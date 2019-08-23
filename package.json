@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "dependencies": {
+    "@types/react": "^16.0.0",
+    "@types/react-dom": "^16.0.0",
+    "bezier-easing": "^2.1.0",
+    "chroma-js": "^2.0.4",
+    "lodash": "^4.17.15",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}

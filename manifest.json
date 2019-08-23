@@ -1,6 +1,6 @@
 {
   "api": "1.0.0",
-  "name": "palette",
+  "name": "Palette",
   "main": "plugin.ts",
-  "ui": "ui.ts"
+  "ui": "ui.tsx"
 }
