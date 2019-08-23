@@ -1,7 +1,23 @@
-function createRectangles(palette) {
+async function createRectangles(palette) {
+  // Get the font ready
+  await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+
   const nodes: SceneNode[] = [];
 
+  const whitePaint: SolidPaint = {
+    type: "SOLID",
+    color: { r: 1, g: 1, b: 1 }
+  };
+
+  const blackPaint: SolidPaint = {
+    type: "SOLID",
+    color: { r: 0, g: 0, b: 0 }
+  };
+
+  console.log(palette.swatches);
+
   for (let i = 0; i < palette.swatches.length; i++) {
+    // Get swatch color
     let swatch = palette.swatches[i];
     let r = swatch.rgb[0] / 255;
     let g = swatch.rgb[1] / 255;
@@ -10,11 +26,48 @@ function createRectangles(palette) {
       type: "SOLID",
       color: { r, g, b }
     };
+
+    // Which color text reads better over this color
+    let textColor =
+      swatch.contrastWhite > swatch.contrastBlack ? whitePaint : blackPaint;
+
+    // Build swatch rectangle
     const rect = figma.createRectangle();
-    rect.x = i * 150;
+    rect.x = i * 160;
+    rect.resizeWithoutConstraints(150, 100);
     rect.fills = [paint];
     figma.currentPage.appendChild(rect);
     nodes.push(rect);
+
+    // Label swatch with hex code
+    let hex = figma.createText();
+    hex.x = i * 160 + 10;
+    hex.y = 8;
+    hex.fills = [textColor];
+    hex.fontSize = 16;
+    hex.characters = swatch.hex;
+    figma.currentPage.appendChild(hex);
+    nodes.push(hex);
+
+    // Label swatch with white contrast
+    let contrastW = figma.createText();
+    contrastW.x = i * 160 + 10;
+    contrastW.y = 28;
+    contrastW.fills = [whitePaint];
+    contrastW.fontSize = 16;
+    contrastW.characters = swatch.contrastWhite;
+    figma.currentPage.appendChild(contrastW);
+    nodes.push(contrastW);
+
+    // Label swatch with black contrast
+    let contrastB = figma.createText();
+    contrastB.x = i * 160 + 10;
+    contrastB.y = 48;
+    contrastB.fills = [blackPaint];
+    contrastB.fontSize = 16;
+    contrastB.characters = swatch.contrastBlack;
+    figma.currentPage.appendChild(contrastB);
+    nodes.push(contrastB);
   }
   figma.currentPage.selection = nodes;
   figma.viewport.scrollAndZoomIntoView(nodes);
