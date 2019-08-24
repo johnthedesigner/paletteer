@@ -37,7 +37,6 @@ async function createRectangles(palette) {
     rect.resizeWithoutConstraints(150, 100);
     rect.fills = [paint];
     figma.currentPage.appendChild(rect);
-    nodes.push(rect);
 
     // Label swatch with hex code
     let hex = figma.createText();
@@ -47,7 +46,6 @@ async function createRectangles(palette) {
     hex.fontSize = 16;
     hex.characters = swatch.hex;
     figma.currentPage.appendChild(hex);
-    nodes.push(hex);
 
     // Label swatch with white contrast
     let contrastW = figma.createText();
@@ -57,7 +55,6 @@ async function createRectangles(palette) {
     contrastW.fontSize = 16;
     contrastW.characters = swatch.contrastWhite;
     figma.currentPage.appendChild(contrastW);
-    nodes.push(contrastW);
 
     // Label swatch with black contrast
     let contrastB = figma.createText();
@@ -67,8 +64,18 @@ async function createRectangles(palette) {
     contrastB.fontSize = 16;
     contrastB.characters = swatch.contrastBlack;
     figma.currentPage.appendChild(contrastB);
-    nodes.push(contrastB);
+
+    // Group swatch components
+    figma.currentPage.selection = [rect, hex, contrastW, contrastB];
+    let swatchGroup = figma.group(
+      figma.currentPage.selection,
+      figma.currentPage
+    );
+    swatchGroup.name = `Swatch / ${swatch.hex}`;
+    nodes.push(swatchGroup);
   }
+  let swatchGradient = figma.group(nodes, figma.currentPage);
+  swatchGradient.name = "Swatch gradient";
   figma.currentPage.selection = nodes;
   figma.viewport.scrollAndZoomIntoView(nodes);
 }
