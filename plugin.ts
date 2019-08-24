@@ -92,12 +92,12 @@ async function createRectangles(palettes) {
 
   // Loop through palette to build a gradient
   let colorPalette = new Array();
-  console.log(palettes);
   for (let i = 0; i < palettes.length; i++) {
     let gradient = buildGradient(palettes[i], i);
     colorPalette.push(gradient);
   }
-  // figma.currentPage.appendChild(colorPalette);
+
+  // Select all swatches and adjust view to include all swatches
   figma.currentPage.selection = colorPalette;
   figma.viewport.scrollAndZoomIntoView(figma.currentPage.selection);
 }

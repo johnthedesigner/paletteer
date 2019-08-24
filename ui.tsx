@@ -1,14 +1,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import _ from "lodash";
 
 import generateColors from "./utils/generateColors.js";
 
-class App extends React.Component {
-  textbox: HTMLInputElement;
+type AppState = {
+  seedColors: Array<string>;
+};
 
-  colorRef = (element: HTMLInputElement) => {
-    if (element) element.value = "#F00";
-    this.textbox = element;
+class App extends React.Component<{}, AppState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      seedColors: [""]
+    };
+  }
+
+  addSeed = () => {
+    let newSeedColors = [...this.state.seedColors];
+    newSeedColors[this.state.seedColors.length] = "";
+    this.setState({ seedColors: newSeedColors });
+  };
+
+  buildGradients = () => {
+    return _.map(this.state.seedColors, seedColor => {
+      return generateColors(seedColor);
+    });
+  };
+
+  onChange = (e, i) => {
+    let newSeedColors = [...this.state.seedColors];
+    newSeedColors[i] = e.target.value;
+    this.setState({ seedColors: newSeedColors });
   };
 
   onCreate = () => {
@@ -16,11 +39,7 @@ class App extends React.Component {
       {
         pluginMessage: {
           type: "create-palette",
-          palettes: [
-            generateColors(this.textbox.value),
-            generateColors("#04aade"),
-            generateColors("blue")
-          ]
+          palettes: this.buildGradients()
         }
       },
       "*"
@@ -32,16 +51,26 @@ class App extends React.Component {
   };
 
   render() {
-    console.log("render the plugin");
-    // console.log(this.textbox.value);
-    // console.log("generate colors: ", generateColors("cyan"));
-
     return (
       <div>
         <h2>Palette Creator</h2>
-        <p>
-          Color: <input type="text" ref={this.colorRef} />
-        </p>
+        {_.map(this.state.seedColors, (seedColor, i) => {
+          return (
+            <p>
+              Color:{" "}
+              <input
+                type="text"
+                name={`color`}
+                value={this.state.seedColors[i]}
+                required
+                onChange={e => this.onChange(e, i)}
+              />
+            </p>
+          );
+        })}
+        <button id="addColor" onClick={this.addSeed}>
+          Add Color
+        </button>
         <button id="create" onClick={this.onCreate}>
           Create Palette
         </button>
