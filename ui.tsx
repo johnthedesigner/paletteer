@@ -16,7 +16,11 @@ class App extends React.Component {
       {
         pluginMessage: {
           type: "create-palette",
-          palette: generateColors(this.textbox.value)
+          palettes: [
+            generateColors(this.textbox.value),
+            generateColors("#04aade"),
+            generateColors("blue")
+          ]
         }
       },
       "*"

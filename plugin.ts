@@ -1,4 +1,4 @@
-async function createRectangles(palette) {
+async function createRectangles(palettes) {
   // Get the font ready
   await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
 
@@ -14,11 +14,8 @@ async function createRectangles(palette) {
     color: { r: 0, g: 0, b: 0 }
   };
 
-  console.log(palette.swatches);
-
-  for (let i = 0; i < palette.swatches.length; i++) {
+  const buildSwatch = (swatch, yOffset, i) => {
     // Get swatch color
-    let swatch = palette.swatches[i];
     let r = swatch.rgb[0] / 255;
     let g = swatch.rgb[1] / 255;
     let b = swatch.rgb[2] / 255;
@@ -34,36 +31,33 @@ async function createRectangles(palette) {
     // Build swatch rectangle
     const rect = figma.createRectangle();
     rect.x = i * 160;
+    rect.y = yOffset;
     rect.resizeWithoutConstraints(150, 100);
     rect.fills = [paint];
-    figma.currentPage.appendChild(rect);
 
     // Label swatch with hex code
     let hex = figma.createText();
     hex.x = i * 160 + 10;
-    hex.y = 8;
+    hex.y = 8 + yOffset;
     hex.fills = [textColor];
     hex.fontSize = 16;
     hex.characters = swatch.hex;
-    figma.currentPage.appendChild(hex);
 
     // Label swatch with white contrast
     let contrastW = figma.createText();
     contrastW.x = i * 160 + 10;
-    contrastW.y = 28;
+    contrastW.y = 28 + yOffset;
     contrastW.fills = [whitePaint];
     contrastW.fontSize = 16;
     contrastW.characters = swatch.contrastWhite;
-    figma.currentPage.appendChild(contrastW);
 
     // Label swatch with black contrast
     let contrastB = figma.createText();
     contrastB.x = i * 160 + 10;
-    contrastB.y = 48;
+    contrastB.y = 48 + yOffset;
     contrastB.fills = [blackPaint];
     contrastB.fontSize = 16;
     contrastB.characters = swatch.contrastBlack;
-    figma.currentPage.appendChild(contrastB);
 
     // Group swatch components
     figma.currentPage.selection = [rect, hex, contrastW, contrastB];
@@ -72,19 +66,47 @@ async function createRectangles(palette) {
       figma.currentPage
     );
     swatchGroup.name = `Swatch / ${swatch.hex}`;
-    nodes.push(swatchGroup);
+    figma.currentPage.appendChild(swatchGroup);
+
+    return swatchGroup;
+  };
+
+  const buildGradient = (palette, i) => {
+    let gradient = new Array();
+    let yOffset = 110 * i;
+
+    // Loop through palette to build a gradient
+    for (let i = 0; i < palette.swatches.length; i++) {
+      // Get swatch color
+      let swatch = palette.swatches[i];
+      let swatchComponent = buildSwatch(swatch, yOffset, i);
+      gradient.push(swatchComponent);
+    }
+
+    // Group swatches into a gradient
+    let swatchGradient = figma.group(gradient, figma.currentPage);
+    swatchGradient.name = "Swatch gradient";
+
+    return swatchGradient;
+  };
+
+  // Loop through palette to build a gradient
+  let colorPalette = new Array();
+  console.log(palettes);
+  for (let i = 0; i < palettes.length; i++) {
+    let gradient = buildGradient(palettes[i], i);
+    colorPalette.push(gradient);
   }
-  let swatchGradient = figma.group(nodes, figma.currentPage);
-  swatchGradient.name = "Swatch gradient";
-  figma.currentPage.selection = nodes;
-  figma.viewport.scrollAndZoomIntoView(nodes);
+  // figma.currentPage.appendChild(colorPalette);
+  figma.currentPage.selection = colorPalette;
+  figma.viewport.scrollAndZoomIntoView(figma.currentPage.selection);
 }
 
 figma.showUI(__html__);
 
 figma.ui.onmessage = msg => {
-  if (msg.type === "create-palette" && typeof msg.palette != "undefined") {
-    createRectangles(msg.palette);
+  if (msg.type === "create-palette" && typeof msg.palettes != "undefined") {
+    createRectangles(msg.palettes);
   }
   figma.closePlugin();
 };
