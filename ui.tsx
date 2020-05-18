@@ -12,7 +12,7 @@ class App extends React.Component<{}, AppState> {
   constructor(props) {
     super(props);
     this.state = {
-      seedColors: [""]
+      seedColors: ["red", "blue"]
     };
   }
 
