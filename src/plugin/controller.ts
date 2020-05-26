@@ -6,38 +6,22 @@ async function createRectangles(palettes) {
   const allSwatches = new Array();
   const nodes = new Array();
 
-  const whitePaint: SolidPaint = {
+  const whitePaint = {
     type: "SOLID",
     color: { r: 1, g: 1, b: 1 }
   };
 
-  const blackPaint: SolidPaint = {
+  const blackPaint = {
     type: "SOLID",
     color: { r: 0, g: 0, b: 0 }
   };
-
-  // Reveal swatch gradually
-  async function fadeLoop(currentNode, fadeIndex, nodeIndex) {
-    let movementPerStep = 0.1;
-    let distance = 1 - currentNode.opacity;
-    let movement = distance * movementPerStep;
-    if (currentNode.opacity < 0.95) {
-      let initialDelay = fadeIndex === 0 ? 50 * nodeIndex : 20;
-      await setTimeout(() => {
-        currentNode.opacity = currentNode.opacity + movement;
-        fadeLoop(currentNode, fadeIndex + 1, nodeIndex);
-      }, initialDelay);
-    } else {
-      currentNode.opacity = 1;
-    }
-  }
 
   const buildSwatch = (swatch, yOffset, i) => {
     // Get swatch color
     let r = swatch.rgb[0] / 255;
     let g = swatch.rgb[1] / 255;
     let b = swatch.rgb[2] / 255;
-    let paint: SolidPaint = {
+    let paint = {
       type: "SOLID",
       color: { r, g, b }
     };
@@ -84,7 +68,6 @@ async function createRectangles(palettes) {
       figma.currentPage
     );
     swatchGroup.name = `Swatch / ${swatch.hex}`;
-    swatchGroup.opacity = 0;
     figma.currentPage.appendChild(swatchGroup);
 
     return swatchGroup;
@@ -128,13 +111,6 @@ async function createRectangles(palettes) {
     } else {
       // Select all swatches and adjust view to include all swatches
       figma.viewport.scrollAndZoomIntoView(nodes);
-      const revealLoop = async _ => {
-        const mapSwatches = await allSwatches.map(
-          async (swatch, swatchIndex) => {
-            await fadeLoop(swatch, 0, swatchIndex);
-          }
-        );
-      };
     }
   };
   gradientLoop(0);
@@ -178,7 +154,7 @@ async function createRectangles(palettes) {
   // revealLoop(0);
 }
 
-figma.showUI(__html__);
+figma.showUI(__html__, { width: 300, height: 300 });
 
 figma.ui.onmessage = msg => {
   if (msg.type === "create-palette" && typeof msg.palettes != "undefined") {

@@ -1,4 +1,4 @@
-import bezier from "bezier-easing";
+import bezier from 'bezier-easing';
 
 export const linear = bezier(0.5, 0.5, 0.5, 0.5);
 
