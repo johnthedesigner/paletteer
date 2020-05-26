@@ -6,12 +6,12 @@ async function createRectangles(palettes) {
   const allSwatches = new Array();
   const nodes = new Array();
 
-  const whitePaint = {
+  const whitePaint: SolidPaint = {
     type: "SOLID",
     color: { r: 1, g: 1, b: 1 }
   };
 
-  const blackPaint = {
+  const blackPaint: SolidPaint = {
     type: "SOLID",
     color: { r: 0, g: 0, b: 0 }
   };
@@ -21,7 +21,7 @@ async function createRectangles(palettes) {
     let r = swatch.rgb[0] / 255;
     let g = swatch.rgb[1] / 255;
     let b = swatch.rgb[2] / 255;
-    let paint = {
+    let paint: SolidPaint = {
       type: "SOLID",
       color: { r, g, b }
     };
@@ -115,43 +115,8 @@ async function createRectangles(palettes) {
   };
   gradientLoop(0);
 
-  // // Reveal swatches one at a time
-  // async function fadeLoop(currentNode, fadeIndex, nodeIndex) {
-  //   let movementPerStep = 0.1;
-  //   let distance = 1 - currentNode.opacity;
-  //   let movement = distance * movementPerStep;
-  //   if (currentNode.opacity < 0.95) {
-  //     let initialDelay = fadeIndex === 0 ? 50 * nodeIndex : 20;
-  //     await setTimeout(() => {
-  //       currentNode.opacity = currentNode.opacity + movement;
-  //       fadeLoop(currentNode, fadeIndex + 1, nodeIndex);
-  //     }, initialDelay);
-  //   } else {
-  //     currentNode.opacity = 1;
-  //   }
-  // }
-
-  // async function showSwatches() {
-  //   for (var i = 0; i < nodes.length; i++) {
-  //     await fadeLoop(nodes[i], 0, i);
-  //   }
-  // }
-  // await showSwatches();
   figma.currentPage.selection = nodes;
   figma.closePlugin();
-
-  // const revealLoop = (swatchIndex) => {
-  //   if (swatchIndex < nodes.length) {
-  //     let currentNode = nodes[swatchIndex];
-  //     fadeLoop(currentNode, 0);
-  //
-  //     revealLoop(swatchIndex + 1);
-  //   } else {
-  //     figma.currentPage.selection = nodes;
-  //     figma.closePlugin();
-  //   }
-  // }
-  // revealLoop(0);
 }
 
 figma.showUI(__html__, { width: 300, height: 300 });
