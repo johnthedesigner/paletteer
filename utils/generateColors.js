@@ -4,14 +4,12 @@ import _ from "lodash";
 import * as Curves from "./curves";
 import crayolaColors from "./crayolaColors";
 
-export default function(sourceColor) {
-  console.log("generate colors");
-
+export default function(sourceColor, steps = 12) {
   // Bail out if there isn't really a source color provided
   if (!sourceColor) return true;
 
   // Configuration
-  let steps = 12; // Number of color swatches in each palette
+  // let steps = 12; // Number of color swatches in each palette
   let contrastRange = [1.1, 19]; // We'll be generating palettes based on text contrast
 
   // build a distribution of contrast values we will target

@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["es2017", "dom"],
-    "jsx": "react"
-  },
-  "include": ["figma.d.ts"]
+    "target": "es6",
+    "outDir": "dist",
+    "jsx": "react",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node"
+  }
 }

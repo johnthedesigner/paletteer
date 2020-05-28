@@ -16,22 +16,6 @@ async function createRectangles(palettes) {
     color: { r: 0, g: 0, b: 0 }
   };
 
-  // Reveal swatch gradually
-  async function fadeLoop(currentNode, fadeIndex, nodeIndex) {
-    let movementPerStep = 0.1;
-    let distance = 1 - currentNode.opacity;
-    let movement = distance * movementPerStep;
-    if (currentNode.opacity < 0.95) {
-      let initialDelay = fadeIndex === 0 ? 50 * nodeIndex : 20;
-      await setTimeout(() => {
-        currentNode.opacity = currentNode.opacity + movement;
-        fadeLoop(currentNode, fadeIndex + 1, nodeIndex);
-      }, initialDelay);
-    } else {
-      currentNode.opacity = 1;
-    }
-  }
-
   const buildSwatch = (swatch, yOffset, i) => {
     // Get swatch color
     let r = swatch.rgb[0] / 255;
@@ -84,7 +68,6 @@ async function createRectangles(palettes) {
       figma.currentPage
     );
     swatchGroup.name = `Swatch / ${swatch.hex}`;
-    swatchGroup.opacity = 0;
     figma.currentPage.appendChild(swatchGroup);
 
     return swatchGroup;
@@ -95,7 +78,7 @@ async function createRectangles(palettes) {
     let gradient = new Array();
     let yOffset = 110 * paletteIndex;
     console.log(yOffset);
-    let swatchCount = 12;
+    let swatchCount = palette.swatches.length;
 
     console.log("building gradient swatches");
     const swatchLoop = i => {
@@ -128,57 +111,14 @@ async function createRectangles(palettes) {
     } else {
       // Select all swatches and adjust view to include all swatches
       figma.viewport.scrollAndZoomIntoView(nodes);
-      const revealLoop = async _ => {
-        const mapSwatches = await allSwatches.map(
-          async (swatch, swatchIndex) => {
-            await fadeLoop(swatch, 0, swatchIndex);
-          }
-        );
-      };
+      figma.currentPage.selection = nodes;
+      figma.closePlugin();
     }
   };
   gradientLoop(0);
-
-  // // Reveal swatches one at a time
-  // async function fadeLoop(currentNode, fadeIndex, nodeIndex) {
-  //   let movementPerStep = 0.1;
-  //   let distance = 1 - currentNode.opacity;
-  //   let movement = distance * movementPerStep;
-  //   if (currentNode.opacity < 0.95) {
-  //     let initialDelay = fadeIndex === 0 ? 50 * nodeIndex : 20;
-  //     await setTimeout(() => {
-  //       currentNode.opacity = currentNode.opacity + movement;
-  //       fadeLoop(currentNode, fadeIndex + 1, nodeIndex);
-  //     }, initialDelay);
-  //   } else {
-  //     currentNode.opacity = 1;
-  //   }
-  // }
-
-  // async function showSwatches() {
-  //   for (var i = 0; i < nodes.length; i++) {
-  //     await fadeLoop(nodes[i], 0, i);
-  //   }
-  // }
-  // await showSwatches();
-  figma.currentPage.selection = nodes;
-  figma.closePlugin();
-
-  // const revealLoop = (swatchIndex) => {
-  //   if (swatchIndex < nodes.length) {
-  //     let currentNode = nodes[swatchIndex];
-  //     fadeLoop(currentNode, 0);
-  //
-  //     revealLoop(swatchIndex + 1);
-  //   } else {
-  //     figma.currentPage.selection = nodes;
-  //     figma.closePlugin();
-  //   }
-  // }
-  // revealLoop(0);
 }
 
-figma.showUI(__html__);
+figma.showUI(__html__, { width: 300, height: 324 });
 
 figma.ui.onmessage = msg => {
   if (msg.type === "create-palette" && typeof msg.palettes != "undefined") {
