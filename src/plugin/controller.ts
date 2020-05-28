@@ -78,7 +78,7 @@ async function createRectangles(palettes) {
     let gradient = new Array();
     let yOffset = 110 * paletteIndex;
     console.log(yOffset);
-    let swatchCount = 12;
+    let swatchCount = palette.swatches.length;
 
     console.log("building gradient swatches");
     const swatchLoop = i => {
@@ -111,15 +111,14 @@ async function createRectangles(palettes) {
     } else {
       // Select all swatches and adjust view to include all swatches
       figma.viewport.scrollAndZoomIntoView(nodes);
+      figma.currentPage.selection = nodes;
+      figma.closePlugin();
     }
   };
   gradientLoop(0);
-
-  figma.currentPage.selection = nodes;
-  figma.closePlugin();
 }
 
-figma.showUI(__html__, { width: 300, height: 300 });
+figma.showUI(__html__, { width: 320, height: 344 });
 
 figma.ui.onmessage = msg => {
   if (msg.type === "create-palette" && typeof msg.palettes != "undefined") {
