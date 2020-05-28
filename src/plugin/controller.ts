@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 async function createRectangles(palettes) {
   // Get the font ready
   await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
@@ -120,8 +122,39 @@ async function createRectangles(palettes) {
 
 figma.showUI(__html__, { width: 300, height: 324 });
 
+// Traverse objects in current selection and pick out fill colors
+let selectionColors = [];
+const getSelectionColors = selection => {
+  _.forIn(selection, function(object) {
+    if (object.children) {
+      getSelectionColors(object.children);
+    }
+    if (object.fills) {
+      _.each(object.fills, fill => {
+        if (fill.color) {
+          selectionColors = [...selectionColors, fill.color];
+        }
+        if (fill.gradientStops) {
+          _.each(fill.gradientStops, stop => {
+            selectionColors = [...selectionColors, stop.color];
+          });
+        }
+      });
+    }
+  });
+  return selectionColors;
+};
+
+figma.ui.postMessage({
+  type: "selection-colors",
+  selectionColors: getSelectionColors(figma.currentPage.selection)
+});
+// figma.ui.postMessage({ type: "init" });
+
 figma.ui.onmessage = msg => {
   if (msg.type === "create-palette" && typeof msg.palettes != "undefined") {
     createRectangles(msg.palettes);
+  } else if (msg.type === "cancel") {
+    figma.closePlugin();
   }
 };

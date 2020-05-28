@@ -40,11 +40,31 @@ class App extends React.Component<{}, AppState> {
   constructor(props) {
     super(props);
     this.state = {
-      seedColors: [initialSeedColor],
+      seedColors: [],
       palettes: [generateColors(initialSeedColor, 12)],
       swatchCount: 12
     };
+
+    window.onmessage = this.receiveMessage;
   }
+
+  receiveMessage = (event: any) => {
+    if (event.data.pluginMessage.type === "selection-colors") {
+      // Get colors from message object and build an array of hex values
+      let colorArray = _.uniq(
+        _.map(event.data.pluginMessage.selectionColors, color => {
+          return chroma(color.r * 255, color.g * 255, color.b * 255).hex();
+        })
+      );
+      if (colorArray.length === 0) colorArray = [initialSeedColor];
+      this.setState({
+        seedColors: colorArray,
+        palettes: _.map(colorArray, seedColor => {
+          return generateColors(seedColor, this.state.swatchCount);
+        })
+      });
+    }
+  };
 
   addSeed = () => {
     let newSeedColors = [...this.state.seedColors, initialSeedColor];
@@ -138,7 +158,6 @@ class App extends React.Component<{}, AppState> {
         <div className="colors-list">
           {_.map(this.state.seedColors, (seedColor, i) => {
             let currentPalette = this.state.palettes[i];
-            console.log(currentPalette);
             return (
               <div className="colors-row" key={i}>
                 <span className="colors-row__color-drop">
