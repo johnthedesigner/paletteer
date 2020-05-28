@@ -118,7 +118,7 @@ async function createRectangles(palettes) {
   gradientLoop(0);
 }
 
-figma.showUI(__html__, { width: 320, height: 344 });
+figma.showUI(__html__, { width: 300, height: 324 });
 
 figma.ui.onmessage = msg => {
   if (msg.type === "create-palette" && typeof msg.palettes != "undefined") {
