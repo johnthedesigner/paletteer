@@ -34,6 +34,24 @@ async function createRectangles(palettes) {
       color: { r, g, b }
     };
 
+    // Save paint style if it doesn't already exist
+    let existingStyles = figma.getLocalPaintStyles();
+    // Get any swatches that match current swatch's hex code
+    let matchingSwatches = _.find(existingStyles, style => {
+      return style.name === swatch.hex.toUpperCase();
+    });
+    let swatchStyle = null;
+    if (matchingSwatches === undefined) {
+      console.log("No saved swatch; saving new swatch to local styles");
+      swatchStyle = figma.createPaintStyle();
+      swatchStyle.name = swatch.hex.toUpperCase();
+      swatchStyle.paints = [paint];
+    } else {
+      // if it already exists we will record it here to use it later
+      console.log("Swatch already exists in local styles");
+      swatchStyle = matchingSwatches;
+    }
+
     // Swatch layout values
     let swatchWidth = 130;
     let swatchColorHeight = 100;
@@ -53,7 +71,7 @@ async function createRectangles(palettes) {
     colorRect.x = swatchX;
     colorRect.y = swatchColorY;
     colorRect.resizeWithoutConstraints(swatchWidth, swatchColorHeight);
-    colorRect.fills = [paint];
+    colorRect.fillStyleId = swatchStyle.id;
 
     // Build swatch label rectangle
     const labelRect = figma.createRectangle();
@@ -71,7 +89,7 @@ async function createRectangles(palettes) {
     hex.lineHeight = { value: swatchLabelHeight, unit: "PIXELS" };
     hex.fills = [blackPaint];
     hex.fontSize = hexFontSize;
-    hex.characters = swatch.hex;
+    hex.characters = swatch.hex.toUpperCase();
     hex.textAlignVertical = "CENTER";
 
     // Label swatch with white contrast
@@ -127,7 +145,6 @@ async function createRectangles(palettes) {
   };
 
   const buildGradient = (palette, paletteIndex) => {
-    console.log(figma.currentPage);
     let gradient = new Array();
     let swatchCount = palette.swatches.length;
 
@@ -136,7 +153,6 @@ async function createRectangles(palettes) {
       console.log(`output swatch: ${paletteIndex} - ${swatchIndex}`);
       let swatch = palette.swatches[swatchIndex];
       let swatchComponent = buildSwatch(swatch, paletteIndex, swatchIndex);
-
       gradient.push(swatchComponent);
       allSwatches.push(swatchComponent);
       nodes.push(swatchComponent);
