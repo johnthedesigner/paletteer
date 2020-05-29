@@ -54,8 +54,8 @@ async function createRectangles(palettes) {
 
     // Swatch layout values
     let swatchWidth = 130;
-    let swatchColorHeight = 100;
-    let swatchLabelHeight = 30;
+    let swatchColorHeight = 90;
+    let swatchLabelHeight = 40;
     let swatchHeight = swatchColorHeight + swatchLabelHeight;
     let gutterX = 10;
     let gutterY = 20;
