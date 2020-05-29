@@ -13,12 +13,18 @@ async function createRectangles(palettes) {
     color: { r: 1, g: 1, b: 1 }
   };
 
+  const grayPaint: SolidPaint = {
+    type: "SOLID",
+    color: { r: 0, g: 0, b: 0 },
+    opacity: 0.15
+  };
+
   const blackPaint: SolidPaint = {
     type: "SOLID",
     color: { r: 0, g: 0, b: 0 }
   };
 
-  const buildSwatch = (swatch, yOffset, i) => {
+  const buildSwatch = (swatch, paletteIndex, swatchIndex) => {
     // Get swatch color
     let r = swatch.rgb[0] / 255;
     let g = swatch.rgb[1] / 255;
@@ -28,43 +34,88 @@ async function createRectangles(palettes) {
       color: { r, g, b }
     };
 
-    // Which color text reads better over this color
-    let textColor =
-      swatch.contrastWhite > swatch.contrastBlack ? whitePaint : blackPaint;
+    // Swatch layout values
+    let swatchWidth = 130;
+    let swatchColorHeight = 100;
+    let swatchLabelHeight = 30;
+    let swatchHeight = swatchColorHeight + swatchLabelHeight;
+    let gutterX = 10;
+    let gutterY = 20;
+    let swatchX = (swatchWidth + gutterX) * swatchIndex;
+    let swatchColorY = (swatchHeight + gutterY) * paletteIndex;
+    let swatchLabelY = swatchColorY + swatchColorHeight;
+    let textPadding = 10;
+    let hexFontSize = 16;
+    let contrastFontSize = 12;
 
-    // Build swatch rectangle
-    const rect = figma.createRectangle();
-    rect.x = i * 160;
-    rect.y = yOffset;
-    rect.resizeWithoutConstraints(150, 100);
-    rect.fills = [paint];
+    // Build swatch color rectangle
+    const colorRect = figma.createRectangle();
+    colorRect.x = swatchX;
+    colorRect.y = swatchColorY;
+    colorRect.resizeWithoutConstraints(swatchWidth, swatchColorHeight);
+    colorRect.fills = [paint];
+
+    // Build swatch label rectangle
+    const labelRect = figma.createRectangle();
+    labelRect.x = swatchX;
+    labelRect.y = swatchLabelY;
+    labelRect.resizeWithoutConstraints(swatchWidth, swatchLabelHeight);
+    labelRect.fills = [whitePaint];
+    labelRect.strokes = [grayPaint];
+    labelRect.strokeWeight = 1;
 
     // Label swatch with hex code
     let hex = figma.createText();
-    hex.x = i * 160 + 10;
-    hex.y = 8 + yOffset;
-    hex.fills = [textColor];
-    hex.fontSize = 16;
+    hex.x = swatchX + textPadding;
+    hex.y = swatchLabelY;
+    hex.lineHeight = { value: swatchLabelHeight, unit: "PIXELS" };
+    hex.fills = [blackPaint];
+    hex.fontSize = hexFontSize;
     hex.characters = swatch.hex;
+    hex.textAlignVertical = "CENTER";
 
     // Label swatch with white contrast
     let contrastW = figma.createText();
-    contrastW.x = i * 160 + 10;
-    contrastW.y = 28 + yOffset;
+    contrastW.x = swatchX + textPadding * 2;
+    contrastW.y = swatchColorY + textPadding;
     contrastW.fills = [whitePaint];
-    contrastW.fontSize = 16;
+    contrastW.fontSize = contrastFontSize;
     contrastW.characters = swatch.contrastWhite;
 
     // Label swatch with black contrast
     let contrastB = figma.createText();
-    contrastB.x = i * 160 + 10;
-    contrastB.y = 48 + yOffset;
+    contrastB.x = swatchX + textPadding * 2;
+    contrastB.y = swatchColorY + textPadding * 2 + contrastFontSize;
     contrastB.fills = [blackPaint];
-    contrastB.fontSize = 16;
+    contrastB.fontSize = contrastFontSize;
     contrastB.characters = swatch.contrastBlack;
 
+    // Greater contrast highlight dot
+    let contrastDot = figma.createEllipse();
+    contrastDot.x = swatchX + textPadding;
+    contrastDot.y =
+      swatch.contrastWhite / 1 > swatch.contrastBlack / 1
+        ? contrastW.y + contrastFontSize / 4
+        : contrastB.y + contrastFontSize / 4;
+    contrastDot.resizeWithoutConstraints(
+      contrastFontSize / 2,
+      contrastFontSize / 2
+    );
+    let contrastColor =
+      swatch.contrastWhite / 1 > swatch.contrastBlack / 1
+        ? whitePaint
+        : blackPaint;
+    contrastDot.fills = [contrastColor];
+
     // Group swatch components
-    figma.currentPage.selection = [rect, hex, contrastW, contrastB];
+    figma.currentPage.selection = [
+      colorRect,
+      labelRect,
+      hex,
+      contrastW,
+      contrastB,
+      contrastDot
+    ];
     let swatchGroup = figma.group(
       figma.currentPage.selection,
       figma.currentPage
@@ -78,22 +129,20 @@ async function createRectangles(palettes) {
   const buildGradient = (palette, paletteIndex) => {
     console.log(figma.currentPage);
     let gradient = new Array();
-    let yOffset = 110 * paletteIndex;
-    console.log(yOffset);
     let swatchCount = palette.swatches.length;
 
     console.log("building gradient swatches");
-    const swatchLoop = i => {
-      console.log(`output swatch: ${paletteIndex} - ${i}`);
-      let swatch = palette.swatches[i];
-      let swatchComponent = buildSwatch(swatch, yOffset, i);
+    const swatchLoop = swatchIndex => {
+      console.log(`output swatch: ${paletteIndex} - ${swatchIndex}`);
+      let swatch = palette.swatches[swatchIndex];
+      let swatchComponent = buildSwatch(swatch, paletteIndex, swatchIndex);
 
       gradient.push(swatchComponent);
       allSwatches.push(swatchComponent);
       nodes.push(swatchComponent);
 
-      if (i < swatchCount - 1) {
-        swatchLoop(i + 1);
+      if (swatchIndex < swatchCount - 1) {
+        swatchLoop(swatchIndex + 1);
       } else {
         // Group swatches into a gradient
         let swatchGradient = figma.group(gradient, figma.currentPage);
