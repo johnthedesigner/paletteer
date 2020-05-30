@@ -12,6 +12,7 @@
         "bezier-easing": "^2.1.0",
         "chroma-js": "^2.1.0",
         "react": "^16.8.6",
+        "react-color": "^2.18.1",
         "react-dom": "^16.8.6"
     },
     "devDependencies": {

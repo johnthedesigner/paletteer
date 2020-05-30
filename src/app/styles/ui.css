@@ -172,14 +172,6 @@ input:focus {
   outline: none;
   box-shadow: inset 0 0 0 2px #18a0fb;
 }
-.color-drop {
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 0.75rem;
-  border: rgba(0, 0, 0, 0.2) solid 1px;
-  box-sizing: border-box;
-}
 .list-footer {
   border: #ddd solid 1px;
   border-top: none;
@@ -208,4 +200,98 @@ input:focus {
 
 .action-buttons {
   text-align: right;
+}
+
+/* Color Picker */
+.color-drop {
+  position: relative;
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.75rem;
+  border: rgba(0, 0, 0, 0.2) solid 1px;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index: 1;
+}
+.color-picker {
+  position: absolute;
+  height: 16.5rem;
+  top: 1rem;
+  right: 1rem;
+  left: 1rem;
+  background: #ffffff;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px inset rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  z-index: 3;
+}
+.color-picker__overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.75);
+  z-index: 2;
+}
+.color-picker__saturation-control {
+  position: absolute;
+  top: 2.5rem;
+  right: 1px;
+  left: 1px;
+  bottom: 2rem;
+  height: 10rem;
+}
+.color-picker__hue-control {
+  position: absolute;
+  bottom: 2.75rem;
+  right: 1rem;
+  left: 4.5rem;
+  height: 0.5rem;
+}
+.color-picker__input-control {
+  text-align: left;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1px;
+  left: 4rem;
+  height: 1.5rem;
+  font-size: 2rem;
+}
+.color-picker__preview-drop {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.25rem;
+  border: rgba(0, 0, 0, 0.2) solid 1px;
+  box-sizing: border-box;
+}
+.color-picker__custom-pointer {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  margin-top: -5px;
+  margin-left: -5px;
+  background: #eee;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+.color-picker__close-button {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+.color-picker__title {
+  position: absolute;
+  top: 0.75rem;
+  left: 1rem;
+  font-weight: bold;
+  font-size: 11px;
+  color: #444;
 }

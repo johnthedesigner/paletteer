@@ -6,8 +6,7 @@ import "../styles/ui.css";
 import generateColors from "../../../utils/generateColors.js";
 import paletteLogo from "./paletteLogo";
 import closeButton from "./closeButton";
-
-// declare function require(path: string): any;
+import ColorDrop from "./ColorDrop";
 
 type AppState = {
   seedColors: Array<string>;
@@ -16,10 +15,6 @@ type AppState = {
 };
 
 const initialSeedColor = "4FE8BA";
-
-const ColorDrop = ({ color }) => {
-  return <span className="color-drop" style={{ backgroundColor: color }} />;
-};
 
 const SwatchItem = ({ color }) => {
   return <span className="swatch-item" style={{ backgroundColor: color }} />;
@@ -96,6 +91,18 @@ class App extends React.Component<{}, AppState> {
     });
   };
 
+  handlePickerChange = (color, colorIndex) => {
+    console.log(chroma(color).hex());
+    let newSeedColors = [...this.state.seedColors];
+    newSeedColors[colorIndex] = chroma(color).hex();
+    this.setState({
+      seedColors: newSeedColors,
+      palettes: _.map(newSeedColors, seedColor => {
+        return generateColors(seedColor, this.state.swatchCount);
+      })
+    });
+  };
+
   onChange = (e, i) => {
     let newSeedColors = [...this.state.seedColors];
     let renderedSeedColors = [...this.state.seedColors];
@@ -166,6 +173,9 @@ class App extends React.Component<{}, AppState> {
                       currentPalette.swatches[currentPalette.sourceColorIndex]
                         .hex
                     }
+                    handleChange={color => {
+                      this.handlePickerChange(color, i);
+                    }}
                   />
                 </span>
 
