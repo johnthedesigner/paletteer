@@ -1,5 +1,6 @@
 import * as React from "react";
 import { CustomPicker } from "react-color";
+import * as ReactGA from "react-ga";
 var {
   EditableInput,
   Hue,
@@ -7,6 +8,8 @@ var {
 } = require("react-color/lib/components/common");
 
 import closeButton from "./closeButton";
+
+ReactGA.initialize("UA-18588101-4", { debug: true });
 
 type ComponentState = {
   color: string;
@@ -32,12 +35,22 @@ class ColorDrop extends React.Component<ComponentProps, ComponentState> {
   }
 
   closePicker = () => {
+    ReactGA.event({
+      category: "Button click",
+      action: "Close color picker"
+    });
+
     this.setState({
       displayColorPicker: false
     });
   };
 
   showPicker = () => {
+    ReactGA.event({
+      category: "Trigger dialog",
+      action: "Open color picker"
+    });
+
     this.setState({
       displayColorPicker: true
     });

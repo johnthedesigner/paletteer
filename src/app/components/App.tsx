@@ -1,12 +1,22 @@
 import * as React from "react";
 import chroma from "chroma-js";
 import _ from "lodash";
+import * as ReactGA from "react-ga";
 
 import "../styles/ui.css";
 import generateColors from "../../../utils/generateColors.js";
 import paletteLogo from "./paletteLogo";
 import closeButton from "./closeButton";
 import ColorDrop from "./ColorDrop";
+
+ReactGA.initialize("UA-18588101-4", { debug: true });
+ReactGA.pageview(
+  window.location.protocol +
+    "//" +
+    window.location.host +
+    "/" +
+    window.location.pathname
+);
 
 type AppState = {
   seedColors: Array<string>;
@@ -51,7 +61,20 @@ class App extends React.Component<{}, AppState> {
           return chroma(color.r * 255, color.g * 255, color.b * 255).hex();
         })
       );
-      if (colorArray.length === 0) colorArray = [initialSeedColor];
+      if (colorArray.length === 0) {
+        ReactGA.event({
+          category: "Trigger dialog",
+          action: "Dialog triggered without selection colors"
+        });
+        // No selection, just use default color
+        colorArray = [initialSeedColor];
+      } else {
+        ReactGA.event({
+          category: "Trigger dialog",
+          action: "Dialog triggered with selection colors",
+          value: colorArray.length
+        });
+      }
       this.setState({
         seedColors: colorArray,
         palettes: _.map(colorArray, seedColor => {
@@ -62,6 +85,11 @@ class App extends React.Component<{}, AppState> {
   };
 
   addSeed = () => {
+    ReactGA.event({
+      category: "Button click",
+      action: "Add color to list"
+    });
+
     let newSeedColors = [...this.state.seedColors, initialSeedColor];
     this.setState({
       seedColors: newSeedColors,
@@ -72,6 +100,11 @@ class App extends React.Component<{}, AppState> {
   };
 
   removeSeed = i => {
+    ReactGA.event({
+      category: "Button click",
+      action: "Remove color from list"
+    });
+
     let newSeedColors = [...this.state.seedColors];
     newSeedColors.splice(i, 1);
     this.setState({
@@ -83,6 +116,13 @@ class App extends React.Component<{}, AppState> {
   };
 
   changeSwatchCount = count => {
+    ReactGA.event({
+      category: "Button click",
+      action: "Toggle swatch count",
+      label: "" + count,
+      value: count
+    });
+
     this.setState({
       swatchCount: count,
       palettes: _.map(this.state.seedColors, seedColor => {
@@ -100,6 +140,13 @@ class App extends React.Component<{}, AppState> {
       palettes: _.map(newSeedColors, seedColor => {
         return generateColors(seedColor, this.state.swatchCount);
       })
+    });
+  };
+
+  onFocus = () => {
+    ReactGA.event({
+      category: "Text input",
+      action: "Focus hex input in list"
     });
   };
 
@@ -121,6 +168,12 @@ class App extends React.Component<{}, AppState> {
   };
 
   onCreate = () => {
+    ReactGA.event({
+      category: "Button click",
+      action: "Create palettes",
+      value: this.state.palettes.length
+    });
+
     parent.postMessage(
       {
         pluginMessage: {
@@ -133,6 +186,11 @@ class App extends React.Component<{}, AppState> {
   };
 
   onCancel = () => {
+    ReactGA.event({
+      category: "Button click",
+      action: "Cancel"
+    });
+
     parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
   };
 
