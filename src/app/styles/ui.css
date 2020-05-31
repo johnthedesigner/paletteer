@@ -235,7 +235,7 @@ input:focus {
   right: 1rem;
   left: 1rem;
   background: #ffffff;
-  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px inset rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px inset rgba(0, 0, 0, 0.15);
   border-radius: 3px;
   z-index: 3;
 }
