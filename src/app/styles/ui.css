@@ -122,14 +122,28 @@ input:focus {
   margin: 0.5rem;
 }
 .colors-row__color-drop {
-  width: 1rem;
+  width: 1.25rem;
 }
 .colors-row__color-input {
   width: 4.5rem;
 }
+.colors-row__color-input input {
+  width: 3.75rem;
+}
 .colors-row__swatch-preview {
   flex: 1;
   display: flex;
+  position: relative;
+}
+.colors-row__swatch-preview:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: rgba(0, 0, 0, 0.1) solid 1px;
+  border-radius: 0.75rem;
 }
 .swatch-item {
   flex: 1;
@@ -209,7 +223,7 @@ input:focus {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.75rem;
-  border: rgba(0, 0, 0, 0.2) solid 1px;
+  border: rgba(0, 0, 0, 0.1) solid 1px;
   box-sizing: border-box;
   cursor: pointer;
   z-index: 1;
