@@ -1,0 +1,24 @@
+body {
+  background: linear-gradient(to right, #fcc8c6, #e9f6ff, #ffe999);
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  color: #424242;
+}
+p {
+  line-height: 1.5;
+}
+.main {
+  width: 30rem;
+  min-width: 30rem;
+  max-width: 80%;
+  margin: 80px auto;
+}
+.logo-wrapper {
+  text-align: center;
+}
+.secondary {
+  min-height: 450px;
+  background-image: "https://github.com/johnthedesigner/paletteer/blob/gh-pages/images/dialog-and-swatches.png";
+  background-size: 835px auto;
+  background-position: top center;
+}
