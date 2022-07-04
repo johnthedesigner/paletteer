@@ -3,6 +3,7 @@ import _ from "lodash";
 async function createRectangles(palettes) {
   // Get the font ready
   await figma.loadFontAsync({ family: "Roboto", style: "Regular" });
+  await figma.loadFontAsync({ family: "Inter", style: "Regular" });
 
   // const nodes: SceneNode[] = [];
   const allSwatches = new Array();
@@ -24,7 +25,7 @@ async function createRectangles(palettes) {
     color: { r: 0, g: 0, b: 0 }
   };
 
-  const buildSwatch = (swatch, paletteIndex, swatchIndex) => {
+  const buildSwatch = async (swatch, paletteIndex, swatchIndex) => {
     // Get swatch color
     let r = swatch.rgb[0] / 255;
     let g = swatch.rgb[1] / 255;
@@ -144,35 +145,40 @@ async function createRectangles(palettes) {
     return swatchGroup;
   };
 
-  const buildGradient = (palette, paletteIndex) => {
+  const buildGradient = async (palette, paletteIndex) => {
     let gradient = new Array();
     let swatchCount = palette.swatches.length;
 
     console.log("building gradient swatches");
-    const swatchLoop = swatchIndex => {
+    const swatchLoop = async swatchIndex => {
       console.log(`output swatch: ${paletteIndex} - ${swatchIndex}`);
       let swatch = palette.swatches[swatchIndex];
-      let swatchComponent = buildSwatch(swatch, paletteIndex, swatchIndex);
+      let swatchComponent = await buildSwatch(
+        swatch,
+        paletteIndex,
+        swatchIndex
+      );
       gradient.push(swatchComponent);
       allSwatches.push(swatchComponent);
       nodes.push(swatchComponent);
 
       if (swatchIndex < swatchCount - 1) {
-        swatchLoop(swatchIndex + 1);
+        await swatchLoop(swatchIndex + 1);
       } else {
         // Group swatches into a gradient
-        let swatchGradient = figma.group(gradient, figma.currentPage);
+        console.log("GROUP ELEMENTS", gradient, figma.currentPage);
+        let swatchGradient = await figma.group(gradient, figma.currentPage);
         swatchGradient.name = "Swatch gradient";
       }
     };
-    swatchLoop(0);
+    await swatchLoop(0);
   };
 
   // Loop through palette to build a gradient
   let colorPalette = new Array();
   let paletteCount = palettes.length;
-  const gradientLoop = i => {
-    colorPalette.push(buildGradient(palettes[i], i));
+  const gradientLoop = async i => {
+    colorPalette.push(await buildGradient(palettes[i], i));
     if (i < paletteCount - 1) {
       gradientLoop(i + 1);
     } else {
