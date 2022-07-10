@@ -37,27 +37,30 @@ class App extends React.Component<{}, AppState> {
     this.state = {
       seedColors: [],
       palettes: [generateColors(initialSeedColor, 12)],
-      swatchCount: 12
+      swatchCount: 12,
+      pluginData: {},
     };
 
     window.onmessage = this.receiveMessage;
   }
 
   receiveMessage = (event: any) => {
-    if (event.data.pluginMessage.type === "selection-colors") {
+    if (event.data.pluginMessage.type === "page-colors") {
       // Get colors from message object and build an array of hex values
+      console.log(event.data.pluginMessage.pageColors);
       let colorArray = _.uniq(
-        _.map(event.data.pluginMessage.selectionColors, color => {
+        _.map(event.data.pluginMessage.pageColors, (color) => {
           return chroma(color.r * 255, color.g * 255, color.b * 255).hex();
         })
       );
       if (colorArray.length === 0) colorArray = [initialSeedColor];
       this.setState({
         seedColors: colorArray,
-        palettes: _.map(colorArray, seedColor => {
+        palettes: _.map(colorArray, (seedColor) => {
           return generateColors(seedColor, this.state.swatchCount);
-        })
+        }),
       });
+    } else if ((event.data.pluginMessage.type = "get-plugin-data")) {
     }
   };
 
@@ -65,29 +68,29 @@ class App extends React.Component<{}, AppState> {
     let newSeedColors = [...this.state.seedColors, initialSeedColor];
     this.setState({
       seedColors: newSeedColors,
-      palettes: _.map(newSeedColors, seedColor => {
+      palettes: _.map(newSeedColors, (seedColor) => {
         return generateColors(seedColor, this.state.swatchCount);
-      })
+      }),
     });
   };
 
-  removeSeed = i => {
+  removeSeed = (i) => {
     let newSeedColors = [...this.state.seedColors];
     newSeedColors.splice(i, 1);
     this.setState({
       seedColors: newSeedColors,
-      palettes: _.map(newSeedColors, seedColor => {
+      palettes: _.map(newSeedColors, (seedColor) => {
         return generateColors(seedColor, this.state.swatchCount);
-      })
+      }),
     });
   };
 
-  changeSwatchCount = count => {
+  changeSwatchCount = (count) => {
     this.setState({
       swatchCount: count,
-      palettes: _.map(this.state.seedColors, seedColor => {
+      palettes: _.map(this.state.seedColors, (seedColor) => {
         return generateColors(seedColor, count);
-      })
+      }),
     });
   };
 
@@ -97,9 +100,9 @@ class App extends React.Component<{}, AppState> {
     newSeedColors[colorIndex] = chroma(color).hex();
     this.setState({
       seedColors: newSeedColors,
-      palettes: _.map(newSeedColors, seedColor => {
+      palettes: _.map(newSeedColors, (seedColor) => {
         return generateColors(seedColor, this.state.swatchCount);
-      })
+      }),
     });
   };
 
@@ -114,9 +117,9 @@ class App extends React.Component<{}, AppState> {
     }
     this.setState({
       seedColors: newSeedColors,
-      palettes: _.map(renderedSeedColors, seedColor => {
+      palettes: _.map(renderedSeedColors, (seedColor) => {
         return generateColors(seedColor, this.state.swatchCount);
-      })
+      }),
     });
   };
 
@@ -125,8 +128,19 @@ class App extends React.Component<{}, AppState> {
       {
         pluginMessage: {
           type: "create-palette",
-          palettes: this.state.palettes
-        }
+          palettes: this.state.palettes,
+        },
+      },
+      "*"
+    );
+  };
+
+  onPluginData = () => {
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "get-plugin-data",
+        },
       },
       "*"
     );
@@ -173,7 +187,7 @@ class App extends React.Component<{}, AppState> {
                       currentPalette.swatches[currentPalette.sourceColorIndex]
                         .hex
                     }
-                    handleChange={color => {
+                    handleChange={(color) => {
                       this.handlePickerChange(color, i);
                     }}
                   />
@@ -185,8 +199,8 @@ class App extends React.Component<{}, AppState> {
                     name={`color`}
                     value={seedColor}
                     required
-                    onClick={e => e.currentTarget.select()}
-                    onChange={e => this.onChange(e, i)}
+                    onClick={(e) => e.currentTarget.select()}
+                    onChange={(e) => this.onChange(e, i)}
                   />
                 </span>
 
@@ -198,8 +212,7 @@ class App extends React.Component<{}, AppState> {
 
                 <span
                   className={`colors-row__remove-color ${this.state.seedColors
-                    .length > 1 || "disabled"}`}
-                >
+                    .length > 1 || "disabled"}`}>
                   <button
                     className="remove-color-button"
                     onClick={() => this.removeSeed(i)}
@@ -224,6 +237,9 @@ class App extends React.Component<{}, AppState> {
           </button>
           <button className="button_primary" onClick={this.onCreate}>
             Generate Palette
+          </button>
+          <button className="button_primary" onClick={this.onPluginData}>
+            Get Plugin Data
           </button>
         </div>
       </div>

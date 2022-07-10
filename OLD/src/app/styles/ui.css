@@ -3,6 +3,11 @@ body {
   font-family: "Roboto", sans-serif;
   text-align: center;
   margin: 1rem;
+  /* background: black; */
+}
+
+[class*="header_modal--header"] {
+  background: red !important;
 }
 
 /* buttons */

@@ -9,20 +9,20 @@ async function createRectangles(palettes) {
   const allSwatches = new Array();
   const nodes = new Array();
 
-  const whitePaint: SolidPaint = {
+  const whitePaint = {
     type: "SOLID",
-    color: { r: 1, g: 1, b: 1 }
+    color: { r: 1, g: 1, b: 1 },
   };
 
-  const grayPaint: SolidPaint = {
+  const grayPaint = {
     type: "SOLID",
     color: { r: 0, g: 0, b: 0 },
-    opacity: 0.15
+    opacity: 0.15,
   };
 
-  const blackPaint: SolidPaint = {
+  const blackPaint = {
     type: "SOLID",
-    color: { r: 0, g: 0, b: 0 }
+    color: { r: 0, g: 0, b: 0 },
   };
 
   const buildSwatch = async (swatch, paletteIndex, swatchIndex) => {
@@ -32,13 +32,13 @@ async function createRectangles(palettes) {
     let b = swatch.rgb[2] / 255;
     let paint: SolidPaint = {
       type: "SOLID",
-      color: { r, g, b }
+      color: { r, g, b },
     };
 
     // Save paint style if it doesn't already exist
     let existingStyles = figma.getLocalPaintStyles();
     // Get any swatches that match current swatch's hex code
-    let matchingSwatches = _.find(existingStyles, style => {
+    let matchingSwatches = _.find(existingStyles, (style) => {
       return style.name === swatch.hex.toUpperCase();
     });
     let swatchStyle = null;
@@ -133,7 +133,7 @@ async function createRectangles(palettes) {
       hex,
       contrastW,
       contrastB,
-      contrastDot
+      contrastDot,
     ];
     let swatchGroup = figma.group(
       figma.currentPage.selection,
@@ -150,7 +150,7 @@ async function createRectangles(palettes) {
     let swatchCount = palette.swatches.length;
 
     console.log("building gradient swatches");
-    const swatchLoop = async swatchIndex => {
+    const swatchLoop = async (swatchIndex) => {
       console.log(`output swatch: ${paletteIndex} - ${swatchIndex}`);
       let swatch = palette.swatches[swatchIndex];
       let swatchComponent = await buildSwatch(
@@ -177,7 +177,7 @@ async function createRectangles(palettes) {
   // Loop through palette to build a gradient
   let colorPalette = new Array();
   let paletteCount = palettes.length;
-  const gradientLoop = async i => {
+  const gradientLoop = async (i) => {
     colorPalette.push(await buildGradient(palettes[i], i));
     if (i < paletteCount - 1) {
       gradientLoop(i + 1);
@@ -191,22 +191,22 @@ async function createRectangles(palettes) {
   gradientLoop(0);
 }
 
-figma.showUI(__html__, { width: 300, height: 324 });
+figma.showUI(__html__, { width: 800, height: 500, themeColors: true });
 
 // Traverse objects in current selection and pick out fill colors
 let selectionColors = [];
-const getSelectionColors = selection => {
+const getSelectionColors = (selection) => {
   _.forIn(selection, function(object) {
     if (object.children) {
       getSelectionColors(object.children);
     }
     if (object.fills) {
-      _.each(object.fills, fill => {
+      _.each(object.fills, (fill) => {
         if (fill.color) {
           selectionColors = [...selectionColors, fill.color];
         }
         if (fill.gradientStops) {
-          _.each(fill.gradientStops, stop => {
+          _.each(fill.gradientStops, (stop) => {
             selectionColors = [...selectionColors, stop.color];
           });
         }
@@ -218,14 +218,51 @@ const getSelectionColors = selection => {
 
 figma.ui.postMessage({
   type: "selection-colors",
-  selectionColors: getSelectionColors(figma.currentPage.selection)
+  selectionColors: getSelectionColors(figma.currentPage.selection),
 });
 // figma.ui.postMessage({ type: "init" });
 
-figma.ui.onmessage = msg => {
+// Traverse objects in entire page and pick out fill colors
+let pageColors = [];
+const getPageColors = (pageObjects) => {
+  _.forIn(pageObjects, function(object) {
+    if (object.children) {
+      getPageColors(object.children);
+    }
+    if (object.fills) {
+      _.each(object.fills, (fill) => {
+        if (fill.color) {
+          pageColors = [...pageColors, fill.color];
+        }
+        if (fill.gradientStops) {
+          _.each(fill.gradientStops, (stop) => {
+            pageColors = [...pageColors, stop.color];
+          });
+        }
+      });
+    }
+  });
+  return pageColors;
+};
+
+figma.ui.postMessage({
+  type: "page-colors",
+  pageColors: getPageColors(figma.currentPage.children),
+});
+
+figma.ui.onmessage = (msg) => {
   if (msg.type === "create-palette" && typeof msg.palettes != "undefined") {
     createRectangles(msg.palettes);
   } else if (msg.type === "cancel") {
     figma.closePlugin();
+  }
+};
+
+figma.ui.onmessage = (msg) => {
+  if (msg.type === "get-plugin-data") {
+    figma.ui.postMessage({
+      type: "get-plugin-data",
+      pluginData: figma.document.getPluginData(),
+    });
   }
 };
