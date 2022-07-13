@@ -1,8 +1,5 @@
-import './style.css'
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
 
-onmessage = (event) => {
-  if (event.data.pluginMessage.payload) {
-    const payload = event.data.pluginMessage.payload
-    console.log(payload)
-  }
-}
+ReactDOM.render(<App />, document.querySelector("body"));

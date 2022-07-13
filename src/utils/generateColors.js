@@ -1,10 +1,11 @@
+import { v4 as uuidv4 } from "uuid";
 import chroma from "chroma-js";
 import _ from "lodash";
 
 import * as Curves from "./curves";
 import crayolaColors from "./crayolaColors";
 
-export default function(sourceColor, steps = 12) {
+const generateColors = (sourceColor, steps = 12) => {
   // Bail out if there isn't really a source color provided
   if (!sourceColor) return true;
 
@@ -13,7 +14,7 @@ export default function(sourceColor, steps = 12) {
   let contrastRange = [1.1, 19]; // We'll be generating palettes based on text contrast
 
   // build a distribution of contrast values we will target
-  let contrastDistribution = _.times(steps, index => {
+  let contrastDistribution = _.times(steps, (index) => {
     let curveStep = Curves["easeInOutQuint"](index / (steps - 1));
     let range = contrastRange[1] - contrastRange[0];
     return curveStep * range + contrastRange[0];
@@ -22,18 +23,18 @@ export default function(sourceColor, steps = 12) {
   // Figure out the closest contrast value for source color and get the index
   let sourceContrast = chroma.contrast(sourceColor, "white").toFixed(2);
   let closestContrastValue = _.first(
-    _.sortBy(contrastDistribution, contrastStep => {
+    _.sortBy(contrastDistribution, (contrastStep) => {
       return Math.abs(contrastStep - sourceContrast);
     })
   );
 
   // Return the index of the closest matching value
-  let sourceColorIndex = _.findIndex(contrastDistribution, o => {
+  let sourceColorIndex = _.findIndex(contrastDistribution, (o) => {
     return o === closestContrastValue;
   });
 
   // Confine a number to a range from 0 to 1
-  let confine = number => {
+  let confine = (number) => {
     return Math.max(Math.min(number, 1), 0);
   };
 
@@ -42,7 +43,7 @@ export default function(sourceColor, steps = 12) {
   let hueIncrement = 0.15; // rate of hue change
   let satIncrement = 0.008; // rate of saturation change
   let lumIncrement = 0.015; // rate of luminosity change
-  _.times(steps * 10, index => {
+  _.times(steps * 10, (index) => {
     let sourceColorHSV = chroma(sourceColor).hsv();
     let lighterHue = sourceColorHSV[0] + hueIncrement * index;
     let lighterSat = confine(sourceColorHSV[1] - satIncrement * index);
@@ -60,7 +61,7 @@ export default function(sourceColor, steps = 12) {
 
   // Select a color for the light end of our palette based on black text contrast
   let lightestColor = _.first(
-    _.sortBy(expandedColors, color => {
+    _.sortBy(expandedColors, (color) => {
       let colorContrast = chroma.contrast(color, "black").toFixed(2);
       return Math.abs(colorContrast - 19);
     })
@@ -68,7 +69,7 @@ export default function(sourceColor, steps = 12) {
 
   // Select a color for the dark end of our palette based on white text contrast
   let darkestColor = _.first(
-    _.sortBy(expandedColors, color => {
+    _.sortBy(expandedColors, (color) => {
       let colorContrast = chroma.contrast(color, "white").toFixed(2);
       return Math.abs(colorContrast - 18);
     })
@@ -79,7 +80,7 @@ export default function(sourceColor, steps = 12) {
     .scale([
       chroma(lightestColor).hex(),
       sourceColor,
-      chroma(darkestColor).hex()
+      chroma(darkestColor).hex(),
     ])
     .domain([0, sourceColorIndex / (steps - 1), 1])
     .colors(steps);
@@ -106,14 +107,14 @@ export default function(sourceColor, steps = 12) {
       contrastWhite: contrastWhite,
       displayColor: displayColor,
       sourceColorIndex,
-      steps
+      steps,
     };
   });
 
   // Pick a name for this set of swatches and apply it to each swatch
   let swatchName = _.first(
     _.orderBy(
-      _.map(crayolaColors, color => {
+      _.map(crayolaColors, (color) => {
         color.distance = chroma.distance(color.hex, sourceColor);
         return color;
       }),
@@ -123,10 +124,7 @@ export default function(sourceColor, steps = 12) {
   ).name;
 
   // Make the swatch name lowercase and replace spaces with hyphens
-  let swatchNameFormatted = swatchName
-    .trim()
-    .replace(/\s/g, "-")
-    .toLowerCase();
+  let swatchNameFormatted = swatchName.trim().replace(/\s/g, "-").toLowerCase();
 
   // Add swatch names to each swatch in the palette
   _.each(swatchList, (swatch, i) => {
@@ -134,8 +132,11 @@ export default function(sourceColor, steps = 12) {
   });
 
   return {
+    id: uuidv4(),
     name: swatchName,
     swatches: swatchList,
-    sourceColorIndex: swatchList[0].sourceColorIndex
+    sourceColorIndex: swatchList[0].sourceColorIndex,
   };
-}
+};
+
+export default generateColors;
