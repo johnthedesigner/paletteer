@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* BUTTONS */
+
+/* DEFAULT/DARK BUTTONS */
+button,
+.button,
+.button__primary,
+.button__primary--dark {
+  display: inline-block;
+  background: black; /* TODO: Replace with color token */
+  color: white; /* TODO: Replace with color token */
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: all linear 0.1s;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.button:hover,
+.button__primary:hover,
+.button__primary--dark:hover {
+  background: #222222; /* TODO: Replace with color token */
+}
+
+.button__secondary,
+.button__secondary--dark {
+  background: rgba(255, 255, 255, 0);
+  border-color: black; /* TODO: Replace with color token */
+  border-style: solid;
+  border-width: 1px;
+  color: black; /* TODO: Replace with color token */
+}
+
+.button__secondary:hover,
+.button__secondary--dark:hover {
+  background: rgba(255, 255, 255, 0.2);
+  /* color: skyblue; TODO: Replace with color token */
+}
+
+.button__color,
+.button__color--dark {
+  background: rgb(12, 142, 241); /* TODO: Replace with color token */
+  color: white; /* TODO: Replace with color token */
+}
+
+.button__color:hover,
+.button__color--dark:hover {
+  background: lightblue; /* TODO: Replace with color token */
+}
+
+.button__text,
+.button__text--dark {
+  background: none;
+  color: black; /* TODO: Replace with color token */
+  text-decoration: underline;
+}
+
+.button__text:hover,
+.button__text--dark:hover {
+  background: rgba(255, 255, 255, 0.2); /* TODO: Replace with color token */
+}
+
+.button-icon {
+  vertical-align: middle;
+  margin-left: 0.375rem;
+  color: white;
+}
+
+button .button-icon,
+.button .button-icon,
+.button__primary .button-icon,
+.button__primary--dark .button-icon {
+  color: white; /* TODO: Replace with color token */
+}
+
+.button__secondary--dark .button-icon {
+  color: black; /* TODO: Replace with color token */
+}
+
+.button__text--dark .button-icon {
+  color: black; /* TODO: Replace with color token */
+}
+
+.button__color .button-icon {
+  color: white; /* TODO: Replace with color token */
+}
+
+/* LIGHT BUTTONS */
+.button__primary--light {
+  background: white; /* TODO: Replace with color token */
+  color: black; /* TODO: Replace with color token */
+}
+
+.button__primary--light .button-icon {
+  color: black; /* TODO: Replace with color token */
+}
+
+.button__secondary--light {
+  background: rgba(0, 0, 0, 0);
+  border-color: white; /* TODO: Replace with color token */
+  border-style: solid;
+  border-width: 1px;
+  color: white; /* TODO: Replace with color token */
+}
+
+.button__text--light {
+  color: white; /* TODO: Replace with color token */
+}
+
+.icon {
+  display: inline-block;
+}

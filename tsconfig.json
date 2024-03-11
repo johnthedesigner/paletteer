@@ -1,13 +1,14 @@
 {
+  "extends": "@create-figma-plugin/tsconfig",
   "compilerOptions": {
-    "target": "es6",
-    "outDir": "dist",
+    "lib": ["es2020"],
+    "typeRoots": ["node_modules/@figma", "node_modules/@types"],
     "jsx": "react",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "experimentalDecorators": true,
-    "removeComments": true,
-    "noImplicitAny": false,
-    "moduleResolution": "node"
-  }
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
+    // "allowJs": true
+    // "esModuleInterop": true{
+    // "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
