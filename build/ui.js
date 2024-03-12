@@ -1,7 +1,9 @@
 (() => {
   var __create = Object.create;
   var __defProp = Object.defineProperty;
+  var __defProps = Object.defineProperties;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __getProtoOf = Object.getPrototypeOf;
@@ -19,6 +21,7 @@
       }
     return a3;
   };
+  var __spreadProps = (a3, b2) => __defProps(a3, __getOwnPropDescs(b2));
   var __esm = (fn, res) => function __init() {
     return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
   };
@@ -110,10 +113,10 @@
     u3 && j(o3, u3, r3), C.__r = 0;
   }
   function P(n2, l3, u3, t3, i3, o3, r3, f3, e3, a3, h3) {
-    var v3, p3, y3, d3, _5, g4 = t3 && t3.__k || s, b2 = l3.length;
+    var v3, p3, y3, d3, _6, g4 = t3 && t3.__k || s, b2 = l3.length;
     for (u3.__d = e3, S(u3, l3, g4), e3 = u3.__d, v3 = 0; v3 < b2; v3++)
-      null != (y3 = u3.__k[v3]) && "boolean" != typeof y3 && "function" != typeof y3 && (p3 = -1 === y3.__i ? c : g4[y3.__i] || c, y3.__i = v3, M(n2, y3, p3, i3, o3, r3, f3, e3, a3, h3), d3 = y3.__e, y3.ref && p3.ref != y3.ref && (p3.ref && N(p3.ref, null, y3), h3.push(y3.ref, y3.__c || d3, y3)), null == _5 && null != d3 && (_5 = d3), 65536 & y3.__u || p3.__k === y3.__k ? e3 = $(y3, e3, n2) : "function" == typeof y3.type && void 0 !== y3.__d ? e3 = y3.__d : d3 && (e3 = d3.nextSibling), y3.__d = void 0, y3.__u &= -196609);
-    u3.__d = e3, u3.__e = _5;
+      null != (y3 = u3.__k[v3]) && "boolean" != typeof y3 && "function" != typeof y3 && (p3 = -1 === y3.__i ? c : g4[y3.__i] || c, y3.__i = v3, M(n2, y3, p3, i3, o3, r3, f3, e3, a3, h3), d3 = y3.__e, y3.ref && p3.ref != y3.ref && (p3.ref && N(p3.ref, null, y3), h3.push(y3.ref, y3.__c || d3, y3)), null == _6 && null != d3 && (_6 = d3), 65536 & y3.__u || p3.__k === y3.__k ? e3 = $(y3, e3, n2) : "function" == typeof y3.type && void 0 !== y3.__d ? e3 = y3.__d : d3 && (e3 = d3.nextSibling), y3.__d = void 0, y3.__u &= -196609);
+    u3.__d = e3, u3.__e = _6;
   }
   function S(n2, l3, u3) {
     var t3, i3, o3, r3, f3, e3 = l3.length, c3 = u3.length, s3 = c3, a3 = 0;
@@ -207,14 +210,14 @@
       return this.l[n2.type + true](l.event ? l.event(n2) : n2);
   }
   function M(n2, u3, t3, i3, o3, r3, f3, e3, c3, s3) {
-    var a3, p3, y3, d3, _5, m3, w3, k3, x4, C4, S2, $3, H3, I3, T4, A3 = u3.type;
+    var a3, p3, y3, d3, _6, m3, w3, k3, x4, C4, S2, $3, H3, I3, T4, A3 = u3.type;
     if (void 0 !== u3.constructor)
       return null;
     128 & t3.__u && (c3 = !!(32 & t3.__u), r3 = [e3 = u3.__e = t3.__e]), (a3 = l.__b) && a3(u3);
     n:
       if ("function" == typeof A3)
         try {
-          if (k3 = u3.props, x4 = (a3 = A3.contextType) && i3[a3.__c], C4 = a3 ? x4 ? x4.props.value : a3.__ : i3, t3.__c ? w3 = (p3 = u3.__c = t3.__c).__ = p3.__E : ("prototype" in A3 && A3.prototype.render ? u3.__c = p3 = new A3(k3, C4) : (u3.__c = p3 = new b(k3, C4), p3.constructor = A3, p3.render = q), x4 && x4.sub(p3), p3.props = k3, p3.state || (p3.state = {}), p3.context = C4, p3.__n = i3, y3 = p3.__d = true, p3.__h = [], p3._sb = []), null == p3.__s && (p3.__s = p3.state), null != A3.getDerivedStateFromProps && (p3.__s == p3.state && (p3.__s = v({}, p3.__s)), v(p3.__s, A3.getDerivedStateFromProps(k3, p3.__s))), d3 = p3.props, _5 = p3.state, p3.__v = u3, y3)
+          if (k3 = u3.props, x4 = (a3 = A3.contextType) && i3[a3.__c], C4 = a3 ? x4 ? x4.props.value : a3.__ : i3, t3.__c ? w3 = (p3 = u3.__c = t3.__c).__ = p3.__E : ("prototype" in A3 && A3.prototype.render ? u3.__c = p3 = new A3(k3, C4) : (u3.__c = p3 = new b(k3, C4), p3.constructor = A3, p3.render = q), x4 && x4.sub(p3), p3.props = k3, p3.state || (p3.state = {}), p3.context = C4, p3.__n = i3, y3 = p3.__d = true, p3.__h = [], p3._sb = []), null == p3.__s && (p3.__s = p3.state), null != A3.getDerivedStateFromProps && (p3.__s == p3.state && (p3.__s = v({}, p3.__s)), v(p3.__s, A3.getDerivedStateFromProps(k3, p3.__s))), d3 = p3.props, _6 = p3.state, p3.__v = u3, y3)
             null == A3.getDerivedStateFromProps && null != p3.componentWillMount && p3.componentWillMount(), null != p3.componentDidMount && p3.__h.push(p3.componentDidMount);
           else {
             if (null == A3.getDerivedStateFromProps && k3 !== d3 && null != p3.componentWillReceiveProps && p3.componentWillReceiveProps(k3, C4), !p3.__e && (null != p3.shouldComponentUpdate && false === p3.shouldComponentUpdate(k3, p3.__s, C4) || u3.__v === t3.__v)) {
@@ -226,7 +229,7 @@
               break n;
             }
             null != p3.componentWillUpdate && p3.componentWillUpdate(k3, p3.__s, C4), null != p3.componentDidUpdate && p3.__h.push(function() {
-              p3.componentDidUpdate(d3, _5, m3);
+              p3.componentDidUpdate(d3, _6, m3);
             });
           }
           if (p3.context = C4, p3.props = k3, p3.__P = n2, p3.__e = false, $3 = l.__r, H3 = 0, "prototype" in A3 && A3.prototype.render) {
@@ -237,7 +240,7 @@
             do {
               p3.__d = false, $3 && $3(u3), a3 = p3.render(p3.props, p3.state, p3.context), p3.state = p3.__s;
             } while (p3.__d && ++H3 < 25);
-          p3.state = p3.__s, null != p3.getChildContext && (i3 = v(v({}, i3), p3.getChildContext())), y3 || null == p3.getSnapshotBeforeUpdate || (m3 = p3.getSnapshotBeforeUpdate(d3, _5)), P(n2, h(T4 = null != a3 && a3.type === g && null == a3.key ? a3.props.children : a3) ? T4 : [T4], u3, t3, i3, o3, r3, f3, e3, c3, s3), p3.base = u3.__e, u3.__u &= -161, p3.__h.length && f3.push(p3), w3 && (p3.__E = p3.__ = null);
+          p3.state = p3.__s, null != p3.getChildContext && (i3 = v(v({}, i3), p3.getChildContext())), y3 || null == p3.getSnapshotBeforeUpdate || (m3 = p3.getSnapshotBeforeUpdate(d3, _6)), P(n2, h(T4 = null != a3 && a3.type === g && null == a3.key ? a3.props.children : a3) ? T4 : [T4], u3, t3, i3, o3, r3, f3, e3, c3, s3), p3.base = u3.__e, u3.__u &= -161, p3.__h.length && f3.push(p3), w3 && (p3.__E = p3.__ = null);
         } catch (n3) {
           u3.__v = null, c3 || null != r3 ? (u3.__e = e3, u3.__u |= c3 ? 160 : 32, r3[r3.indexOf(e3)] = null) : (u3.__e = t3.__e, u3.__k = t3.__k), l.__e(n3, u3, t3);
         }
@@ -259,11 +262,11 @@
     });
   }
   function z(l3, u3, t3, i3, o3, r3, f3, e3, s3) {
-    var a3, v3, y3, d3, _5, g4, b2, w3 = t3.props, k3 = u3.props, x4 = u3.type;
+    var a3, v3, y3, d3, _6, g4, b2, w3 = t3.props, k3 = u3.props, x4 = u3.type;
     if ("svg" === x4 && (o3 = true), null != r3) {
       for (a3 = 0; a3 < r3.length; a3++)
-        if ((_5 = r3[a3]) && "setAttribute" in _5 == !!x4 && (x4 ? _5.localName === x4 : 3 === _5.nodeType)) {
-          l3 = _5, r3[a3] = null;
+        if ((_6 = r3[a3]) && "setAttribute" in _6 == !!x4 && (x4 ? _6.localName === x4 : 3 === _6.nodeType)) {
+          l3 = _6, r3[a3] = null;
           break;
         }
     }
@@ -277,11 +280,11 @@
     else {
       if (r3 = r3 && n.call(l3.childNodes), w3 = t3.props || c, !e3 && null != r3)
         for (w3 = {}, a3 = 0; a3 < l3.attributes.length; a3++)
-          w3[(_5 = l3.attributes[a3]).name] = _5.value;
+          w3[(_6 = l3.attributes[a3]).name] = _6.value;
       for (a3 in w3)
-        _5 = w3[a3], "children" == a3 || ("dangerouslySetInnerHTML" == a3 ? y3 = _5 : "key" === a3 || a3 in k3 || A(l3, a3, null, _5, o3));
+        _6 = w3[a3], "children" == a3 || ("dangerouslySetInnerHTML" == a3 ? y3 = _6 : "key" === a3 || a3 in k3 || A(l3, a3, null, _6, o3));
       for (a3 in k3)
-        _5 = k3[a3], "children" == a3 ? d3 = _5 : "dangerouslySetInnerHTML" == a3 ? v3 = _5 : "value" == a3 ? g4 = _5 : "checked" == a3 ? b2 = _5 : "key" === a3 || e3 && "function" != typeof _5 || w3[a3] === _5 || A(l3, a3, _5, w3[a3], o3);
+        _6 = k3[a3], "children" == a3 ? d3 = _6 : "dangerouslySetInnerHTML" == a3 ? v3 = _6 : "value" == a3 ? g4 = _6 : "checked" == a3 ? b2 = _6 : "key" === a3 || e3 && "function" != typeof _6 || w3[a3] === _6 || A(l3, a3, _6, w3[a3], o3);
       if (v3)
         e3 || y3 && (v3.__html === y3.__html || v3.__html === l3.innerHTML) || (l3.innerHTML = v3.__html), u3.__k = [];
       else if (y3 && (l3.innerHTML = ""), P(l3, h(d3) ? d3 : [d3], u3, t3, i3, o3 && "foreignObject" !== x4, r3, f3, r3 ? r3[0] : t3.__k && m(t3, 0), e3, s3), null != r3)
@@ -488,9 +491,9 @@
     }
   });
 
-  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/ee83ae73-2739-4230-a54e-cdaf42827883/base.js
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/2bfed614-2958-4720-bc8a-99c517618919/base.js
   var init_base = __esm({
-    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/ee83ae73-2739-4230-a54e-cdaf42827883/base.js"() {
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/2bfed614-2958-4720-bc8a-99c517618919/base.js"() {
       if (document.getElementById("826ab65e8b") === null) {
         const element = document.createElement("style");
         element.id = "826ab65e8b";
@@ -817,9 +820,9 @@ svg {
     }
   });
 
-  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/23d5d797-0a03-4af9-ab0a-4474bfe41c81/styles.js
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/1a55d1b2-db99-4989-9350-a4cca79434f8/styles.js
   var init_styles = __esm({
-    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/23d5d797-0a03-4af9-ab0a-4474bfe41c81/styles.js"() {
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/1a55d1b2-db99-4989-9350-a4cca79434f8/styles.js"() {
       if (document.getElementById("dbb7f0b538") === null) {
         const element = document.createElement("style");
         element.id = "dbb7f0b538";
@@ -2003,7 +2006,7 @@ button .button-icon,
           return string.match(reUnicodeWord) || [];
         }
         var runInContext = function runInContext2(context) {
-          context = context == null ? root : _5.defaults(root.Object(), context, _5.pick(root, contextProps));
+          context = context == null ? root : _6.defaults(root.Object(), context, _6.pick(root, contextProps));
           var Array2 = context.Array, Date2 = context.Date, Error2 = context.Error, Function2 = context.Function, Math2 = context.Math, Object2 = context.Object, RegExp2 = context.RegExp, String2 = context.String, TypeError2 = context.TypeError;
           var arrayProto = Array2.prototype, funcProto = Function2.prototype, objectProto = Object2.prototype;
           var coreJsData = context["__core-js_shared__"];
@@ -6777,17 +6780,17 @@ button .button-icon,
           }
           return lodash;
         };
-        var _5 = runInContext();
+        var _6 = runInContext();
         if (typeof define == "function" && typeof define.amd == "object" && define.amd) {
-          root._ = _5;
+          root._ = _6;
           define(function() {
-            return _5;
+            return _6;
           });
         } else if (freeModule) {
-          (freeModule.exports = _5)._ = _5;
-          freeExports._ = _5;
+          (freeModule.exports = _6)._ = _6;
+          freeExports._ = _6;
         } else {
-          root._ = _5;
+          root._ = _6;
         }
       }).call(exports);
     }
@@ -10050,7 +10053,7 @@ button .button-icon,
       init_preact_module();
       import_lodash2 = __toESM(require_lodash());
       init_Button();
-      PalettesList = ({ palettes, removeSeedColor }) => {
+      PalettesList = ({ palettes, removeSeedColor, editPalette }) => {
         const paletteListWrapperStyles = {
           position: "absolute",
           top: 0,
@@ -10106,93 +10109,532 @@ button .button-icon,
             color: swatch.displayColor === "black" ? "black" : "white"
           };
         };
-        return /* @__PURE__ */ y("div", { className: "palette-list-wrapper", style: paletteListWrapperStyles }, /* @__PURE__ */ y("div", { className: "palette-list", style: PalettesListStyles }, import_lodash2.default.map(palettes, (palette) => {
+        return /* @__PURE__ */ y("div", { className: "palette-list-wrapper", style: paletteListWrapperStyles }, /* @__PURE__ */ y("div", { className: "palette-list", style: PalettesListStyles }, import_lodash2.default.map(palettes, (palette, index) => {
           let paletteSwatches = import_lodash2.default.orderBy(palette.swatches, (swatch) => {
             return 0 + swatch.contrastWhite;
           });
           let seedDisplayColor = palette.swatches[palette.sourceColorIndex].displayColor;
-          return /* @__PURE__ */ y("div", { className: "color-block", style: ColorBlockStyles(palette) }, /* @__PURE__ */ y("div", { className: "color-block__header", style: headerStyles2 }, /* @__PURE__ */ y(
+          return /* @__PURE__ */ y(
             "div",
             {
-              className: "color-block__title-area",
-              style: titleAreaStyles(seedDisplayColor)
+              className: "color-block",
+              style: ColorBlockStyles(palette),
+              onClick: () => editPalette(index)
             },
-            /* @__PURE__ */ y(
-              "span",
-              {
-                style: {
-                  fontSize: "1rem",
-                  fontWeight: 700,
-                  fontFamily: "Fira Mono"
-                }
-              },
-              palette.name
-            ),
-            /* @__PURE__ */ y("span", { style: { fontSize: ".75rem" } }, "Primary Shade:", /* @__PURE__ */ y(
-              "span",
-              {
-                style: {
-                  fontFamily: "Fira Mono",
-                  textTransform: "uppercase",
-                  marginLeft: ".25rem"
-                }
-              },
-              palette.swatches[palette.sourceColorIndex].hex
-            ))
-          ), /* @__PURE__ */ y(
-            "div",
-            {
-              className: "color-block__header-actions",
-              style: actionAreaStyles
-            },
-            /* @__PURE__ */ y(
-              Button_default,
-              {
-                buttonType: "primary",
-                lightDark: seedDisplayColor === "white" ? "light" : "dark",
-                iconType: "pencil",
-                text: "Edit",
-                onClick: null
-              }
-            ),
-            /* @__PURE__ */ y(
-              Button_default,
-              {
-                buttonType: "secondary",
-                lightDark: seedDisplayColor === "white" ? "light" : "dark",
-                iconType: "trash",
-                text: "Delete",
-                onClick: () => {
-                  removeSeedColor(
-                    palette.swatches[palette.sourceColorIndex].hex
-                  );
-                }
-              }
-            )
-          )), /* @__PURE__ */ y("div", { className: "color-block__gradient", style: gradientStyles }, import_lodash2.default.map(paletteSwatches, (swatch, index) => {
-            return /* @__PURE__ */ y(
+            /* @__PURE__ */ y("div", { className: "color-block__header", style: headerStyles2 }, /* @__PURE__ */ y(
               "div",
               {
-                className: "color-block__swatch",
-                style: swatchStyles(swatch)
+                className: "color-block__title-area",
+                style: titleAreaStyles(seedDisplayColor)
               },
               /* @__PURE__ */ y(
-                "p",
+                "span",
                 {
                   style: {
-                    color: swatch.displayColor === "white" ? "white" : "black",
-                    textAlign: "center",
+                    fontSize: "1rem",
+                    fontWeight: 700,
                     fontFamily: "Fira Mono"
                   }
                 },
-                (index + 1).toFixed(0).padStart(2, "0")
+                palette.name
               ),
-              /* @__PURE__ */ y("p", { style: { color: "limegreen" } }, swatch.hex != swatch.variableColor && /* @__PURE__ */ y(g, null, "XX"))
-            );
-          })));
+              /* @__PURE__ */ y("span", { style: { fontSize: ".75rem" } }, "Primary Shade:", /* @__PURE__ */ y(
+                "span",
+                {
+                  style: {
+                    fontFamily: "Fira Mono",
+                    textTransform: "uppercase",
+                    marginLeft: ".25rem"
+                  }
+                },
+                palette.swatches[palette.sourceColorIndex].hex
+              ))
+            ), /* @__PURE__ */ y(
+              "div",
+              {
+                className: "color-block__header-actions",
+                style: actionAreaStyles
+              },
+              /* @__PURE__ */ y(
+                Button_default,
+                {
+                  buttonType: "primary",
+                  lightDark: seedDisplayColor === "white" ? "light" : "dark",
+                  iconType: "pencil",
+                  text: "Edit",
+                  onClick: null
+                }
+              ),
+              /* @__PURE__ */ y(
+                Button_default,
+                {
+                  buttonType: "secondary",
+                  lightDark: seedDisplayColor === "white" ? "light" : "dark",
+                  iconType: "trash",
+                  text: "Delete",
+                  onClick: () => {
+                    removeSeedColor(
+                      palette.swatches[palette.sourceColorIndex].hex
+                    );
+                  }
+                }
+              )
+            )),
+            /* @__PURE__ */ y("div", { className: "color-block__gradient", style: gradientStyles }, import_lodash2.default.map(paletteSwatches, (swatch, index2) => {
+              return /* @__PURE__ */ y(
+                "div",
+                {
+                  className: "color-block__swatch",
+                  style: swatchStyles(swatch)
+                },
+                /* @__PURE__ */ y(
+                  "p",
+                  {
+                    style: {
+                      color: swatch.displayColor === "white" ? "white" : "black",
+                      textAlign: "center",
+                      fontFamily: "Fira Mono"
+                    }
+                  },
+                  (index2 + 1).toFixed(0).padStart(2, "0")
+                ),
+                /* @__PURE__ */ y("p", { style: { color: "limegreen" } }, swatch.hex != swatch.variableColor && /* @__PURE__ */ y(g, null, "XX"))
+              );
+            }))
+          );
         })));
       };
       PalettesList_default = PalettesList;
+    }
+  });
+
+  // src/views/Palettes.tsx
+  var modalHeaderStyles, modalMainAreaStyles, modalSidebarStyles, modalMainColumnStyles, modalBodyStyles, modalFooterStyles, footerActionsLeftStyles, footerActionsRightStyles, Palettes, Palettes_default;
+  var init_Palettes = __esm({
+    "src/views/Palettes.tsx"() {
+      "use strict";
+      init_preact_module();
+      init_Header();
+      init_ColorPickerSidebar();
+      init_PalettesList();
+      init_Button();
+      modalHeaderStyles = {
+        position: "relative",
+        width: "100%",
+        height: "80px",
+        borderBottom: "#EEE solid 1px"
+      };
+      modalMainAreaStyles = {
+        flexGrow: 1,
+        display: "flex"
+      };
+      modalSidebarStyles = {
+        position: "relative",
+        width: "14rem",
+        borderRight: "#EEE solid 1px"
+      };
+      modalMainColumnStyles = {
+        display: "flex",
+        flexDirection: "column",
+        flex: 1
+      };
+      modalBodyStyles = {
+        position: "relative",
+        flex: 1,
+        borderBottom: "#EEE solid 1px"
+      };
+      modalFooterStyles = {
+        display: "flex",
+        flexDirection: "row"
+      };
+      footerActionsLeftStyles = {
+        flex: 1,
+        display: "flex",
+        flexDirection: "row",
+        padding: "1rem",
+        gap: ".5rem"
+      };
+      footerActionsRightStyles = {
+        display: "flex",
+        flexDirection: "row",
+        padding: "1rem",
+        gap: ".5rem",
+        alignItems: "center"
+      };
+      Palettes = ({
+        fileName,
+        palettes,
+        selectionColors,
+        pageColors,
+        updateConfig,
+        addSeedColor,
+        removeSeedColor,
+        resetData,
+        setCurrentView,
+        editPalette
+      }) => {
+        return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { className: "modal__header", style: modalHeaderStyles }, /* @__PURE__ */ y(
+          Header_default,
+          {
+            fileName,
+            resetData,
+            updateConfig,
+            palettes
+          }
+        )), /* @__PURE__ */ y("div", { className: "modal__main-area", style: modalMainAreaStyles }, /* @__PURE__ */ y("div", { className: "modal__sidebar", style: modalSidebarStyles }, /* @__PURE__ */ y(
+          ColorPickerSidebar_default,
+          {
+            palettes,
+            selectionColors,
+            pageColors,
+            addSeedColor
+          }
+        )), /* @__PURE__ */ y("div", { className: "modal__main-column", style: modalMainColumnStyles }, /* @__PURE__ */ y("div", { className: "modal__body", style: modalBodyStyles }, /* @__PURE__ */ y(
+          PalettesList_default,
+          {
+            palettes,
+            removeSeedColor,
+            editPalette
+          }
+        )), /* @__PURE__ */ y("div", { className: "modal__footer", style: modalFooterStyles }, /* @__PURE__ */ y(
+          "div",
+          {
+            className: "footer-actions__left",
+            style: footerActionsLeftStyles
+          },
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              buttonType: "color",
+              iconType: "code",
+              text: "Get Tokens",
+              onClick: () => setCurrentView("tokens")
+            }
+          ),
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              buttonType: "color",
+              iconType: "component",
+              text: "Generate Style Guide",
+              onClick: null
+            }
+          )
+        ), /* @__PURE__ */ y(
+          "div",
+          {
+            className: "footer-actions__right",
+            style: footerActionsRightStyles
+          },
+          /* @__PURE__ */ y("span", { style: { fontStyle: "italic" } }, "Palettes saved to variablesXXX"),
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              buttonType: "secondary",
+              iconType: "variable",
+              text: "Delete color variables",
+              onClick: null
+            }
+          )
+        )))));
+      };
+      Palettes_default = Palettes;
+    }
+  });
+
+  // src/components/Text.tsx
+  var Text, Text_default;
+  var init_Text = __esm({
+    "src/components/Text.tsx"() {
+      "use strict";
+      init_preact_module();
+      Text = ({
+        children,
+        className,
+        style,
+        type = "text",
+        size = "small",
+        inline = false
+      }) => {
+        const buildClassName = `text-element ${className}`;
+        const fontSizes = {
+          text: {
+            small: ".75rem",
+            medium: "1rem",
+            large: "1.25rem"
+          },
+          heading: {
+            small: "1rem",
+            medium: "1.25rem",
+            large: "1.5rem"
+          }
+        };
+        const defaultStyles = {
+          fontSize: fontSizes[type][size],
+          display: inline ? "inline" : "block",
+          lineHeight: "150%"
+        };
+        return /* @__PURE__ */ y("span", { className: buildClassName, style: __spreadValues(__spreadValues({}, defaultStyles), style) }, children);
+      };
+      Text_default = Text;
+    }
+  });
+
+  // src/views/Edit.tsx
+  var import_lodash3, tabContainerStyles, Tab, Edit, Edit_default;
+  var init_Edit = __esm({
+    "src/views/Edit.tsx"() {
+      "use strict";
+      init_preact_module();
+      init_compat_module();
+      import_lodash3 = __toESM(require_lodash());
+      init_Button();
+      init_Icon();
+      init_Text();
+      tabContainerStyles = {
+        background: "#EEEEEE",
+        // TODO: Replace with color token
+        flex: 1,
+        display: "flex",
+        flexDirection: "row",
+        padding: ".125rem .125rem 0",
+        gap: ".125rem"
+      };
+      Tab = ({ tabColor, textColor, props, setSelectedTab, children }) => {
+        const tabStyles = {
+          background: tabColor,
+          color: textColor,
+          fontSize: ".75rem",
+          fontWeight: 700,
+          flex: 1,
+          borderColor: "rgba(0,0,0,.2)",
+          borderStyle: "solid",
+          borderWidth: "1px 1px 0 1px",
+          borderRadius: ".375rem .375rem 0 0"
+        };
+        console.log(children);
+        return /* @__PURE__ */ y("button", { style: tabStyles }, children);
+      };
+      Edit = ({ palettes, selectedPalette, setCurrentView }) => {
+        console.log(selectedPalette);
+        const editContainerStyles = {
+          flex: 1,
+          display: "flex",
+          flexDirection: "row"
+        };
+        const editSidebarStyles = {
+          display: "flex",
+          flexDirection: "column",
+          width: "14rem",
+          borderRight: "#EEE solid 1px"
+        };
+        const editBodyStyles = {
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          padding: "1rem"
+        };
+        const demoContainerStyles = {
+          display: "flex",
+          flexDirection: "row",
+          flex: 1
+        };
+        const colorGradientWrapperStyles = {
+          display: "flex",
+          flexDirection: "column",
+          width: "14rem",
+          borderRadius: ".375rem 0 0 .375rem",
+          overflow: "hidden"
+        };
+        const colorGradientHeaderStyles = (palette) => {
+          let sourceColor = palette.swatches[palette.sourceColorIndex].hex;
+          return {
+            background: sourceColor,
+            display: "flex",
+            flexDirection: "column",
+            gap: ".5rem",
+            padding: "1rem"
+          };
+        };
+        const colorNameStyles = {
+          fontSize: "1.25rem",
+          fontWeight: 700
+        };
+        const colorHexStyles = {
+          fontFamily: "Fira Mono",
+          fontSize: "1rem"
+        };
+        const colorTableRowStyles = {
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          fontFamily: "Fira Mono",
+          textAlign: "center",
+          lineHeight: 0.875,
+          flex: 1
+        };
+        const exampleContainerStyles = {
+          flex: 1,
+          borderRadius: " 0 .375rem .375rem 0",
+          borderColor: "#DDDDDD",
+          borderStyle: "solid",
+          borderWidth: "1px 1px 1px 0"
+        };
+        const exampleContentWrapperStyles = {
+          padding: "2rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: ".5rem"
+        };
+        const [selectedTab, setSelectedTab] = p2(0);
+        return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { style: editContainerStyles }, /* @__PURE__ */ y("div", { style: editSidebarStyles }, /* @__PURE__ */ y("div", { style: { padding: "1rem" } }, /* @__PURE__ */ y(
+          Button_default,
+          {
+            buttonType: "secondary",
+            text: "Back to palettes",
+            onClick: () => setCurrentView("palettes")
+          }
+        ))), /* @__PURE__ */ y("div", { style: editBodyStyles }, /* @__PURE__ */ y("div", { style: demoContainerStyles }, /* @__PURE__ */ y("div", { style: colorGradientWrapperStyles }, /* @__PURE__ */ y("div", { style: colorGradientHeaderStyles(selectedPalette) }, /* @__PURE__ */ y("span", { style: colorNameStyles }, selectedPalette.name), /* @__PURE__ */ y("span", { style: colorHexStyles }, selectedPalette.swatches[selectedPalette.sourceColorIndex].hex)), /* @__PURE__ */ y(
+          "div",
+          {
+            style: __spreadProps(__spreadValues({}, colorTableRowStyles), {
+              background: "black",
+              color: "white"
+            })
+          },
+          /* @__PURE__ */ y("div", { style: { flex: 1 } }, "index"),
+          /* @__PURE__ */ y("div", { style: { flex: 1 } }, "Black Contrast"),
+          /* @__PURE__ */ y("div", { style: { flex: 1 } }, "White Contrast")
+        ), import_lodash3.default.map(selectedPalette.swatches, (swatch, index) => {
+          return /* @__PURE__ */ y(
+            "div",
+            {
+              style: __spreadProps(__spreadValues({}, colorTableRowStyles), { background: swatch.hex })
+            },
+            /* @__PURE__ */ y("div", { style: { flex: 1, color: swatch.displayColor } }, (index + 1).toFixed(0).padStart(2, "0")),
+            /* @__PURE__ */ y("div", { style: { flex: 1, color: "black" } }, swatch.displayColor === "black" && /* @__PURE__ */ y(g, null, "\u2022"), swatch.contrastBlack.toFixed(2)),
+            /* @__PURE__ */ y("div", { style: { flex: 1, color: "white" } }, swatch.displayColor === "white" && /* @__PURE__ */ y(g, null, "\u2022"), swatch.contrastWhite.toFixed(2))
+          );
+        })), /* @__PURE__ */ y("div", { style: exampleContainerStyles }, /* @__PURE__ */ y("div", { style: tabContainerStyles }, /* @__PURE__ */ y(
+          Tab,
+          {
+            tabColor: "white",
+            textColor: "black",
+            setSelectedTab: () => {
+              setSelectedTab(0);
+            }
+          },
+          "Light"
+        ), /* @__PURE__ */ y(
+          Tab,
+          {
+            tabColor: "black",
+            textColor: "white",
+            setSelectedTab: () => {
+              setSelectedTab(1);
+            }
+          },
+          "Dark"
+        ), /* @__PURE__ */ y(
+          Tab,
+          {
+            tabColor: selectedPalette.swatches[5].hex,
+            textColor: "white",
+            setSelectedTab: () => {
+              setSelectedTab(2);
+            }
+          },
+          "Color"
+        )), /* @__PURE__ */ y("div", { style: exampleContentWrapperStyles }, /* @__PURE__ */ y(Text_default, { type: "text", size: "small" }, "Buttons"), /* @__PURE__ */ y(
+          "div",
+          {
+            style: {
+              display: "flex",
+              flexDirection: "row",
+              gap: ".5rem"
+            }
+          },
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              onClick: null,
+              text: "Settings",
+              buttonType: "primary",
+              iconType: "settings"
+            }
+          ),
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              onClick: null,
+              text: "Generate Code",
+              buttonType: "secondary",
+              iconType: "code"
+            }
+          ),
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              onClick: null,
+              text: "Refresh",
+              buttonType: "text",
+              iconType: "settings"
+            }
+          )
+        ), /* @__PURE__ */ y(Text_default, { type: "text", size: "small" }, "Heading"), /* @__PURE__ */ y(Text_default, { type: "heading", size: "large" }, "The quick brown fox jumped over the lazy dog."), /* @__PURE__ */ y(Text_default, { type: "text", size: "small" }, "Icons"), /* @__PURE__ */ y(
+          "div",
+          {
+            style: {
+              display: "flex",
+              flexDirection: "row",
+              gap: ".5rem"
+            }
+          },
+          /* @__PURE__ */ y(Icon_default, { type: "pencil" }),
+          /* @__PURE__ */ y(Icon_default, { type: "code" }),
+          /* @__PURE__ */ y(Icon_default, { type: "settings" }),
+          /* @__PURE__ */ y(Icon_default, { type: "help" }),
+          /* @__PURE__ */ y(Icon_default, { type: "trash" })
+        ), /* @__PURE__ */ y(Text_default, { type: "text", size: "small" }, "Paragraph Text"), /* @__PURE__ */ y(Text_default, { type: "text", size: "large" }, "Nam faucibus accumsan ultrices. Duis magna velit, pretium quis ultricies in, efficitur eu nisi. Ut id condimentum neque. Integer dapibus eros urna, quis pharetra nunc fringilla eu.")))))));
+      };
+      Edit_default = Edit;
+    }
+  });
+
+  // src/views/Tokens.tsx
+  var Tokens, Tokens_default;
+  var init_Tokens = __esm({
+    "src/views/Tokens.tsx"() {
+      "use strict";
+      init_preact_module();
+      init_Button();
+      Tokens = ({ palettes, setCurrentView }) => {
+        const editContainerStyles = {
+          flex: 1,
+          display: "flex",
+          flexDirection: "row"
+        };
+        const editSidebarStyles = {
+          display: "flex",
+          flexDirection: "column",
+          width: "14rem",
+          borderRight: "#EEE solid 1px"
+        };
+        const editBodyStyles = {
+          flex: 1,
+          display: "flex",
+          flexDirection: "column"
+        };
+        return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { style: editContainerStyles }, /* @__PURE__ */ y("div", { style: editSidebarStyles }, /* @__PURE__ */ y("div", { style: { padding: "1rem" } }, /* @__PURE__ */ y(
+          Button_default,
+          {
+            buttonType: "secondary",
+            text: "Back to palettes",
+            onClick: () => setCurrentView("palettes")
+          }
+        ))), /* @__PURE__ */ y("div", { style: editBodyStyles }, "Token Editor")));
+      };
+      Tokens_default = Tokens;
     }
   });
 
@@ -10210,6 +10652,12 @@ button .button-icon,
     const [config, setConfig] = p2({
       stepCount: 16
     });
+    const [currentView, setCurrentView] = p2("palettes");
+    const [selectedPalette, setSelectedPalette] = p2(palettes[0]);
+    const editPalette = async (index) => {
+      setSelectedPalette(palettes[index]);
+      setCurrentView("edit");
+    };
     const updateConfig = (key, value) => {
       parent.postMessage(
         {
@@ -10276,85 +10724,30 @@ button .button-icon,
       };
       window.onmessage = handleMessage;
     });
-    return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y(
-      "style",
-      {
-        dangerouslySetInnerHTML: {
-          __html: `@import
-        url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap')
-        .font-text {
-          font-family: "Nunito", sans-serif;
-          font-optical-sizing: auto;
-          font-weight:400;
-          font-style: normal;
-        }`
-        }
-      }
-    ), /* @__PURE__ */ y("div", { className: "modal font-text", style: modalStyles }, /* @__PURE__ */ y("div", { className: "modal__header", style: modalHeaderStyles }, /* @__PURE__ */ y(
-      Header_default,
+    return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { className: "modal font-text", style: modalStyles }, currentView === "palettes" && /* @__PURE__ */ y(
+      Palettes_default,
       {
         fileName,
-        resetData,
-        updateConfig,
-        palettes
-      }
-    )), /* @__PURE__ */ y("div", { className: "modal__main-area", style: modalMainAreaStyles }, /* @__PURE__ */ y("div", { className: "modal__sidebar", style: modalSidebarStyles }, /* @__PURE__ */ y(
-      ColorPickerSidebar_default,
-      {
         palettes,
         selectionColors,
         pageColors,
-        addSeedColor
+        updateConfig,
+        addSeedColor,
+        removeSeedColor,
+        resetData,
+        setCurrentView,
+        editPalette
       }
-    )), /* @__PURE__ */ y("div", { className: "modal__main-column", style: modalMainColumnStyles }, /* @__PURE__ */ y("div", { className: "modal__body", style: modalBodyStyles }, /* @__PURE__ */ y(
-      PalettesList_default,
+    ), currentView === "edit" && /* @__PURE__ */ y(
+      Edit_default,
       {
         palettes,
-        removeSeedColor
+        selectedPalette,
+        setCurrentView
       }
-    )), /* @__PURE__ */ y("div", { className: "modal__footer", style: modalFooterStyles }, /* @__PURE__ */ y(
-      "div",
-      {
-        className: "footer-actions__left",
-        style: footerActionsLeftStyles
-      },
-      /* @__PURE__ */ y(
-        Button_default,
-        {
-          buttonType: "color",
-          iconType: "code",
-          text: "Get Tokens",
-          onClick: null
-        }
-      ),
-      /* @__PURE__ */ y(
-        Button_default,
-        {
-          buttonType: "color",
-          iconType: "component",
-          text: "Generate Style Guide",
-          onClick: null
-        }
-      )
-    ), /* @__PURE__ */ y(
-      "div",
-      {
-        className: "footer-actions__right",
-        style: footerActionsRightStyles
-      },
-      /* @__PURE__ */ y("span", { style: { fontStyle: "italic" } }, "Palettes saved to variables"),
-      /* @__PURE__ */ y(
-        Button_default,
-        {
-          buttonType: "secondary",
-          iconType: "variable",
-          text: "Delete color variables",
-          onClick: null
-        }
-      )
-    ))))));
+    ), currentView === "tokens" && /* @__PURE__ */ y(Tokens_default, { palettes, setCurrentView })));
   }
-  var modalStyles, modalHeaderStyles, modalMainAreaStyles, modalSidebarStyles, modalMainColumnStyles, modalBodyStyles, modalFooterStyles, footerActionsLeftStyles, footerActionsRightStyles, ui_default;
+  var modalStyles, ui_default;
   var init_ui = __esm({
     "src/ui.tsx"() {
       "use strict";
@@ -10362,10 +10755,9 @@ button .button-icon,
       init_preact_module();
       init_compat_module();
       init_styles();
-      init_Header();
-      init_ColorPickerSidebar();
-      init_PalettesList();
-      init_Button();
+      init_Palettes();
+      init_Edit();
+      init_Tokens();
       modalStyles = {
         position: "absolute",
         top: 0,
@@ -10377,49 +10769,6 @@ button .button-icon,
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column"
-      };
-      modalHeaderStyles = {
-        position: "relative",
-        width: "100%",
-        height: "80px",
-        borderBottom: "#EEE solid 1px"
-      };
-      modalMainAreaStyles = {
-        flexGrow: 1,
-        display: "flex"
-      };
-      modalSidebarStyles = {
-        position: "relative",
-        width: "14rem",
-        borderRight: "#EEE solid 1px"
-      };
-      modalMainColumnStyles = {
-        display: "flex",
-        flexDirection: "column",
-        flex: 1
-      };
-      modalBodyStyles = {
-        position: "relative",
-        flex: 1,
-        borderBottom: "#EEE solid 1px"
-      };
-      modalFooterStyles = {
-        display: "flex",
-        flexDirection: "row"
-      };
-      footerActionsLeftStyles = {
-        flex: 1,
-        display: "flex",
-        flexDirection: "row",
-        padding: "1rem",
-        gap: ".5rem"
-      };
-      footerActionsRightStyles = {
-        display: "flex",
-        flexDirection: "row",
-        padding: "1rem",
-        gap: ".5rem",
-        alignItems: "center"
       };
       ui_default = render(Plugin);
     }

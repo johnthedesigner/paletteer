@@ -7,9 +7,10 @@ import Button from "./Button";
 interface IProps {
   palettes: any;
   removeSeedColor: Function;
+  editPalette: Function;
 }
 
-const PalettesList = ({ palettes, removeSeedColor }: IProps) => {
+const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
   const paletteListWrapperStyles = {
     position: "absolute",
     top: 0,
@@ -75,7 +76,7 @@ const PalettesList = ({ palettes, removeSeedColor }: IProps) => {
   return (
     <div className="palette-list-wrapper" style={paletteListWrapperStyles}>
       <div className="palette-list" style={PalettesListStyles}>
-        {_.map(palettes, (palette: any) => {
+        {_.map(palettes, (palette: any, index: number) => {
           // Make sure swatches are ordered light-to-dark
           let paletteSwatches = _.orderBy(palette.swatches, (swatch: any) => {
             return 0 + swatch.contrastWhite;
@@ -83,7 +84,10 @@ const PalettesList = ({ palettes, removeSeedColor }: IProps) => {
           let seedDisplayColor =
             palette.swatches[palette.sourceColorIndex].displayColor;
           return (
-            <div className="color-block" style={ColorBlockStyles(palette)}>
+            <div
+              className="color-block"
+              style={ColorBlockStyles(palette)}
+              onClick={() => editPalette(index)}>
               <div className="color-block__header" style={headerStyles}>
                 <div
                   className="color-block__title-area"

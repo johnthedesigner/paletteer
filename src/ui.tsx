@@ -2,16 +2,14 @@ import { render } from "@create-figma-plugin/ui";
 import { h, Fragment } from "preact";
 import { useEffect, useState } from "react";
 
-// import styles from "./styles.css";
 import "!./styles.css";
 import Header from "./components/Header";
 import ColorPicker from "./components/ColorPickerSidebar";
 import PalettesList from "./components/PalettesList";
 import Button from "./components/Button";
-
-type ColorPicker = {
-  selectionColors: any;
-};
+import Palettes from "./views/Palettes";
+import Edit from "./views/Edit";
+import Tokens from "./views/Tokens";
 
 const modalStyles = {
   position: "absolute",
@@ -26,57 +24,6 @@ const modalStyles = {
   flexDirection: "column",
 };
 
-const modalHeaderStyles = {
-  position: "relative",
-  width: "100%",
-  height: "80px",
-  borderBottom: "#EEE solid 1px" /* TODO: Replace with color token */,
-};
-
-const modalMainAreaStyles = {
-  flexGrow: 1,
-  display: "flex",
-};
-
-const modalSidebarStyles = {
-  position: "relative",
-  width: "14rem",
-  borderRight: "#EEE solid 1px" /* TODO: Replace with color token */,
-};
-
-const modalMainColumnStyles = {
-  display: "flex",
-  flexDirection: "column",
-  flex: 1,
-};
-
-const modalBodyStyles = {
-  position: "relative",
-  flex: 1,
-  borderBottom: "#EEE solid 1px" /* TODO: Replace with color token */,
-};
-
-const modalFooterStyles = {
-  display: "flex",
-  flexDirection: "row",
-};
-
-const footerActionsLeftStyles = {
-  flex: 1,
-  display: "flex",
-  flexDirection: "row",
-  padding: "1rem",
-  gap: ".5rem",
-};
-
-const footerActionsRightStyles = {
-  display: "flex",
-  flexDirection: "row",
-  padding: "1rem",
-  gap: ".5rem",
-  alignItems: "center",
-};
-
 function Plugin() {
   const [initComplete, setInitComplete] = useState(false);
   const [fileName, setFileName] = useState("");
@@ -87,6 +34,16 @@ function Plugin() {
     stepCount: 16,
   });
 
+  // Manage view modes
+  const [currentView, setCurrentView] = useState("palettes");
+  const [selectedPalette, setSelectedPalette] = useState(palettes[0]);
+  // Select a palette and open edit view
+  const editPalette = async (index: number) => {
+    setSelectedPalette(palettes[index]);
+    setCurrentView("edit");
+  };
+
+  // Send and receive plugin state messages
   const updateConfig = (key: string, value: any) => {
     // Update a single config value
     parent.postMessage(
@@ -168,76 +125,31 @@ function Plugin() {
 
   return (
     <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `@import
-        url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap')
-        .font-text {
-          font-family: "Nunito", sans-serif;
-          font-optical-sizing: auto;
-          font-weight:400;
-          font-style: normal;
-        }`,
-        }}
-      />
       <div className="modal font-text" style={modalStyles}>
-        <div className="modal__header" style={modalHeaderStyles}>
-          <Header
+        {currentView === "palettes" && (
+          <Palettes
             fileName={fileName}
-            resetData={resetData}
-            updateConfig={updateConfig}
             palettes={palettes}
+            selectionColors={selectionColors}
+            pageColors={pageColors}
+            updateConfig={updateConfig}
+            addSeedColor={addSeedColor}
+            removeSeedColor={removeSeedColor}
+            resetData={resetData}
+            setCurrentView={setCurrentView}
+            editPalette={editPalette}
           />
-        </div>
-        <div className="modal__main-area" style={modalMainAreaStyles}>
-          <div className="modal__sidebar" style={modalSidebarStyles}>
-            <ColorPicker
-              palettes={palettes}
-              selectionColors={selectionColors}
-              pageColors={pageColors}
-              addSeedColor={addSeedColor}
-            />
-          </div>
-          <div className="modal__main-column" style={modalMainColumnStyles}>
-            <div className="modal__body" style={modalBodyStyles}>
-              <PalettesList
-                palettes={palettes}
-                removeSeedColor={removeSeedColor}
-              />
-            </div>
-            <div className="modal__footer" style={modalFooterStyles}>
-              <div
-                className="footer-actions__left"
-                style={footerActionsLeftStyles}>
-                <Button
-                  buttonType="color"
-                  iconType="code"
-                  text="Get Tokens"
-                  onClick={null}
-                />
-                <Button
-                  buttonType="color"
-                  iconType="component"
-                  text="Generate Style Guide"
-                  onClick={null}
-                />
-              </div>
-              <div
-                className="footer-actions__right"
-                style={footerActionsRightStyles}>
-                <span style={{ fontStyle: "italic" }}>
-                  Palettes saved to variables
-                </span>
-                <Button
-                  buttonType="secondary"
-                  iconType="variable"
-                  text="Delete color variables"
-                  onClick={null}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
+        {currentView === "edit" && (
+          <Edit
+            palettes={palettes}
+            selectedPalette={selectedPalette}
+            setCurrentView={setCurrentView}
+          />
+        )}
+        {currentView === "tokens" && (
+          <Tokens palettes={palettes} setCurrentView={setCurrentView} />
+        )}
       </div>
     </>
   );
