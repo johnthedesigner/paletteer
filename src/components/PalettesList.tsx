@@ -127,7 +127,8 @@ const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
                     lightDark={seedDisplayColor === "white" ? "light" : "dark"}
                     iconType="trash"
                     text="Delete"
-                    onClick={() => {
+                    onClick={(e: any) => {
+                      e.stopPropagation();
                       removeSeedColor(
                         palette.swatches[palette.sourceColorIndex].hex
                       );

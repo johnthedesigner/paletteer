@@ -491,9 +491,9 @@
     }
   });
 
-  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/2bfed614-2958-4720-bc8a-99c517618919/base.js
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/5f8cb051-2685-4265-8c91-626e6b9ae4c6/base.js
   var init_base = __esm({
-    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/2bfed614-2958-4720-bc8a-99c517618919/base.js"() {
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/5f8cb051-2685-4265-8c91-626e6b9ae4c6/base.js"() {
       if (document.getElementById("826ab65e8b") === null) {
         const element = document.createElement("style");
         element.id = "826ab65e8b";
@@ -820,9 +820,9 @@ svg {
     }
   });
 
-  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/1a55d1b2-db99-4989-9350-a4cca79434f8/styles.js
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/06928595-f769-4c97-80c9-ad7de1a5ee49/styles.js
   var init_styles = __esm({
-    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/1a55d1b2-db99-4989-9350-a4cca79434f8/styles.js"() {
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/06928595-f769-4c97-80c9-ad7de1a5ee49/styles.js"() {
       if (document.getElementById("dbb7f0b538") === null) {
         const element = document.createElement("style");
         element.id = "dbb7f0b538";
@@ -10172,7 +10172,8 @@ button .button-icon,
                   lightDark: seedDisplayColor === "white" ? "light" : "dark",
                   iconType: "trash",
                   text: "Delete",
-                  onClick: () => {
+                  onClick: (e3) => {
+                    e3.stopPropagation();
                     removeSeedColor(
                       palette.swatches[palette.sourceColorIndex].hex
                     );
@@ -10392,13 +10393,10 @@ button .button-icon,
       init_Icon();
       init_Text();
       tabContainerStyles = {
-        background: "#EEEEEE",
-        // TODO: Replace with color token
-        flex: 1,
         display: "flex",
         flexDirection: "row",
-        padding: ".125rem .125rem 0",
-        gap: ".125rem"
+        gap: "1px",
+        paddingLeft: "1px"
       };
       Tab = ({ tabColor, textColor, props, setSelectedTab, children }) => {
         const tabStyles = {
@@ -10475,16 +10473,23 @@ button .button-icon,
         };
         const exampleContainerStyles = {
           flex: 1,
+          display: "flex",
+          flexDirection: "column",
           borderRadius: " 0 .375rem .375rem 0",
           borderColor: "#DDDDDD",
-          borderStyle: "solid",
-          borderWidth: "1px 1px 1px 0"
+          borderStyle: "solid"
+          // borderWidth: "1px 1px 1px 0",
         };
         const exampleContentWrapperStyles = {
+          flex: 1,
           padding: "2rem",
           display: "flex",
           flexDirection: "column",
-          gap: ".5rem"
+          gap: ".5rem",
+          borderColor: "#DDDDDD",
+          borderStyle: "solid",
+          borderWidth: "0 1px 1px 0",
+          borderRadius: "0 0 .375rem 0"
         };
         const [selectedTab, setSelectedTab] = p2(0);
         return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { style: editContainerStyles }, /* @__PURE__ */ y("div", { style: editSidebarStyles }, /* @__PURE__ */ y("div", { style: { padding: "1rem" } }, /* @__PURE__ */ y(
@@ -10581,7 +10586,7 @@ button .button-icon,
               iconType: "settings"
             }
           )
-        ), /* @__PURE__ */ y(Text_default, { type: "text", size: "small" }, "Heading"), /* @__PURE__ */ y(Text_default, { type: "heading", size: "large" }, "The quick brown fox jumped over the lazy dog."), /* @__PURE__ */ y(Text_default, { type: "text", size: "small" }, "Icons"), /* @__PURE__ */ y(
+        ), /* @__PURE__ */ y(Text_default, { type: "text", size: "small" }, "Heading"), /* @__PURE__ */ y(Text_default, { type: "heading", size: "large", style: { fontWeight: 900 } }, "The quick brown fox jumped over the lazy dog."), /* @__PURE__ */ y(Text_default, { type: "text", size: "small" }, "Icons"), /* @__PURE__ */ y(
           "div",
           {
             style: {

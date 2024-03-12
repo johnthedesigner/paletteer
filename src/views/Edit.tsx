@@ -14,12 +14,10 @@ interface IProps {
 }
 
 const tabContainerStyles = {
-  background: "#EEEEEE", // TODO: Replace with color token
-  flex: 1,
   display: "flex",
   flexDirection: "row",
-  padding: ".125rem .125rem 0",
-  gap: ".125rem",
+  gap: "1px",
+  paddingLeft: "1px",
 };
 
 const Tab = ({ tabColor, textColor, props, setSelectedTab, children }: any) => {
@@ -108,17 +106,24 @@ const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
 
   const exampleContainerStyles = {
     flex: 1,
+    display: "flex",
+    flexDirection: "column",
     borderRadius: " 0 .375rem .375rem 0",
     borderColor: "#DDDDDD" /* TODO: Replace with color token */,
     borderStyle: "solid",
-    borderWidth: "1px 1px 1px 0",
+    // borderWidth: "1px 1px 1px 0",
   };
 
   const exampleContentWrapperStyles = {
+    flex: 1,
     padding: "2rem",
     display: "flex",
     flexDirection: "column",
     gap: ".5rem",
+    borderColor: "#DDDDDD" /* TODO: Replace with color token */,
+    borderStyle: "solid",
+    borderWidth: "0 1px 1px 0",
+    borderRadius: "0 0 .375rem 0",
   };
 
   // Example section tabs
@@ -236,7 +241,7 @@ const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
                 <Text type="text" size="small">
                   Heading
                 </Text>
-                <Text type="heading" size="large">
+                <Text type="heading" size="large" style={{ fontWeight: 900 }}>
                   The quick brown fox jumped over the lazy dog.
                 </Text>
                 <Text type="text" size="small">
