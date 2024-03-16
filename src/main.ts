@@ -1,5 +1,5 @@
 import { showUI } from "@create-figma-plugin/utilities";
-import { map, includes, filter, each, uniq } from "lodash";
+import { map, includes, filter, find, each, uniq, times } from "lodash";
 import chroma from "chroma-js";
 
 import generateColors from "../utils/generateColors";
@@ -238,6 +238,103 @@ export default function () {
     }
   };
 
+  // Get variable color value from swatch
+  const getColorFromSwatch = async (swatch: any) => {
+    let paletteCollection = await getPaletteCollection();
+    let modeId = paletteCollection.defaultModeId;
+    let variable = await figma.variables.getVariableById(
+      swatch.colorVariableId
+    );
+    let variableColor = variable?.valuesByMode[modeId];
+    let variableHex = await rgbToHex(variableColor);
+    return variableHex;
+  };
+
+  // Add new color to palettes
+  const updatePalette = async (hex: string, paletteId: string) => {
+    let configData = await getConfig();
+    let stepCount = configData != "" ? configData.stepCount : 16;
+
+    // Generate updated palette colors
+    let newPalette = await generateColors(hex, stepCount, "");
+
+    // Get palette variable collection
+    let paletteCollection = await getPaletteCollection();
+
+    // Get default mode ID
+    let modeId = paletteCollection.defaultModeId;
+
+    // Get existing color palettes list
+    let existingPalettes = await getData("savedPaletteList");
+    // Prepare existing palette for update
+    let updatedPalette = await find(existingPalettes, (palette: any) => {
+      return palette.id === paletteId;
+    });
+    await times(16, async (index: number) => {
+      // Get our existing color variable
+      let variableId = updatedPalette.swatches[index].colorVariableId;
+      let existingVariable = await figma.variables.getVariableById(variableId);
+      // Get new swatch parameters
+      let newSwatch = newPalette.swatches[index];
+      // Assign new color to the existing variable
+      await existingVariable?.setValueForMode(modeId, {
+        r: newSwatch.rgb[0] / 255,
+        g: newSwatch.rgb[1] / 255,
+        b: newSwatch.rgb[2] / 255,
+      });
+      // Build an updated swatch from our newly generated palette
+      updatedPalette.swatches[index] = {
+        ...newSwatch,
+        colorVariableId: variableId,
+      };
+      // If this is the source color, update palette source color index
+      if (newSwatch.hex === hex) updatedPalette.sourceColorIndex = index;
+    });
+    // Remove outdated palette
+    let updatedPalettes = await filter(existingPalettes, (palette: any) => {
+      return palette.id != paletteId;
+    });
+    // Set updated palettes in plugin data
+    await setData("savedPaletteList", [updatedPalette, ...updatedPalettes]);
+    await postPalettesToUI();
+  };
+
+  // Add new color to palettes
+  const updatePaletteName = async (name: string, paletteId: string) => {
+    // Get palette variable collection
+    let paletteCollection = await getPaletteCollection();
+
+    // Get default mode ID
+    let modeId = paletteCollection.defaultModeId;
+
+    // Get existing color palettes list
+    let existingPalettes = await getData("savedPaletteList");
+    // Prepare existing palette for update
+    let updatedPalette = await find(existingPalettes, (palette: any) => {
+      return palette.id === paletteId;
+    });
+    // Update the saved palette name
+    updatedPalette.name = name;
+    // Update each of the associated variable names
+    await times(16, async (index: number) => {
+      // Get our existing color variable
+      let variableId = updatedPalette.swatches[index].colorVariableId;
+      let existingVariable = await figma.variables.getVariableById(variableId);
+      if (existingVariable) {
+        existingVariable.name = `${name}/${(index + 1)
+          .toFixed(0)
+          .padStart(2, "0")}`;
+      }
+    });
+    // Remove outdated palette
+    let updatedPalettes = await filter(existingPalettes, (palette: any) => {
+      return palette.id != paletteId;
+    });
+    // Set updated palettes in plugin data
+    await setData("savedPaletteList", [updatedPalette, ...updatedPalettes]);
+    await postPalettesToUI();
+  };
+
   // Delete Color Gradient
   const removeColorByHex = async (hex: string) => {
     let existingPaletteList = await getData("savedPaletteList");
@@ -318,6 +415,20 @@ export default function () {
       case "remove-color":
         await removeColorByHex(msg.hex);
         postPalettesToUI();
+        break;
+
+      case "update-palette":
+        await updatePalette(msg.hex, msg.paletteId);
+        postPalettesToUI();
+        break;
+
+      case "update-palette-name":
+        await updatePaletteName(msg.name, msg.paletteId);
+        postPalettesToUI();
+        break;
+
+      case "get-variable-color":
+        await getColorFromSwatch(msg.swatch);
         break;
 
       case "get-config":

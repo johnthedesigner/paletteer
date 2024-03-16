@@ -6,11 +6,14 @@ import _ from "lodash";
 import Button from "../components/Button";
 import Icon from "../components/Icon";
 import Text from "../components/Text";
+import ColorEditor from "../components/ColorEditor";
 
 interface IProps {
   palettes: any;
-  selectedPalette: any;
+  selectedPaletteId: string;
   setCurrentView: Function;
+  updatePalette: Function;
+  updateName: Function;
 }
 
 const tabContainerStyles = {
@@ -32,12 +35,20 @@ const Tab = ({ tabColor, textColor, props, setSelectedTab, children }: any) => {
     borderWidth: "1px 1px 0 1px",
     borderRadius: ".375rem .375rem 0 0",
   };
-  console.log(children);
   return <button style={tabStyles}>{children}</button>;
 };
 
-const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
-  console.log(selectedPalette);
+const Edit = ({
+  palettes,
+  selectedPaletteId,
+  setCurrentView,
+  updatePalette,
+  updateName,
+}: IProps) => {
+  // Get the full palette from the selected palette ID
+  const selectedPalette = _.find(palettes, (palette) => {
+    return palette.id === selectedPaletteId;
+  });
 
   const editContainerStyles = {
     flex: 1,
@@ -50,6 +61,17 @@ const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
     flexDirection: "column",
     width: "14rem",
     borderRight: "#EEE solid 1px" /* TODO: Replace with color token */,
+  };
+
+  const editSidebarHeaderStyles = {
+    display: "flex",
+    flexDirection: "column",
+    padding: "1rem",
+    borderBottom: "#EEE solid 1px" /* TODO: Replace with color token */,
+  };
+
+  const editSidebarBodyStyles = {
+    flex: 1,
   };
 
   const editBodyStyles = {
@@ -74,9 +96,10 @@ const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
   };
 
   const colorGradientHeaderStyles = (palette: any) => {
-    let sourceColor = palette.swatches[palette.sourceColorIndex].hex;
+    let sourceColor = palette.swatches[palette.sourceColorIndex].variableColor;
     return {
       background: sourceColor,
+      color: palette.swatches[palette.sourceColorIndex].displayColor,
       display: "flex",
       flexDirection: "column",
       gap: ".5rem",
@@ -133,11 +156,18 @@ const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
     <>
       <div style={editContainerStyles}>
         <div style={editSidebarStyles}>
-          <div style={{ padding: "1rem" }}>
+          <div style={editSidebarHeaderStyles}>
             <Button
               buttonType="secondary"
-              text="Back to palettes"
+              text="Back to saved palettes"
               onClick={() => setCurrentView("palettes")}
+            />
+          </div>
+          <div style={editSidebarBodyStyles}>
+            <ColorEditor
+              palette={selectedPalette}
+              updatePalette={updatePalette}
+              updateName={updateName}
             />
           </div>
         </div>
@@ -149,7 +179,7 @@ const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
                 <span style={colorHexStyles}>
                   {
                     selectedPalette.swatches[selectedPalette.sourceColorIndex]
-                      .hex
+                      .variableColor
                   }
                 </span>
               </div>
@@ -166,7 +196,10 @@ const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
               {_.map(selectedPalette.swatches, (swatch: any, index: number) => {
                 return (
                   <div
-                    style={{ ...colorTableRowStyles, background: swatch.hex }}>
+                    style={{
+                      ...colorTableRowStyles,
+                      background: swatch.variableColor,
+                    }}>
                     <div style={{ flex: 1, color: swatch.displayColor }}>
                       {(index + 1).toFixed(0).padStart(2, "0")}
                     </div>
@@ -201,7 +234,7 @@ const Edit = ({ palettes, selectedPalette, setCurrentView }: IProps) => {
                   {"Dark"}
                 </Tab>
                 <Tab
-                  tabColor={selectedPalette.swatches[5].hex}
+                  tabColor={selectedPalette.swatches[5].variableColor}
                   textColor="white"
                   setSelectedTab={() => {
                     setSelectedTab(2);

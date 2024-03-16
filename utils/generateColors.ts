@@ -1,4 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
+// import "react-native-get-random-values";
+import { v3 as uuidv3 } from "uuid";
 import chroma from "chroma-js";
 import _ from "lodash";
 
@@ -154,7 +155,7 @@ const generateColors = async (
   });
 
   return {
-    // id: uuidv4(),
+    id: uuidv3(swatchName, "cdff728a-b361-50b2-9451-37af8675d997"),
     name: swatchName,
     swatches: swatchList,
     sourceColorIndex: swatchList[0].sourceColorIndex,

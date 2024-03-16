@@ -1,6 +1,7 @@
 import { render } from "@create-figma-plugin/ui";
 import { h, Fragment } from "preact";
 import { useEffect, useState } from "react";
+import _ from "lodash";
 
 import "!./styles.css";
 import Header from "./components/Header";
@@ -36,10 +37,10 @@ function Plugin() {
 
   // Manage view modes
   const [currentView, setCurrentView] = useState("palettes");
-  const [selectedPalette, setSelectedPalette] = useState(palettes[0]);
+  const [selectedPaletteId, setSelectedPaletteId] = useState("");
   // Select a palette and open edit view
-  const editPalette = async (index: number) => {
-    setSelectedPalette(palettes[index]);
+  const editPalette = async (paletteId: string) => {
+    setSelectedPaletteId(paletteId);
     setCurrentView("edit");
   };
 
@@ -84,6 +85,47 @@ function Plugin() {
     );
   };
 
+  const getColorForSwatch = (swatch: any) => {
+    // Send new color to plugin back end
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "get-variable-color",
+          swatch,
+        },
+      },
+      "*"
+    );
+  };
+
+  const updatePalette = async (hex: string, paletteId: string) => {
+    // Supply updated palette
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "update-palette",
+          hex,
+          paletteId,
+        },
+      },
+      "*"
+    );
+  };
+
+  const updateName = async (paletteId: string, name: string) => {
+    // Supply updated palette
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "update-palette-name",
+          name,
+          paletteId,
+        },
+      },
+      "*"
+    );
+  };
+
   const resetData = async () => {
     // Reset all plugin data
     parent.postMessage(
@@ -109,6 +151,9 @@ function Plugin() {
 
         case "receive-palettes":
           setPalettes(pluginMessage.palettes);
+          _.each(pluginMessage.palettes[0].swatches, (swatch: any) => {
+            getColorForSwatch(swatch);
+          });
           break;
 
         case "receive-config":
@@ -143,8 +188,10 @@ function Plugin() {
         {currentView === "edit" && (
           <Edit
             palettes={palettes}
-            selectedPalette={selectedPalette}
+            selectedPaletteId={selectedPaletteId}
             setCurrentView={setCurrentView}
+            updatePalette={updatePalette}
+            updateName={updateName}
           />
         )}
         {currentView === "tokens" && (

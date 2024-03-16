@@ -87,7 +87,7 @@ const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
             <div
               className="color-block"
               style={ColorBlockStyles(palette)}
-              onClick={() => editPalette(index)}>
+              onClick={() => editPalette(palette.id)}>
               <div className="color-block__header" style={headerStyles}>
                 <div
                   className="color-block__title-area"
