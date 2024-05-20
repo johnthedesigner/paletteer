@@ -6,14 +6,14 @@ import chroma from "chroma-js";
 import Icon from "./Icon";
 
 interface IProps {
-  palettes: any;
+  swatches: any;
   selectionColors: any;
   pageColors: any;
   addSeedColor: any;
 }
 
 const ColorPicker = ({
-  palettes,
+  swatches,
   selectionColors,
   pageColors,
   addSeedColor,
@@ -34,14 +34,6 @@ const ColorPicker = ({
   pageColors = _.sortBy(pageColors, (color) => {
     return chroma(color).hsl()[0];
   });
-
-  // Check if hex exists in saved seed colors
-  const colorIsSaved = (color: string) => {
-    let seedColorsToCompare = _.map(palettes, (palette) => {
-      return palette.swatches[palette.sourceColorIndex].hex;
-    });
-    return _.includes(seedColorsToCompare, color);
-  };
 
   const sideBarStyles = {
     position: "absolute",
@@ -144,18 +136,38 @@ const ColorPicker = ({
 
   const SeedButton = ({ color }: any) => {
     const [hoverState, setHoverState] = useState(false);
+
+    let seedColorsToCompare = [] as any;
+    for (let swatchIndex = 0; swatchIndex < swatches.length; swatchIndex++) {
+      let currentSwatch = swatches[swatchIndex];
+      seedColorsToCompare.push(currentSwatch.variableColor);
+    }
+    const colorIsSaved = (color: string) => {
+      return _.includes(seedColorsToCompare, color);
+    };
+
     return (
       <div
         className="seed-color"
         style={seedColorStyles(hoverState)}
-        onClick={() => addSeedColor(color)}
-        onMouseEnter={() => setHoverState(true)}
+        onClick={() => {
+          if (!colorIsSaved(color)) {
+            addSeedColor(color);
+          }
+        }}
+        onMouseEnter={() => {
+          if (!colorIsSaved(color)) {
+            setHoverState(true);
+          }
+        }}
         onMouseLeave={() => setHoverState(false)}>
         <div style={colorDotStyles(color)}>
-          {colorIsSaved(color) && <Icon type="check" />}
+          {colorIsSaved(color) === true && <Icon type="check" />}
         </div>
         <div style={colorHexStyles}>{color}</div>
-        <Icon type="right-arrow" iconColor={"rgb(12, 142, 241)"} />
+        {!colorIsSaved(color) && (
+          <Icon type="right-arrow" iconColor={"rgb(12, 142, 241)"} />
+        )}
       </div>
     );
   };

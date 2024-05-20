@@ -1,0 +1,28 @@
+.swatch-list {
+  flex: 1;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.swatch-list__columns {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+.swatch-block-spacer {
+  min-height: 1rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  background: var(--blue-1);
+}
+
+.swatch-block--placeholder {
+  background: var(--blue-1);
+  padding: 1rem;
+  height: 6rem;
+  border-radius: 0.75rem;
+  color: var(--blue-2);
+}

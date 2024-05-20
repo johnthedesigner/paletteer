@@ -10,10 +10,10 @@
     "bezier-easing": "^2.1.0",
     "chroma-js": "^2.4.2",
     "lodash": "^4.17.21",
+    "nanoid": "^5.0.6",
     "preact": "^10.16.0",
     "radash": "^11.0.0",
-    "react-syntax-highlighter": "^15.5.0",
-    "uuid": "^9.0.0"
+    "react-syntax-highlighter": "^15.5.0"
   },
   "devDependencies": {
     "@create-figma-plugin/build": "^2.5.1",

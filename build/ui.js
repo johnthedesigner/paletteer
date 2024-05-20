@@ -128,10 +128,10 @@
     u3 && j(o3, u3, r3), C.__r = 0;
   }
   function P(n2, l3, u3, t3, i3, o3, r3, f3, e3, a3, h3) {
-    var v3, p3, y3, d3, _9, g4 = t3 && t3.__k || s, b2 = l3.length;
+    var v3, p3, y3, d3, _16, g4 = t3 && t3.__k || s, b2 = l3.length;
     for (u3.__d = e3, S(u3, l3, g4), e3 = u3.__d, v3 = 0; v3 < b2; v3++)
-      null != (y3 = u3.__k[v3]) && "boolean" != typeof y3 && "function" != typeof y3 && (p3 = -1 === y3.__i ? c : g4[y3.__i] || c, y3.__i = v3, M(n2, y3, p3, i3, o3, r3, f3, e3, a3, h3), d3 = y3.__e, y3.ref && p3.ref != y3.ref && (p3.ref && N(p3.ref, null, y3), h3.push(y3.ref, y3.__c || d3, y3)), null == _9 && null != d3 && (_9 = d3), 65536 & y3.__u || p3.__k === y3.__k ? e3 = $(y3, e3, n2) : "function" == typeof y3.type && void 0 !== y3.__d ? e3 = y3.__d : d3 && (e3 = d3.nextSibling), y3.__d = void 0, y3.__u &= -196609);
-    u3.__d = e3, u3.__e = _9;
+      null != (y3 = u3.__k[v3]) && "boolean" != typeof y3 && "function" != typeof y3 && (p3 = -1 === y3.__i ? c : g4[y3.__i] || c, y3.__i = v3, M(n2, y3, p3, i3, o3, r3, f3, e3, a3, h3), d3 = y3.__e, y3.ref && p3.ref != y3.ref && (p3.ref && N(p3.ref, null, y3), h3.push(y3.ref, y3.__c || d3, y3)), null == _16 && null != d3 && (_16 = d3), 65536 & y3.__u || p3.__k === y3.__k ? e3 = $(y3, e3, n2) : "function" == typeof y3.type && void 0 !== y3.__d ? e3 = y3.__d : d3 && (e3 = d3.nextSibling), y3.__d = void 0, y3.__u &= -196609);
+    u3.__d = e3, u3.__e = _16;
   }
   function S(n2, l3, u3) {
     var t3, i3, o3, r3, f3, e3 = l3.length, c3 = u3.length, s3 = c3, a3 = 0;
@@ -225,14 +225,14 @@
       return this.l[n2.type + true](l.event ? l.event(n2) : n2);
   }
   function M(n2, u3, t3, i3, o3, r3, f3, e3, c3, s3) {
-    var a3, p3, y3, d3, _9, m3, w4, k4, x4, C4, S2, $3, H3, I3, T4, A4 = u3.type;
+    var a3, p3, y3, d3, _16, m3, w4, k4, x4, C4, S2, $3, H3, I3, T4, A4 = u3.type;
     if (void 0 !== u3.constructor)
       return null;
     128 & t3.__u && (c3 = !!(32 & t3.__u), r3 = [e3 = u3.__e = t3.__e]), (a3 = l.__b) && a3(u3);
     n:
       if ("function" == typeof A4)
         try {
-          if (k4 = u3.props, x4 = (a3 = A4.contextType) && i3[a3.__c], C4 = a3 ? x4 ? x4.props.value : a3.__ : i3, t3.__c ? w4 = (p3 = u3.__c = t3.__c).__ = p3.__E : ("prototype" in A4 && A4.prototype.render ? u3.__c = p3 = new A4(k4, C4) : (u3.__c = p3 = new b(k4, C4), p3.constructor = A4, p3.render = q), x4 && x4.sub(p3), p3.props = k4, p3.state || (p3.state = {}), p3.context = C4, p3.__n = i3, y3 = p3.__d = true, p3.__h = [], p3._sb = []), null == p3.__s && (p3.__s = p3.state), null != A4.getDerivedStateFromProps && (p3.__s == p3.state && (p3.__s = v({}, p3.__s)), v(p3.__s, A4.getDerivedStateFromProps(k4, p3.__s))), d3 = p3.props, _9 = p3.state, p3.__v = u3, y3)
+          if (k4 = u3.props, x4 = (a3 = A4.contextType) && i3[a3.__c], C4 = a3 ? x4 ? x4.props.value : a3.__ : i3, t3.__c ? w4 = (p3 = u3.__c = t3.__c).__ = p3.__E : ("prototype" in A4 && A4.prototype.render ? u3.__c = p3 = new A4(k4, C4) : (u3.__c = p3 = new b(k4, C4), p3.constructor = A4, p3.render = q), x4 && x4.sub(p3), p3.props = k4, p3.state || (p3.state = {}), p3.context = C4, p3.__n = i3, y3 = p3.__d = true, p3.__h = [], p3._sb = []), null == p3.__s && (p3.__s = p3.state), null != A4.getDerivedStateFromProps && (p3.__s == p3.state && (p3.__s = v({}, p3.__s)), v(p3.__s, A4.getDerivedStateFromProps(k4, p3.__s))), d3 = p3.props, _16 = p3.state, p3.__v = u3, y3)
             null == A4.getDerivedStateFromProps && null != p3.componentWillMount && p3.componentWillMount(), null != p3.componentDidMount && p3.__h.push(p3.componentDidMount);
           else {
             if (null == A4.getDerivedStateFromProps && k4 !== d3 && null != p3.componentWillReceiveProps && p3.componentWillReceiveProps(k4, C4), !p3.__e && (null != p3.shouldComponentUpdate && false === p3.shouldComponentUpdate(k4, p3.__s, C4) || u3.__v === t3.__v)) {
@@ -244,7 +244,7 @@
               break n;
             }
             null != p3.componentWillUpdate && p3.componentWillUpdate(k4, p3.__s, C4), null != p3.componentDidUpdate && p3.__h.push(function() {
-              p3.componentDidUpdate(d3, _9, m3);
+              p3.componentDidUpdate(d3, _16, m3);
             });
           }
           if (p3.context = C4, p3.props = k4, p3.__P = n2, p3.__e = false, $3 = l.__r, H3 = 0, "prototype" in A4 && A4.prototype.render) {
@@ -255,7 +255,7 @@
             do {
               p3.__d = false, $3 && $3(u3), a3 = p3.render(p3.props, p3.state, p3.context), p3.state = p3.__s;
             } while (p3.__d && ++H3 < 25);
-          p3.state = p3.__s, null != p3.getChildContext && (i3 = v(v({}, i3), p3.getChildContext())), y3 || null == p3.getSnapshotBeforeUpdate || (m3 = p3.getSnapshotBeforeUpdate(d3, _9)), P(n2, h(T4 = null != a3 && a3.type === g && null == a3.key ? a3.props.children : a3) ? T4 : [T4], u3, t3, i3, o3, r3, f3, e3, c3, s3), p3.base = u3.__e, u3.__u &= -161, p3.__h.length && f3.push(p3), w4 && (p3.__E = p3.__ = null);
+          p3.state = p3.__s, null != p3.getChildContext && (i3 = v(v({}, i3), p3.getChildContext())), y3 || null == p3.getSnapshotBeforeUpdate || (m3 = p3.getSnapshotBeforeUpdate(d3, _16)), P(n2, h(T4 = null != a3 && a3.type === g && null == a3.key ? a3.props.children : a3) ? T4 : [T4], u3, t3, i3, o3, r3, f3, e3, c3, s3), p3.base = u3.__e, u3.__u &= -161, p3.__h.length && f3.push(p3), w4 && (p3.__E = p3.__ = null);
         } catch (n3) {
           u3.__v = null, c3 || null != r3 ? (u3.__e = e3, u3.__u |= c3 ? 160 : 32, r3[r3.indexOf(e3)] = null) : (u3.__e = t3.__e, u3.__k = t3.__k), l.__e(n3, u3, t3);
         }
@@ -277,11 +277,11 @@
     });
   }
   function z(l3, u3, t3, i3, o3, r3, f3, e3, s3) {
-    var a3, v3, y3, d3, _9, g4, b2, w4 = t3.props, k4 = u3.props, x4 = u3.type;
+    var a3, v3, y3, d3, _16, g4, b2, w4 = t3.props, k4 = u3.props, x4 = u3.type;
     if ("svg" === x4 && (o3 = true), null != r3) {
       for (a3 = 0; a3 < r3.length; a3++)
-        if ((_9 = r3[a3]) && "setAttribute" in _9 == !!x4 && (x4 ? _9.localName === x4 : 3 === _9.nodeType)) {
-          l3 = _9, r3[a3] = null;
+        if ((_16 = r3[a3]) && "setAttribute" in _16 == !!x4 && (x4 ? _16.localName === x4 : 3 === _16.nodeType)) {
+          l3 = _16, r3[a3] = null;
           break;
         }
     }
@@ -295,11 +295,11 @@
     else {
       if (r3 = r3 && n.call(l3.childNodes), w4 = t3.props || c, !e3 && null != r3)
         for (w4 = {}, a3 = 0; a3 < l3.attributes.length; a3++)
-          w4[(_9 = l3.attributes[a3]).name] = _9.value;
+          w4[(_16 = l3.attributes[a3]).name] = _16.value;
       for (a3 in w4)
-        _9 = w4[a3], "children" == a3 || ("dangerouslySetInnerHTML" == a3 ? y3 = _9 : "key" === a3 || a3 in k4 || A(l3, a3, null, _9, o3));
+        _16 = w4[a3], "children" == a3 || ("dangerouslySetInnerHTML" == a3 ? y3 = _16 : "key" === a3 || a3 in k4 || A(l3, a3, null, _16, o3));
       for (a3 in k4)
-        _9 = k4[a3], "children" == a3 ? d3 = _9 : "dangerouslySetInnerHTML" == a3 ? v3 = _9 : "value" == a3 ? g4 = _9 : "checked" == a3 ? b2 = _9 : "key" === a3 || e3 && "function" != typeof _9 || w4[a3] === _9 || A(l3, a3, _9, w4[a3], o3);
+        _16 = k4[a3], "children" == a3 ? d3 = _16 : "dangerouslySetInnerHTML" == a3 ? v3 = _16 : "value" == a3 ? g4 = _16 : "checked" == a3 ? b2 = _16 : "key" === a3 || e3 && "function" != typeof _16 || w4[a3] === _16 || A(l3, a3, _16, w4[a3], o3);
       if (v3)
         e3 || y3 && (v3.__html === y3.__html || v3.__html === l3.innerHTML) || (l3.innerHTML = v3.__html), u3.__k = [];
       else if (y3 && (l3.innerHTML = ""), P(l3, h(d3) ? d3 : [d3], u3, t3, i3, o3 && "foreignObject" !== x4, r3, f3, r3 ? r3[0] : t3.__k && m(t3, 0), e3, s3), null != r3)
@@ -591,10 +591,10 @@
     }
   });
 
-  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/bddfd16a-b989-4026-a7c2-df60d2c27f49/link.module.js
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/3a01b390-6178-4022-953b-7a5baccf1050/link.module.js
   var link_module_default;
   var init_link_module = __esm({
-    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/bddfd16a-b989-4026-a7c2-df60d2c27f49/link.module.js"() {
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/3a01b390-6178-4022-953b-7a5baccf1050/link.module.js"() {
       if (document.getElementById("dbd844818d") === null) {
         const element = document.createElement("style");
         element.id = "dbd844818d";
@@ -639,9 +639,9 @@
     }
   });
 
-  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/d39ca616-21c9-43b2-bcba-7662497891e1/base.js
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/fab46357-a3db-4c27-ba39-f843237ad708/base.js
   var init_base = __esm({
-    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/d39ca616-21c9-43b2-bcba-7662497891e1/base.js"() {
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/fab46357-a3db-4c27-ba39-f843237ad708/base.js"() {
       if (document.getElementById("826ab65e8b") === null) {
         const element = document.createElement("style");
         element.id = "826ab65e8b";
@@ -1788,7 +1788,7 @@ svg {
           return string.match(reUnicodeWord) || [];
         }
         var runInContext = function runInContext2(context) {
-          context = context == null ? root : _9.defaults(root.Object(), context, _9.pick(root, contextProps));
+          context = context == null ? root : _16.defaults(root.Object(), context, _16.pick(root, contextProps));
           var Array2 = context.Array, Date2 = context.Date, Error2 = context.Error, Function2 = context.Function, Math2 = context.Math, Object2 = context.Object, RegExp2 = context.RegExp, String2 = context.String, TypeError2 = context.TypeError;
           var arrayProto = Array2.prototype, funcProto = Function2.prototype, objectProto = Object2.prototype;
           var coreJsData = context["__core-js_shared__"];
@@ -6562,35 +6562,193 @@ svg {
           }
           return lodash;
         };
-        var _9 = runInContext();
+        var _16 = runInContext();
         if (typeof define == "function" && typeof define.amd == "object" && define.amd) {
-          root._ = _9;
+          root._ = _16;
           define(function() {
-            return _9;
+            return _16;
           });
         } else if (freeModule) {
-          (freeModule.exports = _9)._ = _9;
-          freeExports._ = _9;
+          (freeModule.exports = _16)._ = _16;
+          freeExports._ = _16;
         } else {
-          root._ = _9;
+          root._ = _16;
         }
       }).call(exports);
     }
   });
 
-  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/c781c00a-3f36-4ae9-b947-dd1648642635/styles.js
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/4e0a7c78-1897-405f-92f1-97ff29f3a7eb/styles.js
   var init_styles = __esm({
-    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/c781c00a-3f36-4ae9-b947-dd1648642635/styles.js"() {
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/4e0a7c78-1897-405f-92f1-97ff29f3a7eb/styles.js"() {
       if (document.getElementById("dbb7f0b538") === null) {
         const element = document.createElement("style");
         element.id = "dbb7f0b538";
         element.innerHTML = `@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+/* COLOR PALETTES */
+/* Paletteer Color Palettes */
+:root {
+  --purple-0: #fcf9ff;
+  --purple-1: #f6ebff;
+  --purple-2: #ecd7ff;
+  --purple-3: #e1bfff;
+  --purple-4: #d3a5ff;
+  --purple-5: #c58aff;
+  --purple-6: #b770ff;
+  --purple-7: #a35cef;
+  --purple-8: #904dd8;
+  --purple-9: #763ab7;
+  --purple-10: #6e31af;
+  --purple-11: #5d21a0;
+  --purple-12: #4a108c;
+  --purple-13: #350072;
+  --purple-14: #22004c;
+  --purple-15: #1a003a;
+
+  --blue-0: #f8faff;
+  --blue-1: #e8efff;
+  --blue-2: #d0e0ff;
+  --blue-3: #b2cdff;
+  --blue-4: #91b9ff;
+  --blue-5: #6ea4ff;
+  --blue-6: #4990ff;
+  --blue-7: #3785fb;
+  --blue-8: #196be4;
+  --blue-9: #0659d2;
+  --blue-10: #004db9;
+  --blue-11: #004098;
+  --blue-12: #003479;
+  --blue-13: #002655;
+  --blue-14: #001734;
+  --blue-15: #001125;
+
+  --turquoise-0: #eafeff;
+  --turquoise-1: #a8feff;
+  --turquoise-2: #0ff9ed;
+  --turquoise-3: #08e3d6;
+  --turquoise-4: #01c9bd;
+  --turquoise-5: #00b7ab;
+  --turquoise-6: #00a397;
+  --turquoise-7: #009186;
+  --turquoise-8: #007f75;
+  --turquoise-9: #006d64;
+  --turquoise-10: #005e56;
+  --turquoise-11: #004f47;
+  --turquoise-12: #003f39;
+  --turquoise-13: #002d29;
+  --turquoise-14: #001c19;
+  --turquoise-15: #001412;
+
+  --green-0: #eafff5;
+  --green-1: #b6ffd8;
+  --green-2: #2cff83;
+  --green-3: #14ea6a;
+  --green-4: #0acb57;
+  --green-5: #00be4b;
+  --green-6: #00aa42;
+  --green-7: #00953a;
+  --green-8: #008432;
+  --green-9: #00722b;
+  --green-10: #006225;
+  --green-11: #00511e;
+  --green-12: #004118;
+  --green-13: #002f11;
+  --green-14: #001e0a;
+  --green-15: #001307;
+
+  --yellow-0: #fffbe4;
+  --yellow-1: #fff0ad;
+  --yellow-2: #fada67;
+  --yellow-3: #ebc850;
+  --yellow-4: #d9b438;
+  --yellow-5: #c7a122;
+  --yellow-6: #b38c0e;
+  --yellow-7: #a37c01;
+  --yellow-8: #8f6c00;
+  --yellow-9: #7d5e00;
+  --yellow-10: #6b5000;
+  --yellow-11: #594200;
+  --yellow-12: #473500;
+  --yellow-13: #332500;
+  --yellow-14: #1f1600;
+  --yellow-15: #140f00;
+
+  --orange-0: #fff9f2;
+  --orange-1: #ffedd5;
+  --orange-2: #ffd9ab;
+  --orange-3: #ffc07a;
+  --orange-4: #ffa346;
+  --orange-5: #ff8717;
+  --orange-6: #e86f00;
+  --orange-7: #cf6100;
+  --orange-8: #b85500;
+  --orange-9: #9e4800;
+  --orange-10: #8a3e00;
+  --orange-11: #733300;
+  --orange-12: #5c2800;
+  --orange-13: #421d00;
+  --orange-14: #291100;
+  --orange-15: #1c0c00;
+
+  --red-0: #fff9f7;
+  --red-1: #ffebe6;
+  --red-2: #ffd6cd;
+  --red-3: #ffbcaf;
+  --red-4: #ff9e8d;
+  --red-5: #ff7e6a;
+  --red-6: #fe5d47;
+  --red-7: #ec442e;
+  --red-8: #d82b15;
+  --red-9: #c31501;
+  --red-10: #a71000;
+  --red-11: #8e0d00;
+  --red-12: #720a00;
+  --red-13: #530600;
+  --red-14: #370400;
+  --red-15: #280300;
+
+  --magenta-0: #fff8fd;
+  --magenta-1: #ffe9f8;
+  --magenta-2: #ffd2f0;
+  --magenta-3: #ffb5e8;
+  --magenta-4: #ff94df;
+  --magenta-5: #f96ed2;
+  --magenta-6: #ec5ac4;
+  --magenta-7: #da41b1;
+  --magenta-8: #c92b9e;
+  --magenta-9: #b4158a;
+  --magenta-10: #a00378;
+  --magenta-11: #860065;
+  --magenta-12: #6d0052;
+  --magenta-13: #51003e;
+  --magenta-14: #350029;
+  --magenta-15: #28001f;
+
+  --grayscale-0: #f9faff;
+  --grayscale-1: #ebeeff;
+  --grayscale-2: #d9ddf3;
+  --grayscale-3: #c7cbe4;
+  --grayscale-4: #b3b8d2;
+  --grayscale-5: #9da2be;
+  --grayscale-6: #8b90ac;
+  --grayscale-7: #7c819d;
+  --grayscale-8: #6b708b;
+  --grayscale-9: #5d627b;
+  --grayscale-10: #4d526a;
+  --grayscale-11: #40455a;
+  --grayscale-12: #383c50;
+  --grayscale-13: #222639;
+  --grayscale-14: #141727;
+  --grayscale-15: #0d101d;
+}
 
 body {
   font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+  color: var(--grayscale-14);
 }
 
 /* BUTTONS */
@@ -6600,29 +6758,44 @@ button,
 .button,
 .button__primary,
 .button__primary--dark {
-  display: inline-block;
-  background: black; /* TODO: Replace with color token */
-  color: white; /* TODO: Replace with color token */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: var(--grayscale-14);
+  color: var(--grayscale-0);
+  font-size: 0.75rem;
+  font-weight: 600;
   padding: 0.5rem 0.75rem;
   border-radius: 0.375rem;
   transition: all linear 0.1s;
   cursor: pointer;
   vertical-align: middle;
+  box-shadow: 0 0.25rem 0.5rem var(--purple-5);
+  box-shadow: 0 0.25rem 0.5rem
+    color-mix(in srgb, var(--purple-5) 25%, transparent);
 }
 
 .button:hover,
 .button__primary:hover,
 .button__primary--dark:hover {
-  background: #222222; /* TODO: Replace with color token */
+  background: var(--grayscale-14);
+}
+
+.button:disabled {
+  background: var(--grayscale-5);
+  color: var(--grayscale-2);
+  pointer-events: none;
 }
 
 .button__secondary,
 .button__secondary--dark {
   background: rgba(255, 255, 255, 0);
-  border-color: black; /* TODO: Replace with color token */
+  border-color: var(--purple-7);
   border-style: solid;
   border-width: 1px;
-  color: black; /* TODO: Replace with color token */
+  color: var(--grayscale-14);
+  color: var(--purple-9);
 }
 
 .button__secondary:hover,
@@ -6633,13 +6806,13 @@ button,
 
 .button__color,
 .button__color--dark {
-  background: rgb(12, 142, 241); /* TODO: Replace with color token */
-  color: white; /* TODO: Replace with color token */
+  background: var(--purple-7); /* TODO: Replace with color token */
+  color: white !important; /* TODO: Replace with color token */
 }
 
 .button__color:hover,
 .button__color--dark:hover {
-  background: lightblue; /* TODO: Replace with color token */
+  background: var(--purple-5); /* TODO: Replace with color token */
 }
 
 .button__text,
@@ -6656,7 +6829,7 @@ button,
 
 .button-icon {
   vertical-align: middle;
-  margin-left: 0.375rem;
+  margin-right: 0.5rem;
   color: white;
 }
 
@@ -6741,6 +6914,48 @@ button .button-icon,
                   stroke: iconColor,
                   strokeLinecap: "round",
                   strokeLinejoin: "round"
+                }
+              )
+            );
+          case "left-arrow":
+            return /* @__PURE__ */ y(
+              "svg",
+              {
+                className: `icon ${className}`,
+                width: "12",
+                height: "12",
+                viewBox: "0 0 12 12",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg"
+              },
+              /* @__PURE__ */ y(
+                "path",
+                {
+                  fillRule: "evenodd",
+                  clipRule: "evenodd",
+                  d: "M7.85355 2.64645C8.04882 2.84171 8.04882 3.15829 7.85355 3.35355L5.20711 6L7.85355 8.64645C8.04882 8.84171 8.04882 9.15829 7.85355 9.35355C7.65829 9.54882 7.34171 9.54882 7.14645 9.35355L4.14645 6.35355C3.95118 6.15829 3.95118 5.84171 4.14645 5.64645L7.14645 2.64645C7.34171 2.45118 7.65829 2.45118 7.85355 2.64645Z",
+                  fill: "currentColor"
+                }
+              )
+            );
+          case "clipboard":
+            return /* @__PURE__ */ y(
+              "svg",
+              {
+                className: `icon ${className}`,
+                width: "12",
+                height: "13",
+                viewBox: "0 0 12 13",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg"
+              },
+              /* @__PURE__ */ y(
+                "path",
+                {
+                  fillRule: "evenodd",
+                  clipRule: "evenodd",
+                  d: "M4.7841 1C4.78941 1 4.79473 1 4.80005 1L7.216 1C7.34219 0.999986 7.46508 0.999972 7.56916 1.00848C7.68346 1.01781 7.81833 1.03985 7.95404 1.109C8.1422 1.20487 8.29518 1.35785 8.39105 1.54601C8.4602 1.68172 8.48224 1.81659 8.49158 1.93089C8.49349 1.95436 8.49498 1.97878 8.49613 2.00398C8.69371 2.01036 8.86293 2.02668 9.01769 2.06815C9.70787 2.25309 10.247 2.79218 10.4319 3.48236C10.5004 3.73819 10.5003 4.03352 10.5001 4.43122C10.5001 4.45381 10.5 4.47674 10.5 4.5V9.12067C10.5001 9.52314 10.5001 9.85532 10.478 10.1259C10.455 10.407 10.4057 10.6653 10.2821 10.908C10.0903 11.2843 9.78435 11.5903 9.40803 11.782C9.16536 11.9057 8.90701 11.9549 8.62596 11.9779C8.35537 12 8.02319 12 7.62071 12H4.37939C3.97691 12 3.64473 12 3.37414 11.9779C3.09309 11.9549 2.83473 11.9057 2.59207 11.782C2.21574 11.5903 1.90978 11.2843 1.71804 10.908C1.59439 10.6653 1.54511 10.407 1.52215 10.1259C1.50004 9.85532 1.50004 9.52314 1.50005 9.12065L1.50005 4.5C1.50005 4.47673 1.50004 4.45381 1.50002 4.43121C1.49981 4.03352 1.49965 3.73819 1.5682 3.48236C1.75313 2.79218 2.29223 2.25309 2.98241 2.06815C3.13717 2.02668 3.30638 2.01036 3.50397 2.00398C3.50512 1.97878 3.5066 1.95436 3.50852 1.93089C3.51786 1.81659 3.53989 1.68172 3.60904 1.54601C3.70492 1.35785 3.8579 1.20487 4.04606 1.109C4.18177 1.03985 4.31664 1.01781 4.43093 1.00848C4.53501 0.999972 4.65791 0.999986 4.7841 1ZM3.50438 3.00478C3.37284 3.00933 3.30129 3.01798 3.24123 3.03408C2.89614 3.12654 2.62659 3.39609 2.53412 3.74118C2.50434 3.85232 2.50005 4.00283 2.50005 4.5V9.1C2.50005 9.52829 2.50044 9.81944 2.51882 10.0445C2.53673 10.2637 2.5692 10.3758 2.60904 10.454C2.70491 10.6422 2.8579 10.7951 3.04606 10.891C3.12426 10.9309 3.23636 10.9633 3.45557 10.9812C3.68061 10.9996 3.97176 11 4.40005 11H7.60005C8.02834 11 8.31948 10.9996 8.54453 10.9812C8.76374 10.9633 8.87584 10.9309 8.95404 10.891C9.1422 10.7951 9.29518 10.6422 9.39105 10.454C9.4309 10.3758 9.46336 10.2637 9.48127 10.0445C9.49966 9.81944 9.50005 9.52829 9.50005 9.1V4.5C9.50005 4.00283 9.49575 3.85232 9.46597 3.74118C9.37351 3.39609 9.10396 3.12654 8.75887 3.03408C8.69881 3.01798 8.62726 3.00933 8.49571 3.00478C8.49463 3.02689 8.49327 3.04838 8.49158 3.06912C8.48224 3.18341 8.4602 3.31828 8.39105 3.45399C8.29518 3.64215 8.1422 3.79514 7.95404 3.89101C7.81833 3.96016 7.68346 3.98219 7.56916 3.99153C7.46508 4.00003 7.34219 4.00002 7.216 4L4.80005 4C4.79473 4 4.78941 4 4.7841 4C4.65791 4.00002 4.53501 4.00003 4.43093 3.99153C4.31664 3.98219 4.18177 3.96016 4.04606 3.89101C3.8579 3.79514 3.70492 3.64216 3.60904 3.45399C3.53989 3.31828 3.51786 3.18341 3.50852 3.06912C3.50683 3.04838 3.50547 3.02689 3.50438 3.00478ZM7.50005 2.3C7.50005 2.15174 7.49966 2.07061 7.4949 2.01232C7.49471 2.01 7.49452 2.0078 7.49432 2.00573C7.49225 2.00554 7.49005 2.00534 7.48773 2.00515C7.42944 2.00039 7.34831 2 7.20005 2H4.80005C4.65178 2 4.57066 2.00039 4.51237 2.00515C4.51004 2.00534 4.50785 2.00554 4.50577 2.00573C4.50558 2.0078 4.50539 2.01 4.5052 2.01232C4.50044 2.07061 4.50005 2.15174 4.50005 2.3V2.7C4.50005 2.84827 4.50044 2.92939 4.5052 2.98769C4.50539 2.99001 4.50558 2.9922 4.50577 2.99428C4.50785 2.99447 4.51004 2.99466 4.51236 2.99485C4.57066 2.99961 4.65178 3 4.80005 3H7.20005C7.34831 3 7.42944 2.99961 7.48773 2.99485C7.49005 2.99466 7.49225 2.99447 7.49432 2.99428C7.49452 2.9922 7.49471 2.99001 7.4949 2.98769C7.49966 2.92939 7.50005 2.84827 7.50005 2.7V2.3ZM6.00005 5.5C6.27619 5.5 6.50005 5.72386 6.50005 6V7.7929L7.14649 7.14645C7.34176 6.95119 7.65834 6.95119 7.8536 7.14645C8.04886 7.34171 8.04886 7.65829 7.8536 7.85356L6.3536 9.35356C6.25983 9.44732 6.13266 9.5 6.00005 9.5C5.86744 9.5 5.74026 9.44732 5.64649 9.35356L4.14649 7.85356C3.95123 7.65829 3.95123 7.34171 4.14649 7.14645C4.34176 6.95119 4.65834 6.95119 4.8536 7.14645L5.50005 7.7929V6C5.50005 5.72386 5.72391 5.5 6.00005 5.5Z",
+                  fill: "currentColor"
                 }
               )
             );
@@ -6958,11 +7173,204 @@ button .button-icon,
                 }
               )
             );
+          case "reset":
+            return /* @__PURE__ */ y(
+              "svg",
+              {
+                className: `icon ${className}`,
+                width: "12",
+                height: "12",
+                viewBox: "0 0 12 12",
+                fill: "none",
+                xmlns: "http://www.w3.org/2000/svg"
+              },
+              /* @__PURE__ */ y(
+                "path",
+                {
+                  fillRule: "evenodd",
+                  clipRule: "evenodd",
+                  d: "M6 2C4.8948 2 3.89508 2.44757 3.17059 3.17255C2.79173 3.55168 2.36151 4.06564 2.01539 4.5H4C4.27614 4.5 4.5 4.72386 4.5 5C4.5 5.27614 4.27614 5.5 4 5.5H1C0.723858 5.5 0.5 5.27614 0.5 5V2C0.5 1.72386 0.723858 1.5 1 1.5C1.27614 1.5 1.5 1.72386 1.5 2V3.54722C1.80094 3.18124 2.14342 2.78573 2.46324 2.46569C3.36761 1.5607 4.6188 1 6 1C8.76142 1 11 3.23858 11 6C11 8.76142 8.76142 11 6 11C3.71977 11 1.79726 9.47404 1.19548 7.38863C1.11892 7.12331 1.27194 6.84616 1.53726 6.7696C1.80258 6.69304 2.07972 6.84606 2.15628 7.11137C2.63786 8.78024 4.17713 10 6 10C8.20914 10 10 8.20914 10 6C10 3.79086 8.20914 2 6 2Z",
+                  fill: "currentColor"
+                }
+              )
+            );
           default:
             return null;
         }
       };
       Icon_default = Icon;
+    }
+  });
+
+  // utils/tokens.ts
+  var colors;
+  var init_tokens = __esm({
+    "utils/tokens.ts"() {
+      "use strict";
+      colors = {
+        purple: {
+          0: "#FCF9FF",
+          1: "#F6EBFF",
+          2: "#ECD7FF",
+          3: "#E1BFFF",
+          4: "#D3A5FF",
+          5: "#C58AFF",
+          6: "#B770FF",
+          7: "#A35CEF",
+          8: "#904DD8",
+          9: "#763AB7",
+          10: "#6E31AF",
+          11: "#5D21A0",
+          12: "#4A108C",
+          13: "#350072",
+          14: "#22004C",
+          15: "#1A003A"
+        },
+        blue: {
+          0: "#F8FAFF",
+          1: "#E8EFFF",
+          2: "#D0E0FF",
+          3: "#B2CDFF",
+          4: "#91B9FF",
+          5: "#6EA4FF",
+          6: "#4990FF",
+          7: "#3785FB",
+          8: "#196BE4",
+          9: "#0659D2",
+          10: "#004DB9",
+          11: "#004098",
+          12: "#003479",
+          13: "#002655",
+          14: "#001734",
+          15: "#001125"
+        },
+        turquoise: {
+          0: "#EAFEFF",
+          1: "#A8FEFF",
+          2: "#0FF9ED",
+          3: "#08E3D6",
+          4: "#01C9BD",
+          5: "#00B7AB",
+          6: "#00A397",
+          7: "#009186",
+          8: "#007F75",
+          9: "#006D64",
+          10: "#005E56",
+          11: "#004F47",
+          12: "#003F39",
+          13: "#002D29",
+          14: "#001C19",
+          15: "#001412"
+        },
+        green: {
+          0: "#EAFFF5",
+          1: "#B6FFD8",
+          2: "#2CFF83",
+          3: "#14EA6A",
+          4: "#0ACB57",
+          5: "#00BE4B",
+          6: "#00AA42",
+          7: "#00953A",
+          8: "#008432",
+          9: "#00722B",
+          10: "#006225",
+          11: "#00511E",
+          12: "#004118",
+          13: "#002F11",
+          14: "#001E0A",
+          15: "#001307"
+        },
+        yellow: {
+          0: "#FFFBE4",
+          1: "#FFF0AD",
+          2: "#FADA67",
+          3: "#EBC850",
+          4: "#D9B438",
+          5: "#C7A122",
+          6: "#B38C0E",
+          7: "#A37C01",
+          8: "#8F6C00",
+          9: "#7D5E00",
+          10: "#6B5000",
+          11: "#594200",
+          12: "#473500",
+          13: "#332500",
+          14: "#1F1600",
+          15: "#140F00"
+        },
+        orange: {
+          0: "#FFF9F2",
+          1: "#FFEDD5",
+          2: "#FFD9AB",
+          3: "#FFC07A",
+          4: "#FFA346",
+          5: "#FF8717",
+          6: "#E86F00",
+          7: "#CF6100",
+          8: "#B85500",
+          9: "#9E4800",
+          10: "#8A3E00",
+          11: "#733300",
+          12: "#5C2800",
+          13: "#421D00",
+          14: "#291100",
+          15: "#1C0C00"
+        },
+        red: {
+          0: "#FFF9F7",
+          1: "#FFEBE6",
+          2: "#FFD6CD",
+          3: "#FFBCAF",
+          4: "#FF9E8D",
+          5: "#FF7E6A",
+          6: "#FE5D47",
+          7: "#EC442E",
+          8: "#D82B15",
+          9: "#C31501",
+          10: "#A71000",
+          11: "#8E0D00",
+          12: "#720A00",
+          13: "#530600",
+          14: "#370400",
+          15: "#280300"
+        },
+        magenta: {
+          0: "#FFF8FD",
+          1: "#FFE9F8",
+          2: "#FFD2F0",
+          3: "#FFB5E8",
+          4: "#FF94DF",
+          5: "#F96ED2",
+          6: "#EC5AC4",
+          7: "#DA41B1",
+          8: "#C92B9E",
+          9: "#B4158A",
+          10: "#A00378",
+          11: "#860065",
+          12: "#6D0052",
+          13: "#51003E",
+          14: "#350029",
+          15: "#28001F"
+        },
+        grayscale: {
+          0: "#F9FAFF",
+          1: "#EBEEFF",
+          2: "#D9DDF3",
+          3: "#C7CBE4",
+          4: "#B3B8D2",
+          5: "#9DA2BE",
+          6: "#8B90AC",
+          7: "#7C819D",
+          8: "#6B708B",
+          9: "#5D627B",
+          10: "#4D526A",
+          11: "#40455A",
+          12: "#383C50",
+          13: "#222639",
+          14: "#141727",
+          15: "#0D101D"
+        }
+      };
     }
   });
 
@@ -6973,6 +7381,7 @@ button .button-icon,
       "use strict";
       init_preact_module();
       init_Icon();
+      init_tokens();
       iconTypes = {
         pencil: "pencil"
       };
@@ -6984,19 +7393,22 @@ button .button-icon,
       };
       Button = ({
         text = "Click Me",
+        buttonColor = colors.purple[7],
         lightDark = "dark",
         iconType = iconTypes.pencil,
         buttonType = buttonTypes.primary,
-        onClick
+        onClick,
+        disabled = false
       }) => {
         return /* @__PURE__ */ y(
           "button",
           {
             className: `button button__${buttonType}--${lightDark}`,
+            disabled,
             onClick
           },
-          text,
-          iconType && /* @__PURE__ */ y(Icon_default, { type: iconType, className: "button-icon" })
+          iconType && /* @__PURE__ */ y(Icon_default, { type: iconType, className: "button-icon" }),
+          text
         );
       };
       Button_default = Button;
@@ -9127,12 +9539,12 @@ button .button-icon,
         var cos$2 = Math.cos;
         var sin$2 = Math.sin;
         var atan2$1 = Math.atan2;
-        var average = function(colors, mode, weights) {
+        var average = function(colors2, mode, weights) {
           if (mode === void 0)
             mode = "lrgb";
           if (weights === void 0)
             weights = null;
-          var l3 = colors.length;
+          var l3 = colors2.length;
           if (!weights) {
             weights = Array.from(new Array(l3)).map(function() {
               return 1;
@@ -9144,14 +9556,14 @@ button .button-icon,
           weights.forEach(function(w4, i5) {
             weights[i5] *= k4;
           });
-          colors = colors.map(function(c3) {
+          colors2 = colors2.map(function(c3) {
             return new Color$6(c3);
           });
           if (mode === "lrgb") {
-            return _average_lrgb(colors, weights);
+            return _average_lrgb(colors2, weights);
           }
-          var first = colors.shift();
-          var xyz = first.get(mode);
+          var first2 = colors2.shift();
+          var xyz = first2.get(mode);
           var cnt = [];
           var dx = 0;
           var dy = 0;
@@ -9164,8 +9576,8 @@ button .button-icon,
               dy += sin$2(A4) * weights[0];
             }
           }
-          var alpha = first.alpha() * weights[0];
-          colors.forEach(function(c3, ci) {
+          var alpha = first2.alpha() * weights[0];
+          colors2.forEach(function(c3, ci) {
             var xyz2 = c3.get(mode);
             alpha += c3.alpha() * weights[ci + 1];
             for (var i5 = 0; i5 < xyz.length; i5++) {
@@ -9198,11 +9610,11 @@ button .button-icon,
           alpha /= l3;
           return new Color$6(xyz, mode).alpha(alpha > 0.99999 ? 1 : alpha, true);
         };
-        var _average_lrgb = function(colors, weights) {
-          var l3 = colors.length;
+        var _average_lrgb = function(colors2, weights) {
+          var l3 = colors2.length;
           var xyz = [0, 0, 0, 0];
-          for (var i4 = 0; i4 < colors.length; i4++) {
-            var col = colors[i4];
+          for (var i4 = 0; i4 < colors2.length; i4++) {
+            var col = colors2[i4];
             var f3 = weights[i4] / l3;
             var rgb2 = col._rgb;
             xyz[0] += pow$4(rgb2[0], 2) * f3;
@@ -9221,7 +9633,7 @@ button .button-icon,
         var chroma$4 = chroma_1;
         var type$2 = utils.type;
         var pow$3 = Math.pow;
-        var scale$2 = function(colors) {
+        var scale$2 = function(colors2) {
           var _mode = "rgb";
           var _nacol = chroma$4("#ccc");
           var _spread = 0;
@@ -9237,26 +9649,26 @@ button .button-icon,
           var _colorCache = {};
           var _useCache = true;
           var _gamma = 1;
-          var setColors = function(colors2) {
-            colors2 = colors2 || ["#fff", "#000"];
-            if (colors2 && type$2(colors2) === "string" && chroma$4.brewer && chroma$4.brewer[colors2.toLowerCase()]) {
-              colors2 = chroma$4.brewer[colors2.toLowerCase()];
+          var setColors = function(colors3) {
+            colors3 = colors3 || ["#fff", "#000"];
+            if (colors3 && type$2(colors3) === "string" && chroma$4.brewer && chroma$4.brewer[colors3.toLowerCase()]) {
+              colors3 = chroma$4.brewer[colors3.toLowerCase()];
             }
-            if (type$2(colors2) === "array") {
-              if (colors2.length === 1) {
-                colors2 = [colors2[0], colors2[0]];
+            if (type$2(colors3) === "array") {
+              if (colors3.length === 1) {
+                colors3 = [colors3[0], colors3[0]];
               }
-              colors2 = colors2.slice(0);
-              for (var c3 = 0; c3 < colors2.length; c3++) {
-                colors2[c3] = chroma$4(colors2[c3]);
+              colors3 = colors3.slice(0);
+              for (var c3 = 0; c3 < colors3.length; c3++) {
+                colors3[c3] = chroma$4(colors3[c3]);
               }
               _pos.length = 0;
-              for (var c$1 = 0; c$1 < colors2.length; c$1++) {
-                _pos.push(c$1 / (colors2.length - 1));
+              for (var c$1 = 0; c$1 < colors3.length; c$1++) {
+                _pos.push(c$1 / (colors3.length - 1));
               }
             }
             resetCache();
-            return _colors = colors2;
+            return _colors = colors3;
           };
           var getClass = function(value) {
             if (_classes != null) {
@@ -9337,7 +9749,7 @@ button .button-icon,
           var resetCache = function() {
             return _colorCache = {};
           };
-          setColors(colors);
+          setColors(colors2);
           var f3 = function(v3) {
             var c3 = chroma$4(getColor(v3));
             if (_out && c3[_out]) {
@@ -9416,8 +9828,8 @@ button .button-icon,
             resetCache();
             return f3;
           };
-          f3.range = function(colors2, _pos2) {
-            setColors(colors2);
+          f3.range = function(colors3, _pos2) {
+            setColors(colors3);
             return f3;
           };
           f3.out = function(_o) {
@@ -9500,7 +9912,7 @@ button .button-icon,
                 return f3(dm + i5 / (numColors - 1) * dd);
               });
             } else {
-              colors = [];
+              colors2 = [];
               var samples = [];
               if (_classes && _classes.length > 2) {
                 for (var i4 = 1, end = _classes.length, asc = 1 <= end; asc ? i4 < end : i4 > end; asc ? i4++ : i4--) {
@@ -9568,14 +9980,14 @@ button .button-icon,
           }
           return row;
         };
-        var bezier = function(colors) {
+        var bezier = function(colors2) {
           var assign, assign$1, assign$2;
           var I3, lab0, lab1, lab2;
-          colors = colors.map(function(c3) {
+          colors2 = colors2.map(function(c3) {
             return new Color$5(c3);
           });
-          if (colors.length === 2) {
-            assign = colors.map(function(c3) {
+          if (colors2.length === 2) {
+            assign = colors2.map(function(c3) {
               return c3.lab();
             }), lab0 = assign[0], lab1 = assign[1];
             I3 = function(t3) {
@@ -9584,8 +9996,8 @@ button .button-icon,
               });
               return new Color$5(lab4, "lab");
             };
-          } else if (colors.length === 3) {
-            assign$1 = colors.map(function(c3) {
+          } else if (colors2.length === 3) {
+            assign$1 = colors2.map(function(c3) {
               return c3.lab();
             }), lab0 = assign$1[0], lab1 = assign$1[1], lab2 = assign$1[2];
             I3 = function(t3) {
@@ -9594,9 +10006,9 @@ button .button-icon,
               });
               return new Color$5(lab4, "lab");
             };
-          } else if (colors.length === 4) {
+          } else if (colors2.length === 4) {
             var lab3;
-            assign$2 = colors.map(function(c3) {
+            assign$2 = colors2.map(function(c3) {
               return c3.lab();
             }), lab0 = assign$2[0], lab1 = assign$2[1], lab2 = assign$2[2], lab3 = assign$2[3];
             I3 = function(t3) {
@@ -9605,12 +10017,12 @@ button .button-icon,
               });
               return new Color$5(lab4, "lab");
             };
-          } else if (colors.length >= 5) {
+          } else if (colors2.length >= 5) {
             var labs, row, n2;
-            labs = colors.map(function(c3) {
+            labs = colors2.map(function(c3) {
               return c3.lab();
             });
-            n2 = colors.length - 1;
+            n2 = colors2.length - 1;
             row = binom_row(n2);
             I3 = function(t3) {
               var u3 = 1 - t3;
@@ -9626,8 +10038,8 @@ button .button-icon,
           }
           return I3;
         };
-        var bezier_1 = function(colors) {
-          var f3 = bezier(colors);
+        var bezier_1 = function(colors2) {
+          var f3 = bezier(colors2);
           f3.scale = function() {
             return scale$1(f3);
           };
@@ -10129,24 +10541,24 @@ button .button-icon,
           colorbrewer[key.toLowerCase()] = colorbrewer[key];
         }
         var colorbrewer_1 = colorbrewer;
-        var chroma3 = chroma_1;
-        chroma3.average = average;
-        chroma3.bezier = bezier_1;
-        chroma3.blend = blend_1;
-        chroma3.cubehelix = cubehelix;
-        chroma3.mix = chroma3.interpolate = mix$1;
-        chroma3.random = random_1;
-        chroma3.scale = scale$2;
-        chroma3.analyze = analyze_1.analyze;
-        chroma3.contrast = contrast;
-        chroma3.deltaE = deltaE;
-        chroma3.distance = distance;
-        chroma3.limits = analyze_1.limits;
-        chroma3.valid = valid;
-        chroma3.scales = scales;
-        chroma3.colors = w3cx11_1;
-        chroma3.brewer = colorbrewer_1;
-        var chroma_js = chroma3;
+        var chroma6 = chroma_1;
+        chroma6.average = average;
+        chroma6.bezier = bezier_1;
+        chroma6.blend = blend_1;
+        chroma6.cubehelix = cubehelix;
+        chroma6.mix = chroma6.interpolate = mix$1;
+        chroma6.random = random_1;
+        chroma6.scale = scale$2;
+        chroma6.analyze = analyze_1.analyze;
+        chroma6.contrast = contrast;
+        chroma6.deltaE = deltaE;
+        chroma6.distance = distance;
+        chroma6.limits = analyze_1.limits;
+        chroma6.valid = valid;
+        chroma6.scales = scales;
+        chroma6.colors = w3cx11_1;
+        chroma6.brewer = colorbrewer_1;
+        var chroma_js = chroma6;
         return chroma_js;
       });
     }
@@ -10163,7 +10575,7 @@ button .button-icon,
       import_chroma_js = __toESM(require_chroma());
       init_Icon();
       ColorPicker = ({
-        palettes,
+        swatches,
         selectionColors,
         pageColors,
         addSeedColor
@@ -10180,12 +10592,6 @@ button .button-icon,
         pageColors = import_lodash.default.sortBy(pageColors, (color) => {
           return (0, import_chroma_js.default)(color).hsl()[0];
         });
-        const colorIsSaved = (color) => {
-          let seedColorsToCompare = import_lodash.default.map(palettes, (palette) => {
-            return palette.swatches[palette.sourceColorIndex].hex;
-          });
-          return import_lodash.default.includes(seedColorsToCompare, color);
-        };
         const sideBarStyles = {
           position: "absolute",
           top: 0,
@@ -10274,20 +10680,36 @@ button .button-icon,
           flex: 1,
           cursor: "pointer"
         };
-        const SeedButton = ({ color }) => {
+        const SeedButton2 = ({ color }) => {
           const [hoverState, setHoverState] = p2(false);
+          let seedColorsToCompare = [];
+          for (let swatchIndex = 0; swatchIndex < swatches.length; swatchIndex++) {
+            let currentSwatch = swatches[swatchIndex];
+            seedColorsToCompare.push(currentSwatch.variableColor);
+          }
+          const colorIsSaved = (color2) => {
+            return import_lodash.default.includes(seedColorsToCompare, color2);
+          };
           return /* @__PURE__ */ y(
             "div",
             {
               className: "seed-color",
               style: seedColorStyles(hoverState),
-              onClick: () => addSeedColor(color),
-              onMouseEnter: () => setHoverState(true),
+              onClick: () => {
+                if (!colorIsSaved(color)) {
+                  addSeedColor(color);
+                }
+              },
+              onMouseEnter: () => {
+                if (!colorIsSaved(color)) {
+                  setHoverState(true);
+                }
+              },
               onMouseLeave: () => setHoverState(false)
             },
-            /* @__PURE__ */ y("div", { style: colorDotStyles(color) }, colorIsSaved(color) && /* @__PURE__ */ y(Icon_default, { type: "check" })),
+            /* @__PURE__ */ y("div", { style: colorDotStyles(color) }, colorIsSaved(color) === true && /* @__PURE__ */ y(Icon_default, { type: "check" })),
             /* @__PURE__ */ y("div", { style: colorHexStyles }, color),
-            /* @__PURE__ */ y(Icon_default, { type: "right-arrow", iconColor: "rgb(12, 142, 241)" })
+            !colorIsSaved(color) && /* @__PURE__ */ y(Icon_default, { type: "right-arrow", iconColor: "rgb(12, 142, 241)" })
           );
         };
         return /* @__PURE__ */ y("div", { style: sideBarStyles }, /* @__PURE__ */ y("div", { className: "color-picker", style: colorPickerStyles }, /* @__PURE__ */ y(
@@ -10297,9 +10719,9 @@ button .button-icon,
           },
           "Choose a seed color"
         ), /* @__PURE__ */ y("span", { style: sectionHeadingStyles }, "From my current selection"), /* @__PURE__ */ y("div", { className: "color-picker__selection-list", style: seedListStyles }, import_lodash.default.map(selectionColors, (color) => {
-          return /* @__PURE__ */ y(SeedButton, { color });
+          return /* @__PURE__ */ y(SeedButton2, { color });
         })), /* @__PURE__ */ y("span", { style: sectionHeadingStyles }, "From this file"), /* @__PURE__ */ y("div", { className: "color-picker__selection-list", style: seedListStyles }, import_lodash.default.map(pageColors, (color) => {
-          return /* @__PURE__ */ y(SeedButton, { color });
+          return /* @__PURE__ */ y(SeedButton2, { color });
         })), /* @__PURE__ */ y("div", { style: colorInputSectionStyles }, /* @__PURE__ */ y("span", { style: sectionHeadingStyles }, "From this file"), /* @__PURE__ */ y("div", { className: "color-picker__input-field" }, /* @__PURE__ */ y("div", { style: inputWrapperStyles }, /* @__PURE__ */ y(
           "input",
           {
@@ -10331,7 +10753,12 @@ button .button-icon,
       init_preact_module();
       import_lodash2 = __toESM(require_lodash());
       init_Button();
-      PalettesList = ({ palettes, removeSeedColor, editPalette }) => {
+      PalettesList = ({
+        palettes,
+        swatches,
+        removeSeedColor,
+        editPalette
+      }) => {
         const paletteListWrapperStyles = {
           position: "absolute",
           top: 0,
@@ -10368,10 +10795,10 @@ button .button-icon,
           gap: ".5rem",
           alignItems: "center"
         };
-        const ColorBlockStyles = (palette) => {
+        const ColorBlockStyles = (seedColor) => {
           return {
             width: "100%",
-            background: palette.swatches[palette.sourceColorIndex].hex,
+            background: seedColor,
             borderRadius: ".375rem",
             overflow: "hidden"
           };
@@ -10388,15 +10815,22 @@ button .button-icon,
           };
         };
         return /* @__PURE__ */ y("div", { className: "palette-list-wrapper", style: paletteListWrapperStyles }, /* @__PURE__ */ y("div", { className: "palette-list", style: PalettesListStyles }, import_lodash2.default.map(palettes, (palette, index) => {
-          let paletteSwatches = import_lodash2.default.orderBy(palette.swatches, (swatch) => {
+          let paletteSwatches2 = import_lodash2.default.filter(swatches, (swatch) => {
+            return swatch.paletteId === palette.id;
+          });
+          paletteSwatches2 = import_lodash2.default.orderBy(paletteSwatches2, (swatch) => {
             return 0 + swatch.contrastWhite;
           });
-          let seedDisplayColor = palette.swatches[palette.sourceColorIndex].displayColor;
+          let seedSwatch = import_lodash2.default.find(swatches, (swatch) => {
+            return swatch.id === palette.sourceColorId;
+          });
+          let seedDisplayColor = seedSwatch.displayColor;
+          let seedColor = seedSwatch.variableColor;
           return /* @__PURE__ */ y(
             "div",
             {
               className: "color-block",
-              style: ColorBlockStyles(palette),
+              style: ColorBlockStyles(seedSwatch.variableColor),
               onClick: () => editPalette(palette.id)
             },
             /* @__PURE__ */ y("div", { className: "color-block__header", style: headerStyles2 }, /* @__PURE__ */ y(
@@ -10425,7 +10859,7 @@ button .button-icon,
                     marginLeft: ".25rem"
                   }
                 },
-                palette.swatches[palette.sourceColorIndex].hex
+                seedColor
               ))
             ), /* @__PURE__ */ y(
               "div",
@@ -10452,14 +10886,12 @@ button .button-icon,
                   text: "Delete",
                   onClick: (e3) => {
                     e3.stopPropagation();
-                    removeSeedColor(
-                      palette.swatches[palette.sourceColorIndex].hex
-                    );
+                    removeSeedColor(palette.id);
                   }
                 }
               )
             )),
-            /* @__PURE__ */ y("div", { className: "color-block__gradient", style: gradientStyles }, import_lodash2.default.map(paletteSwatches, (swatch, index2) => {
+            /* @__PURE__ */ y("div", { className: "color-block__gradient", style: gradientStyles }, import_lodash2.default.map(paletteSwatches2, (swatch, index2) => {
               return /* @__PURE__ */ y(
                 "div",
                 {
@@ -10476,8 +10908,7 @@ button .button-icon,
                     }
                   },
                   (index2 + 1).toFixed(0).padStart(2, "0")
-                ),
-                /* @__PURE__ */ y("p", { style: { color: "limegreen" } }, swatch.hex != swatch.variableColor && /* @__PURE__ */ y(g, null, "XX"))
+                )
               );
             }))
           );
@@ -10497,6 +10928,7 @@ button .button-icon,
       init_ColorPickerSidebar();
       init_PalettesList();
       init_Button();
+      init_tokens();
       modalHeaderStyles = {
         position: "relative",
         width: "100%",
@@ -10543,6 +10975,7 @@ button .button-icon,
       Palettes = ({
         fileName,
         palettes,
+        swatches,
         selectionColors,
         pageColors,
         updateConfig,
@@ -10563,7 +10996,7 @@ button .button-icon,
         )), /* @__PURE__ */ y("div", { className: "modal__main-area", style: modalMainAreaStyles }, /* @__PURE__ */ y("div", { className: "modal__sidebar", style: modalSidebarStyles }, /* @__PURE__ */ y(
           ColorPickerSidebar_default,
           {
-            palettes,
+            swatches,
             selectionColors,
             pageColors,
             addSeedColor
@@ -10572,6 +11005,7 @@ button .button-icon,
           PalettesList_default,
           {
             palettes,
+            swatches,
             removeSeedColor,
             editPalette
           }
@@ -10585,6 +11019,7 @@ button .button-icon,
             Button_default,
             {
               buttonType: "color",
+              buttonColor: colors.purple[7],
               iconType: "code",
               text: "Get Tokens",
               onClick: () => setCurrentView("tokens")
@@ -10594,6 +11029,7 @@ button .button-icon,
             Button_default,
             {
               buttonType: "color",
+              buttonColor: colors.purple[7],
               iconType: "component",
               text: "Generate Style Guide",
               onClick: null
@@ -10605,11 +11041,12 @@ button .button-icon,
             className: "footer-actions__right",
             style: footerActionsRightStyles
           },
-          /* @__PURE__ */ y("span", { style: { fontStyle: "italic" } }, "Palettes saved to variablesXXX"),
+          /* @__PURE__ */ y("span", { style: { fontStyle: "italic" } }, "Palettes saved to variables"),
           /* @__PURE__ */ y(
             Button_default,
             {
               buttonType: "secondary",
+              buttonColor: colors.purple[7],
               iconType: "variable",
               text: "Delete color variables",
               onClick: null
@@ -10660,7 +11097,7 @@ button .button-icon,
   });
 
   // src/components/ColorEditor.tsx
-  var import_lodash3, import_chroma_js2, ColorEditor, ColorEditor_default;
+  var import_lodash3, import_chroma_js2, getPaletteSwatches, getPaletteSourceHex, ColorEditor, ColorEditor_default;
   var init_ColorEditor = __esm({
     "src/components/ColorEditor.tsx"() {
       "use strict";
@@ -10670,7 +11107,28 @@ button .button-icon,
       import_chroma_js2 = __toESM(require_chroma());
       init_Text();
       init_Icon();
-      ColorEditor = ({ palette, updatePalette, updateName }) => {
+      getPaletteSwatches = (palette, swatches) => {
+        return import_lodash3.default.find(swatches, (swatch) => {
+          return swatch.paletteId === palette.id;
+        });
+      };
+      getPaletteSourceHex = (palette, swatches) => {
+        return import_lodash3.default.find(swatches, (swatch) => {
+          return swatch.id === palette.sourceColorId;
+        }).variableColor;
+      };
+      ColorEditor = ({
+        palette,
+        swatches,
+        updatePaletteColor,
+        updatePaletteName
+      }) => {
+        const [paletteSwatches2, setPaletteSwatches] = p2(
+          getPaletteSwatches(palette, swatches)
+        );
+        _2(() => {
+          setPaletteSwatches(getPaletteSwatches(palette, swatches));
+        }, [palette, swatches]);
         const [nameValue, setNameValue] = p2(palette.name);
         var timeout;
         const handleNameUpdate = (e3) => {
@@ -10681,23 +11139,21 @@ button .button-icon,
             timeout = null;
           }
           timeout = setTimeout(() => {
-            updateName(palette.id, inputValue);
+            updatePaletteName(palette.id, inputValue);
           }, 5);
         };
         const [hexValue, setHexValue] = p2(
-          palette.swatches[palette.sourceColorIndex].variableColor
+          getPaletteSourceHex(palette, swatches)
         );
         const handleHexInput = (e3) => {
           let inputValue = e3.target.value;
           setHexValue(inputValue);
         };
         const handleHexUpdate = () => {
-          updatePalette(hexValue, palette.id);
+          console.log("UPDATE HEX CODE", palette.id, hexValue);
+          updatePaletteColor(palette.id, hexValue);
         };
-        _2(() => {
-          setHexValue(palette.swatches[palette.sourceColorIndex].variableColor);
-        }, [palette]);
-        const seedHex = palette.swatches[palette.sourceColorIndex].variableColor;
+        const seedHex = getPaletteSourceHex(palette, swatches);
         const seedChroma = (0, import_chroma_js2.default)(seedHex);
         const adjustmentOptionCount = 8;
         const textInputStyles = {
@@ -10727,7 +11183,6 @@ button .button-icon,
         const adjustmentContentStyles = {
           display: "flex",
           flexDirection: "column",
-          padding: "1rem",
           gap: "1rem"
         };
         const adjustmentInputGroupStyles = {
@@ -10796,7 +11251,7 @@ button .button-icon,
             "button",
             {
               style: adjustmentStepStyles(newHexColor),
-              onClick: () => updatePalette(newHexColor, palette.id)
+              onClick: () => updatePaletteColor(palette.id, newHexColor)
             },
             index === adjustmentOptionCount && /* @__PURE__ */ y(
               "svg",
@@ -10823,7 +11278,7 @@ button .button-icon,
             "button",
             {
               style: adjustmentStepStyles(newHexColor),
-              onClick: () => updatePalette(newHexColor, palette.id)
+              onClick: () => updatePaletteColor(palette.id, newHexColor)
             },
             index === adjustmentOptionCount && /* @__PURE__ */ y(
               "svg",
@@ -10850,7 +11305,7 @@ button .button-icon,
             "button",
             {
               style: adjustmentStepStyles(newHexColor),
-              onClick: () => updatePalette(newHexColor, palette.id)
+              onClick: () => updatePaletteColor(palette.id, newHexColor)
             },
             index === adjustmentOptionCount && /* @__PURE__ */ y(
               "svg",
@@ -10882,6 +11337,7 @@ button .button-icon,
       init_Icon();
       init_Text();
       init_ColorEditor();
+      init_tokens();
       tabContainerStyles = {
         display: "flex",
         flexDirection: "row",
@@ -10904,14 +11360,22 @@ button .button-icon,
       };
       Edit = ({
         palettes,
+        swatches,
         selectedPaletteId,
         setCurrentView,
-        updatePalette,
-        updateName
+        updatePaletteColor,
+        updatePaletteName
       }) => {
         const selectedPalette = import_lodash4.default.find(palettes, (palette) => {
           return palette.id === selectedPaletteId;
         });
+        const selectedPaletteSwatches = import_lodash4.default.filter(swatches, (swatch) => {
+          return swatch.paletteId === selectedPaletteId;
+        });
+        let sourceColorSwatch = import_lodash4.default.find(swatches, (swatch) => {
+          return swatch.id === selectedPalette.sourceColorId;
+        });
+        let sourceColor = sourceColorSwatch == null ? void 0 : sourceColorSwatch.variableColor;
         const editContainerStyles = {
           flex: 1,
           display: "flex",
@@ -10951,10 +11415,13 @@ button .button-icon,
           overflow: "hidden"
         };
         const colorGradientHeaderStyles = (palette) => {
-          let sourceColor = palette.swatches[palette.sourceColorIndex].variableColor;
+          let sourceColorSwatch2 = import_lodash4.default.find(swatches, (swatch) => {
+            return swatch.id === palette.sourceColorId;
+          });
+          let sourceColor2 = sourceColorSwatch2.variableColor;
           return {
-            background: sourceColor,
-            color: palette.swatches[palette.sourceColorIndex].displayColor,
+            background: sourceColor2,
+            color: sourceColorSwatch2.displayColor,
             display: "flex",
             flexDirection: "column",
             gap: ".5rem",
@@ -11002,18 +11469,21 @@ button .button-icon,
         return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { style: editContainerStyles }, /* @__PURE__ */ y("div", { style: editSidebarStyles }, /* @__PURE__ */ y("div", { style: editSidebarHeaderStyles }, /* @__PURE__ */ y(
           Button_default,
           {
-            buttonType: "secondary",
+            buttonType: "color",
+            iconType: "arrow-right",
+            buttonColor: colors.purple[7],
             text: "Back to saved palettes",
-            onClick: () => setCurrentView("palettes")
+            onClick: () => setCurrentView("seeds")
           }
         )), /* @__PURE__ */ y("div", { style: editSidebarBodyStyles }, /* @__PURE__ */ y(
           ColorEditor_default,
           {
             palette: selectedPalette,
-            updatePalette,
-            updateName
+            swatches,
+            updatePaletteColor,
+            updatePaletteName
           }
-        ))), /* @__PURE__ */ y("div", { style: editBodyStyles }, /* @__PURE__ */ y("div", { style: demoContainerStyles }, /* @__PURE__ */ y("div", { style: colorGradientWrapperStyles }, /* @__PURE__ */ y("div", { style: colorGradientHeaderStyles(selectedPalette) }, /* @__PURE__ */ y("span", { style: colorNameStyles }, selectedPalette.name), /* @__PURE__ */ y("span", { style: colorHexStyles }, selectedPalette.swatches[selectedPalette.sourceColorIndex].variableColor)), /* @__PURE__ */ y(
+        ))), /* @__PURE__ */ y("div", { style: editBodyStyles }, /* @__PURE__ */ y("div", { style: demoContainerStyles }, /* @__PURE__ */ y("div", { style: colorGradientWrapperStyles }, /* @__PURE__ */ y("div", { style: colorGradientHeaderStyles(selectedPalette) }, /* @__PURE__ */ y("span", { style: colorNameStyles }, selectedPalette.name), /* @__PURE__ */ y("span", { style: colorHexStyles }, sourceColor.variableColor)), /* @__PURE__ */ y(
           "div",
           {
             style: __spreadProps(__spreadValues({}, colorTableRowStyles), {
@@ -11024,7 +11494,7 @@ button .button-icon,
           /* @__PURE__ */ y("div", { style: { flex: 1 } }, "index"),
           /* @__PURE__ */ y("div", { style: { flex: 1 } }, "Black Contrast"),
           /* @__PURE__ */ y("div", { style: { flex: 1 } }, "White Contrast")
-        ), import_lodash4.default.map(selectedPalette.swatches, (swatch, index) => {
+        ), import_lodash4.default.map(selectedPaletteSwatches, (swatch, index) => {
           return /* @__PURE__ */ y(
             "div",
             {
@@ -11059,7 +11529,7 @@ button .button-icon,
         ), /* @__PURE__ */ y(
           Tab,
           {
-            tabColor: selectedPalette.swatches[5].variableColor,
+            tabColor: selectedPaletteSwatches[5].variableColor,
             textColor: "white",
             setSelectedTab: () => {
               setSelectedTab(2);
@@ -11081,6 +11551,7 @@ button .button-icon,
               onClick: null,
               text: "Settings",
               buttonType: "primary",
+              buttonColor: colors.purple[7],
               iconType: "settings"
             }
           ),
@@ -11090,6 +11561,7 @@ button .button-icon,
               onClick: null,
               text: "Generate Code",
               buttonType: "secondary",
+              buttonColor: colors.purple[7],
               iconType: "code"
             }
           ),
@@ -11099,6 +11571,7 @@ button .button-icon,
               onClick: null,
               text: "Refresh",
               buttonType: "text",
+              buttonColor: colors.purple[7],
               iconType: "settings"
             }
           )
@@ -11485,7 +11958,7 @@ button .button-icon,
   }
   function getAllLineNumbers(_ref) {
     var lines = _ref.lines, startingLineNumber = _ref.startingLineNumber, style = _ref.style;
-    return lines.map(function(_9, i3) {
+    return lines.map(function(_16, i3) {
       var number = i3 + startingLineNumber;
       return /* @__PURE__ */ wn.createElement("span", {
         key: "line-".concat(i3),
@@ -47417,7 +47890,8 @@ button .button-icon,
       import_lodash5 = __toESM(require_lodash());
       init_Button();
       init_Text();
-      Tokens = ({ palettes, setCurrentView }) => {
+      init_tokens();
+      Tokens = ({ palettes, swatches, setCurrentView }) => {
         const editContainerStyles = {
           flex: 1,
           display: "flex",
@@ -47499,8 +47973,11 @@ button .button-icon,
         const generateJsCode = () => {
           let jsCodeString = newLine("const palettes = {");
           import_lodash5.default.each(palettes, async (palette, index) => {
-            jsCodeString += newLine(`${indent}${import_lodash5.default.kebabCase(palette.name)}: {`);
-            import_lodash5.default.each(palette.swatches, (swatch, index2) => {
+            let paletteSwatches2 = import_lodash5.default.filter(swatches, (swatch) => {
+              return swatch.paletteId === palette.id;
+            });
+            jsCodeString += newLine(`${indent}'${import_lodash5.default.kebabCase(palette.name)}': {`);
+            import_lodash5.default.each(paletteSwatches2, (swatch, index2) => {
               jsCodeString += newLine(
                 `${indent}${indent}${index2}: "${swatch.variableColor}",`
               );
@@ -47515,7 +47992,10 @@ button .button-icon,
           let cssCodeString = newLine(`/* Paletteer Color Palettes */`);
           cssCodeString += newLine(":root {");
           import_lodash5.default.each(palettes, async (palette, index) => {
-            import_lodash5.default.each(palette.swatches, (swatch, index2) => {
+            let paletteSwatches2 = import_lodash5.default.filter(swatches, (swatch) => {
+              return swatch.paletteId === palette.id;
+            });
+            import_lodash5.default.each(paletteSwatches2, (swatch, index2) => {
               cssCodeString += newLine(
                 `${indent}--${import_lodash5.default.kebabCase(palette.name)}-${index2}: ${swatch.variableColor};`
               );
@@ -47530,10 +48010,13 @@ button .button-icon,
           let jsonCodeString = newLine(`{`);
           jsonCodeString += newLine(`${indent}"colors" = {`);
           import_lodash5.default.each(palettes, async (palette, index) => {
+            let paletteSwatches2 = import_lodash5.default.filter(swatches, (swatch) => {
+              return swatch.paletteId === palette.id;
+            });
             jsonCodeString += newLine(
               `${indent}${indent}"${import_lodash5.default.kebabCase(palette.name)}": {`
             );
-            import_lodash5.default.each(palette.swatches, (swatch, index2) => {
+            import_lodash5.default.each(paletteSwatches2, (swatch, index2) => {
               jsonCodeString += newLine(`${indent}${indent}${indent}"${index2}": {`);
               jsonCodeString += newLine(
                 `${indent}${indent}${indent}${indent}"value": "${swatch.variableColor}",`
@@ -47558,32 +48041,56 @@ button .button-icon,
         } else {
           currentCodeString = generateJsonCode();
         }
+        async function copyToClipboard(textToCopy) {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(textToCopy);
+          } else {
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            textArea.style.position = "absolute";
+            textArea.style.left = "-999999px";
+            document.body.prepend(textArea);
+            textArea.select();
+            try {
+              document.execCommand("copy");
+            } catch (error) {
+              console.error(error);
+            } finally {
+              textArea.remove();
+            }
+          }
+        }
         return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { style: editContainerStyles }, /* @__PURE__ */ y("div", { style: editSidebarStyles }, /* @__PURE__ */ y("div", { style: editSidebarHeaderStyles }, /* @__PURE__ */ y(
           Button_default,
           {
-            buttonType: "secondary",
+            buttonType: "color",
+            iconType: "left-arrow",
+            buttonColor: colors.purple[7],
             text: "Back to palettes",
-            onClick: () => setCurrentView("palettes")
+            onClick: () => setCurrentView("seeds")
           }
         )), /* @__PURE__ */ y("div", { style: codeSelectionButtons }, /* @__PURE__ */ y(
           Button_default,
           {
-            buttonType: selectedLanguage === "json" ? "color" : "secondary",
-            text: "JSON",
+            buttonType: selectedLanguage === "json" ? "secondary" : "text",
+            buttonColor: colors.purple[7],
+            text: "JSON Tokens",
             onClick: () => setSelectedLanguage("json")
           }
         ), /* @__PURE__ */ y(
           Button_default,
           {
-            buttonType: selectedLanguage === "js" ? "color" : "secondary",
-            text: "Javascript",
+            buttonType: selectedLanguage === "js" ? "secondary" : "text",
+            buttonColor: colors.purple[7],
+            text: "Javascript Object",
             onClick: () => setSelectedLanguage("js")
           }
         ), /* @__PURE__ */ y(
           Button_default,
           {
-            buttonType: selectedLanguage === "css" ? "color" : "secondary",
-            text: "CSS",
+            buttonType: selectedLanguage === "css" ? "secondary" : "text",
+            buttonColor: colors.purple[7],
+            text: "CSS Variables",
             onClick: () => setSelectedLanguage("css")
           }
         ))), /* @__PURE__ */ y("div", { style: editBodyStyles }, /* @__PURE__ */ y("div", { style: editBodyContainerStyles }, /* @__PURE__ */ y("div", { style: editBodyHeaderStyles }, /* @__PURE__ */ y(
@@ -47596,9 +48103,18 @@ button .button-icon,
         ), /* @__PURE__ */ y("div", null, /* @__PURE__ */ y(
           Button_default,
           {
-            buttonType: "primary",
+            buttonType: "color",
+            iconType: "clipboard",
+            buttonColor: colors.purple[7],
             text: "Copy to Clipboard",
-            onClick: null
+            onClick: async () => {
+              try {
+                await copyToClipboard(currentCodeString);
+                console.log("Text copied to the clipboard!");
+              } catch (error) {
+                console.error(error);
+              }
+            }
           }
         ))), /* @__PURE__ */ y("div", { style: codePreviewStyles }, /* @__PURE__ */ y(
           default_highlight_default,
@@ -47616,8 +48132,1251 @@ button .button-icon,
         ))))));
       };
       Tokens_default = Tokens;
-      {
+    }
+  });
+
+  // src/views/Seeds.tsx
+  var modalHeaderStyles2, modalMainAreaStyles2, modalSidebarStyles2, modalMainColumnStyles2, modalBodyStyles2, modalFooterStyles2, footerActionsLeftStyles2, footerActionsRightStyles2, Seeds, Seeds_default;
+  var init_Seeds = __esm({
+    "src/views/Seeds.tsx"() {
+      "use strict";
+      init_preact_module();
+      init_Header();
+      init_ColorPickerSidebar();
+      init_PalettesList();
+      init_Button();
+      modalHeaderStyles2 = {
+        position: "relative",
+        width: "100%",
+        height: "80px",
+        borderBottom: "#EEE solid 1px"
+      };
+      modalMainAreaStyles2 = {
+        flexGrow: 1,
+        display: "flex"
+      };
+      modalSidebarStyles2 = {
+        position: "relative",
+        width: "14rem",
+        borderRight: "#EEE solid 1px"
+      };
+      modalMainColumnStyles2 = {
+        display: "flex",
+        flexDirection: "column",
+        flex: 1
+      };
+      modalBodyStyles2 = {
+        position: "relative",
+        flex: 1,
+        borderBottom: "#EEE solid 1px"
+      };
+      modalFooterStyles2 = {
+        display: "flex",
+        flexDirection: "row"
+      };
+      footerActionsLeftStyles2 = {
+        flex: 1,
+        display: "flex",
+        flexDirection: "row",
+        padding: "1rem",
+        gap: ".5rem"
+      };
+      footerActionsRightStyles2 = {
+        display: "flex",
+        flexDirection: "row",
+        padding: "1rem",
+        gap: ".5rem",
+        alignItems: "center"
+      };
+      Seeds = ({
+        fileName,
+        palettes,
+        swatches,
+        selectionColors,
+        pageColors,
+        updateConfig,
+        addSeedColor,
+        removeSeedColor,
+        resetData,
+        setCurrentView,
+        editPalette
+      }) => {
+        return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { className: "modal__header", style: modalHeaderStyles2 }, /* @__PURE__ */ y(
+          Header_default,
+          {
+            fileName,
+            resetData,
+            updateConfig,
+            palettes
+          }
+        )), /* @__PURE__ */ y("div", { className: "modal__main-area", style: modalMainAreaStyles2 }, /* @__PURE__ */ y("div", { className: "modal__sidebar", style: modalSidebarStyles2 }, /* @__PURE__ */ y(
+          ColorPickerSidebar_default,
+          {
+            swatches,
+            selectionColors,
+            pageColors,
+            addSeedColor
+          }
+        )), /* @__PURE__ */ y("div", { className: "modal__main-column", style: modalMainColumnStyles2 }, /* @__PURE__ */ y("div", { className: "modal__body", style: modalBodyStyles2 }, /* @__PURE__ */ y(
+          PalettesList_default,
+          {
+            palettes,
+            swatches,
+            removeSeedColor,
+            editPalette
+          }
+        )), /* @__PURE__ */ y("div", { className: "modal__footer", style: modalFooterStyles2 }, /* @__PURE__ */ y(
+          "div",
+          {
+            className: "footer-actions__left",
+            style: footerActionsLeftStyles2
+          },
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              buttonType: "color",
+              iconType: "code",
+              text: "Get Tokens",
+              onClick: () => setCurrentView("tokens")
+            }
+          ),
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              buttonType: "color",
+              iconType: "component",
+              text: "Generate Style Guide",
+              onClick: null
+            }
+          )
+        ), /* @__PURE__ */ y(
+          "div",
+          {
+            className: "footer-actions__right",
+            style: footerActionsRightStyles2
+          },
+          /* @__PURE__ */ y("span", { style: { fontStyle: "italic" } }, "Palettes saved to variables"),
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              buttonType: "secondary",
+              iconType: "variable",
+              text: "Delete color variables",
+              onClick: null
+            }
+          )
+        )))));
+      };
+      Seeds_default = Seeds;
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/49ae4727-1a72-4353-91dc-6505cce1bed1/layout.module.js
+  var layout_module_default;
+  var init_layout_module = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/49ae4727-1a72-4353-91dc-6505cce1bed1/layout.module.js"() {
+      if (document.getElementById("e1356d2856") === null) {
+        const element = document.createElement("style");
+        element.id = "e1356d2856";
+        element.textContent = `._body-wrapper_1degy_1 {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  background: white;
+}
+
+._sidebar_1degy_9 {
+  position: relative;
+  background: white;
+  width: 18rem;
+}
+
+._sidebar__card_1degy_15 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: absolute;
+  inset: 1.5rem 0 1.5rem 1.5rem;
+  background: white;
+  border: var(--purple-1) solid 1px;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 0.75rem 1rem var(--purple-5);
+  box-shadow: 0 0.75rem 1rem
+    color-mix(in srgb, var(--purple-5) 25%, transparent);
+  overflow: auto;
+}
+
+._sidebar-title_1degy_31 {
+  font-size: 1.75rem;
+  font-weight: 1000;
+  line-height: 1.125;
+  margin: 0;
+  padding: 0;
+}
+
+._main-body_1degy_39 {
+  flex: 1;
+  padding: 0 1.5rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMvbGF5b3V0Lm1vZHVsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsUUFBUTtFQUNSLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGlCQUFpQjtFQUNqQixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLFlBQVk7RUFDWixrQkFBa0I7RUFDbEIsNkJBQTZCO0VBQzdCLGlCQUFpQjtFQUNqQixpQ0FBaUM7RUFDakMsc0JBQXNCO0VBQ3RCLGVBQWU7RUFDZiwwQ0FBMEM7RUFDMUM7d0RBQ3NEO0VBQ3RELGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixTQUFTO0VBQ1QsVUFBVTtBQUNaOztBQUVBO0VBQ0UsT0FBTztFQUNQLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsYUFBYTtFQUNiLG1CQUFtQjtBQUNyQiIsImZpbGUiOiJzcmMvc3R5bGVzL2xheW91dC5tb2R1bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJvZHktd3JhcHBlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaW5zZXQ6IDA7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xufVxuXG4uc2lkZWJhciB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHdpZHRoOiAxOHJlbTtcbn1cblxuLnNpZGViYXJfX2NhcmQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBnYXA6IDAuNzVyZW07XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaW5zZXQ6IDEuNXJlbSAwIDEuNXJlbSAxLjVyZW07XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBib3JkZXI6IHZhcigtLXB1cnBsZS0xKSBzb2xpZCAxcHg7XG4gIGJvcmRlci1yYWRpdXM6IDAuNzVyZW07XG4gIHBhZGRpbmc6IDEuNXJlbTtcbiAgYm94LXNoYWRvdzogMCAwLjc1cmVtIDFyZW0gdmFyKC0tcHVycGxlLTUpO1xuICBib3gtc2hhZG93OiAwIDAuNzVyZW0gMXJlbVxuICAgIGNvbG9yLW1peChpbiBzcmdiLCB2YXIoLS1wdXJwbGUtNSkgMjUlLCB0cmFuc3BhcmVudCk7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuXG4uc2lkZWJhci10aXRsZSB7XG4gIGZvbnQtc2l6ZTogMS43NXJlbTtcbiAgZm9udC13ZWlnaHQ6IDEwMDA7XG4gIGxpbmUtaGVpZ2h0OiAxLjEyNTtcbiAgbWFyZ2luOiAwO1xuICBwYWRkaW5nOiAwO1xufVxuXG4ubWFpbi1ib2R5IHtcbiAgZmxleDogMTtcbiAgcGFkZGluZzogMCAxLjVyZW07XG4gIG92ZXJmbG93OiBhdXRvO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xufVxuIl19 */`;
+        document.head.append(element);
       }
+      layout_module_default = { "body-wrapper": "_body-wrapper_1degy_1", "sidebar": "_sidebar_1degy_9", "sidebar__card": "_sidebar__card_1degy_15", "sidebar-title": "_sidebar-title_1degy_31", "main-body": "_main-body_1degy_39" };
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/42bf4576-0dd1-4df3-b9e1-7a09c93c6571/SwatchList.module.js
+  var SwatchList_module_default;
+  var init_SwatchList_module = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/42bf4576-0dd1-4df3-b9e1-7a09c93c6571/SwatchList.module.js"() {
+      if (document.getElementById("04b5cd3361") === null) {
+        const element = document.createElement("style");
+        element.id = "04b5cd3361";
+        element.textContent = `._swatch-list_1wavu_1 {
+  flex: 1;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+._swatch-list__columns_1wavu_9 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+._swatch-block-spacer_1wavu_16 {
+  min-height: 1rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  background: var(--blue-1);
+}
+
+._swatch-block--placeholder_1wavu_22 {
+  background: var(--blue-1);
+  padding: 1rem;
+  height: 6rem;
+  border-radius: 0.75rem;
+  color: var(--blue-2);
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb21wb25lbnRzL1N3YXRjaExpc3QubW9kdWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLE9BQU87RUFDUCxjQUFjO0VBQ2QsYUFBYTtFQUNiLHFDQUFxQztFQUNyQyxTQUFTO0FBQ1g7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLFNBQVM7RUFDVCxzQkFBc0I7QUFDeEI7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsa0NBQWtDO0VBQ2xDLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixhQUFhO0VBQ2IsWUFBWTtFQUNaLHNCQUFzQjtFQUN0QixvQkFBb0I7QUFDdEIiLCJmaWxlIjoic3JjL2NvbXBvbmVudHMvU3dhdGNoTGlzdC5tb2R1bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnN3YXRjaC1saXN0IHtcbiAgZmxleDogMTtcbiAgb3ZlcmZsb3c6IGF1dG87XG4gIGRpc3BsYXk6IGdyaWQ7XG4gIGdyaWQtdGVtcGxhdGUtY29sdW1uczogcmVwZWF0KDQsIDFmcik7XG4gIGdhcDogMXJlbTtcbn1cblxuLnN3YXRjaC1saXN0X19jb2x1bW5zIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgZ2FwOiAxcmVtO1xuICBwYWRkaW5nLWJvdHRvbTogMS41cmVtO1xufVxuXG4uc3dhdGNoLWJsb2NrLXNwYWNlciB7XG4gIG1pbi1oZWlnaHQ6IDFyZW07XG4gIGJvcmRlci1yYWRpdXM6IDAgMCAwLjc1cmVtIDAuNzVyZW07XG4gIGJhY2tncm91bmQ6IHZhcigtLWJsdWUtMSk7XG59XG5cbi5zd2F0Y2gtYmxvY2stLXBsYWNlaG9sZGVyIHtcbiAgYmFja2dyb3VuZDogdmFyKC0tYmx1ZS0xKTtcbiAgcGFkZGluZzogMXJlbTtcbiAgaGVpZ2h0OiA2cmVtO1xuICBib3JkZXItcmFkaXVzOiAwLjc1cmVtO1xuICBjb2xvcjogdmFyKC0tYmx1ZS0yKTtcbn1cbiJdfQ== */`;
+        document.head.append(element);
+      }
+      SwatchList_module_default = { "swatch-list": "_swatch-list_1wavu_1", "swatch-list__columns": "_swatch-list__columns_1wavu_9", "swatch-block-spacer": "_swatch-block-spacer_1wavu_16", "swatch-block--placeholder": "_swatch-block--placeholder_1wavu_22" };
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/50963530-52af-41d2-b33a-2178924f1eb7/SwatchBlock.module.js
+  var SwatchBlock_module_default;
+  var init_SwatchBlock_module = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/50963530-52af-41d2-b33a-2178924f1eb7/SwatchBlock.module.js"() {
+      if (document.getElementById("bfceb2c605") === null) {
+        const element = document.createElement("style");
+        element.id = "bfceb2c605";
+        element.textContent = `._swatch-block_1ib2r_1 {
+  display: flex;
+  flex-direction: column;
+  background: var(--blue-6);
+  padding: 1rem;
+  height: 7rem;
+  border-radius: 0.75rem;
+  color: var(--blue-2);
+  box-shadow: 0rem 0rem 0rem var(--purple-3);
+  transition: all ease-out 0.1s;
+  /* cursor: pointer; */
+}
+
+/* .swatch-block:hover {
+  z-index: 1;
+  box-shadow: 0.25rem 0.5rem 1rem var(--purple-3);
+  margin-top: -0.25rem;
+  margin-bottom: 0.25rem;
+} */
+
+._swatch-block__header_1ib2r_21 {
+  flex: 1;
+  /* cursor: pointer; */
+}
+
+._swatch-block__name_1ib2r_26 {
+  font-size: 1rem;
+  font-weight: 1000;
+  padding: 0;
+  margin: 0 0 0.25rem;
+}
+
+._swatch-block__black-contrast_1ib2r_33 {
+  color: black;
+  font-size: 0.75rem;
+  padding: 0;
+  margin: 0.125rem 0;
+}
+
+._swatch-block__white-contrast_1ib2r_40 {
+  color: white;
+  font-size: 0.75rem;
+  padding: 0;
+  margin: 0.125rem 0;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb21wb25lbnRzL1N3YXRjaEJsb2NrLm1vZHVsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLHlCQUF5QjtFQUN6QixhQUFhO0VBQ2IsWUFBWTtFQUNaLHNCQUFzQjtFQUN0QixvQkFBb0I7RUFDcEIsMENBQTBDO0VBQzFDLDZCQUE2QjtFQUM3QixxQkFBcUI7QUFDdkI7O0FBRUE7Ozs7O0dBS0c7O0FBRUg7RUFDRSxPQUFPO0VBQ1AscUJBQXFCO0FBQ3ZCOztBQUVBO0VBQ0UsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixVQUFVO0VBQ1YsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixVQUFVO0VBQ1Ysa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixVQUFVO0VBQ1Ysa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InNyYy9jb21wb25lbnRzL1N3YXRjaEJsb2NrLm1vZHVsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3dhdGNoLWJsb2NrIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgYmFja2dyb3VuZDogdmFyKC0tYmx1ZS02KTtcbiAgcGFkZGluZzogMXJlbTtcbiAgaGVpZ2h0OiA3cmVtO1xuICBib3JkZXItcmFkaXVzOiAwLjc1cmVtO1xuICBjb2xvcjogdmFyKC0tYmx1ZS0yKTtcbiAgYm94LXNoYWRvdzogMHJlbSAwcmVtIDByZW0gdmFyKC0tcHVycGxlLTMpO1xuICB0cmFuc2l0aW9uOiBhbGwgZWFzZS1vdXQgMC4xcztcbiAgLyogY3Vyc29yOiBwb2ludGVyOyAqL1xufVxuXG4vKiAuc3dhdGNoLWJsb2NrOmhvdmVyIHtcbiAgei1pbmRleDogMTtcbiAgYm94LXNoYWRvdzogMC4yNXJlbSAwLjVyZW0gMXJlbSB2YXIoLS1wdXJwbGUtMyk7XG4gIG1hcmdpbi10b3A6IC0wLjI1cmVtO1xuICBtYXJnaW4tYm90dG9tOiAwLjI1cmVtO1xufSAqL1xuXG4uc3dhdGNoLWJsb2NrX19oZWFkZXIge1xuICBmbGV4OiAxO1xuICAvKiBjdXJzb3I6IHBvaW50ZXI7ICovXG59XG5cbi5zd2F0Y2gtYmxvY2tfX25hbWUge1xuICBmb250LXNpemU6IDFyZW07XG4gIGZvbnQtd2VpZ2h0OiAxMDAwO1xuICBwYWRkaW5nOiAwO1xuICBtYXJnaW46IDAgMCAwLjI1cmVtO1xufVxuXG4uc3dhdGNoLWJsb2NrX19ibGFjay1jb250cmFzdCB7XG4gIGNvbG9yOiBibGFjaztcbiAgZm9udC1zaXplOiAwLjc1cmVtO1xuICBwYWRkaW5nOiAwO1xuICBtYXJnaW46IDAuMTI1cmVtIDA7XG59XG5cbi5zd2F0Y2gtYmxvY2tfX3doaXRlLWNvbnRyYXN0IHtcbiAgY29sb3I6IHdoaXRlO1xuICBmb250LXNpemU6IDAuNzVyZW07XG4gIHBhZGRpbmc6IDA7XG4gIG1hcmdpbjogMC4xMjVyZW0gMDtcbn1cbiJdfQ== */`;
+        document.head.append(element);
+      }
+      SwatchBlock_module_default = { "swatch-block": "_swatch-block_1ib2r_1", "swatch-block__header": "_swatch-block__header_1ib2r_21", "swatch-block__name": "_swatch-block__name_1ib2r_26", "swatch-block__black-contrast": "_swatch-block__black-contrast_1ib2r_33", "swatch-block__white-contrast": "_swatch-block__white-contrast_1ib2r_40" };
+    }
+  });
+
+  // src/components/SwatchBlock.tsx
+  var SwatchBlock, SwatchBlock_default;
+  var init_SwatchBlock = __esm({
+    "src/components/SwatchBlock.tsx"() {
+      "use strict";
+      init_preact_module();
+      init_SwatchBlock_module();
+      SwatchBlock = ({ swatch }) => {
+        return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y(
+          "div",
+          {
+            className: SwatchBlock_module_default["swatch-block"],
+            style: {
+              background: swatch.hex,
+              color: swatch.displayColor
+            }
+          },
+          /* @__PURE__ */ y("div", { className: SwatchBlock_module_default["swatch-block__header"] }, /* @__PURE__ */ y("p", { className: SwatchBlock_module_default["swatch-block__name"] }, (swatch.index + 1).toFixed(0).padStart(2, "0")), /* @__PURE__ */ y("p", { className: SwatchBlock_module_default["swatch-block__black-contrast"] }, swatch.contrastBlack.toFixed(2), swatch.displayColor === "black" && /* @__PURE__ */ y("span", { style: { marginLeft: ".25rem" } }, "\u2022")), /* @__PURE__ */ y("p", { className: SwatchBlock_module_default["swatch-block__white-contrast"] }, swatch.contrastWhite.toFixed(2), swatch.displayColor === "white" && /* @__PURE__ */ y("span", { style: { marginLeft: ".25rem" } }, "\u2022")))
+        ));
+      };
+      SwatchBlock_default = SwatchBlock;
+    }
+  });
+
+  // src/components/SwatchList.tsx
+  var import_lodash6, SwatchList, SwatchList_default;
+  var init_SwatchList = __esm({
+    "src/components/SwatchList.tsx"() {
+      "use strict";
+      init_preact_module();
+      import_lodash6 = __toESM(require_lodash());
+      init_SwatchList_module();
+      init_SwatchBlock();
+      SwatchList = ({ swatches }) => {
+        const SwatchListSpacer = ({ height = "1rem", columnSwatches }) => {
+          let spacerColor = columnSwatches[0].hex;
+          return /* @__PURE__ */ y(
+            "div",
+            {
+              className: SwatchList_module_default["swatch-block-spacer"],
+              style: { height, background: spacerColor }
+            }
+          );
+        };
+        const getColumns = () => {
+          let columns = [new Array(), new Array(), new Array(), new Array()];
+          let columnLoop = (swatches2, swatchIndex, columnIndex) => {
+            if (swatches2.length === swatchIndex) {
+              return;
+            } else {
+              columns[columnIndex].push(swatches2[swatchIndex]);
+              let newColumnIndex = columnIndex === 3 ? 0 : columnIndex + 1;
+              columnLoop(swatches2, swatchIndex + 1, newColumnIndex);
+            }
+          };
+          columnLoop(swatches, 0, 0);
+          return columns;
+        };
+        let swatchColumns = getColumns();
+        return /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-list"] }, /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-list__columns"] }, /* @__PURE__ */ y(SwatchListSpacer, { height: "2rem", columnSwatches: swatchColumns[0] }), import_lodash6.default.map(swatchColumns[0], (swatch) => {
+          return /* @__PURE__ */ y(SwatchBlock_default, { swatch });
+        }), swatchColumns[0].length < 1 && /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-block--placeholder"] })), /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-list__columns"] }, /* @__PURE__ */ y(SwatchListSpacer, { height: "1rem", columnSwatches: swatchColumns[1] }), import_lodash6.default.map(swatchColumns[1], (swatch) => {
+          return /* @__PURE__ */ y(SwatchBlock_default, { swatch });
+        }), swatchColumns[1].length < 1 && /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-block--placeholder"] })), /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-list__columns"] }, /* @__PURE__ */ y(SwatchListSpacer, { height: "4rem", columnSwatches: swatchColumns[2] }), import_lodash6.default.map(swatchColumns[2], (swatch) => {
+          return /* @__PURE__ */ y(SwatchBlock_default, { swatch });
+        }), swatchColumns[2].length < 1 && /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-block--placeholder"] })), /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-list__columns"] }, /* @__PURE__ */ y(SwatchListSpacer, { height: "3rem", columnSwatches: swatchColumns[3] }), import_lodash6.default.map(swatchColumns[3], (swatch) => {
+          return /* @__PURE__ */ y(SwatchBlock_default, { swatch });
+        }), swatchColumns[3].length < 1 && /* @__PURE__ */ y("div", { className: SwatchList_module_default["swatch-block--placeholder"] })));
+      };
+      SwatchList_default = SwatchList;
+    }
+  });
+
+  // src/views/Editor.tsx
+  var import_lodash7, Editor, Editor_default;
+  var init_Editor = __esm({
+    "src/views/Editor.tsx"() {
+      "use strict";
+      init_preact_module();
+      import_lodash7 = __toESM(require_lodash());
+      init_layout_module();
+      init_Button();
+      init_ColorEditor();
+      init_SwatchList();
+      init_tokens();
+      Editor = ({
+        selectedPaletteId,
+        palettes,
+        swatches,
+        setCurrentView,
+        updatePaletteColor,
+        updatePaletteName
+      }) => {
+        let selectedPalette = import_lodash7.default.find(palettes, (palette) => {
+          return palette.id === selectedPaletteId;
+        });
+        let paletteSwatches2 = import_lodash7.default.filter(swatches, (swatch) => {
+          return swatch.paletteId === selectedPaletteId;
+        });
+        return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { className: layout_module_default["body-wrapper"] }, /* @__PURE__ */ y("div", { className: layout_module_default["sidebar"] }, /* @__PURE__ */ y("div", { className: layout_module_default["sidebar__card"] }, /* @__PURE__ */ y(
+          Button_default,
+          {
+            buttonType: "color",
+            iconType: "left-arrow",
+            buttonColor: colors.purple[7],
+            text: "Back to saved palettes",
+            onClick: () => setCurrentView("seeds")
+          }
+        ), /* @__PURE__ */ y("p", { className: layout_module_default["sidebar-title"] }, "Let's get this color just right."), /* @__PURE__ */ y(
+          ColorEditor_default,
+          {
+            palette: selectedPalette,
+            swatches,
+            updatePaletteColor,
+            updatePaletteName
+          }
+        ))), /* @__PURE__ */ y("div", { className: layout_module_default["main-body"] }, /* @__PURE__ */ y(SwatchList_default, { swatches: paletteSwatches2 }))));
+      };
+      Editor_default = Editor;
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/5e3f33e6-6dc4-4c6d-9a90-bb4f245fa408/layout.module.js
+  var layout_module_default2;
+  var init_layout_module2 = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/5e3f33e6-6dc4-4c6d-9a90-bb4f245fa408/layout.module.js"() {
+      if (document.getElementById("e1356d2856") === null) {
+        const element = document.createElement("style");
+        element.id = "e1356d2856";
+        element.textContent = `._body-wrapper_1degy_1 {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  background: white;
+}
+
+._sidebar_1degy_9 {
+  position: relative;
+  background: white;
+  width: 18rem;
+}
+
+._sidebar__card_1degy_15 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: absolute;
+  inset: 1.5rem 0 1.5rem 1.5rem;
+  background: white;
+  border: var(--purple-1) solid 1px;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 0.75rem 1rem var(--purple-5);
+  box-shadow: 0 0.75rem 1rem
+    color-mix(in srgb, var(--purple-5) 25%, transparent);
+  overflow: auto;
+}
+
+._sidebar-title_1degy_31 {
+  font-size: 1.75rem;
+  font-weight: 1000;
+  line-height: 1.125;
+  margin: 0;
+  padding: 0;
+}
+
+._main-body_1degy_39 {
+  flex: 1;
+  padding: 0 1.5rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMvbGF5b3V0Lm1vZHVsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsUUFBUTtFQUNSLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGlCQUFpQjtFQUNqQixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLFlBQVk7RUFDWixrQkFBa0I7RUFDbEIsNkJBQTZCO0VBQzdCLGlCQUFpQjtFQUNqQixpQ0FBaUM7RUFDakMsc0JBQXNCO0VBQ3RCLGVBQWU7RUFDZiwwQ0FBMEM7RUFDMUM7d0RBQ3NEO0VBQ3RELGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixTQUFTO0VBQ1QsVUFBVTtBQUNaOztBQUVBO0VBQ0UsT0FBTztFQUNQLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsYUFBYTtFQUNiLG1CQUFtQjtBQUNyQiIsImZpbGUiOiJzcmMvc3R5bGVzL2xheW91dC5tb2R1bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJvZHktd3JhcHBlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaW5zZXQ6IDA7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xufVxuXG4uc2lkZWJhciB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHdpZHRoOiAxOHJlbTtcbn1cblxuLnNpZGViYXJfX2NhcmQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBnYXA6IDAuNzVyZW07XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaW5zZXQ6IDEuNXJlbSAwIDEuNXJlbSAxLjVyZW07XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBib3JkZXI6IHZhcigtLXB1cnBsZS0xKSBzb2xpZCAxcHg7XG4gIGJvcmRlci1yYWRpdXM6IDAuNzVyZW07XG4gIHBhZGRpbmc6IDEuNXJlbTtcbiAgYm94LXNoYWRvdzogMCAwLjc1cmVtIDFyZW0gdmFyKC0tcHVycGxlLTUpO1xuICBib3gtc2hhZG93OiAwIDAuNzVyZW0gMXJlbVxuICAgIGNvbG9yLW1peChpbiBzcmdiLCB2YXIoLS1wdXJwbGUtNSkgMjUlLCB0cmFuc3BhcmVudCk7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuXG4uc2lkZWJhci10aXRsZSB7XG4gIGZvbnQtc2l6ZTogMS43NXJlbTtcbiAgZm9udC13ZWlnaHQ6IDEwMDA7XG4gIGxpbmUtaGVpZ2h0OiAxLjEyNTtcbiAgbWFyZ2luOiAwO1xuICBwYWRkaW5nOiAwO1xufVxuXG4ubWFpbi1ib2R5IHtcbiAgZmxleDogMTtcbiAgcGFkZGluZzogMCAxLjVyZW07XG4gIG92ZXJmbG93OiBhdXRvO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xufVxuIl19 */`;
+        document.head.append(element);
+      }
+      layout_module_default2 = { "body-wrapper": "_body-wrapper_1degy_1", "sidebar": "_sidebar_1degy_9", "sidebar__card": "_sidebar__card_1degy_15", "sidebar-title": "_sidebar-title_1degy_31", "main-body": "_main-body_1degy_39" };
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/aa13663c-184a-4502-a393-1df183c27fe4/Palette.module.js
+  var Palette_module_default;
+  var init_Palette_module = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/aa13663c-184a-4502-a393-1df183c27fe4/Palette.module.js"() {
+      if (document.getElementById("2595ea259a") === null) {
+        const element = document.createElement("style");
+        element.id = "2595ea259a";
+        element.textContent = `._action-overlay_1avba_1 {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+._reset-button_1avba_11 {
+  background: var(--grayscale-14);
+  color: var(--grayscale-1);
+}
+
+._tokens-button_1avba_16 {
+  background: var(--purple-7);
+  color: var(--grayscale-1);
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy92aWV3cy9QYWxldHRlLm1vZHVsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsY0FBYztFQUNkLGFBQWE7RUFDYixXQUFXO0VBQ1gsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSwrQkFBK0I7RUFDL0IseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsMkJBQTJCO0VBQzNCLHlCQUF5QjtBQUMzQiIsImZpbGUiOiJzcmMvdmlld3MvUGFsZXR0ZS5tb2R1bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFjdGlvbi1vdmVybGF5IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBib3R0b206IDEuNXJlbTtcbiAgcmlnaHQ6IDEuNXJlbTtcbiAgei1pbmRleDogMTA7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGdhcDogMC41cmVtO1xufVxuXG4ucmVzZXQtYnV0dG9uIHtcbiAgYmFja2dyb3VuZDogdmFyKC0tZ3JheXNjYWxlLTE0KTtcbiAgY29sb3I6IHZhcigtLWdyYXlzY2FsZS0xKTtcbn1cblxuLnRva2Vucy1idXR0b24ge1xuICBiYWNrZ3JvdW5kOiB2YXIoLS1wdXJwbGUtNyk7XG4gIGNvbG9yOiB2YXIoLS1ncmF5c2NhbGUtMSk7XG59XG4iXX0= */`;
+        document.head.append(element);
+      }
+      Palette_module_default = { "action-overlay": "_action-overlay_1avba_1", "reset-button": "_reset-button_1avba_11", "tokens-button": "_tokens-button_1avba_16" };
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/dec4562d-9978-476b-8cfa-1f4741cade45/SeedButton.module.js
+  var SeedButton_module_default;
+  var init_SeedButton_module = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/dec4562d-9978-476b-8cfa-1f4741cade45/SeedButton.module.js"() {
+      if (document.getElementById("5c7c104b84") === null) {
+        const element = document.createElement("style");
+        element.id = "5c7c104b84";
+        element.textContent = `._seed-button_st8q9_1 {
+  background: var(--purple-0);
+  display: block;
+  padding: 0.5rem 0.75rem 1.5rem;
+  margin: 0 0 -1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-align: left;
+  text-transform: uppercase;
+  transition: all ease-out 0.2s;
+  border: rgba(0, 0, 0, 0.05) solid 1px;
+}
+
+._seed-button_st8q9_1:last-child {
+  padding-bottom: 0.625rem;
+  margin-bottom: 0;
+}
+
+._seed-button_st8q9_1:hover {
+  margin-bottom: -0.75rem;
+  margin-top: -0.25rem;
+}
+
+._seed-button_st8q9_1:last-child:hover {
+  margin-bottom: 0.25rem;
+}
+
+._seed-button__content_st8q9_28 {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+._seed-button__hex_st8q9_34 {
+  flex: 1;
+  cursor: pointer;
+}
+
+._seed-button__icon_st8q9_39 {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb21wb25lbnRzL1NlZWRCdXR0b24ubW9kdWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDJCQUEyQjtFQUMzQixjQUFjO0VBQ2QsOEJBQThCO0VBQzlCLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtFQUNoQix5QkFBeUI7RUFDekIsNkJBQTZCO0VBQzdCLHFDQUFxQztBQUN2Qzs7QUFFQTtFQUNFLHdCQUF3QjtFQUN4QixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSx1QkFBdUI7RUFDdkIsb0JBQW9CO0FBQ3RCOztBQUVBO0VBQ0Usc0JBQXNCO0FBQ3hCOztBQUVBO0VBQ0UsYUFBYTtFQUNiLG1CQUFtQjtFQUNuQixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsT0FBTztFQUNQLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCIiwiZmlsZSI6InNyYy9jb21wb25lbnRzL1NlZWRCdXR0b24ubW9kdWxlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zZWVkLWJ1dHRvbiB7XG4gIGJhY2tncm91bmQ6IHZhcigtLXB1cnBsZS0wKTtcbiAgZGlzcGxheTogYmxvY2s7XG4gIHBhZGRpbmc6IDAuNXJlbSAwLjc1cmVtIDEuNXJlbTtcbiAgbWFyZ2luOiAwIDAgLTFyZW07XG4gIGZvbnQtc2l6ZTogMC43NXJlbTtcbiAgZm9udC13ZWlnaHQ6IDUwMDtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcbiAgdHJhbnNpdGlvbjogYWxsIGVhc2Utb3V0IDAuMnM7XG4gIGJvcmRlcjogcmdiYSgwLCAwLCAwLCAwLjA1KSBzb2xpZCAxcHg7XG59XG5cbi5zZWVkLWJ1dHRvbjpsYXN0LWNoaWxkIHtcbiAgcGFkZGluZy1ib3R0b206IDAuNjI1cmVtO1xuICBtYXJnaW4tYm90dG9tOiAwO1xufVxuXG4uc2VlZC1idXR0b246aG92ZXIge1xuICBtYXJnaW4tYm90dG9tOiAtMC43NXJlbTtcbiAgbWFyZ2luLXRvcDogLTAuMjVyZW07XG59XG5cbi5zZWVkLWJ1dHRvbjpsYXN0LWNoaWxkOmhvdmVyIHtcbiAgbWFyZ2luLWJvdHRvbTogMC4yNXJlbTtcbn1cblxuLnNlZWQtYnV0dG9uX19jb250ZW50IHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uc2VlZC1idXR0b25fX2hleCB7XG4gIGZsZXg6IDE7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLnNlZWQtYnV0dG9uX19pY29uIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuIl19 */`;
+        document.head.append(element);
+      }
+      SeedButton_module_default = { "seed-button": "_seed-button_st8q9_1", "seed-button__content": "_seed-button__content_st8q9_28", "seed-button__hex": "_seed-button__hex_st8q9_34", "seed-button__icon": "_seed-button__icon_st8q9_39" };
+    }
+  });
+
+  // src/components/SeedButton.tsx
+  var import_chroma_js3, import_lodash8, SeedButton, SeedButton_default;
+  var init_SeedButton = __esm({
+    "src/components/SeedButton.tsx"() {
+      "use strict";
+      init_preact_module();
+      init_SeedButton_module();
+      init_Icon();
+      import_chroma_js3 = __toESM(require_chroma());
+      import_lodash8 = __toESM(require_lodash());
+      SeedButton = ({ color, swatches, addSeedColor }) => {
+        let existingColors = import_lodash8.default.map(swatches, (swatch) => {
+          return swatch.hex.toLowerCase();
+        });
+        console.log("CHECK EXISTING COLORS", existingColors, color);
+        let colorInPalette = import_lodash8.default.includes(existingColors, color.toLowerCase());
+        let displayColor = import_chroma_js3.default.contrast(color, "white") >= 4.5 ? "white" : "black";
+        const handleClick = (e3) => {
+          if (!colorInPalette) {
+            addSeedColor(color);
+          }
+        };
+        return /* @__PURE__ */ y(
+          "button",
+          {
+            className: SeedButton_module_default["seed-button"],
+            style: {
+              background: color,
+              cursor: colorInPalette ? "default" : "pointer"
+            },
+            onClick: handleClick
+          },
+          /* @__PURE__ */ y("span", { className: SeedButton_module_default["seed-button__content"] }, /* @__PURE__ */ y(
+            "span",
+            {
+              className: SeedButton_module_default["seed-button__hex"],
+              style: {
+                color: displayColor,
+                cursor: colorInPalette ? "default" : "pointer"
+              }
+            },
+            color
+          ), !colorInPalette && /* @__PURE__ */ y(
+            "span",
+            {
+              className: SeedButton_module_default["seed-button__icon"],
+              style: {
+                cursor: colorInPalette ? "default" : "pointer"
+              }
+            },
+            /* @__PURE__ */ y(Icon_default, { type: "right-arrow", iconColor: displayColor })
+          ), colorInPalette && /* @__PURE__ */ y(
+            "span",
+            {
+              className: SeedButton_module_default["seed-button__icon"],
+              style: {
+                cursor: colorInPalette ? "default" : "pointer"
+              }
+            },
+            /* @__PURE__ */ y(Icon_default, { type: "check", iconColor: displayColor })
+          ))
+        );
+      };
+      SeedButton_default = SeedButton;
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/cb8b35fb-bb23-4885-8a7b-e3b9deb6c82e/layout.module.js
+  var layout_module_default3;
+  var init_layout_module3 = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/cb8b35fb-bb23-4885-8a7b-e3b9deb6c82e/layout.module.js"() {
+      if (document.getElementById("e1356d2856") === null) {
+        const element = document.createElement("style");
+        element.id = "e1356d2856";
+        element.textContent = `._body-wrapper_1degy_1 {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  background: white;
+}
+
+._sidebar_1degy_9 {
+  position: relative;
+  background: white;
+  width: 18rem;
+}
+
+._sidebar__card_1degy_15 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: absolute;
+  inset: 1.5rem 0 1.5rem 1.5rem;
+  background: white;
+  border: var(--purple-1) solid 1px;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 0.75rem 1rem var(--purple-5);
+  box-shadow: 0 0.75rem 1rem
+    color-mix(in srgb, var(--purple-5) 25%, transparent);
+  overflow: auto;
+}
+
+._sidebar-title_1degy_31 {
+  font-size: 1.75rem;
+  font-weight: 1000;
+  line-height: 1.125;
+  margin: 0;
+  padding: 0;
+}
+
+._main-body_1degy_39 {
+  flex: 1;
+  padding: 0 1.5rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9zdHlsZXMvbGF5b3V0Lm1vZHVsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsUUFBUTtFQUNSLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGlCQUFpQjtFQUNqQixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxhQUFhO0VBQ2Isc0JBQXNCO0VBQ3RCLFlBQVk7RUFDWixrQkFBa0I7RUFDbEIsNkJBQTZCO0VBQzdCLGlCQUFpQjtFQUNqQixpQ0FBaUM7RUFDakMsc0JBQXNCO0VBQ3RCLGVBQWU7RUFDZiwwQ0FBMEM7RUFDMUM7d0RBQ3NEO0VBQ3RELGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixTQUFTO0VBQ1QsVUFBVTtBQUNaOztBQUVBO0VBQ0UsT0FBTztFQUNQLGlCQUFpQjtFQUNqQixjQUFjO0VBQ2QsYUFBYTtFQUNiLG1CQUFtQjtBQUNyQiIsImZpbGUiOiJzcmMvc3R5bGVzL2xheW91dC5tb2R1bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJvZHktd3JhcHBlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaW5zZXQ6IDA7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xufVxuXG4uc2lkZWJhciB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHdpZHRoOiAxOHJlbTtcbn1cblxuLnNpZGViYXJfX2NhcmQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICBnYXA6IDAuNzVyZW07XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaW5zZXQ6IDEuNXJlbSAwIDEuNXJlbSAxLjVyZW07XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBib3JkZXI6IHZhcigtLXB1cnBsZS0xKSBzb2xpZCAxcHg7XG4gIGJvcmRlci1yYWRpdXM6IDAuNzVyZW07XG4gIHBhZGRpbmc6IDEuNXJlbTtcbiAgYm94LXNoYWRvdzogMCAwLjc1cmVtIDFyZW0gdmFyKC0tcHVycGxlLTUpO1xuICBib3gtc2hhZG93OiAwIDAuNzVyZW0gMXJlbVxuICAgIGNvbG9yLW1peChpbiBzcmdiLCB2YXIoLS1wdXJwbGUtNSkgMjUlLCB0cmFuc3BhcmVudCk7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuXG4uc2lkZWJhci10aXRsZSB7XG4gIGZvbnQtc2l6ZTogMS43NXJlbTtcbiAgZm9udC13ZWlnaHQ6IDEwMDA7XG4gIGxpbmUtaGVpZ2h0OiAxLjEyNTtcbiAgbWFyZ2luOiAwO1xuICBwYWRkaW5nOiAwO1xufVxuXG4ubWFpbi1ib2R5IHtcbiAgZmxleDogMTtcbiAgcGFkZGluZzogMCAxLjVyZW07XG4gIG92ZXJmbG93OiBhdXRvO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xufVxuIl19 */`;
+        document.head.append(element);
+      }
+      layout_module_default3 = { "body-wrapper": "_body-wrapper_1degy_1", "sidebar": "_sidebar_1degy_9", "sidebar__card": "_sidebar__card_1degy_15", "sidebar-title": "_sidebar-title_1degy_31", "main-body": "_main-body_1degy_39" };
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/6576a9e1-ca5c-4094-b0d3-cdd49fdabd61/SeedSidebar.module.js
+  var SeedSidebar_module_default;
+  var init_SeedSidebar_module = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/6576a9e1-ca5c-4094-b0d3-cdd49fdabd61/SeedSidebar.module.js"() {
+      if (document.getElementById("d8296207c5") === null) {
+        const element = document.createElement("style");
+        element.id = "d8296207c5";
+        element.textContent = `._seed-list_43y7m_1 {
+  display: flex;
+  flex-direction: column;
+}
+
+._seed-list__label_43y7m_6 {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--grayscale-8);
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb21wb25lbnRzL1NlZWRTaWRlYmFyLm1vZHVsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFhO0VBQ2Isc0JBQXNCO0FBQ3hCOztBQUVBO0VBQ0UsZUFBZTtFQUNmLFNBQVM7RUFDVCx5QkFBeUI7QUFDM0IiLCJmaWxlIjoic3JjL2NvbXBvbmVudHMvU2VlZFNpZGViYXIubW9kdWxlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zZWVkLWxpc3Qge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xufVxuXG4uc2VlZC1saXN0X19sYWJlbCB7XG4gIGZvbnQtc2l6ZTogMXJlbTtcbiAgbWFyZ2luOiAwO1xuICBjb2xvcjogdmFyKC0tZ3JheXNjYWxlLTgpO1xufVxuIl19 */`;
+        document.head.append(element);
+      }
+      SeedSidebar_module_default = { "seed-list": "_seed-list_43y7m_1", "seed-list__label": "_seed-list__label_43y7m_6" };
+    }
+  });
+
+  // src/components/SeedSidebar.tsx
+  var import_lodash9, import_chroma_js4, SeedSidebar, SeedSidebar_default;
+  var init_SeedSidebar = __esm({
+    "src/components/SeedSidebar.tsx"() {
+      "use strict";
+      init_preact_module();
+      import_lodash9 = __toESM(require_lodash());
+      init_SeedButton();
+      init_layout_module3();
+      init_SeedSidebar_module();
+      import_chroma_js4 = __toESM(require_chroma());
+      SeedSidebar = ({
+        selectionColors,
+        pageColors,
+        swatches,
+        addSeedColor
+      }) => {
+        let orderedSelectionColors = import_lodash9.default.orderBy(
+          selectionColors,
+          (color) => {
+            return (0, import_chroma_js4.default)(color).hsl()[0];
+          },
+          "desc"
+        );
+        let orderedPageColors = import_lodash9.default.orderBy(
+          import_lodash9.default.xor(pageColors, selectionColors),
+          (color) => {
+            return (0, import_chroma_js4.default)(color).hsl()[0];
+          },
+          "desc"
+        );
+        let extraPageColors = ["#FE5D47", "#EBC850", "#08E3D6", "#3785FB", "#E1BFFF"];
+        return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("p", { className: layout_module_default3["sidebar-title"] }, "Choose brand colors to build your color palette."), orderedSelectionColors.length > 0 && /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("span", { className: SeedSidebar_module_default["seed-list__label"] }, "From your selection"), /* @__PURE__ */ y("div", { className: SeedSidebar_module_default["seed-list"] }, import_lodash9.default.map(orderedSelectionColors, (color) => {
+          return /* @__PURE__ */ y(
+            SeedButton_default,
+            {
+              color,
+              swatches,
+              addSeedColor
+            }
+          );
+        }))), orderedPageColors.length > 0 && /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("span", { className: SeedSidebar_module_default["seed-list__label"] }, "From this file"), /* @__PURE__ */ y("div", { className: SeedSidebar_module_default["seed-list"] }, import_lodash9.default.map(orderedPageColors, (color) => {
+          return /* @__PURE__ */ y(
+            SeedButton_default,
+            {
+              color,
+              swatches,
+              addSeedColor
+            }
+          );
+        }))), orderedPageColors.length + orderedSelectionColors.length === 0 && /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("span", { className: SeedSidebar_module_default["seed-list__label"] }, "Example colors"), /* @__PURE__ */ y("div", { className: SeedSidebar_module_default["seed-list"] }, import_lodash9.default.map(extraPageColors, (color) => {
+          return /* @__PURE__ */ y(
+            SeedButton_default,
+            {
+              color,
+              swatches,
+              addSeedColor
+            }
+          );
+        }))));
+      };
+      SeedSidebar_default = SeedSidebar;
+    }
+  });
+
+  // utils/getPaletteSwatches.ts
+  var import_lodash10, paletteSwatches, getPaletteSwatches_default;
+  var init_getPaletteSwatches = __esm({
+    "utils/getPaletteSwatches.ts"() {
+      "use strict";
+      import_lodash10 = __toESM(require_lodash());
+      paletteSwatches = (palette, swatches) => {
+        return import_lodash10.default.orderBy(
+          import_lodash10.default.filter(swatches, (swatch) => {
+            return swatch.paletteId === palette.id;
+          }),
+          "index",
+          "asc"
+        );
+      };
+      getPaletteSwatches_default = paletteSwatches;
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/088503f1-909b-4c1b-a924-af7a9b422855/PaletteBlock.module.js
+  var PaletteBlock_module_default;
+  var init_PaletteBlock_module = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/088503f1-909b-4c1b-a924-af7a9b422855/PaletteBlock.module.js"() {
+      if (document.getElementById("9599ec8111") === null) {
+        const element = document.createElement("style");
+        element.id = "9599ec8111";
+        element.textContent = `._palette-block_ksb2k_1 {
+  display: flex;
+  flex-direction: column;
+  background: var(--blue-6);
+  padding: 1rem;
+  height: 12rem;
+  border-radius: 0.75rem;
+  border: rgba(0, 0, 0, 0.05) solid 1px;
+  color: var(--blue-2);
+  box-shadow: 0rem 0rem 0rem var(--purple-3);
+  transition: all ease-out 0.1s;
+  cursor: pointer;
+}
+
+._palette-block_ksb2k_1:hover {
+  z-index: 1;
+  box-shadow: 0.25rem 0.5rem 1rem var(--purple-3);
+  margin-top: -0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+._palette-block__header_ksb2k_22 {
+  flex: 1;
+  cursor: pointer;
+}
+
+._palette-block__footer_ksb2k_27 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+._palette-block__name_ksb2k_34 {
+  font-size: 1rem;
+  font-weight: 1000;
+  padding: 0;
+  margin: 0 0 0.25rem;
+}
+
+._palette-block__hex_ksb2k_41 {
+  font-size: 0.75rem;
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+._palette-block__button_ksb2k_48 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: all ease-out 0.2s;
+}
+
+._palette-block_ksb2k_1:hover ._palette-block__button_ksb2k_48 {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb21wb25lbnRzL1BhbGV0dGVCbG9jay5tb2R1bGUuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsYUFBYTtFQUNiLHNCQUFzQjtFQUN0Qix5QkFBeUI7RUFDekIsYUFBYTtFQUNiLGFBQWE7RUFDYixzQkFBc0I7RUFDdEIscUNBQXFDO0VBQ3JDLG9CQUFvQjtFQUNwQiwwQ0FBMEM7RUFDMUMsNkJBQTZCO0VBQzdCLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsK0NBQStDO0VBQy9DLG9CQUFvQjtFQUNwQixzQkFBc0I7QUFDeEI7O0FBRUE7RUFDRSxPQUFPO0VBQ1AsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixtQkFBbUI7RUFDbkIseUJBQXlCO0VBQ3pCLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLFVBQVU7RUFDVixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsVUFBVTtFQUNWLFNBQVM7RUFDVCx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsbUJBQW1CO0VBQ25CLG1CQUFtQjtFQUNuQixXQUFXO0VBQ1gsVUFBVTtFQUNWLDZCQUE2QjtBQUMvQjs7QUFFQTtFQUNFLFVBQVU7QUFDWiIsImZpbGUiOiJzcmMvY29tcG9uZW50cy9QYWxldHRlQmxvY2subW9kdWxlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wYWxldHRlLWJsb2NrIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgYmFja2dyb3VuZDogdmFyKC0tYmx1ZS02KTtcbiAgcGFkZGluZzogMXJlbTtcbiAgaGVpZ2h0OiAxMnJlbTtcbiAgYm9yZGVyLXJhZGl1czogMC43NXJlbTtcbiAgYm9yZGVyOiByZ2JhKDAsIDAsIDAsIDAuMDUpIHNvbGlkIDFweDtcbiAgY29sb3I6IHZhcigtLWJsdWUtMik7XG4gIGJveC1zaGFkb3c6IDByZW0gMHJlbSAwcmVtIHZhcigtLXB1cnBsZS0zKTtcbiAgdHJhbnNpdGlvbjogYWxsIGVhc2Utb3V0IDAuMXM7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLnBhbGV0dGUtYmxvY2s6aG92ZXIge1xuICB6LWluZGV4OiAxO1xuICBib3gtc2hhZG93OiAwLjI1cmVtIDAuNXJlbSAxcmVtIHZhcigtLXB1cnBsZS0zKTtcbiAgbWFyZ2luLXRvcDogLTAuMjVyZW07XG4gIG1hcmdpbi1ib3R0b206IDAuMjVyZW07XG59XG5cbi5wYWxldHRlLWJsb2NrX19oZWFkZXIge1xuICBmbGV4OiAxO1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5wYWxldHRlLWJsb2NrX19mb290ZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xuICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbi5wYWxldHRlLWJsb2NrX19uYW1lIHtcbiAgZm9udC1zaXplOiAxcmVtO1xuICBmb250LXdlaWdodDogMTAwMDtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwIDAgMC4yNXJlbTtcbn1cblxuLnBhbGV0dGUtYmxvY2tfX2hleCB7XG4gIGZvbnQtc2l6ZTogMC43NXJlbTtcbiAgcGFkZGluZzogMDtcbiAgbWFyZ2luOiAwO1xuICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xufVxuXG4ucGFsZXR0ZS1ibG9ja19fYnV0dG9uIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgZ2FwOiAwLjVyZW07XG4gIG9wYWNpdHk6IDA7XG4gIHRyYW5zaXRpb246IGFsbCBlYXNlLW91dCAwLjJzO1xufVxuXG4ucGFsZXR0ZS1ibG9jazpob3ZlciAucGFsZXR0ZS1ibG9ja19fYnV0dG9uIHtcbiAgb3BhY2l0eTogMTtcbn1cbiJdfQ== */`;
+        document.head.append(element);
+      }
+      PaletteBlock_module_default = { "palette-block": "_palette-block_ksb2k_1", "palette-block__header": "_palette-block__header_ksb2k_22", "palette-block__footer": "_palette-block__footer_ksb2k_27", "palette-block__name": "_palette-block__name_ksb2k_34", "palette-block__hex": "_palette-block__hex_ksb2k_41", "palette-block__button": "_palette-block__button_ksb2k_48" };
+    }
+  });
+
+  // src/components/PaletteBlock.tsx
+  var import_lodash11, import_chroma_js5, PaletteBlock, PaletteBlock_default;
+  var init_PaletteBlock = __esm({
+    "src/components/PaletteBlock.tsx"() {
+      "use strict";
+      init_preact_module();
+      import_lodash11 = __toESM(require_lodash());
+      import_chroma_js5 = __toESM(require_chroma());
+      init_compat_module();
+      init_getPaletteSwatches();
+      init_PaletteBlock_module();
+      init_Icon();
+      PaletteBlock = ({
+        palette,
+        swatches,
+        editPalette,
+        removeSeedColor
+      }) => {
+        const [deleteHovered, setDeleteHovered] = p2(false);
+        if (palette.temporaryHex) {
+          return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y(
+            "div",
+            {
+              className: PaletteBlock_module_default["palette-block"],
+              style: {
+                background: palette.temporaryHex,
+                color: (0, import_chroma_js5.default)(palette.temporaryHex).brighten(2).hex()
+              }
+            },
+            /* @__PURE__ */ y("p", { className: PaletteBlock_module_default["palette-block__name"] }, "Loading...")
+          ));
+        } else {
+          let sourceSwatch = import_lodash11.default.find(swatches, (swatch) => {
+            return palette.sourceColorId === swatch.id;
+          });
+          let paletteSwatches2 = getPaletteSwatches_default(palette, swatches);
+          let darkColors = import_lodash11.default.sortBy(
+            import_lodash11.default.slice(paletteSwatches2, 8, 16),
+            (swatch) => {
+              return import_chroma_js5.default.contrast(sourceSwatch.hex, swatch.hex);
+            },
+            "asc"
+          );
+          let lightColors = import_lodash11.default.sortBy(
+            import_lodash11.default.slice(paletteSwatches2, 0, 8),
+            (swatch) => {
+              return import_chroma_js5.default.contrast(sourceSwatch.hex, swatch.hex);
+            },
+            "asc"
+          );
+          let prospectiveTextColors = sourceSwatch.index < 7 ? darkColors : lightColors;
+          prospectiveTextColors = import_lodash11.default.orderBy(prospectiveTextColors, (swatch) => {
+            return import_chroma_js5.default.distance(sourceSwatch.hex, swatch.hex);
+          });
+          let prospectiveButtonColors = sourceSwatch.index < 7 ? lightColors : darkColors;
+          prospectiveButtonColors = import_lodash11.default.orderBy(
+            prospectiveButtonColors,
+            (swatch) => {
+              return import_chroma_js5.default.distance(sourceSwatch.hex, swatch.hex);
+            }
+          );
+          let textContrast = 4.5;
+          let buttonContrast = 1;
+          let textColor = import_lodash11.default.find(prospectiveTextColors, (swatch) => {
+            return import_chroma_js5.default.contrast(sourceSwatch.hex, swatch.hex) > textContrast;
+          }) || import_lodash11.default.last(prospectiveTextColors);
+          let buttonColor = import_lodash11.default.find(prospectiveButtonColors, (swatch) => {
+            return import_chroma_js5.default.contrast(sourceSwatch.hex, swatch.hex) > buttonContrast;
+          }) || import_lodash11.default.last(prospectiveButtonColors);
+          return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y(
+            "div",
+            {
+              className: PaletteBlock_module_default["palette-block"],
+              style: {
+                background: sourceSwatch.hex,
+                color: (textColor == null ? void 0 : textColor.hex) || "red"
+              },
+              onClick: () => editPalette(palette.id)
+            },
+            (paletteSwatches2 == null ? void 0 : paletteSwatches2.length) === 0 && /* @__PURE__ */ y("p", { className: PaletteBlock_module_default["palette-block__name"] }, "Loading..."),
+            (paletteSwatches2 == null ? void 0 : paletteSwatches2.length) > 0 && /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { className: PaletteBlock_module_default["palette-block__header"] }, /* @__PURE__ */ y("p", { className: PaletteBlock_module_default["palette-block__name"] }, palette.name), /* @__PURE__ */ y("p", { className: PaletteBlock_module_default["palette-block__hex"] }, sourceSwatch.hex)), /* @__PURE__ */ y("div", { className: PaletteBlock_module_default["palette-block__footer"] }, /* @__PURE__ */ y(
+              "button",
+              {
+                onMouseOver: () => setDeleteHovered(true),
+                onMouseOut: () => setDeleteHovered(false),
+                style: {
+                  color: textColor.hex,
+                  background: deleteHovered ? buttonColor.hex : "transparent"
+                },
+                className: PaletteBlock_module_default["palette-block__button"],
+                onClick: (e3) => {
+                  e3.stopPropagation();
+                  removeSeedColor(palette.id);
+                }
+              },
+              /* @__PURE__ */ y(Icon_default, { type: "trash", iconColor: textColor.hex }),
+              "Delete"
+            )))
+          ));
+        }
+      };
+      PaletteBlock_default = PaletteBlock;
+    }
+  });
+
+  // ../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/95cc365a-6bc2-41da-a4be-56c8f3183f61/PaletteList.module.js
+  var PaletteList_module_default;
+  var init_PaletteList_module = __esm({
+    "../../../../private/var/folders/1h/b1mxv5wx1zgg_18sqhncjm_r0000gn/T/95cc365a-6bc2-41da-a4be-56c8f3183f61/PaletteList.module.js"() {
+      if (document.getElementById("c7b893dc7c") === null) {
+        const element = document.createElement("style");
+        element.id = "c7b893dc7c";
+        element.textContent = `._palette-list_1kuzf_1 {
+  flex: 1;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  overflow: visible;
+}
+
+._palette-list__columns_1kuzf_10 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+._palette-block-spacer_1kuzf_17 {
+  min-height: 1rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  background: var(--purple-1);
+  /* border: var(--blue-2) dashed 0.125rem; */
+}
+
+._palette-block--placeholder_1kuzf_24 {
+  display: flex;
+  flex-direction: column;
+  background: var(--purple-0);
+  border: var(--purple-2) dashed 0.125rem;
+  padding: 1rem;
+  height: 10rem;
+  border-radius: 0.75rem;
+  color: var(--purple-2);
+  transition: all ease-in-out 0.1s;
+}
+
+._palette-block__placeholder-text_1kuzf_36 {
+  flex: 1;
+  color: var(--grayscale-14);
+  font-size: 1.25rem;
+  font-weight: 1000;
+  line-height: 1.125;
+  padding: none;
+  margin: 0;
+}
+
+._palette-block__placeholder-button_1kuzf_46 {
+  background: var(--purple-7);
+  color: var(--purple-0);
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9jb21wb25lbnRzL1BhbGV0dGVMaXN0Lm1vZHVsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxPQUFPO0VBQ1AsY0FBYztFQUNkLGFBQWE7RUFDYixxQ0FBcUM7RUFDckMsU0FBUztFQUNULGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixzQkFBc0I7RUFDdEIsU0FBUztFQUNULHNCQUFzQjtBQUN4Qjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixrQ0FBa0M7RUFDbEMsMkJBQTJCO0VBQzNCLDJDQUEyQztBQUM3Qzs7QUFFQTtFQUNFLGFBQWE7RUFDYixzQkFBc0I7RUFDdEIsMkJBQTJCO0VBQzNCLHVDQUF1QztFQUN2QyxhQUFhO0VBQ2IsYUFBYTtFQUNiLHNCQUFzQjtFQUN0QixzQkFBc0I7RUFDdEIsZ0NBQWdDO0FBQ2xDOztBQUVBO0VBQ0UsT0FBTztFQUNQLDBCQUEwQjtFQUMxQixrQkFBa0I7RUFDbEIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixhQUFhO0VBQ2IsU0FBUztBQUNYOztBQUVBO0VBQ0UsMkJBQTJCO0VBQzNCLHNCQUFzQjtBQUN4QiIsImZpbGUiOiJzcmMvY29tcG9uZW50cy9QYWxldHRlTGlzdC5tb2R1bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhbGV0dGUtbGlzdCB7XG4gIGZsZXg6IDE7XG4gIG92ZXJmbG93OiBhdXRvO1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdCgzLCAxZnIpO1xuICBnYXA6IDFyZW07XG4gIG92ZXJmbG93OiB2aXNpYmxlO1xufVxuXG4ucGFsZXR0ZS1saXN0X19jb2x1bW5zIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgZ2FwOiAxcmVtO1xuICBwYWRkaW5nLWJvdHRvbTogMS41cmVtO1xufVxuXG4ucGFsZXR0ZS1ibG9jay1zcGFjZXIge1xuICBtaW4taGVpZ2h0OiAxcmVtO1xuICBib3JkZXItcmFkaXVzOiAwIDAgMC43NXJlbSAwLjc1cmVtO1xuICBiYWNrZ3JvdW5kOiB2YXIoLS1wdXJwbGUtMSk7XG4gIC8qIGJvcmRlcjogdmFyKC0tYmx1ZS0yKSBkYXNoZWQgMC4xMjVyZW07ICovXG59XG5cbi5wYWxldHRlLWJsb2NrLS1wbGFjZWhvbGRlciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIGJhY2tncm91bmQ6IHZhcigtLXB1cnBsZS0wKTtcbiAgYm9yZGVyOiB2YXIoLS1wdXJwbGUtMikgZGFzaGVkIDAuMTI1cmVtO1xuICBwYWRkaW5nOiAxcmVtO1xuICBoZWlnaHQ6IDEwcmVtO1xuICBib3JkZXItcmFkaXVzOiAwLjc1cmVtO1xuICBjb2xvcjogdmFyKC0tcHVycGxlLTIpO1xuICB0cmFuc2l0aW9uOiBhbGwgZWFzZS1pbi1vdXQgMC4xcztcbn1cblxuLnBhbGV0dGUtYmxvY2tfX3BsYWNlaG9sZGVyLXRleHQge1xuICBmbGV4OiAxO1xuICBjb2xvcjogdmFyKC0tZ3JheXNjYWxlLTE0KTtcbiAgZm9udC1zaXplOiAxLjI1cmVtO1xuICBmb250LXdlaWdodDogMTAwMDtcbiAgbGluZS1oZWlnaHQ6IDEuMTI1O1xuICBwYWRkaW5nOiBub25lO1xuICBtYXJnaW46IDA7XG59XG5cbi5wYWxldHRlLWJsb2NrX19wbGFjZWhvbGRlci1idXR0b24ge1xuICBiYWNrZ3JvdW5kOiB2YXIoLS1wdXJwbGUtNyk7XG4gIGNvbG9yOiB2YXIoLS1wdXJwbGUtMCk7XG59XG4iXX0= */`;
+        document.head.append(element);
+      }
+      PaletteList_module_default = { "palette-list": "_palette-list_1kuzf_1", "palette-list__columns": "_palette-list__columns_1kuzf_10", "palette-block-spacer": "_palette-block-spacer_1kuzf_17", "palette-block--placeholder": "_palette-block--placeholder_1kuzf_24", "palette-block__placeholder-text": "_palette-block__placeholder-text_1kuzf_36", "palette-block__placeholder-button": "_palette-block__placeholder-button_1kuzf_46" };
+    }
+  });
+
+  // src/components/PaletteList.tsx
+  var import_lodash12, PaletteList, PaletteList_default;
+  var init_PaletteList = __esm({
+    "src/components/PaletteList.tsx"() {
+      "use strict";
+      init_preact_module();
+      import_lodash12 = __toESM(require_lodash());
+      init_PaletteBlock();
+      init_tokens();
+      init_PaletteList_module();
+      init_Button();
+      PaletteList = ({
+        palettes,
+        swatches,
+        editPalette,
+        removeSeedColor
+      }) => {
+        const PaletteListSpacer = ({ height = "1rem", columnPalettes }) => {
+          let spacerColor = colors.purple[1];
+          if (columnPalettes.length > 0 && columnPalettes[0] != void 0 && columnPalettes.temporaryHex === void 0) {
+            let firstColor = columnPalettes[0];
+            let paletteSwatches2 = import_lodash12.default.sortBy(
+              import_lodash12.default.filter(swatches, (swatch) => {
+                return swatch.paletteId === firstColor.id;
+              }),
+              "index",
+              "asc"
+            );
+            spacerColor = paletteSwatches2[1] ? paletteSwatches2[1].hex : colors.purple[0];
+          }
+          return /* @__PURE__ */ y(
+            "div",
+            {
+              className: PaletteList_module_default["palette-block-spacer"],
+              style: { height, background: spacerColor }
+            }
+          );
+        };
+        const getColumns = () => {
+          let columns = [new Array(), new Array(), new Array()];
+          let columnLoop = (palettes2, paletteIndex, columnIndex) => {
+            if (palettes2.length === paletteIndex) {
+              return;
+            } else {
+              columns[columnIndex].push(palettes2[paletteIndex]);
+              let newColumnIndex = columnIndex === 2 ? 0 : columnIndex + 1;
+              columnLoop(palettes2, paletteIndex + 1, newColumnIndex);
+            }
+          };
+          columnLoop(palettes, 0, 0);
+          return columns;
+        };
+        let paletteColumns = getColumns();
+        return /* @__PURE__ */ y("div", { className: PaletteList_module_default["palette-list"] }, /* @__PURE__ */ y("div", { className: PaletteList_module_default["palette-list__columns"] }, /* @__PURE__ */ y(PaletteListSpacer, { height: "1rem", columnPalettes: paletteColumns[0] }), import_lodash12.default.map(paletteColumns[0], (palette) => {
+          return /* @__PURE__ */ y(
+            PaletteBlock_default,
+            {
+              palette,
+              swatches,
+              editPalette,
+              removeSeedColor
+            }
+          );
+        }), paletteColumns[0].length < 1 && /* @__PURE__ */ y(
+          "div",
+          {
+            className: PaletteList_module_default["palette-block--placeholder"],
+            style: { opacity: palettes.length < 1 ? 1 : 0 }
+          }
+        ), paletteColumns[0].length < 2 && /* @__PURE__ */ y(
+          "div",
+          {
+            className: PaletteList_module_default["palette-block--placeholder"],
+            style: { opacity: palettes.length < 1 ? 1 : 0 }
+          }
+        )), /* @__PURE__ */ y("div", { className: PaletteList_module_default["palette-list__columns"] }, /* @__PURE__ */ y(PaletteListSpacer, { height: "3rem", columnPalettes: paletteColumns[1] }), import_lodash12.default.map(paletteColumns[1], (palette) => {
+          return /* @__PURE__ */ y(
+            PaletteBlock_default,
+            {
+              palette,
+              swatches,
+              editPalette,
+              removeSeedColor
+            }
+          );
+        }), paletteColumns[1].length < 1 && /* @__PURE__ */ y(
+          "div",
+          {
+            className: PaletteList_module_default["palette-block--placeholder"],
+            style: { opacity: palettes.length < 1 ? 1 : 0 }
+          },
+          /* @__PURE__ */ y("p", { className: PaletteList_module_default["palette-block__placeholder-text"] }, "Pick a color to get started."),
+          /* @__PURE__ */ y(
+            Button_default,
+            {
+              text: "Pick a random color",
+              buttonType: "secondary",
+              buttonColor: colors.purple[7],
+              iconType: "palette",
+              onClick: () => console.log("test")
+            }
+          )
+        ), paletteColumns[1].length < 2 && /* @__PURE__ */ y(
+          "div",
+          {
+            className: PaletteList_module_default["palette-block--placeholder"],
+            style: { opacity: palettes.length < 1 ? 1 : 0 }
+          }
+        )), /* @__PURE__ */ y("div", { className: PaletteList_module_default["palette-list__columns"] }, /* @__PURE__ */ y(PaletteListSpacer, { height: "2rem", columnPalettes: paletteColumns[2] }), import_lodash12.default.map(paletteColumns[2], (palette) => {
+          return /* @__PURE__ */ y(
+            PaletteBlock_default,
+            {
+              palette,
+              swatches,
+              editPalette,
+              removeSeedColor
+            }
+          );
+        }), paletteColumns[2].length < 1 && /* @__PURE__ */ y(
+          "div",
+          {
+            className: PaletteList_module_default["palette-block--placeholder"],
+            style: { opacity: palettes.length < 1 ? 1 : 0 }
+          }
+        )));
+      };
+      PaletteList_default = PaletteList;
+    }
+  });
+
+  // src/views/Palette.tsx
+  var showResetButton, Palette, Palette_default;
+  var init_Palette = __esm({
+    "src/views/Palette.tsx"() {
+      "use strict";
+      init_preact_module();
+      init_layout_module2();
+      init_Palette_module();
+      init_SeedSidebar();
+      init_PaletteList();
+      init_Button();
+      init_tokens();
+      showResetButton = true;
+      Palette = ({
+        palettes,
+        swatches,
+        selectionColors,
+        pageColors,
+        editPalette,
+        addSeedColor,
+        removeSeedColor,
+        resetData,
+        setCurrentView
+      }) => {
+        return /* @__PURE__ */ y("div", { className: layout_module_default2["body-wrapper"] }, /* @__PURE__ */ y("div", { className: layout_module_default2["sidebar"] }, /* @__PURE__ */ y("div", { className: layout_module_default2["sidebar__card"] }, /* @__PURE__ */ y(
+          SeedSidebar_default,
+          {
+            selectionColors,
+            pageColors,
+            swatches,
+            addSeedColor
+          }
+        ))), /* @__PURE__ */ y("div", { className: layout_module_default2["main-body"] }, /* @__PURE__ */ y(
+          PaletteList_default,
+          {
+            palettes,
+            swatches,
+            editPalette,
+            removeSeedColor
+          }
+        ), /* @__PURE__ */ y("div", { className: Palette_module_default["action-overlay"] }, showResetButton && /* @__PURE__ */ y(g, null, /* @__PURE__ */ y(
+          Button_default,
+          {
+            text: "Reset",
+            buttonType: "color",
+            buttonColor: colors.purple[7],
+            iconType: "reset",
+            onClick: () => resetData()
+          }
+        ), /* @__PURE__ */ y(
+          Button_default,
+          {
+            text: "Get tokens",
+            buttonType: "color",
+            buttonColor: colors.purple[7],
+            disabled: palettes.length === 0,
+            iconType: "code",
+            onClick: () => setCurrentView("tokens")
+          }
+        )))));
+      };
+      Palette_default = Palette;
     }
   });
 
@@ -47632,14 +49391,36 @@ button .button-icon,
     const [selectionColors, setSelectionColors] = p2([]);
     const [pageColors, setPageColors] = p2([]);
     const [palettes, setPalettes] = p2([]);
+    const [swatches, setSwatches] = p2([]);
     const [config, setConfig] = p2({
       stepCount: 16
     });
-    const [currentView, setCurrentView] = p2("palettes");
+    const [paletteLoading, setPaletteLoading] = p2(false);
+    _2(() => {
+      setPaletteLoading(
+        import_lodash13.default.filter(palettes, (palette) => {
+          return palette.temporaryHex != void 0;
+        }).length > 0
+      );
+    }, [palettes]);
+    const modalStyles = {
+      position: "absolute",
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      height: "100%",
+      width: "100%",
+      boxSizing: "border-box",
+      display: "flex",
+      flexDirection: "column",
+      background: paletteLoading ? "red" : "white"
+    };
+    const [currentView, setCurrentView] = p2("seeds");
     const [selectedPaletteId, setSelectedPaletteId] = p2("");
     const editPalette = async (paletteId) => {
       setSelectedPaletteId(paletteId);
-      setCurrentView("edit");
+      setCurrentView("editor");
     };
     const updateConfig = (key, value) => {
       parent.postMessage(
@@ -47654,51 +49435,42 @@ button .button-icon,
       );
     };
     const addSeedColor = (hex) => {
-      parent.postMessage(
-        {
-          pluginMessage: {
-            type: "add-color",
-            hex
-          }
-        },
-        "*"
-      );
+      setTimeout(() => {
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: "add-color",
+              hex
+            }
+          },
+          "*"
+        );
+      }, 1);
     };
-    const removeSeedColor = async (hex) => {
+    const removeSeedColor = async (paletteId) => {
       parent.postMessage(
         {
           pluginMessage: {
             type: "remove-color",
-            hex
-          }
-        },
-        "*"
-      );
-    };
-    const getColorForSwatch = (swatch) => {
-      parent.postMessage(
-        {
-          pluginMessage: {
-            type: "get-variable-color",
-            swatch
-          }
-        },
-        "*"
-      );
-    };
-    const updatePalette = async (hex, paletteId) => {
-      parent.postMessage(
-        {
-          pluginMessage: {
-            type: "update-palette",
-            hex,
             paletteId
           }
         },
         "*"
       );
     };
-    const updateName = async (paletteId, name) => {
+    const updatePaletteColor = async (paletteId, hex) => {
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: "update-palette-color",
+            paletteId,
+            hex
+          }
+        },
+        "*"
+      );
+    };
+    const updatePaletteName = async (paletteId, name) => {
       parent.postMessage(
         {
           pluginMessage: {
@@ -47732,9 +49504,7 @@ button .button-icon,
             break;
           case "receive-palettes":
             setPalettes(pluginMessage.palettes);
-            import_lodash6.default.each(pluginMessage.palettes[0].swatches, (swatch) => {
-              getColorForSwatch(swatch);
-            });
+            setSwatches(pluginMessage.swatches);
             break;
           case "receive-config":
             setConfig(pluginMessage.configData);
@@ -47745,11 +49515,40 @@ button .button-icon,
       };
       window.onmessage = handleMessage;
     });
-    return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { className: "modal font-text", style: modalStyles }, currentView === "palettes" && /* @__PURE__ */ y(
+    return /* @__PURE__ */ y(g, null, /* @__PURE__ */ y("div", { className: "modal font-text", style: modalStyles }, currentView === "seeds" && /* @__PURE__ */ y(
+      Palette_default,
+      {
+        palettes,
+        swatches,
+        selectionColors,
+        pageColors,
+        addSeedColor,
+        removeSeedColor,
+        editPalette,
+        resetData,
+        setCurrentView
+      }
+    ), currentView === "seeds-old" && /* @__PURE__ */ y(
+      Seeds_default,
+      {
+        fileName,
+        palettes,
+        swatches,
+        selectionColors,
+        pageColors,
+        updateConfig,
+        addSeedColor,
+        removeSeedColor,
+        resetData,
+        setCurrentView,
+        editPalette
+      }
+    ), currentView === "palettes" && /* @__PURE__ */ y(
       Palettes_default,
       {
         fileName,
         palettes,
+        swatches,
         selectionColors,
         pageColors,
         updateConfig,
@@ -47763,37 +49562,46 @@ button .button-icon,
       Edit_default,
       {
         palettes,
+        swatches,
         selectedPaletteId,
         setCurrentView,
-        updatePalette,
-        updateName
+        updatePaletteColor,
+        updatePaletteName
       }
-    ), currentView === "tokens" && /* @__PURE__ */ y(Tokens_default, { palettes, setCurrentView })));
+    ), currentView === "editor" && /* @__PURE__ */ y(
+      Editor_default,
+      {
+        selectedPaletteId,
+        palettes,
+        swatches,
+        setCurrentView,
+        updatePaletteColor,
+        updatePaletteName
+      }
+    ), currentView === "tokens" && /* @__PURE__ */ y(
+      Tokens_default,
+      {
+        palettes,
+        swatches,
+        setCurrentView
+      }
+    )));
   }
-  var import_lodash6, modalStyles, ui_default;
+  var import_lodash13, ui_default;
   var init_ui = __esm({
     "src/ui.tsx"() {
       "use strict";
       init_lib();
       init_preact_module();
       init_compat_module();
-      import_lodash6 = __toESM(require_lodash());
+      import_lodash13 = __toESM(require_lodash());
       init_styles();
       init_Palettes();
       init_Edit();
       init_Tokens();
-      modalStyles = {
-        position: "absolute",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        height: "100%",
-        width: "100%",
-        boxSizing: "border-box",
-        display: "flex",
-        flexDirection: "column"
-      };
+      init_Seeds();
+      init_Editor();
+      init_Palette();
       ui_default = render(Plugin);
     }
   });

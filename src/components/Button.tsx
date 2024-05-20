@@ -2,13 +2,16 @@ import { h } from "preact";
 
 import Icon from "./Icon";
 import { useState } from "react";
+import { colors } from "../../utils/tokens";
 
 interface IProps {
   text: string;
+  buttonColor: string;
   lightDark?: string;
   iconType?: string;
   buttonType?: string;
   onClick: any;
+  disabled?: boolean;
 }
 
 const iconTypes = {
@@ -30,17 +33,20 @@ const buttonStates = {
 
 const Button = ({
   text = "Click Me",
+  buttonColor = colors.purple[7],
   lightDark = "dark",
   iconType = iconTypes.pencil,
   buttonType = buttonTypes.primary,
   onClick,
+  disabled = false,
 }: IProps) => {
   return (
     <button
       className={`button button__${buttonType}--${lightDark}`}
+      disabled={disabled}
       onClick={onClick}>
-      {text}
       {iconType && <Icon type={iconType} className="button-icon" />}
+      {text}
     </button>
   );
 };

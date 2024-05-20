@@ -8,11 +8,39 @@ import Icon from "./Icon";
 
 interface IProps {
   palette: any;
-  updatePalette: Function;
-  updateName: Function;
+  swatches: any;
+  updatePaletteColor: Function;
+  updatePaletteName: Function;
 }
 
-const ColorEditor = ({ palette, updatePalette, updateName }: IProps) => {
+// Get a list of swatches that match current palette ID
+const getPaletteSwatches = (palette: any, swatches: any) => {
+  return _.find(swatches, (swatch: any) => {
+    return swatch.paletteId === palette.id;
+  });
+};
+
+// Find the source color hex code for this palette ID
+const getPaletteSourceHex = (palette: any, swatches: any) => {
+  return _.find(swatches, (swatch: any) => {
+    return swatch.id === palette.sourceColorId;
+  }).variableColor;
+};
+
+const ColorEditor = ({
+  palette,
+  swatches,
+  updatePaletteColor,
+  updatePaletteName,
+}: IProps) => {
+  // Get the colors together
+  const [paletteSwatches, setPaletteSwatches] = useState(
+    getPaletteSwatches(palette, swatches)
+  );
+  useEffect(() => {
+    setPaletteSwatches(getPaletteSwatches(palette, swatches));
+  }, [palette, swatches]);
+
   // Set up Name editing
   const [nameValue, setNameValue] = useState(palette.name);
   var timeout: any;
@@ -24,28 +52,32 @@ const ColorEditor = ({ palette, updatePalette, updateName }: IProps) => {
       timeout = null;
     }
     timeout = setTimeout(() => {
-      updateName(palette.id, inputValue);
+      updatePaletteName(palette.id, inputValue);
     }, 5);
   };
 
   // Set up Hex code editing
   const [hexValue, setHexValue] = useState(
-    palette.swatches[palette.sourceColorIndex].variableColor
+    getPaletteSourceHex(palette, swatches)
   );
+  // useEffect(() => {
+  //   setHexValue(getPaletteSourceHex(palette, swatches));
+  // }, [palette, swatches]);
   const handleHexInput = (e: any) => {
     let inputValue = e.target.value;
     setHexValue(inputValue);
   };
   const handleHexUpdate = () => {
-    updatePalette(hexValue, palette.id);
+    console.log("UPDATE HEX CODE", palette.id, hexValue);
+    updatePaletteColor(palette.id, hexValue);
   };
   // When palette is updated, refresh source hex color value
-  useEffect(() => {
-    setHexValue(palette.swatches[palette.sourceColorIndex].variableColor);
-  }, [palette]);
+  // useEffect(() => {
+  //   setHexValue(palette.swatches[palette.sourceColorIndex].variableColor);
+  // }, [palette]);
 
   // Set up color adjustments
-  const seedHex = palette.swatches[palette.sourceColorIndex].variableColor;
+  const seedHex = getPaletteSourceHex(palette, swatches);
   const seedChroma = chroma(seedHex);
   // Set how many adjustment options there are above and below existing color
   const adjustmentOptionCount = 8;
@@ -81,7 +113,6 @@ const ColorEditor = ({ palette, updatePalette, updateName }: IProps) => {
   const adjustmentContentStyles = {
     display: "flex",
     flexDirection: "column",
-    padding: "1rem",
     gap: "1rem",
   };
 
@@ -170,7 +201,7 @@ const ColorEditor = ({ palette, updatePalette, updateName }: IProps) => {
             return (
               <button
                 style={adjustmentStepStyles(newHexColor)}
-                onClick={() => updatePalette(newHexColor, palette.id)}>
+                onClick={() => updatePaletteColor(palette.id, newHexColor)}>
                 {index === adjustmentOptionCount && (
                   <svg
                     width="11"
@@ -201,7 +232,7 @@ const ColorEditor = ({ palette, updatePalette, updateName }: IProps) => {
             return (
               <button
                 style={adjustmentStepStyles(newHexColor)}
-                onClick={() => updatePalette(newHexColor, palette.id)}>
+                onClick={() => updatePaletteColor(palette.id, newHexColor)}>
                 {index === adjustmentOptionCount && (
                   <svg
                     width="11"
@@ -232,7 +263,7 @@ const ColorEditor = ({ palette, updatePalette, updateName }: IProps) => {
             return (
               <button
                 style={adjustmentStepStyles(newHexColor)}
-                onClick={() => updatePalette(newHexColor, palette.id)}>
+                onClick={() => updatePaletteColor(palette.id, newHexColor)}>
                 {index === adjustmentOptionCount && (
                   <svg
                     width="11"

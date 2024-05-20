@@ -1,0 +1,10 @@
+.seed-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.seed-list__label {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--grayscale-8);
+}

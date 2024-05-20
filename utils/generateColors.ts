@@ -1,16 +1,19 @@
-// import "react-native-get-random-values";
-import { v3 as uuidv3 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
+// import { nanoid } from "nanoid";
+import { nanoid } from "nanoid/non-secure";
 import chroma from "chroma-js";
 import _ from "lodash";
 
 import * as Curves from "./curves";
-import crayolaColors from "./crayolaColors";
+import getColorName from "./getColorName";
 
 const generateColors = async (
   sourceColor: string,
   steps: number = 16,
   customName: string,
-  preserveSourceColor: boolean = true
+  paletteId: string,
+  preserveSourceColor: boolean = true,
+  colorNamesInUse: string[] = []
 ): Promise<any> => {
   // Bail out if there isn't really a source color provided
   if (!sourceColor) return true;
@@ -81,7 +84,6 @@ const generateColors = async (
   );
 
   // Assemble the swatch list for this palette
-  // let swatchList = _.map(colorGradient, (color, index) => {
   // Use new gradient to make colors
   let swatchList = _.map(contrastMatchedColors, (color, index) => {
     // If this is the source color index, override the hex to the source color
@@ -97,6 +99,9 @@ const generateColors = async (
       displayColor = "black";
     }
     return {
+      id: nanoid(),
+      paletteId: paletteId,
+      index,
       hex: chroma(color).hex(),
       hue: chroma(color).hsv()[0],
       sat: chroma(color).hsv()[1],
@@ -114,34 +119,9 @@ const generateColors = async (
   });
 
   // Pick a name for this set of swatches and apply it to each swatch
-  //   let swatchName = customName
-  //     ? customName
-  //     : _.first(
-  //         _.orderBy(
-  //           _.map(crayolaColors, (color) => {
-  //             color.distance = chroma.distance(color.hex, sourceColor);
-  //             return color;
-  //           }),
-  //           "distance",
-  //           "asc"
-  //         )
-  //       ).name;
-
-  // Pick a name for this set of swatches and apply it to each swatch
-  // Just in case we fail to find a color, fall back on supplied hex code
   var swatchName = "";
   if (customName === "") {
-    let colorsByDistance = _.sortBy(
-      crayolaColors,
-      (crayolaColor: any) => {
-        return chroma.distance(crayolaColor.hex, sourceColor);
-      },
-      "asc"
-    );
-
-    let matchingCrayolaColor = _.first(colorsByDistance);
-
-    swatchName = matchingCrayolaColor ? matchingCrayolaColor.name : sourceColor;
+    swatchName = getColorName(sourceColor, colorNamesInUse);
   } else {
     swatchName = customName;
   }
@@ -155,8 +135,9 @@ const generateColors = async (
   });
 
   return {
-    id: uuidv3(swatchName, "cdff728a-b361-50b2-9451-37af8675d997"),
+    // id: nanoid(), // Now generating this up front in main.ts
     name: swatchName,
+    id: paletteId,
     swatches: swatchList,
     sourceColorIndex: swatchList[0].sourceColorIndex,
   };

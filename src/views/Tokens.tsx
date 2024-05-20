@@ -7,13 +7,15 @@ import _ from "lodash";
 
 import Button from "../components/Button";
 import Text from "../components/Text";
+import { colors } from "../../utils/tokens";
 
 interface IProps {
   palettes: any;
+  swatches: any;
   setCurrentView: Function;
 }
 
-const Tokens = ({ palettes, setCurrentView }: IProps) => {
+const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
   const editContainerStyles = {
     flex: 1,
     display: "flex",
@@ -108,9 +110,13 @@ const Tokens = ({ palettes, setCurrentView }: IProps) => {
     // Begin combined palettes object
     let jsCodeString = newLine("const palettes = {");
     _.each(palettes, async (palette: any, index: number) => {
+      // Get swatches for this palette
+      let paletteSwatches = _.filter(swatches, (swatch: any) => {
+        return swatch.paletteId === palette.id;
+      });
       // Begin individual palette object
-      jsCodeString += newLine(`${indent}${_.kebabCase(palette.name)}: {`);
-      _.each(palette.swatches, (swatch: any, index: number) => {
+      jsCodeString += newLine(`${indent}'${_.kebabCase(palette.name)}': {`);
+      _.each(paletteSwatches, (swatch: any, index: number) => {
         jsCodeString += newLine(
           `${indent}${indent}${index}: "${swatch.variableColor}",`
         );
@@ -129,9 +135,13 @@ const Tokens = ({ palettes, setCurrentView }: IProps) => {
     let cssCodeString = newLine(`/* Paletteer Color Palettes */`);
     cssCodeString += newLine(":root {");
     _.each(palettes, async (palette: any, index: number) => {
+      // Get swatches for this palette
+      let paletteSwatches = _.filter(swatches, (swatch: any) => {
+        return swatch.paletteId === palette.id;
+      });
       // Begin individual palette object
       //   cssCodeString += newLine(`${indent}${_.kebabCase(palette.name)}: {`);
-      _.each(palette.swatches, (swatch: any, index: number) => {
+      _.each(paletteSwatches, (swatch: any, index: number) => {
         cssCodeString += newLine(
           `${indent}--${_.kebabCase(palette.name)}-${index}: ${
             swatch.variableColor
@@ -152,11 +162,15 @@ const Tokens = ({ palettes, setCurrentView }: IProps) => {
     let jsonCodeString = newLine(`{`);
     jsonCodeString += newLine(`${indent}"colors" = {`);
     _.each(palettes, async (palette: any, index: number) => {
+      // Get swatches for this palette
+      let paletteSwatches = _.filter(swatches, (swatch: any) => {
+        return swatch.paletteId === palette.id;
+      });
       // Begin individual palette object
       jsonCodeString += newLine(
         `${indent}${indent}"${_.kebabCase(palette.name)}": {`
       );
-      _.each(palette.swatches, (swatch: any, index: number) => {
+      _.each(paletteSwatches, (swatch: any, index: number) => {
         jsonCodeString += newLine(`${indent}${indent}${indent}"${index}": {`);
         jsonCodeString += newLine(
           `${indent}${indent}${indent}${indent}"value": "${swatch.variableColor}",`
@@ -185,31 +199,62 @@ const Tokens = ({ palettes, setCurrentView }: IProps) => {
     currentCodeString = generateJsonCode();
   }
 
+  async function copyToClipboard(textToCopy: string) {
+    // Navigator clipboard api needs a secure context (https)
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(textToCopy);
+    } else {
+      // Use the 'out of viewport hidden text area' trick
+      const textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+
+      // Move textarea out of the viewport so it's not visible
+      textArea.style.position = "absolute";
+      textArea.style.left = "-999999px";
+
+      document.body.prepend(textArea);
+      textArea.select();
+
+      try {
+        document.execCommand("copy");
+      } catch (error) {
+        console.error(error);
+      } finally {
+        textArea.remove();
+      }
+    }
+  }
+
   return (
     <>
       <div style={editContainerStyles}>
         <div style={editSidebarStyles}>
           <div style={editSidebarHeaderStyles}>
             <Button
-              buttonType="secondary"
+              buttonType="color"
+              iconType="left-arrow"
+              buttonColor={colors.purple[7]}
               text="Back to palettes"
-              onClick={() => setCurrentView("palettes")}
+              onClick={() => setCurrentView("seeds")}
             />
           </div>
           <div style={codeSelectionButtons}>
             <Button
-              buttonType={selectedLanguage === "json" ? "color" : "secondary"}
-              text="JSON"
+              buttonType={selectedLanguage === "json" ? "secondary" : "text"}
+              buttonColor={colors.purple[7]}
+              text="JSON Tokens"
               onClick={() => setSelectedLanguage("json")}
             />
             <Button
-              buttonType={selectedLanguage === "js" ? "color" : "secondary"}
-              text="Javascript"
+              buttonType={selectedLanguage === "js" ? "secondary" : "text"}
+              buttonColor={colors.purple[7]}
+              text="Javascript Object"
               onClick={() => setSelectedLanguage("js")}
             />
             <Button
-              buttonType={selectedLanguage === "css" ? "color" : "secondary"}
-              text="CSS"
+              buttonType={selectedLanguage === "css" ? "secondary" : "text"}
+              buttonColor={colors.purple[7]}
+              text="CSS Variables"
               onClick={() => setSelectedLanguage("css")}
             />
           </div>
@@ -230,9 +275,19 @@ const Tokens = ({ palettes, setCurrentView }: IProps) => {
               </div>
               <div>
                 <Button
-                  buttonType="primary"
+                  buttonType="color"
+                  iconType="clipboard"
+                  buttonColor={colors.purple[7]}
                   text="Copy to Clipboard"
-                  onClick={null}
+                  onClick={async () => {
+                    try {
+                      await copyToClipboard(currentCodeString);
+                      // TODO: Trigger success toast
+                      console.log("Text copied to the clipboard!");
+                    } catch (error) {
+                      console.error(error);
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -257,62 +312,3 @@ const Tokens = ({ palettes, setCurrentView }: IProps) => {
 };
 
 export default Tokens;
-
-{
-  /* <div style={editContainerStyles}>
-<div style={editSidebarStyles}>
-  <div style={editSidebarHeaderStyles}>
-    <Button
-      buttonType="secondary"
-      text="Back to palettes"
-      onClick={() => setCurrentView("palettes")}
-    />
-  </div>
-  <div style={codeSelectionButtons}>
-    <Button
-      buttonType={selectedLanguage === "json" ? "color" : "secondary"}
-      text="JSON"
-      onClick={() => setSelectedLanguage("json")}
-    />
-    <Button
-      buttonType={selectedLanguage === "js" ? "color" : "secondary"}
-      text="Javascript"
-      onClick={() => setSelectedLanguage("js")}
-    />
-    <Button
-      buttonType={selectedLanguage === "css" ? "color" : "secondary"}
-      text="CSS"
-      onClick={() => setSelectedLanguage("css")}
-    />
-  </div>
-</div>
-<div style={editBodyStyles}>
-  <div style={editBodyHeaderStyles}>
-    <div style={{ flex: 1 }}>
-      <Text type="heading" size="small">
-        JSON Design Tokens
-      </Text>
-    </div>
-    <div>
-      <Button
-        buttonType="primary"
-        text="Copy to Clipboard"
-        onClick={null}
-      />
-    </div>
-  </div>
-  <div style={codePreviewStyles}>
-    <SyntaxHighlighter
-      language={selectedLanguage}
-      style={githubGist}
-      showLineNumbers={true}
-      wrapLines={true}
-      codeTagProps={{ style: codeStyles }}
-      lineProps={handleLineProps}
-      lineNumberStyle={lineNumberStyles}>
-      {currentCodeString}
-    </SyntaxHighlighter>
-  </div>
-</div>
-</div> */
-}

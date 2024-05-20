@@ -7,13 +7,15 @@ import Button from "../components/Button";
 import Icon from "../components/Icon";
 import Text from "../components/Text";
 import ColorEditor from "../components/ColorEditor";
+import { colors } from "../../utils/tokens";
 
 interface IProps {
   palettes: any;
+  swatches: any;
   selectedPaletteId: string;
   setCurrentView: Function;
-  updatePalette: Function;
-  updateName: Function;
+  updatePaletteColor: Function;
+  updatePaletteName: Function;
 }
 
 const tabContainerStyles = {
@@ -40,15 +42,25 @@ const Tab = ({ tabColor, textColor, props, setSelectedTab, children }: any) => {
 
 const Edit = ({
   palettes,
+  swatches,
   selectedPaletteId,
   setCurrentView,
-  updatePalette,
-  updateName,
+  updatePaletteColor,
+  updatePaletteName,
 }: IProps) => {
-  // Get the full palette from the selected palette ID
+  // Get the selected palette from the selected palette ID
   const selectedPalette = _.find(palettes, (palette) => {
     return palette.id === selectedPaletteId;
   });
+  // Get the swatches from the selected palette
+  const selectedPaletteSwatches = _.filter(swatches, (swatch: any) => {
+    return swatch.paletteId === selectedPaletteId;
+  });
+  // Get the source color swatch
+  let sourceColorSwatch = _.find(swatches, (swatch: any) => {
+    return swatch.id === selectedPalette.sourceColorId;
+  });
+  let sourceColor = sourceColorSwatch?.variableColor;
 
   const editContainerStyles = {
     flex: 1,
@@ -96,10 +108,13 @@ const Edit = ({
   };
 
   const colorGradientHeaderStyles = (palette: any) => {
-    let sourceColor = palette.swatches[palette.sourceColorIndex].variableColor;
+    let sourceColorSwatch = _.find(swatches, (swatch: any) => {
+      return swatch.id === palette.sourceColorId;
+    });
+    let sourceColor = sourceColorSwatch.variableColor;
     return {
       background: sourceColor,
-      color: palette.swatches[palette.sourceColorIndex].displayColor,
+      color: sourceColorSwatch.displayColor,
       display: "flex",
       flexDirection: "column",
       gap: ".5rem",
@@ -158,16 +173,19 @@ const Edit = ({
         <div style={editSidebarStyles}>
           <div style={editSidebarHeaderStyles}>
             <Button
-              buttonType="secondary"
+              buttonType="color"
+              iconType="arrow-right"
+              buttonColor={colors.purple[7]}
               text="Back to saved palettes"
-              onClick={() => setCurrentView("palettes")}
+              onClick={() => setCurrentView("seeds")}
             />
           </div>
           <div style={editSidebarBodyStyles}>
             <ColorEditor
               palette={selectedPalette}
-              updatePalette={updatePalette}
-              updateName={updateName}
+              swatches={swatches}
+              updatePaletteColor={updatePaletteColor}
+              updatePaletteName={updatePaletteName}
             />
           </div>
         </div>
@@ -176,12 +194,7 @@ const Edit = ({
             <div style={colorGradientWrapperStyles}>
               <div style={colorGradientHeaderStyles(selectedPalette)}>
                 <span style={colorNameStyles}>{selectedPalette.name}</span>
-                <span style={colorHexStyles}>
-                  {
-                    selectedPalette.swatches[selectedPalette.sourceColorIndex]
-                      .variableColor
-                  }
-                </span>
+                <span style={colorHexStyles}>{sourceColor.variableColor}</span>
               </div>
               <div
                 style={{
@@ -193,7 +206,7 @@ const Edit = ({
                 <div style={{ flex: 1 }}>Black Contrast</div>
                 <div style={{ flex: 1 }}>White Contrast</div>
               </div>
-              {_.map(selectedPalette.swatches, (swatch: any, index: number) => {
+              {_.map(selectedPaletteSwatches, (swatch: any, index: number) => {
                 return (
                   <div
                     style={{
@@ -234,7 +247,7 @@ const Edit = ({
                   {"Dark"}
                 </Tab>
                 <Tab
-                  tabColor={selectedPalette.swatches[5].variableColor}
+                  tabColor={selectedPaletteSwatches[5].variableColor}
                   textColor="white"
                   setSelectedTab={() => {
                     setSelectedTab(2);
@@ -256,18 +269,21 @@ const Edit = ({
                     onClick={null}
                     text="Settings"
                     buttonType="primary"
+                    buttonColor={colors.purple[7]}
                     iconType="settings"
                   />
                   <Button
                     onClick={null}
                     text="Generate Code"
                     buttonType="secondary"
+                    buttonColor={colors.purple[7]}
                     iconType="code"
                   />
                   <Button
                     onClick={null}
                     text="Refresh"
                     buttonType="text"
+                    buttonColor={colors.purple[7]}
                     iconType="settings"
                   />
                 </div>

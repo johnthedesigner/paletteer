@@ -4,26 +4,14 @@ import { useEffect, useState } from "react";
 import _ from "lodash";
 
 import "!./styles.css";
-import Header from "./components/Header";
-import ColorPicker from "./components/ColorPickerSidebar";
-import PalettesList from "./components/PalettesList";
-import Button from "./components/Button";
 import Palettes from "./views/Palettes";
 import Edit from "./views/Edit";
 import Tokens from "./views/Tokens";
+import Seeds from "./views/Seeds";
+import Editor from "./views/Editor";
 
-const modalStyles = {
-  position: "absolute",
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  height: "100%",
-  width: "100%",
-  boxSizing: "border-box",
-  display: "flex",
-  flexDirection: "column",
-};
+// REDESIGNED VIEWS
+import Palette from "./views/Palette";
 
 function Plugin() {
   const [initComplete, setInitComplete] = useState(false);
@@ -31,17 +19,42 @@ function Plugin() {
   const [selectionColors, setSelectionColors] = useState([]);
   const [pageColors, setPageColors] = useState([]);
   const [palettes, setPalettes] = useState([]);
+  const [swatches, setSwatches] = useState([]);
   const [config, setConfig] = useState({
     stepCount: 16,
   });
+  const [paletteLoading, setPaletteLoading] = useState(false);
+
+  useEffect(() => {
+    setPaletteLoading(
+      _.filter(palettes, (palette: any) => {
+        // A Palette is loading if we find one with the property "temporaryHex"
+        return palette.temporaryHex != undefined;
+      }).length > 0
+    );
+  }, [palettes]);
+
+  const modalStyles = {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    height: "100%",
+    width: "100%",
+    boxSizing: "border-box",
+    display: "flex",
+    flexDirection: "column",
+    background: paletteLoading ? "red" : "white",
+  };
 
   // Manage view modes
-  const [currentView, setCurrentView] = useState("palettes");
+  const [currentView, setCurrentView] = useState("seeds");
   const [selectedPaletteId, setSelectedPaletteId] = useState("");
   // Select a palette and open edit view
   const editPalette = async (paletteId: string) => {
     setSelectedPaletteId(paletteId);
-    setCurrentView("edit");
+    setCurrentView("editor");
   };
 
   // Send and receive plugin state messages
@@ -61,50 +74,25 @@ function Plugin() {
 
   const addSeedColor = (hex: any) => {
     // Send new color to plugin back end
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: "add-color",
-          hex,
+    setTimeout(() => {
+      parent.postMessage(
+        {
+          pluginMessage: {
+            type: "add-color",
+            hex,
+          },
         },
-      },
-      "*"
-    );
+        "*"
+      );
+    }, 1);
   };
 
-  const removeSeedColor = async (hex: string) => {
+  const removeSeedColor = async (paletteId: string) => {
     // Remove seed color by hex
     parent.postMessage(
       {
         pluginMessage: {
           type: "remove-color",
-          hex,
-        },
-      },
-      "*"
-    );
-  };
-
-  const getColorForSwatch = (swatch: any) => {
-    // Send new color to plugin back end
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: "get-variable-color",
-          swatch,
-        },
-      },
-      "*"
-    );
-  };
-
-  const updatePalette = async (hex: string, paletteId: string) => {
-    // Supply updated palette
-    parent.postMessage(
-      {
-        pluginMessage: {
-          type: "update-palette",
-          hex,
           paletteId,
         },
       },
@@ -112,7 +100,21 @@ function Plugin() {
     );
   };
 
-  const updateName = async (paletteId: string, name: string) => {
+  const updatePaletteColor = async (paletteId: string, hex: string) => {
+    // Supply updated palette
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "update-palette-color",
+          paletteId,
+          hex,
+        },
+      },
+      "*"
+    );
+  };
+
+  const updatePaletteName = async (paletteId: string, name: string) => {
     // Supply updated palette
     parent.postMessage(
       {
@@ -151,9 +153,7 @@ function Plugin() {
 
         case "receive-palettes":
           setPalettes(pluginMessage.palettes);
-          _.each(pluginMessage.palettes[0].swatches, (swatch: any) => {
-            getColorForSwatch(swatch);
-          });
+          setSwatches(pluginMessage.swatches);
           break;
 
         case "receive-config":
@@ -171,10 +171,39 @@ function Plugin() {
   return (
     <>
       <div className="modal font-text" style={modalStyles}>
+        {currentView === "seeds" && (
+          <Palette
+            palettes={palettes}
+            swatches={swatches}
+            selectionColors={selectionColors}
+            pageColors={pageColors}
+            addSeedColor={addSeedColor}
+            removeSeedColor={removeSeedColor}
+            editPalette={editPalette}
+            resetData={resetData}
+            setCurrentView={setCurrentView}
+          />
+        )}
+        {currentView === "seeds-old" && (
+          <Seeds
+            fileName={fileName}
+            palettes={palettes}
+            swatches={swatches}
+            selectionColors={selectionColors}
+            pageColors={pageColors}
+            updateConfig={updateConfig}
+            addSeedColor={addSeedColor}
+            removeSeedColor={removeSeedColor}
+            resetData={resetData}
+            setCurrentView={setCurrentView}
+            editPalette={editPalette}
+          />
+        )}
         {currentView === "palettes" && (
           <Palettes
             fileName={fileName}
             palettes={palettes}
+            swatches={swatches}
             selectionColors={selectionColors}
             pageColors={pageColors}
             updateConfig={updateConfig}
@@ -188,14 +217,29 @@ function Plugin() {
         {currentView === "edit" && (
           <Edit
             palettes={palettes}
+            swatches={swatches}
             selectedPaletteId={selectedPaletteId}
             setCurrentView={setCurrentView}
-            updatePalette={updatePalette}
-            updateName={updateName}
+            updatePaletteColor={updatePaletteColor}
+            updatePaletteName={updatePaletteName}
+          />
+        )}
+        {currentView === "editor" && (
+          <Editor
+            selectedPaletteId={selectedPaletteId}
+            palettes={palettes}
+            swatches={swatches}
+            setCurrentView={setCurrentView}
+            updatePaletteColor={updatePaletteColor}
+            updatePaletteName={updatePaletteName}
           />
         )}
         {currentView === "tokens" && (
-          <Tokens palettes={palettes} setCurrentView={setCurrentView} />
+          <Tokens
+            palettes={palettes}
+            swatches={swatches}
+            setCurrentView={setCurrentView}
+          />
         )}
       </div>
     </>

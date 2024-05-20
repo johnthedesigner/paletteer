@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import ColorPicker from "../components/ColorPickerSidebar";
 import PalettesList from "../components/PalettesList";
 import Button from "../components/Button";
+import { colors } from "../../utils/tokens";
 
 const modalHeaderStyles = {
   position: "relative",
@@ -61,6 +62,7 @@ const footerActionsRightStyles = {
 interface IProps {
   fileName: string;
   palettes: any;
+  swatches: any;
   selectionColors: any;
   pageColors: any;
   updateConfig: Function;
@@ -74,6 +76,7 @@ interface IProps {
 const Palettes = ({
   fileName,
   palettes,
+  swatches,
   selectionColors,
   pageColors,
   updateConfig,
@@ -96,7 +99,7 @@ const Palettes = ({
       <div className="modal__main-area" style={modalMainAreaStyles}>
         <div className="modal__sidebar" style={modalSidebarStyles}>
           <ColorPicker
-            palettes={palettes}
+            swatches={swatches}
             selectionColors={selectionColors}
             pageColors={pageColors}
             addSeedColor={addSeedColor}
@@ -106,6 +109,7 @@ const Palettes = ({
           <div className="modal__body" style={modalBodyStyles}>
             <PalettesList
               palettes={palettes}
+              swatches={swatches}
               removeSeedColor={removeSeedColor}
               editPalette={editPalette}
             />
@@ -116,12 +120,14 @@ const Palettes = ({
               style={footerActionsLeftStyles}>
               <Button
                 buttonType="color"
+                buttonColor={colors.purple[7]}
                 iconType="code"
                 text="Get Tokens"
                 onClick={() => setCurrentView("tokens")}
               />
               <Button
                 buttonType="color"
+                buttonColor={colors.purple[7]}
                 iconType="component"
                 text="Generate Style Guide"
                 onClick={null}
@@ -131,10 +137,11 @@ const Palettes = ({
               className="footer-actions__right"
               style={footerActionsRightStyles}>
               <span style={{ fontStyle: "italic" }}>
-                Palettes saved to variablesXXX
+                Palettes saved to variables
               </span>
               <Button
                 buttonType="secondary"
+                buttonColor={colors.purple[7]}
                 iconType="variable"
                 text="Delete color variables"
                 onClick={null}

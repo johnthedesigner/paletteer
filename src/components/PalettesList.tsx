@@ -6,11 +6,17 @@ import Button from "./Button";
 
 interface IProps {
   palettes: any;
+  swatches: any;
   removeSeedColor: Function;
   editPalette: Function;
 }
 
-const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
+const PalettesList = ({
+  palettes,
+  swatches,
+  removeSeedColor,
+  editPalette,
+}: IProps) => {
   const paletteListWrapperStyles = {
     position: "absolute",
     top: 0,
@@ -51,10 +57,10 @@ const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
     alignItems: "center",
   };
 
-  const ColorBlockStyles = (palette: any) => {
+  const ColorBlockStyles = (seedColor: string) => {
     return {
       width: "100%",
-      background: palette.swatches[palette.sourceColorIndex].hex,
+      background: seedColor,
       borderRadius: ".375rem",
       overflow: "hidden",
     };
@@ -78,15 +84,22 @@ const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
       <div className="palette-list" style={PalettesListStyles}>
         {_.map(palettes, (palette: any, index: number) => {
           // Make sure swatches are ordered light-to-dark
-          let paletteSwatches = _.orderBy(palette.swatches, (swatch: any) => {
+          let paletteSwatches = _.filter(swatches, (swatch: any) => {
+            return swatch.paletteId === palette.id;
+          });
+          paletteSwatches = _.orderBy(paletteSwatches, (swatch: any) => {
             return 0 + swatch.contrastWhite;
           });
-          let seedDisplayColor =
-            palette.swatches[palette.sourceColorIndex].displayColor;
+          let seedSwatch = _.find(swatches, (swatch: any) => {
+            return swatch.id === palette.sourceColorId;
+          });
+          let seedDisplayColor = seedSwatch.displayColor;
+          let seedColor = seedSwatch.variableColor;
+
           return (
             <div
               className="color-block"
-              style={ColorBlockStyles(palette)}
+              style={ColorBlockStyles(seedSwatch.variableColor)}
               onClick={() => editPalette(palette.id)}>
               <div className="color-block__header" style={headerStyles}>
                 <div
@@ -108,7 +121,7 @@ const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
                         textTransform: "uppercase",
                         marginLeft: ".25rem",
                       }}>
-                      {palette.swatches[palette.sourceColorIndex].hex}
+                      {seedColor}
                     </span>
                   </span>
                 </div>
@@ -129,9 +142,7 @@ const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
                     text="Delete"
                     onClick={(e: any) => {
                       e.stopPropagation();
-                      removeSeedColor(
-                        palette.swatches[palette.sourceColorIndex].hex
-                      );
+                      removeSeedColor(palette.id);
                     }}
                   />
                 </div>
@@ -150,10 +161,6 @@ const PalettesList = ({ palettes, removeSeedColor, editPalette }: IProps) => {
                           fontFamily: "Fira Mono",
                         }}>
                         {(index + 1).toFixed(0).padStart(2, "0")}
-                      </p>
-                      <p style={{ color: "limegreen" }}>
-                        {/* {Mark swatches that differ from generated color} */}
-                        {swatch.hex != swatch.variableColor && <>XX</>}
                       </p>
                     </div>
                   );

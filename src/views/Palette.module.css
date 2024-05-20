@@ -1,0 +1,19 @@
+.action-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.reset-button {
+  background: var(--grayscale-14);
+  color: var(--grayscale-1);
+}
+
+.tokens-button {
+  background: var(--purple-7);
+  color: var(--grayscale-1);
+}

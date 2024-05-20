@@ -53,6 +53,82 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __forAwait = (obj, it, method) => (it = obj[__knownSymbol("asyncIterator")]) ? it.call(obj) : (obj = obj[__knownSymbol("iterator")](), it = {}, method = (key, fn) => (fn = obj[key]) && (it[key] = (arg) => new Promise((yes, no, done) => (arg = fn.call(obj, arg), done = arg.done, Promise.resolve(arg.value).then((value) => yes({ value, done }), no)))), method("next"), method("return"), it);
 
+// node_modules/rgb-hex/index.js
+function rgbHex(red, green, blue, alpha) {
+  let isPercent = (red + (alpha || "")).toString().includes("%");
+  if (typeof red === "string" && !green) {
+    const parsed = parseCssRgbString(red);
+    if (!parsed) {
+      throw new TypeError("Invalid or unsupported color format.");
+    }
+    isPercent = false;
+    [red, green, blue, alpha] = parsed;
+  } else if (alpha !== void 0) {
+    alpha = Number.parseFloat(alpha);
+  }
+  if (typeof red !== "number" || typeof green !== "number" || typeof blue !== "number" || red > 255 || green > 255 || blue > 255) {
+    throw new TypeError("Expected three numbers below 256");
+  }
+  if (typeof alpha === "number") {
+    if (!isPercent && alpha >= 0 && alpha <= 1) {
+      alpha = Math.round(255 * alpha);
+    } else if (isPercent && alpha >= 0 && alpha <= 100) {
+      alpha = Math.round(255 * alpha / 100);
+    } else {
+      throw new TypeError(`Expected alpha value (${alpha}) as a fraction or percentage`);
+    }
+    alpha = (alpha | 1 << 8).toString(16).slice(1);
+  } else {
+    alpha = "";
+  }
+  return toHex(red, green, blue, alpha);
+}
+var toHex, parseCssRgbString;
+var init_rgb_hex = __esm({
+  "node_modules/rgb-hex/index.js"() {
+    toHex = (red, green, blue, alpha) => (blue | green << 8 | red << 16 | 1 << 24).toString(16).slice(1) + alpha;
+    parseCssRgbString = (input) => {
+      const parts = input.replace(/rgba?\(([^)]+)\)/, "$1").split(/[,\s/]+/).filter(Boolean);
+      if (parts.length < 3) {
+        return;
+      }
+      const parseValue = (value, max) => {
+        value = value.trim();
+        if (value.endsWith("%")) {
+          return Math.min(Number.parseFloat(value) * max / 100, max);
+        }
+        return Math.min(Number.parseFloat(value), max);
+      };
+      const red = parseValue(parts[0], 255);
+      const green = parseValue(parts[1], 255);
+      const blue = parseValue(parts[2], 255);
+      let alpha;
+      if (parts.length === 4) {
+        alpha = parseValue(parts[3], 1);
+      }
+      return [red, green, blue, alpha];
+    };
+  }
+});
+
+// node_modules/@create-figma-plugin/utilities/lib/color/convert-rgb-color-to-hex-color.js
+function convertRgbColorToHexColor(rgbColor) {
+  const { r, g, b } = rgbColor;
+  if (r < 0 || r > 1 || g < 0 || g > 1 || b < 0 || b > 1) {
+    return null;
+  }
+  try {
+    return rgbHex(Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)).toUpperCase();
+  } catch (e) {
+    return null;
+  }
+}
+var init_convert_rgb_color_to_hex_color = __esm({
+  "node_modules/@create-figma-plugin/utilities/lib/color/convert-rgb-color-to-hex-color.js"() {
+    init_rgb_hex();
+  }
+});
+
 // node_modules/@create-figma-plugin/utilities/lib/ui.js
 function showUI(options, data) {
   if (typeof __html__ === "undefined") {
@@ -71,6 +147,7 @@ var init_ui = __esm({
 // node_modules/@create-figma-plugin/utilities/lib/index.js
 var init_lib = __esm({
   "node_modules/@create-figma-plugin/utilities/lib/index.js"() {
+    init_convert_rgb_color_to_hex_color();
     init_ui();
   }
 });
@@ -765,7 +842,7 @@ var require_lodash = __commonJS({
         return string.match(reUnicodeWord) || [];
       }
       var runInContext = function runInContext2(context) {
-        context = context == null ? root : _2.defaults(root.Object(), context, _2.pick(root, contextProps));
+        context = context == null ? root : _4.defaults(root.Object(), context, _4.pick(root, contextProps));
         var Array2 = context.Array, Date = context.Date, Error2 = context.Error, Function2 = context.Function, Math2 = context.Math, Object2 = context.Object, RegExp2 = context.RegExp, String = context.String, TypeError2 = context.TypeError;
         var arrayProto = Array2.prototype, funcProto = Function2.prototype, objectProto = Object2.prototype;
         var coreJsData = context["__core-js_shared__"];
@@ -3418,7 +3495,7 @@ var require_lodash = __commonJS({
           }).sort(compareAscending));
           return result2;
         });
-        function remove(array, predicate) {
+        function remove2(array, predicate) {
           var result2 = [];
           if (!(array && array.length)) {
             return result2;
@@ -4849,7 +4926,7 @@ var require_lodash = __commonJS({
           }
           return result2 + omission;
         }
-        function unescape2(string) {
+        function unescape(string) {
           string = toString(string);
           return string && reHasEscapedHtml.test(string) ? string.replace(reEscapedHtml, unescapeHtmlChar) : string;
         }
@@ -5162,7 +5239,7 @@ var require_lodash = __commonJS({
         lodash.rangeRight = rangeRight;
         lodash.rearg = rearg;
         lodash.reject = reject;
-        lodash.remove = remove;
+        lodash.remove = remove2;
         lodash.rest = rest;
         lodash.reverse = reverse;
         lodash.sampleSize = sampleSize;
@@ -5363,7 +5440,7 @@ var require_lodash = __commonJS({
         lodash.trimEnd = trimEnd;
         lodash.trimStart = trimStart;
         lodash.truncate = truncate;
-        lodash.unescape = unescape2;
+        lodash.unescape = unescape;
         lodash.uniqueId = uniqueId;
         lodash.upperCase = upperCase;
         lodash.upperFirst = upperFirst;
@@ -5539,17 +5616,17 @@ var require_lodash = __commonJS({
         }
         return lodash;
       };
-      var _2 = runInContext();
+      var _4 = runInContext();
       if (typeof define == "function" && typeof define.amd == "object" && define.amd) {
-        root._ = _2;
+        root._ = _4;
         define(function() {
-          return _2;
+          return _4;
         });
       } else if (freeModule) {
-        (freeModule.exports = _2)._ = _2;
-        freeExports._ = _2;
+        (freeModule.exports = _4)._ = _4;
+        freeExports._ = _4;
       } else {
-        root._ = _2;
+        root._ = _4;
       }
     }).call(exports);
   }
@@ -5559,6 +5636,22 @@ var require_lodash = __commonJS({
 var require_lodash2 = __commonJS({
   "node_modules/lodash/index.js"(exports, module) {
     module.exports = require_lodash();
+  }
+});
+
+// node_modules/nanoid/non-secure/index.js
+var urlAlphabet, nanoid;
+var init_non_secure = __esm({
+  "node_modules/nanoid/non-secure/index.js"() {
+    urlAlphabet = "useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";
+    nanoid = (size = 21) => {
+      let id = "";
+      let i = size;
+      while (i--) {
+        id += urlAlphabet[Math.random() * 64 | 0];
+      }
+      return id;
+    };
   }
 });
 
@@ -8678,294 +8771,6 @@ var require_chroma_js = __commonJS({
   }
 });
 
-// node_modules/uuid/dist/esm-browser/regex.js
-var regex_default;
-var init_regex = __esm({
-  "node_modules/uuid/dist/esm-browser/regex.js"() {
-    regex_default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
-  }
-});
-
-// node_modules/uuid/dist/esm-browser/validate.js
-function validate(uuid) {
-  return typeof uuid === "string" && regex_default.test(uuid);
-}
-var validate_default;
-var init_validate = __esm({
-  "node_modules/uuid/dist/esm-browser/validate.js"() {
-    init_regex();
-    validate_default = validate;
-  }
-});
-
-// node_modules/uuid/dist/esm-browser/stringify.js
-function unsafeStringify(arr, offset = 0) {
-  return byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]];
-}
-var byteToHex;
-var init_stringify = __esm({
-  "node_modules/uuid/dist/esm-browser/stringify.js"() {
-    byteToHex = [];
-    for (let i = 0; i < 256; ++i) {
-      byteToHex.push((i + 256).toString(16).slice(1));
-    }
-  }
-});
-
-// node_modules/uuid/dist/esm-browser/parse.js
-function parse(uuid) {
-  if (!validate_default(uuid)) {
-    throw TypeError("Invalid UUID");
-  }
-  let v;
-  const arr = new Uint8Array(16);
-  arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
-  arr[1] = v >>> 16 & 255;
-  arr[2] = v >>> 8 & 255;
-  arr[3] = v & 255;
-  arr[4] = (v = parseInt(uuid.slice(9, 13), 16)) >>> 8;
-  arr[5] = v & 255;
-  arr[6] = (v = parseInt(uuid.slice(14, 18), 16)) >>> 8;
-  arr[7] = v & 255;
-  arr[8] = (v = parseInt(uuid.slice(19, 23), 16)) >>> 8;
-  arr[9] = v & 255;
-  arr[10] = (v = parseInt(uuid.slice(24, 36), 16)) / 1099511627776 & 255;
-  arr[11] = v / 4294967296 & 255;
-  arr[12] = v >>> 24 & 255;
-  arr[13] = v >>> 16 & 255;
-  arr[14] = v >>> 8 & 255;
-  arr[15] = v & 255;
-  return arr;
-}
-var parse_default;
-var init_parse = __esm({
-  "node_modules/uuid/dist/esm-browser/parse.js"() {
-    init_validate();
-    parse_default = parse;
-  }
-});
-
-// node_modules/uuid/dist/esm-browser/v35.js
-function stringToBytes(str) {
-  str = unescape(encodeURIComponent(str));
-  const bytes = [];
-  for (let i = 0; i < str.length; ++i) {
-    bytes.push(str.charCodeAt(i));
-  }
-  return bytes;
-}
-function v35(name, version, hashfunc) {
-  function generateUUID(value, namespace, buf, offset) {
-    var _namespace;
-    if (typeof value === "string") {
-      value = stringToBytes(value);
-    }
-    if (typeof namespace === "string") {
-      namespace = parse_default(namespace);
-    }
-    if (((_namespace = namespace) === null || _namespace === void 0 ? void 0 : _namespace.length) !== 16) {
-      throw TypeError("Namespace must be array-like (16 iterable integer values, 0-255)");
-    }
-    let bytes = new Uint8Array(16 + value.length);
-    bytes.set(namespace);
-    bytes.set(value, namespace.length);
-    bytes = hashfunc(bytes);
-    bytes[6] = bytes[6] & 15 | version;
-    bytes[8] = bytes[8] & 63 | 128;
-    if (buf) {
-      offset = offset || 0;
-      for (let i = 0; i < 16; ++i) {
-        buf[offset + i] = bytes[i];
-      }
-      return buf;
-    }
-    return unsafeStringify(bytes);
-  }
-  try {
-    generateUUID.name = name;
-  } catch (err) {
-  }
-  generateUUID.DNS = DNS;
-  generateUUID.URL = URL;
-  return generateUUID;
-}
-var DNS, URL;
-var init_v35 = __esm({
-  "node_modules/uuid/dist/esm-browser/v35.js"() {
-    init_stringify();
-    init_parse();
-    DNS = "6ba7b810-9dad-11d1-80b4-00c04fd430c8";
-    URL = "6ba7b811-9dad-11d1-80b4-00c04fd430c8";
-  }
-});
-
-// node_modules/uuid/dist/esm-browser/md5.js
-function md5(bytes) {
-  if (typeof bytes === "string") {
-    const msg = unescape(encodeURIComponent(bytes));
-    bytes = new Uint8Array(msg.length);
-    for (let i = 0; i < msg.length; ++i) {
-      bytes[i] = msg.charCodeAt(i);
-    }
-  }
-  return md5ToHexEncodedArray(wordsToMd5(bytesToWords(bytes), bytes.length * 8));
-}
-function md5ToHexEncodedArray(input) {
-  const output = [];
-  const length32 = input.length * 32;
-  const hexTab = "0123456789abcdef";
-  for (let i = 0; i < length32; i += 8) {
-    const x = input[i >> 5] >>> i % 32 & 255;
-    const hex = parseInt(hexTab.charAt(x >>> 4 & 15) + hexTab.charAt(x & 15), 16);
-    output.push(hex);
-  }
-  return output;
-}
-function getOutputLength(inputLength8) {
-  return (inputLength8 + 64 >>> 9 << 4) + 14 + 1;
-}
-function wordsToMd5(x, len) {
-  x[len >> 5] |= 128 << len % 32;
-  x[getOutputLength(len) - 1] = len;
-  let a = 1732584193;
-  let b = -271733879;
-  let c = -1732584194;
-  let d = 271733878;
-  for (let i = 0; i < x.length; i += 16) {
-    const olda = a;
-    const oldb = b;
-    const oldc = c;
-    const oldd = d;
-    a = md5ff(a, b, c, d, x[i], 7, -680876936);
-    d = md5ff(d, a, b, c, x[i + 1], 12, -389564586);
-    c = md5ff(c, d, a, b, x[i + 2], 17, 606105819);
-    b = md5ff(b, c, d, a, x[i + 3], 22, -1044525330);
-    a = md5ff(a, b, c, d, x[i + 4], 7, -176418897);
-    d = md5ff(d, a, b, c, x[i + 5], 12, 1200080426);
-    c = md5ff(c, d, a, b, x[i + 6], 17, -1473231341);
-    b = md5ff(b, c, d, a, x[i + 7], 22, -45705983);
-    a = md5ff(a, b, c, d, x[i + 8], 7, 1770035416);
-    d = md5ff(d, a, b, c, x[i + 9], 12, -1958414417);
-    c = md5ff(c, d, a, b, x[i + 10], 17, -42063);
-    b = md5ff(b, c, d, a, x[i + 11], 22, -1990404162);
-    a = md5ff(a, b, c, d, x[i + 12], 7, 1804603682);
-    d = md5ff(d, a, b, c, x[i + 13], 12, -40341101);
-    c = md5ff(c, d, a, b, x[i + 14], 17, -1502002290);
-    b = md5ff(b, c, d, a, x[i + 15], 22, 1236535329);
-    a = md5gg(a, b, c, d, x[i + 1], 5, -165796510);
-    d = md5gg(d, a, b, c, x[i + 6], 9, -1069501632);
-    c = md5gg(c, d, a, b, x[i + 11], 14, 643717713);
-    b = md5gg(b, c, d, a, x[i], 20, -373897302);
-    a = md5gg(a, b, c, d, x[i + 5], 5, -701558691);
-    d = md5gg(d, a, b, c, x[i + 10], 9, 38016083);
-    c = md5gg(c, d, a, b, x[i + 15], 14, -660478335);
-    b = md5gg(b, c, d, a, x[i + 4], 20, -405537848);
-    a = md5gg(a, b, c, d, x[i + 9], 5, 568446438);
-    d = md5gg(d, a, b, c, x[i + 14], 9, -1019803690);
-    c = md5gg(c, d, a, b, x[i + 3], 14, -187363961);
-    b = md5gg(b, c, d, a, x[i + 8], 20, 1163531501);
-    a = md5gg(a, b, c, d, x[i + 13], 5, -1444681467);
-    d = md5gg(d, a, b, c, x[i + 2], 9, -51403784);
-    c = md5gg(c, d, a, b, x[i + 7], 14, 1735328473);
-    b = md5gg(b, c, d, a, x[i + 12], 20, -1926607734);
-    a = md5hh(a, b, c, d, x[i + 5], 4, -378558);
-    d = md5hh(d, a, b, c, x[i + 8], 11, -2022574463);
-    c = md5hh(c, d, a, b, x[i + 11], 16, 1839030562);
-    b = md5hh(b, c, d, a, x[i + 14], 23, -35309556);
-    a = md5hh(a, b, c, d, x[i + 1], 4, -1530992060);
-    d = md5hh(d, a, b, c, x[i + 4], 11, 1272893353);
-    c = md5hh(c, d, a, b, x[i + 7], 16, -155497632);
-    b = md5hh(b, c, d, a, x[i + 10], 23, -1094730640);
-    a = md5hh(a, b, c, d, x[i + 13], 4, 681279174);
-    d = md5hh(d, a, b, c, x[i], 11, -358537222);
-    c = md5hh(c, d, a, b, x[i + 3], 16, -722521979);
-    b = md5hh(b, c, d, a, x[i + 6], 23, 76029189);
-    a = md5hh(a, b, c, d, x[i + 9], 4, -640364487);
-    d = md5hh(d, a, b, c, x[i + 12], 11, -421815835);
-    c = md5hh(c, d, a, b, x[i + 15], 16, 530742520);
-    b = md5hh(b, c, d, a, x[i + 2], 23, -995338651);
-    a = md5ii(a, b, c, d, x[i], 6, -198630844);
-    d = md5ii(d, a, b, c, x[i + 7], 10, 1126891415);
-    c = md5ii(c, d, a, b, x[i + 14], 15, -1416354905);
-    b = md5ii(b, c, d, a, x[i + 5], 21, -57434055);
-    a = md5ii(a, b, c, d, x[i + 12], 6, 1700485571);
-    d = md5ii(d, a, b, c, x[i + 3], 10, -1894986606);
-    c = md5ii(c, d, a, b, x[i + 10], 15, -1051523);
-    b = md5ii(b, c, d, a, x[i + 1], 21, -2054922799);
-    a = md5ii(a, b, c, d, x[i + 8], 6, 1873313359);
-    d = md5ii(d, a, b, c, x[i + 15], 10, -30611744);
-    c = md5ii(c, d, a, b, x[i + 6], 15, -1560198380);
-    b = md5ii(b, c, d, a, x[i + 13], 21, 1309151649);
-    a = md5ii(a, b, c, d, x[i + 4], 6, -145523070);
-    d = md5ii(d, a, b, c, x[i + 11], 10, -1120210379);
-    c = md5ii(c, d, a, b, x[i + 2], 15, 718787259);
-    b = md5ii(b, c, d, a, x[i + 9], 21, -343485551);
-    a = safeAdd(a, olda);
-    b = safeAdd(b, oldb);
-    c = safeAdd(c, oldc);
-    d = safeAdd(d, oldd);
-  }
-  return [a, b, c, d];
-}
-function bytesToWords(input) {
-  if (input.length === 0) {
-    return [];
-  }
-  const length8 = input.length * 8;
-  const output = new Uint32Array(getOutputLength(length8));
-  for (let i = 0; i < length8; i += 8) {
-    output[i >> 5] |= (input[i / 8] & 255) << i % 32;
-  }
-  return output;
-}
-function safeAdd(x, y) {
-  const lsw = (x & 65535) + (y & 65535);
-  const msw = (x >> 16) + (y >> 16) + (lsw >> 16);
-  return msw << 16 | lsw & 65535;
-}
-function bitRotateLeft(num, cnt) {
-  return num << cnt | num >>> 32 - cnt;
-}
-function md5cmn(q, a, b, x, s, t) {
-  return safeAdd(bitRotateLeft(safeAdd(safeAdd(a, q), safeAdd(x, t)), s), b);
-}
-function md5ff(a, b, c, d, x, s, t) {
-  return md5cmn(b & c | ~b & d, a, b, x, s, t);
-}
-function md5gg(a, b, c, d, x, s, t) {
-  return md5cmn(b & d | c & ~d, a, b, x, s, t);
-}
-function md5hh(a, b, c, d, x, s, t) {
-  return md5cmn(b ^ c ^ d, a, b, x, s, t);
-}
-function md5ii(a, b, c, d, x, s, t) {
-  return md5cmn(c ^ (b | ~d), a, b, x, s, t);
-}
-var md5_default;
-var init_md5 = __esm({
-  "node_modules/uuid/dist/esm-browser/md5.js"() {
-    md5_default = md5;
-  }
-});
-
-// node_modules/uuid/dist/esm-browser/v3.js
-var v3, v3_default;
-var init_v3 = __esm({
-  "node_modules/uuid/dist/esm-browser/v3.js"() {
-    init_v35();
-    init_md5();
-    v3 = v35("v3", 48, md5_default);
-    v3_default = v3;
-  }
-});
-
-// node_modules/uuid/dist/esm-browser/index.js
-var init_esm_browser = __esm({
-  "node_modules/uuid/dist/esm-browser/index.js"() {
-    init_v3();
-  }
-});
-
 // utils/bezier.ts
 function A(aA1, aA2) {
   return 1 - 3 * aA2 + 3 * aA1;
@@ -9102,7 +8907,8 @@ var init_crayolaColors = __esm({
       },
       {
         hex: "#78DBE2",
-        name: "Aquamarine",
+        name: "Nina's Teal",
+        // Previously "Aquamarine"
         rgb: "(120, 219, 226)"
       },
       {
@@ -9755,33 +9561,58 @@ var init_crayolaColors = __esm({
   }
 });
 
+// utils/getColorName.ts
+var import_chroma_js, import_lodash, getColorName, getColorName_default;
+var init_getColorName = __esm({
+  "utils/getColorName.ts"() {
+    "use strict";
+    import_chroma_js = __toESM(require_chroma_js());
+    import_lodash = __toESM(require_lodash2());
+    init_crayolaColors();
+    getColorName = (sourceColor, namesInUse = []) => {
+      let colorsByDistance = import_lodash.default.sortBy(
+        crayolaColors_default,
+        (crayolaColor) => {
+          return import_chroma_js.default.distance(crayolaColor.hex, sourceColor);
+        },
+        "asc"
+      );
+      let matchingCrayolaColor = import_lodash.default.find(colorsByDistance, (color) => {
+        return !import_lodash.default.includes(namesInUse, color.name);
+      });
+      return matchingCrayolaColor ? matchingCrayolaColor.name : sourceColor;
+    };
+    getColorName_default = getColorName;
+  }
+});
+
 // utils/generateColors.ts
-var import_chroma_js, import_lodash, generateColors, generateColors_default;
+var import_chroma_js2, import_lodash2, generateColors, generateColors_default;
 var init_generateColors = __esm({
   "utils/generateColors.ts"() {
     "use strict";
-    init_esm_browser();
-    import_chroma_js = __toESM(require_chroma_js());
-    import_lodash = __toESM(require_lodash2());
+    init_non_secure();
+    import_chroma_js2 = __toESM(require_chroma_js());
+    import_lodash2 = __toESM(require_lodash2());
     init_curves();
-    init_crayolaColors();
-    generateColors = async (sourceColor, steps = 16, customName, preserveSourceColor = true) => {
+    init_getColorName();
+    generateColors = async (sourceColor, steps = 16, customName, paletteId, preserveSourceColor = true, colorNamesInUse = []) => {
       if (!sourceColor)
         return true;
       let lowContrast = 1.01;
       let highContrast = 19;
       let contrastRangeX = highContrast - lowContrast;
-      let targetContrastArray = import_lodash.default.map(import_lodash.default.range(steps), (step) => {
+      let targetContrastArray = import_lodash2.default.map(import_lodash2.default.range(steps), (step) => {
         let output = easeInOutCustom((step + 1) / steps) * contrastRangeX + lowContrast;
         return output;
       });
-      let sourceContrast = import_chroma_js.default.contrast(sourceColor, "white");
-      let closestContrastValue = import_lodash.default.first(
-        import_lodash.default.sortBy(targetContrastArray, (contrastStep) => {
+      let sourceContrast = import_chroma_js2.default.contrast(sourceColor, "white");
+      let closestContrastValue = import_lodash2.default.first(
+        import_lodash2.default.sortBy(targetContrastArray, (contrastStep) => {
           return Math.abs(contrastStep - sourceContrast);
         })
       );
-      let sourceColorIndex = import_lodash.default.findIndex(targetContrastArray, (o) => {
+      let sourceColorIndex = import_lodash2.default.findIndex(targetContrastArray, (o) => {
         return o === closestContrastValue;
       });
       let confine = (number) => {
@@ -9791,28 +9622,28 @@ var init_generateColors = __esm({
       let hueRate = 0.02;
       let satRate = 3e-3;
       let lumRate = 0.01;
-      import_lodash.default.times(steps * 20, (index) => {
-        let sourceColorHSV = (0, import_chroma_js.default)(sourceColor).hsv();
+      import_lodash2.default.times(steps * 20, (index) => {
+        let sourceColorHSV = (0, import_chroma_js2.default)(sourceColor).hsv();
         let lighterHue = sourceColorHSV[0] + hueRate * index;
         let lighterSat = confine(sourceColorHSV[1] - satRate * index);
         let lighterLum = confine(sourceColorHSV[2] + lumRate * index);
         let darkerHue = sourceColorHSV[0] - hueRate * 2 * index;
         let darkerSat = confine(sourceColorHSV[1] + satRate * 4 * index);
         let darkerLum = confine(sourceColorHSV[2] - lumRate * index);
-        let lighterColor = (0, import_chroma_js.default)(
-          import_chroma_js.default.hsv(lighterHue, lighterSat, lighterLum)
+        let lighterColor = (0, import_chroma_js2.default)(
+          import_chroma_js2.default.hsv(lighterHue, lighterSat, lighterLum)
         ).hex();
-        let darkerColor = (0, import_chroma_js.default)(import_chroma_js.default.hsv(darkerHue, darkerSat, darkerLum)).hex();
+        let darkerColor = (0, import_chroma_js2.default)(import_chroma_js2.default.hsv(darkerHue, darkerSat, darkerLum)).hex();
         colorOptionsArray.push(darkerColor);
         colorOptionsArray.push(lighterColor);
       });
-      let contrastMatchedColors = import_lodash.default.map(
+      let contrastMatchedColors = import_lodash2.default.map(
         targetContrastArray,
         (targetContrastValue) => {
-          let selectedColor = import_lodash.default.first(
-            import_lodash.default.sortBy(colorOptionsArray, (candidateColor) => {
+          let selectedColor = import_lodash2.default.first(
+            import_lodash2.default.sortBy(colorOptionsArray, (candidateColor) => {
               let contrastDifference = Math.abs(
-                import_chroma_js.default.contrast(candidateColor, "white") - targetContrastValue
+                import_chroma_js2.default.contrast(candidateColor, "white") - targetContrastValue
               );
               return contrastDifference;
             })
@@ -9820,12 +9651,12 @@ var init_generateColors = __esm({
           return selectedColor;
         }
       );
-      let swatchList = import_lodash.default.map(contrastMatchedColors, (color, index) => {
+      let swatchList = import_lodash2.default.map(contrastMatchedColors, (color, index) => {
         if (index === sourceColorIndex && preserveSourceColor) {
           color = sourceColor;
         }
-        const contrastWhite = import_chroma_js.default.contrast(color, "white");
-        const contrastBlack = import_chroma_js.default.contrast(color, "black");
+        const contrastWhite = import_chroma_js2.default.contrast(color, "white");
+        const contrastBlack = import_chroma_js2.default.contrast(color, "black");
         var displayColor = "";
         if (contrastWhite >= 4.5) {
           displayColor = "white";
@@ -9833,13 +9664,16 @@ var init_generateColors = __esm({
           displayColor = "black";
         }
         return {
-          hex: (0, import_chroma_js.default)(color).hex(),
-          hue: (0, import_chroma_js.default)(color).hsv()[0],
-          sat: (0, import_chroma_js.default)(color).hsv()[1],
-          lum: (0, import_chroma_js.default)(color).hsv()[2],
-          hsv: (0, import_chroma_js.default)(color).hsv(),
-          hsl: (0, import_chroma_js.default)(color).hsl(),
-          rgb: (0, import_chroma_js.default)(color).rgb(),
+          id: nanoid(),
+          paletteId,
+          index,
+          hex: (0, import_chroma_js2.default)(color).hex(),
+          hue: (0, import_chroma_js2.default)(color).hsv()[0],
+          sat: (0, import_chroma_js2.default)(color).hsv()[1],
+          lum: (0, import_chroma_js2.default)(color).hsv()[2],
+          hsv: (0, import_chroma_js2.default)(color).hsv(),
+          hsl: (0, import_chroma_js2.default)(color).hsl(),
+          rgb: (0, import_chroma_js2.default)(color).rgb(),
           contrastBlack,
           contrastWhite,
           displayColor,
@@ -9850,25 +9684,18 @@ var init_generateColors = __esm({
       });
       var swatchName = "";
       if (customName === "") {
-        let colorsByDistance = import_lodash.default.sortBy(
-          crayolaColors_default,
-          (crayolaColor) => {
-            return import_chroma_js.default.distance(crayolaColor.hex, sourceColor);
-          },
-          "asc"
-        );
-        let matchingCrayolaColor = import_lodash.default.first(colorsByDistance);
-        swatchName = matchingCrayolaColor ? matchingCrayolaColor.name : sourceColor;
+        swatchName = getColorName_default(sourceColor, colorNamesInUse);
       } else {
         swatchName = customName;
       }
       let swatchNameFormatted = swatchName.trim().replace(/\s/g, "-").toLowerCase();
-      import_lodash.default.each(swatchList, (swatch, i) => {
+      import_lodash2.default.each(swatchList, (swatch, i) => {
         swatchList[i].name = `${swatchNameFormatted}-${i}`;
       });
       return {
-        id: v3_default(swatchName, "cdff728a-b361-50b2-9451-37af8675d997"),
+        // id: nanoid(), // Now generating this up front in main.ts
         name: swatchName,
+        id: paletteId,
         swatches: swatchList,
         sourceColorIndex: swatchList[0].sourceColorIndex
       };
@@ -9883,88 +9710,95 @@ __export(main_exports, {
   default: () => main_default
 });
 function main_default() {
-  showUI({ width: 900, height: 640 });
+  showUI({ width: 900, height: 600 });
+  const saveColorVariables = true;
   const paletteCollectionName = "Paletteer Palettes";
-  const rgbToHex = async (rgbObject) => {
-    let multipliedRgb = {
-      r: rgbObject.r * 255,
-      g: rgbObject.g * 255,
-      b: rgbObject.b * 255
-    };
-    let hexString = await (0, import_chroma_js2.default)(multipliedRgb).hex();
-    return hexString;
-  };
-  let selectionColors = [];
-  let deepColorSample = false;
-  const getColors = async (selection) => {
-    for (var i = 0; i < selection.length; i++) {
-      let object = selection[i];
-      if (object.children && deepColorSample) {
-        getColors(object.children);
-      }
-      if (object && object.fills) {
-        for (var f = 0; f < object.fills.length; f++) {
-          let fill = object.fills[f];
-          if (fill.color) {
-            selectionColors.push(await rgbToHex(fill.color));
-          }
-          if (fill.gradientStops) {
-            for (var s = 0; s < fill.gradientStops.length; s++) {
-              let stop = fill.gradientStops[s];
-              selectionColors.push(await rgbToHex(stop.color));
-            }
-          }
-        }
-      }
-    }
-    return (0, import_lodash2.uniq)(selectionColors);
-  };
-  const hexColorIsSaved = async (hex) => {
-    let palettesToCompare = await getData("savedPaletteList");
-    let seedColorsToCompare = (0, import_lodash2.map)(palettesToCompare, (palette) => {
-      return palette.swatches[palette.sourceColorIndex].hex;
-    });
-    return (0, import_lodash2.includes)(seedColorsToCompare, hex);
-  };
   const getData = async (string) => {
     let stringData = await figma.root.getPluginData(string);
-    let parsedData = string != "" ? await JSON.parse(stringData).data : { test: "test" };
-    return parsedData;
+    if (stringData === "") {
+      return null;
+    } else {
+      return await JSON.parse(stringData).data;
+    }
   };
   const setData = async (name, data) => {
     let stringifiedData = await JSON.stringify({ data });
     await figma.root.setPluginData(name, stringifiedData);
   };
+  const getList = async (listName) => {
+    let list = await getData(listName);
+    if (list) {
+      return list;
+    } else {
+      return [];
+    }
+  };
+  const setList = async (listName, list) => {
+    setData(listName, list);
+  };
+  const getListItemById = async (id, listName) => {
+    let currentList = await getList(listName);
+    return await (0, import_lodash3.find)(currentList, (item) => {
+      return item.id === id;
+    });
+  };
+  const getListItemsByKeyValue = async (listName, key, value) => {
+    let allListItems = await getList(listName);
+    return (0, import_lodash3.filter)(allListItems, (item) => {
+      return item[key] === value;
+    });
+  };
+  const addToList = async (listName, item) => {
+    let existingList = await getList(listName);
+    setData(listName, [...existingList, item]);
+  };
+  const updateListById = async (listName, id, newItem) => {
+    let existingList = await getList(listName);
+    console.log("UPDATING ITEM IN A LIST BY ID", listName, existingList, id);
+    var updatedList = new Array();
+    for (let index = 0; index < existingList.length; index++) {
+      let existingItem = existingList[index];
+      if (existingItem.id === id) {
+        updatedList.push(newItem);
+      } else {
+        updatedList.push(existingItem);
+      }
+    }
+    setList(listName, updatedList);
+  };
+  const removeFromListById = async (listName, id) => {
+    let editedList = await getList(listName);
+    await (0, import_lodash3.remove)(editedList, (item) => {
+      return item.id === id;
+    });
+    setList(listName, editedList);
+  };
+  const configDataName = "paletteerConfig";
   const getConfig = async () => {
-    let configData = await getData("paletteerConfig");
+    let configData = await getData(configDataName);
     return configData;
   };
   const setConfig = async (key, value) => {
-    let configData = await getData("paletteerConfig");
+    let configData = await getData(configDataName);
     if (configData === "") {
       configData = {};
     }
     configData[key] = value;
-    await setData("paletteerConfig", configData);
-    getConfig();
-  };
-  const getPaletteCollection = async () => {
-    let configData = await getConfig();
-    let paletteCollectionId = configData.paletteCollectionId ? configData.paletteCollectionId : "";
-    let paletteCollection = await figma.variables.getVariableCollectionById(
-      paletteCollectionId
-    );
-    if (paletteCollection === null) {
-      paletteCollection = await figma.variables.createVariableCollection(
-        paletteCollectionName
-      );
-      await setConfig("paletteCollectionId", paletteCollection.id);
-    }
-    return paletteCollection;
+    await setData(configDataName, configData);
+    return await getConfig();
   };
   const getDefaultModeId = async () => {
     let { defaultModeId } = await getPaletteCollection();
     return defaultModeId;
+  };
+  const colorNamesInUse = async () => {
+    let currentPaletteList = await getList("paletteList");
+    let colorNames2 = [];
+    for (let paletteIndex = 0; paletteIndex < currentPaletteList.length; paletteIndex++) {
+      let selectedPalette = currentPaletteList[paletteIndex];
+      await colorNames2.push(selectedPalette.name);
+    }
+    return colorNames2;
   };
   const colorVariableFactory = async (index, paletteCollection, paletteName) => {
     let colorVariable = await figma.variables.createVariable(
@@ -9975,14 +9809,311 @@ function main_default() {
     );
     return colorVariable;
   };
+  const getPaletteCollection = async () => {
+    let configData = await getConfig();
+    let paletteCollectionId = configData.paletteCollectionId ? configData.paletteCollectionId : null;
+    let paletteCollection;
+    if (paletteCollectionId === null) {
+      paletteCollection = await figma.variables.createVariableCollection(
+        paletteCollectionName
+      );
+      await setConfig("paletteCollectionId", paletteCollection.id);
+    } else {
+      paletteCollection = await figma.variables.getVariableCollectionById(
+        paletteCollectionId
+      );
+    }
+    return paletteCollection;
+  };
+  const getSwatchVariable = async (swatch, palette, variableId, saveColorVariables2 = true) => {
+    var _a;
+    let paletteCollection = await getPaletteCollection();
+    let defaultModeId = await getDefaultModeId();
+    let swatchVariable;
+    if (saveColorVariables2) {
+      if (variableId != null) {
+        swatchVariable = await figma.variables.getVariableById(variableId);
+      } else {
+        swatchVariable = await colorVariableFactory(
+          swatch.index,
+          paletteCollection,
+          palette.name
+        );
+        variableId = swatchVariable.id;
+      }
+    } else {
+      if (variableId != null) {
+        (_a = figma.variables.getVariableById(variableId)) == null ? void 0 : _a.remove();
+      }
+    }
+    return swatchVariable;
+  };
+  const updateSwatchVariableNames = async (saveColorVariables2 = true) => {
+    let currentPalettes = await getList("paletteList");
+    let currentSwatches = await getList("swatchList");
+    console.log("UPDATING VARIABLE NAMES");
+    if (saveColorVariables2) {
+      console.log("SAVING VARIABLES ENABLED", currentSwatches);
+      for (let swatchIndex = 0; swatchIndex < currentSwatches.length; swatchIndex++) {
+        let swatch = currentSwatches[swatchIndex];
+        let swatchPalette = import_lodash4.default.find(currentPalettes, (palette) => {
+          return palette.id === swatch.paletteId;
+        });
+        console.log("UPDATING SWATCH", swatch);
+        let swatchVariable = await figma.variables.getVariableById(
+          swatch.colorVariableId
+        );
+        console.log(
+          "UPDATING VARIABLE",
+          swatch.colorVariableId,
+          swatchVariable
+        );
+        if (swatchVariable) {
+          console.log(
+            "TRY VARIABLE NAME",
+            `${swatchPalette.name}/${(swatch.index + 1).toFixed(0).padStart(2, "0")}`
+          );
+          let updatedName = `${swatchPalette.name}/${(swatch.index + 1).toFixed(0).padStart(2, "0")}`;
+          let existingName = swatchVariable.name;
+          console.log(
+            "CHECK IF VARIABLE NAME HAS CHANGED",
+            existingName,
+            updatedName
+          );
+          if (existingName != updatedName) {
+            swatchVariable.name = `${swatchPalette.name}/${(swatch.index + 1).toFixed(0).padStart(2, "0")}`;
+          }
+        }
+      }
+    }
+  };
+  const updateSwatchVariableColors = async (saveColorVariables2 = true) => {
+    let currentSwatches = await getList("swatchList");
+    if (saveColorVariables2) {
+      let defaultModeId = await getDefaultModeId();
+      for (let swatchIndex = 0; swatchIndex < currentSwatches.length; swatchIndex++) {
+        let swatch = currentSwatches[swatchIndex];
+        let swatchVariable = await figma.variables.getVariableById(
+          swatch.colorVariableId
+        );
+        if (swatchVariable) {
+          await (swatchVariable == null ? void 0 : swatchVariable.setValueForMode(defaultModeId, {
+            r: swatch.rgb[0] / 255,
+            g: swatch.rgb[1] / 255,
+            b: swatch.rgb[2] / 255
+          }));
+        }
+      }
+    } else {
+      let existingCollection = await getPaletteCollection();
+      if (existingCollection) {
+        existingCollection.remove();
+      }
+    }
+  };
+  const updateSwatchVariable = async (swatch, paletteId, variableId, saveColorVariables2 = true) => {
+    var _a;
+    let paletteCollection = await getPaletteCollection();
+    let palette = (0, import_lodash3.find)(await getList("paletteList"), (palette2) => {
+      return palette2.id === paletteId;
+    });
+    let defaultModeId = await getDefaultModeId();
+    if (saveColorVariables2) {
+      let swatchVariable;
+      if (variableId != null) {
+        swatchVariable = await figma.variables.getVariableById(variableId);
+      } else {
+        swatchVariable = await colorVariableFactory(
+          swatch.index,
+          paletteCollection,
+          palette.name
+        );
+        await (swatchVariable == null ? void 0 : swatchVariable.setValueForMode(defaultModeId, {
+          r: swatch.rgb[0] / 255,
+          g: swatch.rgb[1] / 255,
+          b: swatch.rgb[2] / 255
+        }));
+        variableId = swatchVariable.id;
+      }
+    } else {
+      if (variableId === null) {
+        (_a = figma.variables.getVariableById(variableId)) == null ? void 0 : _a.remove();
+      }
+    }
+    return variableId;
+  };
+  const newPaletteFromHex = async (hex) => {
+    let paletteId = nanoid();
+    let placeholderPalette = {
+      id: paletteId,
+      temporaryHex: hex
+    };
+    await addToList("paletteList", placeholderPalette);
+    postPalettesToUI();
+    let generatedPalette = await generateColors_default(
+      hex,
+      16,
+      "",
+      paletteId,
+      true,
+      await colorNamesInUse()
+    );
+    let newPalette = {
+      name: generatedPalette == null ? void 0 : generatedPalette.name,
+      id: paletteId,
+      sourceColorIndex: generatedPalette == null ? void 0 : generatedPalette.sourceColorIndex,
+      sourceColorId: generatedPalette == null ? void 0 : generatedPalette.swatches[generatedPalette == null ? void 0 : generatedPalette.sourceColorIndex].id
+    };
+    await updateListById("paletteList", paletteId, newPalette);
+    let paletteCollection = await getPaletteCollection();
+    for (let swatchIndex = 0; swatchIndex < generatedPalette.swatches.length; swatchIndex++) {
+      let swatch = generatedPalette.swatches[swatchIndex];
+      let swatchVariable = await colorVariableFactory(
+        swatch.index,
+        paletteCollection,
+        generatedPalette == null ? void 0 : generatedPalette.name
+      );
+      await addToList("swatchList", __spreadProps(__spreadValues({}, swatch), {
+        colorVariableId: swatchVariable.id,
+        paletteId
+      }));
+    }
+    updateSwatchVariableNames();
+    updateSwatchVariableColors();
+  };
+  const updatePaletteColorsById = async (paletteId, hex) => {
+    let existingPalette = await getListItemById(paletteId, "paletteList");
+    let generatedPalette = await generateColors_default(
+      hex,
+      16,
+      existingPalette.name,
+      paletteId,
+      true,
+      await colorNamesInUse()
+    );
+    let updatedPalette = {
+      id: paletteId,
+      name: generatedPalette.name,
+      sourceColorIndex: generatedPalette.sourceColorIndex,
+      sourceColorId: generatedPalette.swatches[generatedPalette.sourceColorIndex].id
+    };
+    await updateListById("paletteList", paletteId, updatedPalette);
+    let existingSwatches = await getListItemsByKeyValue(
+      "swatchList",
+      "paletteId",
+      paletteId
+    );
+    console.log("GET READY FOR SWATCH UPDATES", existingSwatches, paletteId);
+    for (let swatchIndex = 0; swatchIndex < existingSwatches.length; swatchIndex++) {
+      let existingSwatch = existingSwatches[swatchIndex];
+      let generatedSwatch = generatedPalette.swatches[swatchIndex];
+      let updatedSwatch = __spreadProps(__spreadValues({}, generatedSwatch), {
+        id: existingSwatch.id,
+        colorVariableId: existingSwatch.colorVariableId,
+        paletteId: generatedPalette.id
+      });
+      console.log("TIME TO UPDATE A SWATCH", existingSwatch, updatedSwatch);
+      await updateListById("swatchList", existingSwatch.id, updatedSwatch);
+    }
+    updateSwatchVariableNames();
+    updateSwatchVariableColors();
+  };
+  const updatePaletteNameById = async (paletteId, name) => {
+    console.log("UPDATING PALETTE NAME", paletteId, name);
+    let existingPalette = await getListItemById(paletteId, "paletteList");
+    let updatedPalette = __spreadProps(__spreadValues({}, existingPalette), {
+      name
+    });
+    console.log("UPDATED PALETTE DATA", updatedPalette);
+    await updateListById("paletteList", paletteId, updatedPalette);
+    await updateSwatchVariableNames();
+  };
+  const updatePaletteById = async (paletteId, hex, name) => {
+    let paletteName = name ? name : "";
+    let generatedPalette = await generateColors_default(
+      hex,
+      16,
+      paletteName,
+      paletteId,
+      true,
+      await colorNamesInUse()
+    );
+    let existingSwatches = await getListItemsByKeyValue(
+      "swatchList",
+      "paletteId",
+      paletteId
+    );
+    updateListById("paletteList", paletteId, {
+      id: paletteId,
+      name: paletteName,
+      sourceColorIndex: generatedPalette.sourceColorIndex,
+      sourceColorId: generatedPalette.swatches[generatedPalette.sourceColorIndex].id
+    });
+    (0, import_lodash3.each)(
+      generatedPalette.swatches,
+      async (generatedSwatch, index) => {
+        let existingSwatch = await (0, import_lodash3.find)(existingSwatches, (swatch) => {
+          return swatch.index === index;
+        });
+        let variableId = existingSwatch.colorVariableId;
+        await updateSwatchVariable(
+          generatedSwatch,
+          paletteId,
+          variableId,
+          saveColorVariables
+        );
+        let updatedSwatch = __spreadProps(__spreadValues({}, generatedSwatch), {
+          id: existingSwatch.id,
+          colorVariableId: variableId
+        });
+        updateListById("swatchList", existingSwatch.id, updatedSwatch);
+      }
+    );
+  };
+  let selectionColors = [];
+  let deepColorSample = true;
+  const getColors = async (selection) => {
+    for (var i = 0; i < selection.length; i++) {
+      let object = selection[i];
+      if (object.children && deepColorSample) {
+        getColors(object.children);
+      }
+      if (object && object.fills) {
+        for (var f = 0; f < object.fills.length; f++) {
+          let fill = object.fills[f];
+          if (fill.color) {
+            selectionColors.push(
+              `#${await convertRgbColorToHexColor(fill.color)}`
+            );
+          }
+          if (fill.gradientStops) {
+            for (var s = 0; s < fill.gradientStops.length; s++) {
+              let stop = fill.gradientStops[s];
+              selectionColors.push(
+                `#${await convertRgbColorToHexColor(stop.color)}`
+              );
+            }
+          }
+        }
+      }
+    }
+    return (0, import_lodash3.uniq)(selectionColors);
+  };
+  const hexColorIsSaved = async (hex) => {
+    let swatches = await getData("swatchList");
+    let seedColorsToCompare = (0, import_lodash3.map)(swatches, (swatch) => {
+      return swatch.hex;
+    });
+    return (0, import_lodash3.includes)(seedColorsToCompare, hex);
+  };
   const getVariableColorById = async (variableId) => {
     let colorVariableData = await figma.variables.getVariableById(variableId);
     let defaultModeId = await getDefaultModeId();
     let variableRgba = colorVariableData == null ? void 0 : colorVariableData.valuesByMode[defaultModeId];
-    return rgbToHex(variableRgba);
+    return `#${convertRgbColorToHexColor(variableRgba)}`;
   };
   const mapVariablesToPalettes = async () => {
-    let currentPalettes = await getData("savedPaletteList");
+    let currentPalettes = await getList("paletteList");
     let paletteIndex = 0;
     try {
       for (var iter2 = __forAwait(currentPalettes), more2, temp2, error2; more2 = !(temp2 = await iter2.next()).done; more2 = false) {
@@ -10019,11 +10150,35 @@ function main_default() {
     }
     return currentPalettes;
   };
+  const mapVariablesToSwatches = async () => {
+    let currentSwatches = await getList("swatchList");
+    let swatchIndex = 0;
+    try {
+      for (var iter = __forAwait(currentSwatches), more, temp, error; more = !(temp = await iter.next()).done; more = false) {
+        let swatch = temp.value;
+        let variableColor = await getVariableColorById(swatch.colorVariableId);
+        currentSwatches[swatchIndex].variableColor = variableColor;
+        swatchIndex++;
+      }
+    } catch (temp) {
+      error = [temp];
+    } finally {
+      try {
+        more && (temp = iter.return) && await temp.call(iter);
+      } finally {
+        if (error)
+          throw error[0];
+      }
+    }
+    return currentSwatches;
+  };
   const postPalettesToUI = async () => {
-    let currentPalettes = await mapVariablesToPalettes();
+    let palettes = await getList("paletteList");
+    let swatches = await mapVariablesToSwatches();
     figma.ui.postMessage({
       type: "receive-palettes",
-      palettes: currentPalettes
+      palettes,
+      swatches
     });
   };
   const postConfigToUI = async () => {
@@ -10033,121 +10188,46 @@ function main_default() {
       configData
     });
   };
-  const newColorFromHex = async (hex) => {
-    let configData = await getConfig();
-    let stepCount = configData != "" ? configData.stepCount : 16;
-    let isSavedAlready = await hexColorIsSaved(hex);
-    if (!isSavedAlready) {
-      let newPalette = await generateColors_default(hex, stepCount, "");
-      let paletteCollection = await getPaletteCollection();
-      if (paletteCollection != null) {
-        let modeId = paletteCollection.defaultModeId;
-        for (let step = 0; step < newPalette.swatches.length; step++) {
-          let colorVariable = await colorVariableFactory(
-            step,
-            paletteCollection,
-            newPalette.name
-          );
-          let swatch = newPalette.swatches[step];
-          colorVariable.setValueForMode(modeId, {
-            r: swatch.rgb[0] / 255,
-            g: swatch.rgb[1] / 255,
-            b: swatch.rgb[2] / 255
-          });
-          newPalette.swatches[step].colorVariableId = colorVariable.id;
-        }
-        let existingPalette = await getData("savedPaletteList");
-        let updatedPaletteList = [...existingPalette, newPalette];
-        await setData("savedPaletteList", updatedPaletteList);
-        await setConfig("paletteCollectionId", paletteCollection.id);
-        await setConfig("paletteCollection", paletteCollection);
-      }
-    }
-  };
   const getColorFromSwatch = async (swatch) => {
-    let paletteCollection = await getPaletteCollection();
-    let modeId = paletteCollection.defaultModeId;
+    let defaultModeId = await getDefaultModeId();
     let variable = await figma.variables.getVariableById(
       swatch.colorVariableId
     );
-    let variableColor = variable == null ? void 0 : variable.valuesByMode[modeId];
-    let variableHex = await rgbToHex(variableColor);
+    let variableColor = variable == null ? void 0 : variable.valuesByMode[defaultModeId];
+    let variableHex = await `#${convertRgbColorToHexColor(
+      variableColor
+    )}`;
     return variableHex;
   };
-  const updatePalette = async (hex, paletteId) => {
-    let configData = await getConfig();
-    let stepCount = configData != "" ? configData.stepCount : 16;
-    let newPalette = await generateColors_default(hex, stepCount, "");
+  const updateVariables = async () => {
+    let existingSwatches = await getList("swatchList");
     let paletteCollection = await getPaletteCollection();
-    let modeId = paletteCollection.defaultModeId;
-    let existingPalettes = await getData("savedPaletteList");
-    let updatedPalette = await (0, import_lodash2.find)(existingPalettes, (palette) => {
-      return palette.id === paletteId;
-    });
-    await (0, import_lodash2.times)(16, async (index) => {
-      let variableId = updatedPalette.swatches[index].colorVariableId;
-      let existingVariable = await figma.variables.getVariableById(variableId);
-      let newSwatch = newPalette.swatches[index];
-      await (existingVariable == null ? void 0 : existingVariable.setValueForMode(modeId, {
-        r: newSwatch.rgb[0] / 255,
-        g: newSwatch.rgb[1] / 255,
-        b: newSwatch.rgb[2] / 255
-      }));
-      updatedPalette.swatches[index] = __spreadProps(__spreadValues({}, newSwatch), {
-        colorVariableId: variableId
-      });
-      if (newSwatch.hex === hex)
-        updatedPalette.sourceColorIndex = index;
-    });
-    let updatedPalettes = await (0, import_lodash2.filter)(existingPalettes, (palette) => {
-      return palette.id != paletteId;
-    });
-    await setData("savedPaletteList", [updatedPalette, ...updatedPalettes]);
-    await postPalettesToUI();
-  };
-  const updatePaletteName = async (name, paletteId) => {
-    let paletteCollection = await getPaletteCollection();
-    let modeId = paletteCollection.defaultModeId;
-    let existingPalettes = await getData("savedPaletteList");
-    let updatedPalette = await (0, import_lodash2.find)(existingPalettes, (palette) => {
-      return palette.id === paletteId;
-    });
-    updatedPalette.name = name;
-    await (0, import_lodash2.times)(16, async (index) => {
-      let variableId = updatedPalette.swatches[index].colorVariableId;
-      let existingVariable = await figma.variables.getVariableById(variableId);
-      if (existingVariable) {
-        existingVariable.name = `${name}/${(index + 1).toFixed(0).padStart(2, "0")}`;
-      }
-    });
-    let updatedPalettes = await (0, import_lodash2.filter)(existingPalettes, (palette) => {
-      return palette.id != paletteId;
-    });
-    await setData("savedPaletteList", [updatedPalette, ...updatedPalettes]);
-    await postPalettesToUI();
-  };
-  const removeColorByHex = async (hex) => {
-    let existingPaletteList = await getData("savedPaletteList");
-    (0, import_lodash2.each)(existingPaletteList, (palette) => {
-      let hexList = (0, import_lodash2.map)(palette.swatches, (swatch) => {
-        return swatch.hex;
-      });
-      if ((0, import_lodash2.includes)(hexList, hex)) {
-        (0, import_lodash2.each)(palette.swatches, (swatch) => {
-          var _a;
-          (_a = figma.variables.getVariableById(swatch.colorVariableId)) == null ? void 0 : _a.remove();
-        });
-      }
-    });
-    let newPaletteList = (0, import_lodash2.filter)(existingPaletteList, (palette) => {
-      return !(0, import_lodash2.includes)(
-        (0, import_lodash2.map)(palette.swatches, (swatch) => {
-          return swatch.hex;
-        }),
-        hex
+    let defaultModeId = await getDefaultModeId();
+    for (let swatchIndex = 0; swatchIndex < existingSwatches.length; swatchIndex++) {
+      let currentSwatch = existingSwatches[swatchIndex];
+      await updateSwatchVariable(
+        currentSwatch,
+        currentSwatch.paletteId,
+        currentSwatch.colorVariableId,
+        saveColorVariables
       );
-    });
-    await setData("savedPaletteList", newPaletteList);
+    }
+  };
+  const removeColorById = async (paletteId) => {
+    var _a;
+    await removeFromListById("paletteList", paletteId);
+    let relatedSwatches = await getListItemsByKeyValue(
+      "swatchList",
+      "paletteId",
+      paletteId
+    );
+    for (let swatchIndex = 0; swatchIndex < relatedSwatches.length; swatchIndex++) {
+      let currentSwatch = relatedSwatches[swatchIndex];
+      await ((_a = figma.variables.getVariableById(currentSwatch.colorVariableId)) == null ? void 0 : _a.remove());
+      await removeFromListById("swatchList", currentSwatch.id);
+    }
+    let currentCollection = await getPaletteCollection();
+    currentCollection.remove();
   };
   const initPlugin = async () => {
     await figma.ui.postMessage({
@@ -10163,26 +10243,35 @@ function main_default() {
   figma.ui.onmessage = async (msg) => {
     switch (msg.type) {
       case "reset-data":
-        await setData("savedSeedColorList", "");
-        await setData("savedPaletteList", "");
+        await setData("paletteList", []);
+        await setData("swatchList", []);
         await setData("paletteerConfig", "");
         postPalettesToUI();
         postConfigToUI();
+        updateSwatchVariableColors(false);
         break;
       case "add-color":
-        await newColorFromHex(msg.hex);
+        await newPaletteFromHex(msg.hex);
         postPalettesToUI();
         break;
       case "remove-color":
-        await removeColorByHex(msg.hex);
+        await removeColorById(msg.paletteId);
         postPalettesToUI();
         break;
       case "update-palette":
-        await updatePalette(msg.hex, msg.paletteId);
+        await updatePaletteById(msg.paletteId, msg.hex, msg.name);
+        postPalettesToUI();
+        break;
+      case "update-palette-color":
+        await updatePaletteColorsById(msg.paletteId, msg.hex);
+        postPalettesToUI();
+        break;
+      case "update-variables":
+        await updateVariables();
         postPalettesToUI();
         break;
       case "update-palette-name":
-        await updatePaletteName(msg.name, msg.paletteId);
+        await updatePaletteNameById(msg.paletteId, msg.name);
         postPalettesToUI();
         break;
       case "get-variable-color":
@@ -10206,13 +10295,14 @@ function main_default() {
     }
   };
 }
-var import_lodash2, import_chroma_js2, colorNames;
+var import_lodash3, import_lodash4, colorNames;
 var init_main = __esm({
   "src/main.ts"() {
     "use strict";
     init_lib();
-    import_lodash2 = __toESM(require_lodash2());
-    import_chroma_js2 = __toESM(require_chroma_js());
+    import_lodash3 = __toESM(require_lodash2());
+    init_non_secure();
+    import_lodash4 = __toESM(require_lodash2());
     init_generateColors();
     init_crayolaColors();
     colorNames = new Array();

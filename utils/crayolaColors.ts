@@ -16,7 +16,7 @@ const crayolaColors = [
   },
   {
     hex: "#78DBE2",
-    name: "Aquamarine",
+    name: "Nina's Teal", // Previously "Aquamarine"
     rgb: "(120, 219, 226)",
   },
   {
