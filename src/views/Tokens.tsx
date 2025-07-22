@@ -233,7 +233,6 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
             <Button
               buttonType="color"
               iconType="left-arrow"
-              buttonColor={colors.purple[7]}
               text="Back to palettes"
               onClick={() => setCurrentView("seeds")}
             />
@@ -241,19 +240,16 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
           <div style={codeSelectionButtons}>
             <Button
               buttonType={selectedLanguage === "json" ? "secondary" : "text"}
-              buttonColor={colors.purple[7]}
               text="JSON Tokens"
               onClick={() => setSelectedLanguage("json")}
             />
             <Button
               buttonType={selectedLanguage === "js" ? "secondary" : "text"}
-              buttonColor={colors.purple[7]}
               text="Javascript Object"
               onClick={() => setSelectedLanguage("js")}
             />
             <Button
               buttonType={selectedLanguage === "css" ? "secondary" : "text"}
-              buttonColor={colors.purple[7]}
               text="CSS Variables"
               onClick={() => setSelectedLanguage("css")}
             />
@@ -277,7 +273,6 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
                 <Button
                   buttonType="color"
                   iconType="clipboard"
-                  buttonColor={colors.purple[7]}
                   text="Copy to Clipboard"
                   onClick={async () => {
                     try {

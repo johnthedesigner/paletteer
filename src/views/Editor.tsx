@@ -2,12 +2,9 @@ import { h, Fragment } from "preact";
 import _ from "lodash";
 
 import layoutStyles from "../styles/layout.module.css";
-import styles from "./Editor.module.css";
 import Button from "../components/Button";
 import ColorEditor from "../components/ColorEditor";
-import PaletteList from "../components/PaletteList";
 import SwatchList from "../components/SwatchList";
-import { colors } from "../../utils/tokens";
 
 interface EditorProps {
   selectedPaletteId: string;
@@ -40,9 +37,11 @@ const Editor = ({
             <Button
               buttonType="color"
               iconType="left-arrow"
-              buttonColor={colors.purple[7]}
               text="Back to saved palettes"
-              onClick={() => setCurrentView("seeds")}
+              onClick={() => {
+                console.log("back to saved palettes");
+                setCurrentView("seeds");
+              }}
             />
             <p className={layoutStyles["sidebar-title"]}>
               Let's get this color just right.

@@ -1,6 +1,7 @@
 import { h } from "preact";
 
 import Button from "./Button";
+import { colors } from "../../utils/tokens";
 
 interface IProps {
   fileName: string;

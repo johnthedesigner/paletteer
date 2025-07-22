@@ -5,6 +5,7 @@ import chroma from "chroma-js";
 
 import Text from "./Text";
 import Icon from "./Icon";
+import { convertHexColorToRgbColor } from "@create-figma-plugin/utilities";
 
 interface IProps {
   palette: any;
@@ -22,9 +23,11 @@ const getPaletteSwatches = (palette: any, swatches: any) => {
 
 // Find the source color hex code for this palette ID
 const getPaletteSourceHex = (palette: any, swatches: any) => {
-  return _.find(swatches, (swatch: any) => {
+  let sourceSwatch = _.find(swatches, (swatch: any) => {
     return swatch.id === palette.sourceColorId;
-  }).variableColor;
+  });
+  let variableColor = sourceSwatch ? sourceSwatch.variableColor : "#FFFFFF";
+  return variableColor;
 };
 
 const ColorEditor = ({
@@ -60,9 +63,12 @@ const ColorEditor = ({
   const [hexValue, setHexValue] = useState(
     getPaletteSourceHex(palette, swatches)
   );
-  // useEffect(() => {
-  //   setHexValue(getPaletteSourceHex(palette, swatches));
-  // }, [palette, swatches]);
+  useEffect(() => {
+    let newHex = getPaletteSourceHex(palette, swatches);
+    if (newHex !== hexValue) {
+      setHexValue(newHex);
+    }
+  }, [palette, swatches]);
   const handleHexInput = (e: any) => {
     let inputValue = e.target.value;
     setHexValue(inputValue);
@@ -71,10 +77,6 @@ const ColorEditor = ({
     console.log("UPDATE HEX CODE", palette.id, hexValue);
     updatePaletteColor(palette.id, hexValue);
   };
-  // When palette is updated, refresh source hex color value
-  // useEffect(() => {
-  //   setHexValue(palette.swatches[palette.sourceColorIndex].variableColor);
-  // }, [palette]);
 
   // Set up color adjustments
   const seedHex = getPaletteSourceHex(palette, swatches);
@@ -201,7 +203,10 @@ const ColorEditor = ({
             return (
               <button
                 style={adjustmentStepStyles(newHexColor)}
-                onClick={() => updatePaletteColor(palette.id, newHexColor)}>
+                onClick={() => {
+                  console.log("UPDATE COLOR", newHexColor);
+                  updatePaletteColor(palette.id, newHexColor);
+                }}>
                 {index === adjustmentOptionCount && (
                   <svg
                     width="11"

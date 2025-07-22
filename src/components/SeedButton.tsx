@@ -15,11 +15,11 @@ const SeedButton = ({ color, swatches, addSeedColor }: ButtonProps) => {
   let existingColors = _.map(swatches, (swatch: any) => {
     return swatch.hex.toLowerCase();
   });
-  console.log("CHECK EXISTING COLORS", existingColors, color);
   let colorInPalette = _.includes(existingColors, color.toLowerCase());
   let displayColor = chroma.contrast(color, "white") >= 4.5 ? "white" : "black";
   const handleClick = (e: any) => {
-    if (!colorInPalette) {
+    if (!colorInPalette || true) {
+      // TODO: remove this override
       addSeedColor(color);
     }
   };

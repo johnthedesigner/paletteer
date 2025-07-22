@@ -760,9 +760,9 @@ var require_lodash = __commonJS({
         }
         return result;
       }
-      function mapToArray(map2) {
-        var index = -1, result = Array(map2.size);
-        map2.forEach(function(value, key) {
+      function mapToArray(map) {
+        var index = -1, result = Array(map.size);
+        map.forEach(function(value, key) {
           result[++index] = [key, value];
         });
         return result;
@@ -1373,7 +1373,7 @@ var require_lodash = __commonJS({
           }, wait);
         }
         function baseDifference(array, values2, iteratee2, comparator) {
-          var index = -1, includes3 = arrayIncludes, isCommon = true, length = array.length, result2 = [], valuesLength = values2.length;
+          var index = -1, includes2 = arrayIncludes, isCommon = true, length = array.length, result2 = [], valuesLength = values2.length;
           if (!length) {
             return result2;
           }
@@ -1381,10 +1381,10 @@ var require_lodash = __commonJS({
             values2 = arrayMap(values2, baseUnary(iteratee2));
           }
           if (comparator) {
-            includes3 = arrayIncludesWith;
+            includes2 = arrayIncludesWith;
             isCommon = false;
           } else if (values2.length >= LARGE_ARRAY_SIZE) {
-            includes3 = cacheHas;
+            includes2 = cacheHas;
             isCommon = false;
             values2 = new SetCache(values2);
           }
@@ -1400,7 +1400,7 @@ var require_lodash = __commonJS({
                   }
                 }
                 result2.push(value);
-              } else if (!includes3(values2, computed, comparator)) {
+              } else if (!includes2(values2, computed, comparator)) {
                 result2.push(value);
               }
             }
@@ -1513,7 +1513,7 @@ var require_lodash = __commonJS({
           return number >= nativeMin(start, end) && number < nativeMax(start, end);
         }
         function baseIntersection(arrays, iteratee2, comparator) {
-          var includes3 = comparator ? arrayIncludesWith : arrayIncludes, length = arrays[0].length, othLength = arrays.length, othIndex = othLength, caches = Array2(othLength), maxLength = Infinity, result2 = [];
+          var includes2 = comparator ? arrayIncludesWith : arrayIncludes, length = arrays[0].length, othLength = arrays.length, othIndex = othLength, caches = Array2(othLength), maxLength = Infinity, result2 = [];
           while (othIndex--) {
             var array = arrays[othIndex];
             if (othIndex && iteratee2) {
@@ -1528,11 +1528,11 @@ var require_lodash = __commonJS({
             while (++index < length && result2.length < maxLength) {
               var value = array[index], computed = iteratee2 ? iteratee2(value) : value;
               value = comparator || value !== 0 ? value : 0;
-              if (!(seen ? cacheHas(seen, computed) : includes3(result2, computed, comparator))) {
+              if (!(seen ? cacheHas(seen, computed) : includes2(result2, computed, comparator))) {
                 othIndex = othLength;
                 while (--othIndex) {
                   var cache = caches[othIndex];
-                  if (!(cache ? cacheHas(cache, computed) : includes3(arrays[othIndex], computed, comparator))) {
+                  if (!(cache ? cacheHas(cache, computed) : includes2(arrays[othIndex], computed, comparator))) {
                     continue outer;
                   }
                 }
@@ -2044,17 +2044,17 @@ var require_lodash = __commonJS({
           return result2 == "0" && 1 / value == -INFINITY ? "-0" : result2;
         }
         function baseUniq(array, iteratee2, comparator) {
-          var index = -1, includes3 = arrayIncludes, length = array.length, isCommon = true, result2 = [], seen = result2;
+          var index = -1, includes2 = arrayIncludes, length = array.length, isCommon = true, result2 = [], seen = result2;
           if (comparator) {
             isCommon = false;
-            includes3 = arrayIncludesWith;
+            includes2 = arrayIncludesWith;
           } else if (length >= LARGE_ARRAY_SIZE) {
             var set2 = iteratee2 ? null : createSet(array);
             if (set2) {
               return setToArray(set2);
             }
             isCommon = false;
-            includes3 = cacheHas;
+            includes2 = cacheHas;
             seen = new SetCache();
           } else {
             seen = iteratee2 ? [] : result2;
@@ -2074,7 +2074,7 @@ var require_lodash = __commonJS({
                   seen.push(computed);
                 }
                 result2.push(value);
-              } else if (!includes3(seen, computed, comparator)) {
+              } else if (!includes2(seen, computed, comparator)) {
                 if (seen !== result2) {
                   seen.push(computed);
                 }
@@ -2876,8 +2876,8 @@ var require_lodash = __commonJS({
           result2 = result2 === iteratee ? baseIteratee : result2;
           return arguments.length ? result2(arguments[0], arguments[1]) : result2;
         }
-        function getMapData(map3, key) {
-          var data = map3.__data__;
+        function getMapData(map2, key) {
+          var data = map2.__data__;
           return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
         }
         function getMatchData(object) {
@@ -3781,14 +3781,14 @@ var require_lodash = __commonJS({
         var find2 = createFind(findIndex);
         var findLast = createFind(findLastIndex);
         function flatMap(collection, iteratee2) {
-          return baseFlatten(map2(collection, iteratee2), 1);
+          return baseFlatten(map(collection, iteratee2), 1);
         }
         function flatMapDeep(collection, iteratee2) {
-          return baseFlatten(map2(collection, iteratee2), INFINITY);
+          return baseFlatten(map(collection, iteratee2), INFINITY);
         }
         function flatMapDepth(collection, iteratee2, depth) {
           depth = depth === undefined2 ? 1 : toInteger(depth);
-          return baseFlatten(map2(collection, iteratee2), depth);
+          return baseFlatten(map(collection, iteratee2), depth);
         }
         function forEach(collection, iteratee2) {
           var func = isArray(collection) ? arrayEach : baseEach;
@@ -3805,7 +3805,7 @@ var require_lodash = __commonJS({
             baseAssignValue(result2, key, [value]);
           }
         });
-        function includes2(collection, value, fromIndex, guard) {
+        function includes(collection, value, fromIndex, guard) {
           collection = isArrayLike(collection) ? collection : values(collection);
           fromIndex = fromIndex && !guard ? toInteger(fromIndex) : 0;
           var length = collection.length;
@@ -3824,7 +3824,7 @@ var require_lodash = __commonJS({
         var keyBy = createAggregator(function(result2, value, key) {
           baseAssignValue(result2, key, value);
         });
-        function map2(collection, iteratee2) {
+        function map(collection, iteratee2) {
           var func = isArray(collection) ? arrayMap : baseMap;
           return func(collection, getIteratee(iteratee2, 3));
         }
@@ -5078,7 +5078,7 @@ var require_lodash = __commonJS({
         function stubTrue() {
           return true;
         }
-        function times2(n, iteratee2) {
+        function times(n, iteratee2) {
           n = toInteger(n);
           if (n < 1 || n > MAX_SAFE_INTEGER) {
             return [];
@@ -5202,7 +5202,7 @@ var require_lodash = __commonJS({
         lodash.keyBy = keyBy;
         lodash.keys = keys;
         lodash.keysIn = keysIn;
-        lodash.map = map2;
+        lodash.map = map;
         lodash.mapKeys = mapKeys;
         lodash.mapValues = mapValues;
         lodash.matches = matches;
@@ -5334,7 +5334,7 @@ var require_lodash = __commonJS({
         lodash.hasIn = hasIn;
         lodash.head = head;
         lodash.identity = identity;
-        lodash.includes = includes2;
+        lodash.includes = includes;
         lodash.indexOf = indexOf;
         lodash.inRange = inRange;
         lodash.invoke = invoke;
@@ -5427,7 +5427,7 @@ var require_lodash = __commonJS({
         lodash.sum = sum;
         lodash.sumBy = sumBy;
         lodash.template = template;
-        lodash.times = times2;
+        lodash.times = times;
         lodash.toFinite = toFinite;
         lodash.toInteger = toInteger;
         lodash.toLength = toLength;
@@ -9619,8 +9619,8 @@ var init_generateColors = __esm({
         return Math.max(Math.min(number, 1), 0);
       };
       let colorOptionsArray = new Array();
-      let hueRate = 0.02;
-      let satRate = 3e-3;
+      let hueRate = 0.1;
+      let satRate = 0.02;
       let lumRate = 0.01;
       import_lodash2.default.times(steps * 20, (index) => {
         let sourceColorHSV = (0, import_chroma_js2.default)(sourceColor).hsv();
@@ -9715,6 +9715,7 @@ function main_default() {
   const paletteCollectionName = "Paletteer Palettes";
   const getData = async (string) => {
     let stringData = await figma.root.getPluginData(string);
+    console.log("GETTING DATA", string, stringData);
     if (stringData === "") {
       return null;
     } else {
@@ -9780,7 +9781,7 @@ function main_default() {
   };
   const setConfig = async (key, value) => {
     let configData = await getData(configDataName);
-    if (configData === "") {
+    if (!configData) {
       configData = {};
     }
     configData[key] = value;
@@ -9801,17 +9802,19 @@ function main_default() {
     return colorNames2;
   };
   const colorVariableFactory = async (index, paletteCollection, paletteName) => {
+    console.log("ADDING VARIABLE TO COLLECTION", paletteCollection);
     let colorVariable = await figma.variables.createVariable(
       `${paletteName}/${(index + 1).toFixed(0).padStart(2, "0")}`,
       // Name variables upon creation, ex. 'palette name/01'
       paletteCollection,
       "COLOR"
     );
+    console.log("COLOR VARIABLE", colorVariable);
     return colorVariable;
   };
   const getPaletteCollection = async () => {
     let configData = await getConfig();
-    let paletteCollectionId = configData.paletteCollectionId ? configData.paletteCollectionId : null;
+    let paletteCollectionId = configData && configData.paletteCollectionId ? configData.paletteCollectionId : null;
     let paletteCollection;
     if (paletteCollectionId === null) {
       paletteCollection = await figma.variables.createVariableCollection(
@@ -9823,63 +9826,28 @@ function main_default() {
         paletteCollectionId
       );
     }
+    console.log(
+      "I FOUND/MADE A PALETTE COLLECTION",
+      paletteCollection,
+      figma.variables.getLocalVariableCollections()
+    );
     return paletteCollection;
-  };
-  const getSwatchVariable = async (swatch, palette, variableId, saveColorVariables2 = true) => {
-    var _a;
-    let paletteCollection = await getPaletteCollection();
-    let defaultModeId = await getDefaultModeId();
-    let swatchVariable;
-    if (saveColorVariables2) {
-      if (variableId != null) {
-        swatchVariable = await figma.variables.getVariableById(variableId);
-      } else {
-        swatchVariable = await colorVariableFactory(
-          swatch.index,
-          paletteCollection,
-          palette.name
-        );
-        variableId = swatchVariable.id;
-      }
-    } else {
-      if (variableId != null) {
-        (_a = figma.variables.getVariableById(variableId)) == null ? void 0 : _a.remove();
-      }
-    }
-    return swatchVariable;
   };
   const updateSwatchVariableNames = async (saveColorVariables2 = true) => {
     let currentPalettes = await getList("paletteList");
     let currentSwatches = await getList("swatchList");
-    console.log("UPDATING VARIABLE NAMES");
     if (saveColorVariables2) {
-      console.log("SAVING VARIABLES ENABLED", currentSwatches);
       for (let swatchIndex = 0; swatchIndex < currentSwatches.length; swatchIndex++) {
         let swatch = currentSwatches[swatchIndex];
         let swatchPalette = import_lodash4.default.find(currentPalettes, (palette) => {
           return palette.id === swatch.paletteId;
         });
-        console.log("UPDATING SWATCH", swatch);
         let swatchVariable = await figma.variables.getVariableById(
           swatch.colorVariableId
         );
-        console.log(
-          "UPDATING VARIABLE",
-          swatch.colorVariableId,
-          swatchVariable
-        );
         if (swatchVariable) {
-          console.log(
-            "TRY VARIABLE NAME",
-            `${swatchPalette.name}/${(swatch.index + 1).toFixed(0).padStart(2, "0")}`
-          );
           let updatedName = `${swatchPalette.name}/${(swatch.index + 1).toFixed(0).padStart(2, "0")}`;
           let existingName = swatchVariable.name;
-          console.log(
-            "CHECK IF VARIABLE NAME HAS CHANGED",
-            existingName,
-            updatedName
-          );
           if (existingName != updatedName) {
             swatchVariable.name = `${swatchPalette.name}/${(swatch.index + 1).toFixed(0).padStart(2, "0")}`;
           }
@@ -9888,6 +9856,7 @@ function main_default() {
     }
   };
   const updateSwatchVariableColors = async (saveColorVariables2 = true) => {
+    console.log("TIME TO UPDATE VARIABLE COLORS");
     let currentSwatches = await getList("swatchList");
     if (saveColorVariables2) {
       let defaultModeId = await getDefaultModeId();
@@ -9896,6 +9865,7 @@ function main_default() {
         let swatchVariable = await figma.variables.getVariableById(
           swatch.colorVariableId
         );
+        console.log("UPDATE THIS VARIABLE", swatch, swatchVariable);
         if (swatchVariable) {
           await (swatchVariable == null ? void 0 : swatchVariable.setValueForMode(defaultModeId, {
             r: swatch.rgb[0] / 255,
@@ -9903,13 +9873,24 @@ function main_default() {
             b: swatch.rgb[2] / 255
           }));
         }
+        console.log("UPDATED VARIABLE", swatchVariable);
       }
     } else {
       let existingCollection = await getPaletteCollection();
+      console.log(
+        "NOT SAVING, DELETE COLLECTION IF WE HAVE ONE",
+        existingCollection
+      );
       if (existingCollection) {
         existingCollection.remove();
       }
     }
+    console.log("DONE UPDATING VARIABLES 1", await getList("swatchList"));
+    console.log("DONE UPDATING VARIABLES 2", await getPaletteCollection());
+    let checkSwatchList = await getList("swatchList");
+    let checkSwatch = checkSwatchList[0];
+    let checkVariable = await getVariableColorById(checkSwatch.colorVariableId);
+    console.log("DOES THIS VARIABLE STILL EXIST?", checkVariable);
   };
   const updateSwatchVariable = async (swatch, paletteId, variableId, saveColorVariables2 = true) => {
     var _a;
@@ -9943,6 +9924,7 @@ function main_default() {
     return variableId;
   };
   const newPaletteFromHex = async (hex) => {
+    console.log("CREATING A NEW PALETTE");
     let paletteId = nanoid();
     let placeholderPalette = {
       id: paletteId,
@@ -9973,16 +9955,22 @@ function main_default() {
         paletteCollection,
         generatedPalette == null ? void 0 : generatedPalette.name
       );
+      console.log("WE GOT A SWATCH VARIABLE", swatchVariable);
       await addToList("swatchList", __spreadProps(__spreadValues({}, swatch), {
         colorVariableId: swatchVariable.id,
         paletteId
       }));
     }
-    updateSwatchVariableNames();
-    updateSwatchVariableColors();
+    await updateSwatchVariableNames();
+    await updateSwatchVariableColors();
   };
   const updatePaletteColorsById = async (paletteId, hex) => {
     let existingPalette = await getListItemById(paletteId, "paletteList");
+    let existingPaletteSwatches = await getListItemsByKeyValue(
+      "swatchList",
+      "paletteId",
+      paletteId
+    );
     let generatedPalette = await generateColors_default(
       hex,
       16,
@@ -9991,11 +9979,18 @@ function main_default() {
       true,
       await colorNamesInUse()
     );
+    let existingSourceColorSwatch = await import_lodash4.default.find(
+      existingPaletteSwatches,
+      (swatch) => {
+        return swatch.index === generatedPalette.sourceColorIndex;
+      }
+    );
+    let existingSourceColorSwatchId = existingSourceColorSwatch ? existingSourceColorSwatch.id : null;
     let updatedPalette = {
       id: paletteId,
       name: generatedPalette.name,
       sourceColorIndex: generatedPalette.sourceColorIndex,
-      sourceColorId: generatedPalette.swatches[generatedPalette.sourceColorIndex].id
+      sourceColorId: existingSourceColorSwatchId
     };
     await updateListById("paletteList", paletteId, updatedPalette);
     let existingSwatches = await getListItemsByKeyValue(
@@ -10003,7 +9998,6 @@ function main_default() {
       "paletteId",
       paletteId
     );
-    console.log("GET READY FOR SWATCH UPDATES", existingSwatches, paletteId);
     for (let swatchIndex = 0; swatchIndex < existingSwatches.length; swatchIndex++) {
       let existingSwatch = existingSwatches[swatchIndex];
       let generatedSwatch = generatedPalette.swatches[swatchIndex];
@@ -10015,16 +10009,15 @@ function main_default() {
       console.log("TIME TO UPDATE A SWATCH", existingSwatch, updatedSwatch);
       await updateListById("swatchList", existingSwatch.id, updatedSwatch);
     }
-    updateSwatchVariableNames();
-    updateSwatchVariableColors();
+    await updateSwatchVariableColors();
+    await updateSwatchVariableNames();
+    await postPalettesToUI();
   };
   const updatePaletteNameById = async (paletteId, name) => {
-    console.log("UPDATING PALETTE NAME", paletteId, name);
     let existingPalette = await getListItemById(paletteId, "paletteList");
     let updatedPalette = __spreadProps(__spreadValues({}, existingPalette), {
       name
     });
-    console.log("UPDATED PALETTE DATA", updatedPalette);
     await updateListById("paletteList", paletteId, updatedPalette);
     await updateSwatchVariableNames();
   };
@@ -10099,56 +10092,26 @@ function main_default() {
     }
     return (0, import_lodash3.uniq)(selectionColors);
   };
-  const hexColorIsSaved = async (hex) => {
-    let swatches = await getData("swatchList");
-    let seedColorsToCompare = (0, import_lodash3.map)(swatches, (swatch) => {
-      return swatch.hex;
+  let getSelectionColors = () => {
+    let currentSelectionPaints = figma.getSelectionColors();
+    let solidPaints = import_lodash4.default.filter(currentSelectionPaints == null ? void 0 : currentSelectionPaints.paints, (paint) => {
+      return paint.type === "SOLID";
     });
-    return (0, import_lodash3.includes)(seedColorsToCompare, hex);
+    let currentSelectionColors = import_lodash4.default.map(solidPaints, (paint) => {
+      return `#${convertRgbColorToHexColor(paint.color)}`;
+    });
+    console.log(
+      "PAINTS",
+      currentSelectionPaints == null ? void 0 : currentSelectionPaints.paints,
+      currentSelectionColors
+    );
+    return currentSelectionColors;
   };
   const getVariableColorById = async (variableId) => {
     let colorVariableData = await figma.variables.getVariableById(variableId);
     let defaultModeId = await getDefaultModeId();
     let variableRgba = colorVariableData == null ? void 0 : colorVariableData.valuesByMode[defaultModeId];
     return `#${convertRgbColorToHexColor(variableRgba)}`;
-  };
-  const mapVariablesToPalettes = async () => {
-    let currentPalettes = await getList("paletteList");
-    let paletteIndex = 0;
-    try {
-      for (var iter2 = __forAwait(currentPalettes), more2, temp2, error2; more2 = !(temp2 = await iter2.next()).done; more2 = false) {
-        let palette = temp2.value;
-        let swatchIndex = 0;
-        try {
-          for (var iter = __forAwait(palette.swatches), more, temp, error; more = !(temp = await iter.next()).done; more = false) {
-            let swatch = temp.value;
-            let variableColor = await getVariableColorById(swatch.colorVariableId);
-            currentPalettes[paletteIndex].swatches[swatchIndex].variableColor = variableColor;
-            swatchIndex++;
-          }
-        } catch (temp) {
-          error = [temp];
-        } finally {
-          try {
-            more && (temp = iter.return) && await temp.call(iter);
-          } finally {
-            if (error)
-              throw error[0];
-          }
-        }
-        paletteIndex++;
-      }
-    } catch (temp2) {
-      error2 = [temp2];
-    } finally {
-      try {
-        more2 && (temp2 = iter2.return) && await temp2.call(iter2);
-      } finally {
-        if (error2)
-          throw error2[0];
-      }
-    }
-    return currentPalettes;
   };
   const mapVariablesToSwatches = async () => {
     let currentSwatches = await getList("swatchList");
@@ -10226,13 +10189,18 @@ function main_default() {
       await ((_a = figma.variables.getVariableById(currentSwatch.colorVariableId)) == null ? void 0 : _a.remove());
       await removeFromListById("swatchList", currentSwatch.id);
     }
-    let currentCollection = await getPaletteCollection();
-    currentCollection.remove();
   };
   const initPlugin = async () => {
+    let previousCollection = await getPaletteCollection();
+    console.log(
+      "DOES THE PREVIOUS COLLECTION STILL EXIST?",
+      previousCollection
+    );
     await figma.ui.postMessage({
       type: "init-plugin",
-      selectionColors: await getColors(figma.currentPage.selection),
+      // selectionColors: await getColors(figma.currentPage.selection), // Legacy method before getSelectionColors existed
+      selectionColors: await getSelectionColors(),
+      // selectionColors: [],
       pageColors: await getColors(figma.currentPage.children),
       fileName: figma.root.name
     });
@@ -10243,34 +10211,47 @@ function main_default() {
   figma.ui.onmessage = async (msg) => {
     switch (msg.type) {
       case "reset-data":
+        console.log("RESETTING ALL PLUGIN DATA");
+        let paletteCollection = await getPaletteCollection();
         await setData("paletteList", []);
         await setData("swatchList", []);
         await setData("paletteerConfig", "");
         postPalettesToUI();
         postConfigToUI();
-        updateSwatchVariableColors(false);
+        await paletteCollection.remove();
+        updateSwatchVariableColors();
+        break;
+      case "window-size":
+        let windowSize = msg.windowSize === "small" ? { width: 200, height: 600 } : { width: 900, height: 600 };
+        figma.ui.resize(windowSize.width, windowSize.height);
         break;
       case "add-color":
+        await getPaletteCollection();
         await newPaletteFromHex(msg.hex);
         postPalettesToUI();
         break;
       case "remove-color":
+        await getPaletteCollection();
         await removeColorById(msg.paletteId);
         postPalettesToUI();
         break;
       case "update-palette":
+        await getPaletteCollection();
         await updatePaletteById(msg.paletteId, msg.hex, msg.name);
         postPalettesToUI();
         break;
       case "update-palette-color":
+        await getPaletteCollection();
         await updatePaletteColorsById(msg.paletteId, msg.hex);
         postPalettesToUI();
         break;
       case "update-variables":
+        await getPaletteCollection();
         await updateVariables();
         postPalettesToUI();
         break;
       case "update-palette-name":
+        await getPaletteCollection();
         await updatePaletteNameById(msg.paletteId, msg.name);
         postPalettesToUI();
         break;

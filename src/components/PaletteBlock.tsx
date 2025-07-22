@@ -6,6 +6,7 @@ import { useState } from "react";
 import getPaletteSwatches from "../../utils/getPaletteSwatches";
 import styles from "./PaletteBlock.module.css";
 import Icon from "./Icon";
+import tempColor from "../../utils/tempColor";
 
 interface BlockProps {
   palette: any;
@@ -21,6 +22,9 @@ const PaletteBlock = ({
   removeSeedColor,
 }: BlockProps) => {
   const [deleteHovered, setDeleteHovered] = useState(false);
+
+  console.log("CHECK THE SWATCHES", swatches);
+  console.log("CHECK THE PALETTE", palette);
 
   // CHECK IF THIS IS A TEMPORARY PALETTE OR IF IT HAS SWATCHES
   if (palette.temporaryHex) {
@@ -43,6 +47,10 @@ const PaletteBlock = ({
     let sourceSwatch = _.find(swatches, (swatch: any) => {
       return palette.sourceColorId === swatch.id;
     });
+    // If we can't find the source color swatch for some reason, use a placeholder
+    if (!sourceSwatch) {
+      sourceSwatch = tempColor;
+    }
     // Get all of the matching swatches for this palette ordered by index
     let paletteSwatches = getPaletteSwatches(palette, swatches);
     // Get the darker and lighter halves of the palette sorted by
@@ -50,14 +58,21 @@ const PaletteBlock = ({
     let darkColors = _.sortBy(
       _.slice(paletteSwatches, 8, 16),
       (swatch: any) => {
-        return chroma.contrast(sourceSwatch.hex, swatch.hex);
+        let sourceHex = sourceSwatch ? sourceSwatch.hex : "#FFFFFF";
+        let newHex = swatch ? swatch.hex : "#FFFFFF";
+        // console.log("GET COLORS FROM", sourceHex, newHex);
+        return chroma.contrast(sourceHex, newHex);
       },
       "asc"
     );
     let lightColors = _.sortBy(
       _.slice(paletteSwatches, 0, 8),
       (swatch: any) => {
-        return chroma.contrast(sourceSwatch.hex, swatch.hex);
+        let sourceHex = sourceSwatch ? sourceSwatch.hex : "#FFFFFF";
+        let newHex = swatch ? swatch.hex : "#FFFFFF";
+        console.log("GET COLORS FROM", sourceHex, newHex);
+        return chroma.contrast(sourceHex, newHex);
+        // return chroma.contrast(sourceSwatch.hex, swatch.hex);
       },
       "asc"
     );
@@ -90,44 +105,50 @@ const PaletteBlock = ({
 
     return (
       <>
-        <div
-          className={styles["palette-block"]}
-          style={{
-            background: sourceSwatch.hex,
-            color: textColor?.hex || "red",
-          }}
-          onClick={() => editPalette(palette.id)}>
-          {paletteSwatches?.length === 0 && (
-            <p className={styles["palette-block__name"]}>Loading...</p>
-          )}
-          {paletteSwatches?.length > 0 && (
-            <>
-              <div className={styles["palette-block__header"]}>
-                <p className={styles["palette-block__name"]}>{palette.name}</p>
-                <p className={styles["palette-block__hex"]}>
-                  {sourceSwatch.hex}
-                </p>
-              </div>
-              <div className={styles["palette-block__footer"]}>
-                <button
-                  onMouseOver={() => setDeleteHovered(true)}
-                  onMouseOut={() => setDeleteHovered(false)}
-                  style={{
-                    color: textColor.hex,
-                    background: deleteHovered ? buttonColor.hex : "transparent",
-                  }}
-                  className={styles["palette-block__button"]}
-                  onClick={(e: any) => {
-                    e.stopPropagation();
-                    removeSeedColor(palette.id);
-                  }}>
-                  <Icon type={"trash"} iconColor={textColor.hex} />
-                  Delete
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+        {sourceSwatch && (
+          <div
+            className={styles["palette-block"]}
+            style={{
+              background: sourceSwatch.hex,
+              color: textColor?.hex || "red",
+            }}
+            onClick={() => editPalette(palette.id)}>
+            {paletteSwatches?.length === 0 && (
+              <p className={styles["palette-block__name"]}>Loading...</p>
+            )}
+            {paletteSwatches?.length > 0 && (
+              <>
+                <div className={styles["palette-block__header"]}>
+                  <p className={styles["palette-block__name"]}>
+                    {palette.name}
+                  </p>
+                  <p className={styles["palette-block__hex"]}>
+                    {sourceSwatch.hex}
+                  </p>
+                </div>
+                <div className={styles["palette-block__footer"]}>
+                  <button
+                    onMouseOver={() => setDeleteHovered(true)}
+                    onMouseOut={() => setDeleteHovered(false)}
+                    style={{
+                      color: textColor.hex,
+                      background: deleteHovered
+                        ? buttonColor.hex
+                        : "transparent",
+                    }}
+                    className={styles["palette-block__button"]}
+                    onClick={(e: any) => {
+                      e.stopPropagation();
+                      removeSeedColor(palette.id);
+                    }}>
+                    <Icon type={"trash"} iconColor={textColor.hex} />
+                    Delete
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </>
     );
   }

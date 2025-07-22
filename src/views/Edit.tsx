@@ -175,7 +175,6 @@ const Edit = ({
             <Button
               buttonType="color"
               iconType="arrow-right"
-              buttonColor={colors.purple[7]}
               text="Back to saved palettes"
               onClick={() => setCurrentView("seeds")}
             />
@@ -269,21 +268,18 @@ const Edit = ({
                     onClick={null}
                     text="Settings"
                     buttonType="primary"
-                    buttonColor={colors.purple[7]}
                     iconType="settings"
                   />
                   <Button
                     onClick={null}
                     text="Generate Code"
                     buttonType="secondary"
-                    buttonColor={colors.purple[7]}
                     iconType="code"
                   />
                   <Button
                     onClick={null}
                     text="Refresh"
                     buttonType="text"
-                    buttonColor={colors.purple[7]}
                     iconType="settings"
                   />
                 </div>

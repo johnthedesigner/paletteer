@@ -60,18 +60,22 @@ const Palette = ({
               <Button
                 text="Reset"
                 buttonType="color"
-                buttonColor={colors.purple[7]}
                 iconType="reset"
                 onClick={() => resetData()}
               />
               <Button
                 text="Get tokens"
                 buttonType="color"
-                buttonColor={colors.purple[7]}
                 disabled={palettes.length === 0}
                 iconType="code"
                 onClick={() => setCurrentView("tokens")}
               />
+              {/* <Button
+                text="Toggle Size"
+                buttonType="color"
+                iconType="code"
+                onClick={() => setCurrentView("select")}
+              /> */}
             </>
           )}
         </div>

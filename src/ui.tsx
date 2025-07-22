@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import _ from "lodash";
 
 import "!./styles.css";
-import Palettes from "./views/Palettes";
-import Edit from "./views/Edit";
+// import Palettes from "./views/Palettes";
+// import Edit from "./views/Edit";
 import Tokens from "./views/Tokens";
-import Seeds from "./views/Seeds";
 import Editor from "./views/Editor";
 
 // REDESIGNED VIEWS
 import Palette from "./views/Palette";
+import SeedSidebar from "./components/SeedSidebar";
 
 function Plugin() {
   const [initComplete, setInitComplete] = useState(false);
@@ -24,6 +24,7 @@ function Plugin() {
     stepCount: 16,
   });
   const [paletteLoading, setPaletteLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setPaletteLoading(
@@ -57,6 +58,21 @@ function Plugin() {
     setCurrentView("editor");
   };
 
+  // Change window size for color selection mode
+  useEffect(() => {
+    let windowSize = currentView === "select" ? "small" : "large";
+    console.log("ON CURRENT VIEW CHANGE", currentView);
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "window-size",
+          windowSize,
+        },
+      },
+      "*"
+    );
+  }, [currentView]);
+
   // Send and receive plugin state messages
   const updateConfig = (key: string, value: any) => {
     // Update a single config value
@@ -73,6 +89,7 @@ function Plugin() {
   };
 
   const addSeedColor = (hex: any) => {
+    setLoading(true);
     // Send new color to plugin back end
     setTimeout(() => {
       parent.postMessage(
@@ -149,11 +166,13 @@ function Plugin() {
           setPageColors(pluginMessage.pageColors);
           setFileName(pluginMessage.fileName);
           setInitComplete(true);
+          setLoading(false);
           break;
 
         case "receive-palettes":
           setPalettes(pluginMessage.palettes);
           setSwatches(pluginMessage.swatches);
+          setLoading(false);
           break;
 
         case "receive-config":
@@ -167,6 +186,21 @@ function Plugin() {
 
     window.onmessage = handleMessage;
   });
+
+  const LoadingSpinner = ({ loading }: any) => {
+    return (
+      <div
+        style={{
+          display: loading ? "block" : "none",
+          position: "absolute",
+          bottom: "1rem",
+          left: "1rem",
+          zIndex: 100,
+        }}>
+        LOADING...
+      </div>
+    );
+  };
 
   return (
     <>
@@ -184,22 +218,7 @@ function Plugin() {
             setCurrentView={setCurrentView}
           />
         )}
-        {currentView === "seeds-old" && (
-          <Seeds
-            fileName={fileName}
-            palettes={palettes}
-            swatches={swatches}
-            selectionColors={selectionColors}
-            pageColors={pageColors}
-            updateConfig={updateConfig}
-            addSeedColor={addSeedColor}
-            removeSeedColor={removeSeedColor}
-            resetData={resetData}
-            setCurrentView={setCurrentView}
-            editPalette={editPalette}
-          />
-        )}
-        {currentView === "palettes" && (
+        {/* {currentView === "palettes" && (
           <Palettes
             fileName={fileName}
             palettes={palettes}
@@ -223,7 +242,7 @@ function Plugin() {
             updatePaletteColor={updatePaletteColor}
             updatePaletteName={updatePaletteName}
           />
-        )}
+        )} */}
         {currentView === "editor" && (
           <Editor
             selectedPaletteId={selectedPaletteId}
@@ -241,6 +260,17 @@ function Plugin() {
             setCurrentView={setCurrentView}
           />
         )}
+        {/* {currentView === "select" && (
+          <div style={{ padding: "1rem" }}>
+            <SeedSidebar
+              selectionColors={selectionColors}
+              pageColors={pageColors}
+              swatches={swatches}
+              addSeedColor={addSeedColor}
+            />
+          </div>
+        )} */}
+        <LoadingSpinner loading={loading} />
       </div>
     </>
   );

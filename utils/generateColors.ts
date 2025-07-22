@@ -48,8 +48,10 @@ const generateColors = async (
 
   // Generate new colors close to target contrasts in array
   let colorOptionsArray = new Array();
-  let hueRate = 0.02; // rate of hue change
-  let satRate = 0.003; // rate of saturation change
+  // let hueRate = 0.02; // rate of hue change
+  let hueRate = 0.1; // rate of hue change
+  // let satRate = 0.006; // rate of saturation change
+  let satRate = 0.02; // rate of saturation change
   let lumRate = 0.01; // rate of luminosity change
   // First build an array of many colors to choose from
   _.times(steps * 20, (index) => {

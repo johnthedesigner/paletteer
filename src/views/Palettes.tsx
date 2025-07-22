@@ -120,14 +120,12 @@ const Palettes = ({
               style={footerActionsLeftStyles}>
               <Button
                 buttonType="color"
-                buttonColor={colors.purple[7]}
                 iconType="code"
                 text="Get Tokens"
                 onClick={() => setCurrentView("tokens")}
               />
               <Button
                 buttonType="color"
-                buttonColor={colors.purple[7]}
                 iconType="component"
                 text="Generate Style Guide"
                 onClick={null}
@@ -141,7 +139,6 @@ const Palettes = ({
               </span>
               <Button
                 buttonType="secondary"
-                buttonColor={colors.purple[7]}
                 iconType="variable"
                 text="Delete color variables"
                 onClick={null}

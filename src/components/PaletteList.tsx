@@ -118,7 +118,6 @@ const PaletteList = ({
             <Button
               text="Pick a random color"
               buttonType="secondary"
-              buttonColor={colors.purple[7]}
               iconType="palette"
               onClick={() => console.log("test")}
             />
