@@ -4,6 +4,8 @@ declare const styles: {
   readonly "button__primary--dark": string;
   readonly "button__secondary": string;
   readonly "button__secondary--dark": string;
+  readonly "button__outline": string;
+  readonly "button__outline--dark": string;
   readonly "button__color": string;
   readonly "button__color--dark": string;
   readonly "button__text": string;

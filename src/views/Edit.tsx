@@ -173,7 +173,7 @@ const Edit = ({
         <div style={editSidebarStyles}>
           <div style={editSidebarHeaderStyles}>
             <Button
-              buttonType="color"
+              buttonType="primary"
               iconType="arrow-right"
               text="Back to saved palettes"
               onClick={() => setCurrentView("seeds")}

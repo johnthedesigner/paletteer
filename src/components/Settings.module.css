@@ -1,0 +1,188 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.panel {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  margin: 3rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.closeButton:hover {
+  background-color: #f3f4f6;
+}
+
+.content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(80vh - 6rem);
+}
+
+.setting {
+  margin-bottom: 2rem;
+}
+
+.setting:last-child {
+  margin-bottom: 0;
+}
+
+.settingTitle {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.settingDescription {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.radioLabel:hover {
+  border-color: #9ca3af;
+  background-color: #f9fafb;
+}
+
+.radioInput {
+  margin: 0;
+  margin-top: 0.125rem;
+}
+
+.radioInput:checked + .radioText {
+  color: #111827;
+  font-weight: 500;
+}
+
+.radioLabel:has(.radioInput:checked) {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.radioText {
+  flex: 1;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 2rem 0;
+}
+
+.confirmationOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.confirmationModal {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  width: 100%;
+}
+
+.confirmationTitle {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.confirmationText {
+  margin: 0 0 1.5rem 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.confirmationButtons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+@supports not selector(:has(*)) {
+  .radioLabel input[type="radio"]:checked {
+    border-color: #3b82f6;
+  }
+  
+  .radioLabel:focus-within {
+    border-color: #3b82f6;
+    background-color: #eff6ff;
+  }
+}

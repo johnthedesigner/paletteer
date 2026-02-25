@@ -21,10 +21,14 @@ function Plugin() {
   const [palettes, setPalettes] = useState([]);
   const [swatches, setSwatches] = useState([]);
   const [config, setConfig] = useState({
-    stepCount: 16,
+    stepCount: 19, // Default to 19 for complete Tailwind compatibility
   });
   const [paletteLoading, setPaletteLoading] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [pageColorsLoading, setPageColorsLoading] = useState(false);
+  const [colorExtractionProgress, setColorExtractionProgress] = useState({ processed: 0, total: 0, skipped: 0 });
+  // Settings state
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
     setPaletteLoading(
@@ -82,6 +86,20 @@ function Plugin() {
           type: "set-config",
           key,
           value,
+        },
+      },
+      "*"
+    );
+  };
+
+  const handleShadesChange = (shades: number) => {
+    updateConfig("stepCount", shades);
+    // Trigger regeneration of all palettes with new step count
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: "regenerate-all-palettes",
+          stepCount: shades,
         },
       },
       "*"
@@ -167,6 +185,37 @@ function Plugin() {
           setFileName(pluginMessage.fileName);
           setInitComplete(true);
           setLoading(false);
+          
+          // Request page colors immediately after initialization
+          setPageColorsLoading(true);
+          parent.postMessage(
+            {
+              pluginMessage: {
+                type: "get-page-colors",
+              },
+            },
+            "*"
+          );
+          break;
+
+        case "page-colors-progress":
+          // Handle incremental color updates
+          setPageColors(pluginMessage.colors);
+          setColorExtractionProgress({
+            processed: pluginMessage.processed,
+            total: pluginMessage.total,
+            skipped: pluginMessage.skipped || 0
+          });
+          
+          if (pluginMessage.isComplete) {
+            setPageColorsLoading(false);
+          }
+          break;
+
+        case "page-colors-result":
+          // Legacy handler (fallback)
+          setPageColors(pluginMessage.pageColors);
+          setPageColorsLoading(false);
           break;
 
         case "receive-palettes":
@@ -176,7 +225,15 @@ function Plugin() {
           break;
 
         case "receive-config":
-          setConfig(pluginMessage.configData);
+          // Merge with existing config to preserve defaults
+          setConfig(prevConfig => ({
+            ...prevConfig,
+            ...pluginMessage.configData
+          }));
+          break;
+
+        case "selection-colors-updated":
+          setSelectionColors(pluginMessage.selectionColors);
           break;
 
         default:
@@ -211,6 +268,11 @@ function Plugin() {
             swatches={swatches}
             selectionColors={selectionColors}
             pageColors={pageColors}
+            pageColorsLoading={pageColorsLoading}
+            isSettingsOpen={isSettingsOpen}
+            setIsSettingsOpen={setIsSettingsOpen}
+            numberOfShades={config.stepCount}
+            onShadesChange={handleShadesChange}
             addSeedColor={addSeedColor}
             removeSeedColor={removeSeedColor}
             editPalette={editPalette}
@@ -271,6 +333,28 @@ function Plugin() {
           </div>
         )} */}
         <LoadingSpinner loading={loading} />
+        {pageColorsLoading && (
+          <div
+            style={{
+              position: "absolute",
+              top: "1rem",
+              right: "1rem",
+              background: "rgba(0, 0, 0, 0.8)",
+              color: "white",
+              padding: "8px 12px",
+              borderRadius: "4px",
+              fontSize: "12px",
+              zIndex: 100,
+            }}>
+            Extracting colors... {colorExtractionProgress.processed > 0 && 
+              `${colorExtractionProgress.processed} objects`
+            }{colorExtractionProgress.skipped > 0 && 
+              ` (${colorExtractionProgress.skipped} skipped)`
+            }{pageColors.length > 0 && 
+              `, ${pageColors.length} colors`
+            }
+          </div>
+        )}
       </div>
     </>
   );

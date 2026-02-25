@@ -2,7 +2,6 @@
   "dependencies": {
     "@create-figma-plugin/ui": "^2.5.1",
     "@create-figma-plugin/utilities": "^2.5.1",
-    "@types/bezier-easing": "^2.1.2",
     "@types/chroma-js": "^2.4.0",
     "@types/lodash": "^4.14.197",
     "@types/react": "^18.2.20",
@@ -13,7 +12,8 @@
     "nanoid": "^5.0.6",
     "preact": "^10.16.0",
     "radash": "^11.0.0",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "@create-figma-plugin/build": "^2.5.1",

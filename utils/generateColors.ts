@@ -131,9 +131,26 @@ const generateColors = async (
   // Make the swatch name lowercase and replace spaces with hyphens
   let swatchNameFormatted = swatchName.trim().replace(/\s/g, "-").toLowerCase();
 
+  // Generate Tailwind-compatible scale values based on step count
+  const getTailwindScale = (steps: number, index: number) => {
+    if (steps === 11) {
+      // Standard Tailwind scale: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950
+      const scale = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+      return scale[index] || index;
+    } else if (steps === 18) {
+      // Extended Tailwind scale with additional values
+      const scale = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900];
+      return scale[index] || index;
+    } else {
+      // Fallback to index for other step counts
+      return index;
+    }
+  };
+
   // Add swatch names to each swatch in the palette
   _.each(swatchList, (swatch, i) => {
-    swatchList[i].name = `${swatchNameFormatted}-${i}`;
+    const scaleValue = getTailwindScale(steps, i);
+    swatchList[i].name = `${swatchNameFormatted}-${scaleValue}`;
   });
 
   return {

@@ -8,6 +8,7 @@ import _ from "lodash";
 import Button from "../components/Button";
 import Text from "../components/Text";
 import { colors } from "../../utils/tokens";
+import { getTailwindScale } from "../utils/tailwindScale";
 
 interface IProps {
   palettes: any;
@@ -61,6 +62,7 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
   const editBodyHeaderStyles = {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
     padding: "1rem",
     borderBottom: "#EEE solid 1px" /* TODO: Replace with color token */,
   };
@@ -117,8 +119,9 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
       // Begin individual palette object
       jsCodeString += newLine(`${indent}'${_.kebabCase(palette.name)}': {`);
       _.each(paletteSwatches, (swatch: any, index: number) => {
+        let scaleValue = getTailwindScale(swatch.steps, swatch.index);
         jsCodeString += newLine(
-          `${indent}${indent}${index}: "${swatch.variableColor}",`
+          `${indent}${indent}${scaleValue}: "${swatch.variableColor}",`
         );
       });
       // End individual palette object
@@ -142,8 +145,9 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
       // Begin individual palette object
       //   cssCodeString += newLine(`${indent}${_.kebabCase(palette.name)}: {`);
       _.each(paletteSwatches, (swatch: any, index: number) => {
+        let scaleValue = getTailwindScale(swatch.steps, swatch.index);
         cssCodeString += newLine(
-          `${indent}--${_.kebabCase(palette.name)}-${index}: ${
+          `${indent}--${_.kebabCase(palette.name)}-${scaleValue}: ${
             swatch.variableColor
           };`
         );
@@ -171,7 +175,8 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
         `${indent}${indent}"${_.kebabCase(palette.name)}": {`
       );
       _.each(paletteSwatches, (swatch: any, index: number) => {
-        jsonCodeString += newLine(`${indent}${indent}${indent}"${index}": {`);
+        let scaleValue = getTailwindScale(swatch.steps, swatch.index);
+        jsonCodeString += newLine(`${indent}${indent}${indent}"${scaleValue}": {`);
         jsonCodeString += newLine(
           `${indent}${indent}${indent}${indent}"value": "${swatch.variableColor}",`
         );
@@ -231,7 +236,7 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
         <div style={editSidebarStyles}>
           <div style={editSidebarHeaderStyles}>
             <Button
-              buttonType="color"
+              buttonType="outline"
               iconType="left-arrow"
               text="Back to palettes"
               onClick={() => setCurrentView("seeds")}
@@ -239,17 +244,17 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
           </div>
           <div style={codeSelectionButtons}>
             <Button
-              buttonType={selectedLanguage === "json" ? "secondary" : "text"}
+              buttonType={selectedLanguage === "json" ? "color" : "text"}
               text="JSON Tokens"
               onClick={() => setSelectedLanguage("json")}
             />
             <Button
-              buttonType={selectedLanguage === "js" ? "secondary" : "text"}
+              buttonType={selectedLanguage === "js" ? "color" : "text"}
               text="Javascript Object"
               onClick={() => setSelectedLanguage("js")}
             />
             <Button
-              buttonType={selectedLanguage === "css" ? "secondary" : "text"}
+              buttonType={selectedLanguage === "css" ? "color" : "text"}
               text="CSS Variables"
               onClick={() => setSelectedLanguage("css")}
             />
@@ -260,18 +265,13 @@ const Tokens = ({ palettes, swatches, setCurrentView }: IProps) => {
             <div style={editBodyHeaderStyles}>
               <div
                 style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                <Text type="heading" size="small">
+                <Text type="heading" size="medium">
                   {selectedLanguageLabel[selectedLanguage]} Design Tokens
                 </Text>
-                <Link href="#">
-                  <Text type="text" size="small">
-                    About this format
-                  </Text>
-                </Link>
               </div>
               <div>
                 <Button
-                  buttonType="color"
+                  buttonType="primary"
                   iconType="clipboard"
                   text="Copy to Clipboard"
                   onClick={async () => {

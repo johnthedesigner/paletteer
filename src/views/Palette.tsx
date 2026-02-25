@@ -6,6 +6,7 @@ import styles from "./Palette.module.css";
 import SeedSidebar from "../components/SeedSidebar";
 import PaletteList from "../components/PaletteList";
 import Button from "../components/Button";
+import Settings from "../components/Settings";
 import { colors } from "../../utils/tokens";
 import Logo from "../components/logo";
 
@@ -17,6 +18,11 @@ interface PaletteProps {
   swatches: any;
   selectionColors: any;
   pageColors: any;
+  pageColorsLoading: boolean;
+  isSettingsOpen: boolean;
+  setIsSettingsOpen: (open: boolean) => void;
+  numberOfShades: number;
+  onShadesChange: (shades: number) => void;
   editPalette: Function;
   addSeedColor: Function;
   removeSeedColor: Function;
@@ -28,6 +34,11 @@ const Palette = ({
   swatches,
   selectionColors,
   pageColors,
+  pageColorsLoading,
+  isSettingsOpen,
+  setIsSettingsOpen,
+  numberOfShades,
+  onShadesChange,
   editPalette,
   addSeedColor,
   removeSeedColor,
@@ -35,52 +46,59 @@ const Palette = ({
   setCurrentView,
 }: PaletteProps) => {
   return (
-    <div className={layoutStyles["body-wrapper"]}>
-      <div className={layoutStyles["sidebar"]}>
-        <div className={layoutStyles["sidebar__card"]}>
-          {/* <Logo /> */}
-          <SeedSidebar
-            selectionColors={selectionColors}
-            pageColors={pageColors}
+    <>
+      <div className={layoutStyles["body-wrapper"]} style={{ filter: isSettingsOpen ? "blur(2px)" : "none" }}>
+        <div className={layoutStyles["sidebar"]}>
+          <div className={layoutStyles["sidebar__card"]}>
+            {/* <Logo /> */}
+            <SeedSidebar
+              selectionColors={selectionColors}
+              pageColors={pageColors}
+              pageColorsLoading={pageColorsLoading}
+              swatches={swatches}
+              addSeedColor={addSeedColor}
+            />
+          </div>
+        </div>
+        <div className={layoutStyles["main-body"]}>
+          <PaletteList
+            palettes={palettes}
             swatches={swatches}
+            pageColors={pageColors}
             addSeedColor={addSeedColor}
+            editPalette={editPalette}
+            removeSeedColor={removeSeedColor}
           />
+          <div className={styles["action-overlay"]}>
+            {showResetButton && (
+              <>
+                <Button
+                  text="Settings"
+                  buttonType="outline"
+                  iconType="settings"
+                  onClick={() => setIsSettingsOpen(true)}
+                />
+                <Button
+                  text="Get tokens"
+                  buttonType="primary"
+                  disabled={palettes.length === 0}
+                  iconType="code"
+                  onClick={() => setCurrentView("tokens")}
+                />
+              </>
+            )}
+          </div>
         </div>
       </div>
-      <div className={layoutStyles["main-body"]}>
-        <PaletteList
-          palettes={palettes}
-          swatches={swatches}
-          editPalette={editPalette}
-          removeSeedColor={removeSeedColor}
-        />
-        <div className={styles["action-overlay"]}>
-          {showResetButton && (
-            <>
-              <Button
-                text="Reset"
-                buttonType="color"
-                iconType="reset"
-                onClick={() => resetData()}
-              />
-              <Button
-                text="Get tokens"
-                buttonType="color"
-                disabled={palettes.length === 0}
-                iconType="code"
-                onClick={() => setCurrentView("tokens")}
-              />
-              {/* <Button
-                text="Toggle Size"
-                buttonType="color"
-                iconType="code"
-                onClick={() => setCurrentView("select")}
-              /> */}
-            </>
-          )}
-        </div>
-      </div>
-    </div>
+      
+      <Settings
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        numberOfShades={numberOfShades}
+        onShadesChange={onShadesChange}
+        onReset={resetData}
+      />
+    </>
   );
 };
 

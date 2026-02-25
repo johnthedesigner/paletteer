@@ -8,6 +8,7 @@ import _ from "lodash";
 
 import generateColors from "../utils/generateColors";
 import crayolaColors from "../utils/crayolaColors";
+import { getTailwindScale } from "./utils/tailwindScale";
 var colorNames = new Array();
 if (crayolaColors) {
   colorNames = crayolaColors;
@@ -136,12 +137,14 @@ export default function () {
   // Create a new color variable for the default mode
   const colorVariableFactory = async (
     index: number,
+    steps: number,
     paletteCollection: any,
     paletteName: string
   ) => {
     console.log("ADDING VARIABLE TO COLLECTION", paletteCollection);
+    let scaleValue = getTailwindScale(steps, index);
     let colorVariable = await figma.variables.createVariable(
-      `${paletteName}/${(index + 1).toFixed(0).padStart(2, "0")}`, // Name variables upon creation, ex. 'palette name/01'
+      `${paletteName}/${scaleValue}`, // Name variables upon creation, ex. 'palette name/500'
       paletteCollection,
       "COLOR"
     );
@@ -210,14 +213,11 @@ export default function () {
         );
         // If the variable exists, update the name, otherwise do nothing
         if (swatchVariable) {
-          let updatedName = `${swatchPalette.name}/${(swatch.index + 1)
-            .toFixed(0)
-            .padStart(2, "0")}`;
+          let scaleValue = getTailwindScale(swatch.steps, swatch.index);
+          let updatedName = `${swatchPalette.name}/${scaleValue}`;
           let existingName = swatchVariable.name;
           if (existingName != updatedName) {
-            swatchVariable.name = `${swatchPalette.name}/${(swatch.index + 1)
-              .toFixed(0)
-              .padStart(2, "0")}`;
+            swatchVariable.name = `${swatchPalette.name}/${scaleValue}`;
           }
         }
       }
@@ -301,6 +301,7 @@ export default function () {
         // No variable ID found, create a new one
         swatchVariable = await colorVariableFactory(
           swatch.index,
+          swatch.steps,
           paletteCollection,
           palette.name
         );
@@ -336,9 +337,11 @@ export default function () {
     await addToList("paletteList", placeholderPalette);
     postPalettesToUI();
     // Generate colors & info from hex
+    let configData = await getConfig();
+    let stepCount = configData?.stepCount || 19; // Default to 19 if not set
     let generatedPalette = await generateColors(
       hex,
-      16,
+      stepCount,
       "",
       paletteId,
       true,
@@ -365,6 +368,7 @@ export default function () {
       // Create a new placeholder variable and get its ID
       let swatchVariable = await colorVariableFactory(
         swatch.index,
+        swatch.steps,
         paletteCollection,
         generatedPalette?.name
       );
@@ -381,6 +385,43 @@ export default function () {
     await updateSwatchVariableColors();
   };
 
+  // Regenerate all existing palettes with a new step count
+  const regenerateAllPalettes = async (newStepCount: number) => {
+    try {
+      // Update the step count in config first so updatePaletteColorsById uses the new value
+      await setConfig("stepCount", newStepCount);
+      
+      // Get all existing palettes
+      let allPalettes = await getList("paletteList");
+      console.log(`Found ${allPalettes.length} palettes to regenerate with ${newStepCount} steps`);
+
+      // Process each palette using the existing updatePaletteColorsById function
+      for (let palette of allPalettes) {
+        if (!palette.sourceColorId) {
+          console.warn(`Palette ${palette.id} has no sourceColorId, skipping`);
+          continue;
+        }
+
+        // Get the source swatch to extract the hex color
+        let sourceSwatch = await getListItemById(palette.sourceColorId, "swatchList");
+        if (!sourceSwatch) {
+          console.warn(`Source swatch ${palette.sourceColorId} not found for palette ${palette.id}, skipping`);
+          continue;
+        }
+
+        console.log(`Regenerating palette ${palette.name} with seed color ${sourceSwatch.hex}`);
+
+        // Use the existing updatePaletteColorsById function to regenerate with new step count
+        await updatePaletteColorsById(palette.id, sourceSwatch.hex);
+      }
+
+      console.log(`Successfully regenerated ${allPalettes.length} palettes`);
+    } catch (error) {
+      console.error("Error regenerating palettes:", error);
+      figma.notify("Error regenerating palettes. Check console for details.");
+    }
+  };
+
   // Update an existing palette by supplying a new hex seed color and ID
   const updatePaletteColorsById = async (paletteId: string, hex: string) => {
     // Get existing palette
@@ -391,9 +432,11 @@ export default function () {
       paletteId
     );
     // Generate colors & info from hex
+    let configData = await getConfig();
+    let stepCount = configData?.stepCount || 19; // Default to 19 if not set
     let generatedPalette = await generateColors(
       hex,
-      16,
+      stepCount,
       existingPalette.name,
       paletteId,
       true,
@@ -473,9 +516,11 @@ export default function () {
     // Use autogenerated name if one isn't provided
     let paletteName = name ? name : "";
     // Generate colors & info from hex
+    let configData = await getConfig();
+    let stepCount = configData?.stepCount || 19; // Default to 19 if not set
     let generatedPalette = await generateColors(
       hex,
-      16,
+      stepCount,
       paletteName,
       paletteId,
       true,
@@ -524,55 +569,257 @@ export default function () {
     );
   };
 
-  // Get colors from the current Figma selection
+  // Get colors from the current Figma selection (batched, non-blocking version)
   let selectionColors: any = [];
   let deepColorSample = true;
+  
   const getColors = async (selection: any) => {
+    // Legacy synchronous version for backward compatibility
+    const colorsFound: string[] = [];
+    
     for (var i = 0; i < selection.length; i++) {
       let object = selection[i];
       if (object.children && deepColorSample) {
-        getColors(object.children);
+        const childColors = await getColors(object.children);
+        colorsFound.push(...childColors);
       }
       if (object && object.fills) {
         for (var f = 0; f < object.fills.length; f++) {
           let fill = object.fills[f];
           if (fill.color) {
-            selectionColors.push(
+            colorsFound.push(
               `#${await convertRgbColorToHexColor(fill.color)}`
             );
           }
           if (fill.gradientStops) {
             for (var s = 0; s < fill.gradientStops.length; s++) {
               let stop = fill.gradientStops[s];
-              selectionColors.push(
+              colorsFound.push(
                 `#${await convertRgbColorToHexColor(stop.color)}`
               );
-              // selectionColors = [...selectionColors, stop.color];
             }
           }
         }
       }
     }
     // Make sure to return a list of unique hex codes
-    return uniq(selectionColors);
+    return uniq(colorsFound);
+  };
+
+  const getColorsBatched = async (selection: any, batchSize = 100) => {
+    try {
+      const allColors = new Set<string>();
+    const processedComponents = new Set<string>(); // Track processed component IDs globally
+    let processedCount = 0;
+    let skippedInstances = 0;
+
+    // OPTIMIZATION 1: Get colors from local paint styles first (fast!)
+    const extractColorsFromStyles = () => {
+      const styleColors = new Set<string>();
+      const paintStyles = figma.getLocalPaintStyles();
+      
+      paintStyles.forEach(style => {
+        style.paints.forEach(paint => {
+          if (paint.type === 'SOLID' && paint.color) {
+            styleColors.add(`#${convertRgbColorToHexColor(paint.color)}`);
+          } else if (paint.type === 'GRADIENT_LINEAR' || paint.type === 'GRADIENT_RADIAL' || paint.type === 'GRADIENT_ANGULAR' || paint.type === 'GRADIENT_DIAMOND') {
+            paint.gradientStops?.forEach(stop => {
+              if (stop.color) {
+                styleColors.add(`#${convertRgbColorToHexColor(stop.color)}`);
+              }
+            });
+          }
+        });
+      });
+      
+      return styleColors;
+    };
+
+    // OPTIMIZATION 2: Process nodes asynchronously with batched discovery and deduplication
+    const processNodesAsync = async (rootNodes: any[]) => {
+      let rootIndex = 0;
+      
+      const processRootNodeBatch = async () => {
+        if (rootIndex >= rootNodes.length) {
+          // Send final completion message
+          figma.ui.postMessage({
+            type: "page-colors-progress",
+            colors: Array.from(allColors),
+            processed: processedCount,
+            skipped: skippedInstances,
+            total: processedCount,
+            colorsFound: allColors.size,
+            isComplete: true
+          });
+          return;
+        }
+
+        const rootNode = rootNodes[rootIndex];
+        rootIndex++;
+
+        if (!rootNode || !rootNode.findAll) {
+          // Process next root node
+          return new Promise(resolve => {
+            setTimeout(() => resolve(processRootNodeBatch()), 0);
+          });
+        }
+
+        // Find nodes with fills/strokes in this root node
+        const foundNodes = rootNode.findAll((node: any) => {
+          return (node.fills && node.fills.length > 0) || 
+                 (node.strokes && node.strokes.length > 0) || 
+                 node.type === 'INSTANCE';
+        });
+
+        // Process found nodes in batches
+        let nodeIndex = 0;
+        
+        const processNodeBatch = async () => {
+          const batchEnd = Math.min(nodeIndex + batchSize, foundNodes.length);
+          const batchColors = new Set<string>();
+          let batchSkipped = 0;
+          
+          for (let i = nodeIndex; i < batchEnd; i++) {
+            const node = foundNodes[i];
+            if (!node || !node.id) continue;
+
+            // Skip duplicate component instances
+            if (node.type === 'INSTANCE' && node.mainComponent) {
+              const componentId = node.mainComponent.id;
+              if (processedComponents.has(componentId)) {
+                batchSkipped++;
+                continue;
+              }
+              processedComponents.add(componentId);
+            }
+
+            processedCount++;
+
+            // Extract colors from fills
+            if (node.fills && node.fills.length > 0) {
+              node.fills.forEach((fill: any) => {
+                if (fill.type === 'SOLID' && fill.color) {
+                  batchColors.add(`#${convertRgbColorToHexColor(fill.color)}`);
+                } else if (fill.type?.startsWith('GRADIENT') && fill.gradientStops) {
+                  fill.gradientStops.forEach((stop: any) => {
+                    if (stop.color) {
+                      batchColors.add(`#${convertRgbColorToHexColor(stop.color)}`);
+                    }
+                  });
+                }
+              });
+            }
+
+            // Extract colors from strokes
+            if (node.strokes && node.strokes.length > 0) {
+              node.strokes.forEach((stroke: any) => {
+                if (stroke.type === 'SOLID' && stroke.color) {
+                  batchColors.add(`#${convertRgbColorToHexColor(stroke.color)}`);
+                }
+              });
+            }
+          }
+
+          // Add batch colors to main set
+          batchColors.forEach(color => allColors.add(color));
+          skippedInstances += batchSkipped;
+          nodeIndex = batchEnd;
+
+          // Send progress update
+          figma.ui.postMessage({
+            type: "page-colors-progress",
+            colors: Array.from(allColors),
+            processed: processedCount,
+            skipped: skippedInstances,
+            total: processedCount + skippedInstances,
+            colorsFound: allColors.size,
+            isComplete: false
+          });
+
+          // Continue with next batch or move to next root node
+          if (nodeIndex < foundNodes.length) {
+            return new Promise(resolve => {
+              setTimeout(() => resolve(processNodeBatch()), 0);
+            });
+          } else {
+            // Move to next root node
+            return new Promise(resolve => {
+              setTimeout(() => resolve(processRootNodeBatch()), 0);
+            });
+          }
+        };
+
+        // Start processing nodes for this root
+        if (foundNodes.length > 0) {
+          return processNodeBatch();
+        } else {
+          // No nodes found, move to next root
+          return new Promise(resolve => {
+            setTimeout(() => resolve(processRootNodeBatch()), 0);
+          });
+        }
+      };
+
+      // Start processing root nodes
+      return processRootNodeBatch();
+    };
+
+    // Start with colors from paint styles (instant)
+    const styleColors = extractColorsFromStyles();
+    styleColors.forEach(color => allColors.add(color));
+
+    // Send initial style colors immediately
+    figma.ui.postMessage({
+      type: "page-colors-progress", 
+      colors: Array.from(allColors),
+      processed: 0,
+      skipped: 0,
+      total: 0,
+      colorsFound: allColors.size,
+      isComplete: false
+    });
+
+    // Process all nodes asynchronously
+    await processNodesAsync(selection);
+
+    return Array.from(allColors);
+    } catch (error) {
+      console.error('Error in getColorsBatched:', error);
+      figma.ui.postMessage({
+        type: "page-colors-progress", 
+        colors: [],
+        processed: 0,
+        skipped: 0,
+        total: 0,
+        colorsFound: 0,
+        isComplete: true,
+        error: 'Failed to extract colors'
+      });
+      return [];
+    }
   };
 
   // // Updating selection colors retrieval now that figma.getSelectionColors exists
   let getSelectionColors = () => {
-    let currentSelectionPaints = figma.getSelectionColors();
-    let solidPaints = _.filter(currentSelectionPaints?.paints, (paint: any) => {
-      return paint.type === "SOLID";
-    });
-    let currentSelectionColors = _.map(solidPaints, (paint: any) => {
-      return `#${convertRgbColorToHexColor(paint.color)}`;
-    });
-    console.log(
-      "PAINTS",
-      currentSelectionPaints?.paints,
-      currentSelectionColors
-    );
-    // return currentSelectionColors;
-    return currentSelectionColors;
+    try {
+      let currentSelectionPaints = figma.getSelectionColors();
+      let solidPaints = _.filter(currentSelectionPaints?.paints, (paint: any) => {
+        return paint.type === "SOLID";
+      });
+      let currentSelectionColors = _.map(solidPaints, (paint: any) => {
+        return `#${convertRgbColorToHexColor(paint.color)}`;
+      });
+      console.log(
+        "PAINTS",
+        currentSelectionPaints?.paints,
+        currentSelectionColors
+      );
+      // Deduplicate colors before returning
+      return uniq(currentSelectionColors);
+    } catch (error) {
+      console.error('Error getting selection colors:', error);
+      return [];
+    }
   };
 
   // Get hex color for a variable by Variable ID
@@ -603,35 +850,57 @@ export default function () {
 
   // Post latest seed colors to the UI
   const postPalettesToUI = async () => {
-    let palettes = await getList("paletteList");
-    let swatches = await mapVariablesToSwatches();
-    // Send data to the UI
-    figma.ui.postMessage({
-      type: "receive-palettes",
-      palettes,
-      swatches,
-    });
+    try {
+      let palettes = await getList("paletteList");
+      let swatches = await mapVariablesToSwatches();
+      // Send data to the UI
+      figma.ui.postMessage({
+        type: "receive-palettes",
+        palettes,
+        swatches,
+      });
+    } catch (error) {
+      console.error('Error posting palettes to UI:', error);
+    }
   };
 
   const postConfigToUI = async () => {
-    let configData = await getConfig();
-    figma.ui.postMessage({
-      type: "receive-config",
-      configData,
-    });
+    try {
+      let configData = await getConfig();
+      // Initialize default config if none exists
+      if (!configData) {
+        configData = { stepCount: 19 };
+        await setConfig("stepCount", 19);
+      } else if (!configData.stepCount) {
+        // Ensure stepCount exists
+        configData.stepCount = 19;
+        await setConfig("stepCount", 19);
+      }
+      figma.ui.postMessage({
+        type: "receive-config",
+        configData,
+      });
+    } catch (error) {
+      console.error('Error posting config to UI:', error);
+    }
   };
 
   // Get variable color value from swatch
   const getColorFromSwatch = async (swatch: any) => {
-    let defaultModeId = await getDefaultModeId();
-    let variable = await figma.variables.getVariableById(
-      swatch.colorVariableId
-    );
-    let variableColor = variable?.valuesByMode[defaultModeId];
-    let variableHex = await `#${convertRgbColorToHexColor(
-      variableColor as any
-    )}`;
-    return variableHex;
+    try {
+      let defaultModeId = await getDefaultModeId();
+      let variable = await figma.variables.getVariableById(
+        swatch.colorVariableId
+      );
+      let variableColor = variable?.valuesByMode[defaultModeId];
+      let variableHex = `#${convertRgbColorToHexColor(
+        variableColor as any
+      )}`;
+      return variableHex;
+    } catch (error) {
+      console.error('Error getting color from swatch:', error);
+      return swatch.hex || '#000000'; // Fallback color
+    }
   };
 
   // Update variables from saved palettes
@@ -696,7 +965,7 @@ export default function () {
       // selectionColors: await getColors(figma.currentPage.selection), // Legacy method before getSelectionColors existed
       selectionColors: await getSelectionColors(),
       // selectionColors: [],
-      pageColors: await getColors(figma.currentPage.children),
+      pageColors: [], // Page colors now loaded on-demand
       fileName: figma.root.name,
     });
     await postConfigToUI();
@@ -705,20 +974,34 @@ export default function () {
   // Run Once
   initPlugin();
 
+  // Listen for selection changes and update selection colors in real-time
+  figma.on('selectionchange', async () => {
+    try {
+      const newSelectionColors = await getSelectionColors();
+      figma.ui.postMessage({
+        type: "selection-colors-updated",
+        selectionColors: newSelectionColors,
+      });
+    } catch (error) {
+      console.error('Error in selectionchange handler:', error);
+    }
+  });
+
   // Recieve messages from the UI
   figma.ui.onmessage = async (msg) => {
-    switch (msg.type) {
+    try {
+      switch (msg.type) {
       case "reset-data":
         console.log("RESETTING ALL PLUGIN DATA");
         // Remove all plugin data just in case
         let paletteCollection = await getPaletteCollection();
+        await paletteCollection.remove();
         await setData("paletteList", []);
         await setData("swatchList", []);
         await setData("paletteerConfig", "");
-        postPalettesToUI();
-        postConfigToUI();
-        await paletteCollection.remove();
-        updateSwatchVariableColors();
+        await postPalettesToUI();
+        await postConfigToUI();
+        // updateSwatchVariableColors();
 
         break;
 
@@ -734,37 +1017,37 @@ export default function () {
       case "add-color":
         await getPaletteCollection();
         await newPaletteFromHex(msg.hex);
-        postPalettesToUI();
+        await postPalettesToUI();
         break;
 
       case "remove-color":
         await getPaletteCollection();
         await removeColorById(msg.paletteId);
-        postPalettesToUI();
+        await postPalettesToUI();
         break;
 
       case "update-palette":
         await getPaletteCollection();
         await updatePaletteById(msg.paletteId, msg.hex, msg.name);
-        postPalettesToUI();
+        await postPalettesToUI();
         break;
 
       case "update-palette-color":
         await getPaletteCollection();
         await updatePaletteColorsById(msg.paletteId, msg.hex);
-        postPalettesToUI();
+        await postPalettesToUI();
         break;
 
       case "update-variables":
         await getPaletteCollection();
         await updateVariables();
-        postPalettesToUI();
+        await postPalettesToUI();
         break;
 
       case "update-palette-name":
         await getPaletteCollection();
         await updatePaletteNameById(msg.paletteId, msg.name);
-        postPalettesToUI();
+        await postPalettesToUI();
         break;
 
       case "get-variable-color":
@@ -777,6 +1060,17 @@ export default function () {
 
       case "set-config":
         let configData = await setConfig(msg.key, msg.value);
+        // Post updated config back to UI
+        await postConfigToUI();
+        break;
+
+      case "get-page-colors":
+        // Extract page colors using batched, non-blocking approach
+        try {
+          await getColorsBatched(figma.currentPage.children);
+        } catch (error) {
+          console.error('Error getting page colors:', error);
+        }
         break;
 
       case "generate-style-guide":
@@ -785,12 +1079,23 @@ export default function () {
         );
         break;
 
+      case "regenerate-all-palettes":
+        console.log("Regenerating all palettes with new step count:", msg.stepCount);
+        await regenerateAllPalettes(msg.stepCount);
+        await postPalettesToUI();
+        figma.notify("All palettes have been regenerated!");
+        break;
+
       case "close-plugin":
         figma.closePlugin();
         break;
 
       default:
       // figma.closePlugin();
+    }
+    } catch (error) {
+      console.error('Error in message handler:', error);
+      figma.notify('An error occurred. Please check the console for details.');
     }
   };
 }

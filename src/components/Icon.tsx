@@ -11,7 +11,7 @@ const Icon = ({
   className = "icon",
   type,
   iconColor = "currentcolor",
-  style = {},
+  style,
 }: IProps) => {
   switch (type) {
     case "right-arrow":
@@ -22,6 +22,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             d="M2 6H10M10 6L7 3M10 6L7 9"
@@ -40,6 +41,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -58,6 +60,7 @@ const Icon = ({
           height="13"
           viewBox="0 0 12 13"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -76,6 +79,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -94,6 +98,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -112,6 +117,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -130,6 +136,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_11_7825)">
             <path
@@ -155,6 +162,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_15_1896)">
             <path
@@ -190,6 +198,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -208,6 +217,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -230,6 +240,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -248,6 +259,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"
@@ -266,6 +278,7 @@ const Icon = ({
           height="12"
           viewBox="0 0 12 12"
           fill="none"
+          style={style}
           xmlns="http://www.w3.org/2000/svg">
           <path
             fillRule="evenodd"

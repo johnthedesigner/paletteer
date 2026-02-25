@@ -1,5 +1,6 @@
 import { h, Fragment } from "preact";
 import _ from "lodash";
+import { getTailwindScale, formatScaleValue } from "../utils/tailwindScale";
 
 import styles from "./SwatchBlock.module.css";
 
@@ -18,7 +19,7 @@ const SwatchBlock = ({ swatch }: BlockProps) => {
         }}>
         <div className={styles["swatch-block__header"]}>
           <p className={styles["swatch-block__name"]}>
-            {(swatch.index + 1).toFixed(0).padStart(2, "0")}
+            {formatScaleValue(getTailwindScale(swatch.steps, swatch.index))}
           </p>
           <p className={styles["swatch-block__black-contrast"]}>
             {swatch.contrastBlack.toFixed(2)}

@@ -1,0 +1,32 @@
+.page-color-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto;
+  gap: .25rem;
+  padding: 0;
+  /* margin-top: 8px; */
+  /* width: 100%; */
+}
+
+.page-color-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all ease-out 0.15s;
+  position: relative;
+  padding: 0;
+  outline: none;
+}
+
+.page-color-swatch:hover:not(.page-color-swatch--disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.page-color-swatch--disabled {
+  opacity: 0.5;
+  cursor: default;
+}

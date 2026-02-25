@@ -59,25 +59,6 @@ const ColorEditor = ({
     }, 5);
   };
 
-  // Set up Hex code editing
-  const [hexValue, setHexValue] = useState(
-    getPaletteSourceHex(palette, swatches)
-  );
-  useEffect(() => {
-    let newHex = getPaletteSourceHex(palette, swatches);
-    if (newHex !== hexValue) {
-      setHexValue(newHex);
-    }
-  }, [palette, swatches]);
-  const handleHexInput = (e: any) => {
-    let inputValue = e.target.value;
-    setHexValue(inputValue);
-  };
-  const handleHexUpdate = () => {
-    console.log("UPDATE HEX CODE", palette.id, hexValue);
-    updatePaletteColor(palette.id, hexValue);
-  };
-
   // Set up color adjustments
   const seedHex = getPaletteSourceHex(palette, swatches);
   const seedChroma = chroma(seedHex);
@@ -162,26 +143,6 @@ const ColorEditor = ({
           onChange={handleNameUpdate}
           onFocus={handleFocus}
         />
-      </div>
-      <div style={adjustmentInputGroupStyles}>
-        <Text type="text" size="small">
-          Hex Code
-        </Text>
-        <div style={inputWrapperStyles}>
-          <input
-            type="text"
-            placeholder="#FF0000"
-            value={hexValue}
-            onChange={handleHexInput}
-            style={inputFieldStyles}
-          />
-          <button
-            style={inputButtonStyles}
-            className="color-picker__submit-button"
-            onClick={handleHexUpdate}>
-            <Icon type="right-arrow" iconColor="rgb(12, 142, 241)" />
-          </button>
-        </div>
       </div>
       <div style={adjustmentInputGroupStyles}>
         <Text type="text" size="small">

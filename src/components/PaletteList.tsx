@@ -1,5 +1,6 @@
 import { h, Fragment } from "preact";
 import _, { first } from "lodash";
+import chroma from "chroma-js";
 
 import PaletteBlock from "../components/PaletteBlock";
 import { colors } from "../../utils/tokens";
@@ -9,6 +10,8 @@ import Button from "./Button";
 interface PalettesProps {
   palettes: any;
   swatches: any;
+  pageColors: string[];
+  addSeedColor: Function;
   editPalette: Function;
   removeSeedColor: Function;
 }
@@ -16,6 +19,8 @@ interface PalettesProps {
 const PaletteList = ({
   palettes,
   swatches,
+  pageColors,
+  addSeedColor,
   editPalette,
   removeSeedColor,
 }: PalettesProps) => {
@@ -44,6 +49,40 @@ const PaletteList = ({
         style={{ height, background: spacerColor }}
       />
     );
+  };
+
+  const pickWeightedRandomColor = () => {
+    if (!pageColors || pageColors.length === 0) return;
+    
+    // Sort colors by distance from middle saturation (0.5)
+    const targetSaturation = 0.5;
+    const colorWeights = pageColors
+      .map((color) => {
+        try {
+          const hsl = chroma(color).hsl();
+          const saturation = isNaN(hsl[1]) ? 0 : hsl[1]; // Handle grayscale colors
+          const distanceFromTarget = Math.abs(saturation - targetSaturation);
+          // Weight inversely proportional to distance (closer = higher weight)
+          const weight = 1 - distanceFromTarget;
+          return { color, weight: Math.max(0.1, weight) }; // Minimum weight of 0.1
+        } catch (e) {
+          return { color, weight: 0.1 }; // Fallback for invalid colors
+        }
+      })
+      .sort((a, b) => b.weight - a.weight); // Sort by weight descending
+    
+    // Create weighted array (colors with higher weights appear more frequently)
+    const weightedColors: string[] = [];
+    colorWeights.forEach(({ color, weight }) => {
+      const frequency = Math.ceil(weight * 10); // Scale weights to reasonable frequency
+      for (let i = 0; i < frequency; i++) {
+        weightedColors.push(color);
+      }
+    });
+    
+    // Pick random color from weighted array
+    const randomColor = weightedColors[Math.floor(Math.random() * weightedColors.length)];
+    addSeedColor(randomColor);
   };
 
   const getColumns = () => {
@@ -119,7 +158,7 @@ const PaletteList = ({
               text="Pick a random color"
               buttonType="secondary"
               iconType="palette"
-              onClick={() => console.log("test")}
+              onClick={pickWeightedRandomColor}
             />
           </div>
         )}

@@ -218,6 +218,22 @@ button,
   /* color: skyblue; TODO: Replace with color token */
 }
 
+.button__outline,
+.button__outline--dark {
+  background: rgba(255, 255, 255, 0);
+  border-color: var(--grayscale-14);
+  border-style: solid;
+  border-width: 1px;
+  color: var(--grayscale-14);
+}
+
+.button__outline:hover,
+.button__outline--dark:hover {
+  background: rgba(255, 255, 255, 0);
+  border-color: var(--purple-7);
+  /* color: skyblue; TODO: Replace with color token */
+}
+
 .button__color,
 .button__color--dark {
   background: var(--purple-7); /* TODO: Replace with color token */
@@ -233,7 +249,7 @@ button,
 .button__text--dark {
   background: none;
   color: black; /* TODO: Replace with color token */
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 .button__text:hover,
@@ -256,6 +272,13 @@ button .button-icon,
 
 .button__secondary--dark .button-icon {
   color: black; /* TODO: Replace with color token */
+}
+
+.button__outline--dark .button-icon {
+  color: var(--grayscale-14); /* TODO: Replace with color token */
+}
+.button__outline--dark:hover .button-icon {
+  color: var(--purple-7); /* TODO: Replace with color token */
 }
 
 .button__text--dark .button-icon {

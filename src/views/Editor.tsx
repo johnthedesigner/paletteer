@@ -35,7 +35,7 @@ const Editor = ({
         <div className={layoutStyles["sidebar"]}>
           <div className={layoutStyles["sidebar__card"]}>
             <Button
-              buttonType="color"
+              buttonType="outline"
               iconType="left-arrow"
               text="Back to saved palettes"
               onClick={() => {
