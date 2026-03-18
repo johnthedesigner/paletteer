@@ -65,7 +65,6 @@ function Plugin() {
   // Change window size for color selection mode
   useEffect(() => {
     let windowSize = currentView === "select" ? "small" : "large";
-    console.log("ON CURRENT VIEW CHANGE", currentView);
     parent.postMessage(
       {
         pluginMessage: {

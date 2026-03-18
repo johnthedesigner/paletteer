@@ -1,6 +1,7 @@
 import { h } from "preact";
-import styles from "./PageColorGrid.module.css";
 import _ from "lodash";
+
+import styles from "./PageColorGrid.module.css";
 
 interface PageColorGridProps {
   pageColors: any[];
